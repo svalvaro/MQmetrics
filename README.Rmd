@@ -1,0 +1,120 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ProteoMS
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of ProteoMS is to analyze Proteomics data from LC-MS/MS. It takes the output tables from MaxQuant and plots multiple parameters.
+
+## Installation
+
+<!-- You can install thess released version of ProteoMS from [CRAN](https://CRAN.R-project.org) with: -->
+
+<!-- ``` r -->
+<!-- install.packages("ProteoMS") -->
+<!-- ``` -->
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("BioAlvaro/ProteoMS")
+```
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r librariesNeeded, message= FALSE}
+#First you need to load this libraries:
+library(readr)
+library(tidyverse)
+library(gridExtra)
+library(chron)
+```
+
+```{r example, message=FALSE, warning=FALSE}
+library(ProteoMS)
+## basic example code
+
+dir <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
+
+files <- ReadDataFromDir(dir) #This function will read the tables needed for creating the outputs.
+
+#files can be extracted like this:
+summary <- files[["summary.txt"]]#
+evidence <- files[["evidence.txt"]]#tomodify
+peptides <- files[["peptides.txt"]]#
+msmsScans <- files[["msmsScans.txt"]]#tomodify  
+proteinGroups <- files[["proteinGroups.txt"]]#
+runningTimes <-  files[["runningTimes.txt"]]#
+parameters <- files[["parameters.txt"]]#
+```
+
+
+```{r ExperimentDuration}
+ExperimentInformation(runningTimes, parameters) 
+```
+
+
+```{r PlotPeaks}
+PlotPeaks(summary)
+```
+
+
+```{r PlotMSMS}
+PlotMsMs(summary)
+```
+
+
+```{r isotope}
+PlotIsotopePattern(summary)
+```
+
+
+```{r PeptidesIdentified, warning=FALSE }
+PLotPeptidesIdentified(summary)
+```
+
+```{r PlotIntensity, warning = FALSE}
+
+PlotIntensity(proteinGroups, intensity_type = 'LFQ')
+
+```
+
+
+
+```{r IdentificationType, warning = FALSE}
+PlotIdentificationType(peptides)
+```
+
+
+```{r Charg, warning=FALSE, message=FALSE}
+PlotCharge(evidence)
+```
+
+```{r TotalIonCurrent}
+PlotTotalIonCurrent(msmsScans)
+```
+
+```{r DynamicRange}
+PlotCombinedDynamicRange(proteinGroups)
+```
+```{r DynamicRangeAll, fig.height=14, fig.width=10}
+PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
+```
+
+

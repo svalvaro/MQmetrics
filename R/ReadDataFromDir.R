@@ -47,11 +47,6 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
   evidence_table <- evidence_table[is.na(evidence_table$`Potential contaminant`) & is.na(evidence_table$Reverse),]
   }
 
-  #allPpeptides.txt
-
-  allpeptides_table <-  read_delim(file.path(x,"txt/allPeptides.txt"),
-                                   "\t", escape_double = FALSE, na = "NA",
-                                   trim_ws = TRUE)
 
 
 
@@ -92,9 +87,9 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
 
   #Vector of tables
 
-  alltables <- list(summary_table, peptides_table, evidence_table, allpeptides_table, msscans_table, prot_groups, running_time, parameters_table)
+  alltables <- list(summary_table, peptides_table, evidence_table,  msscans_table, prot_groups, running_time, parameters_table)
 
-  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt', 'allPeptides.txt','msmsScans.txt', 'proteinGroups.txt', 'runningTimes.txt', 'parameters.txt')
+  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'proteinGroups.txt', 'runningTimes.txt', 'parameters.txt')
 
 
   return(alltables)

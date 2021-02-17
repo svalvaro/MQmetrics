@@ -19,7 +19,7 @@ library(ProteoMS)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-dir <- "/home/alvaro/Documents/MaxQuant/example1/" #is the directory with the output of the MaxQuant analysis.
+dir <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
 
 files <- ReadDataFromDir(dir) #This function will read the tables needed for creating the outputs.
 
@@ -27,7 +27,6 @@ files <- ReadDataFromDir(dir) #This function will read the tables needed for cre
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
 peptides <- files[["peptides.txt"]]
-allPeptides <- files[["allPeptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]  
 proteinGroups <- files[["proteinGroups.txt"]]
 runningTimes <-  files[["runningTimes.txt"]]

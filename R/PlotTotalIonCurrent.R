@@ -16,5 +16,6 @@ PlotTotalIonCurrent <- function(msmsScans){
     facet_grid(Experiment~ .)+
     ggtitle('Total Ion Current')+
     theme(legend.position = 'none')
+
 }
 

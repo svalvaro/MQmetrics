@@ -29,32 +29,25 @@ devtools::install_github("BioAlvaro/ProteoMS")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ``` r
-#First you need to load this libraries:
-library(readr)
-library(tidyverse)
-library(gridExtra)
-library(chron)
+library(ProteoMS)
 ```
 
 ``` r
-library(ProteoMS)
-## basic example code
+MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
 
-dir <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
+#MQPathCombined <- '/home/alvaro/Documents/MaxQuant_results/combined/'
 
-files <- ReadDataFromDir(dir) #This function will read the tables needed for creating the outputs.
+files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
 #files can be extracted like this:
-summary <- files[["summary.txt"]]#
-evidence <- files[["evidence.txt"]]#tomodify
-peptides <- files[["peptides.txt"]]#
-msmsScans <- files[["msmsScans.txt"]]#tomodify  
-proteinGroups <- files[["proteinGroups.txt"]]#
-runningTimes <-  files[["#runningTimes.txt"]]#
-parameters <- files[["parameters.txt"]]#
+summary <- files[["summary.txt"]]
+evidence <- files[["evidence.txt"]]
+peptides <- files[["peptides.txt"]]
+msmsScans <- files[["msmsScans.txt"]]  
+proteinGroups <- files[["proteinGroups.txt"]]
+runningTimes <-  files[["#runningTimes.txt"]]
+parameters <- files[["parameters.txt"]]
 ```
 
 ``` r
@@ -95,7 +88,7 @@ PLotPeptidesIdentified(summary)
 
 ``` r
 
-PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10)
+PlotIntensity(proteinGroups, intensity_type = 'LFQ')
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />

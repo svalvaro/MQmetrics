@@ -36,32 +36,25 @@ devtools::install_github("BioAlvaro/ProteoMS")
 ```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r librariesNeeded, message= FALSE}
-#First you need to load this libraries:
-library(readr)
-library(tidyverse)
-library(gridExtra)
-library(chron)
+```{r setup}
+library(ProteoMS)
 ```
 
-```{r example, message=FALSE, warning=FALSE}
-library(ProteoMS)
-## basic example code
+```{r, message=FALSE, warning=FALSE}
+MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
 
-dir <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
+#MQPathCombined <- '/home/alvaro/Documents/MaxQuant_results/combined/'
 
-files <- ReadDataFromDir(dir) #This function will read the tables needed for creating the outputs.
+files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
 #files can be extracted like this:
-summary <- files[["summary.txt"]]#
-evidence <- files[["evidence.txt"]]#tomodify
-peptides <- files[["peptides.txt"]]#
-msmsScans <- files[["msmsScans.txt"]]#tomodify  
-proteinGroups <- files[["proteinGroups.txt"]]#
-runningTimes <-  files[["#runningTimes.txt"]]#
-parameters <- files[["parameters.txt"]]#
+summary <- files[["summary.txt"]]
+evidence <- files[["evidence.txt"]]
+peptides <- files[["peptides.txt"]]
+msmsScans <- files[["msmsScans.txt"]]  
+proteinGroups <- files[["proteinGroups.txt"]]
+runningTimes <-  files[["#runningTimes.txt"]]
+parameters <- files[["parameters.txt"]]
 ```
 
 
@@ -70,51 +63,52 @@ ExperimentInformation(runningTimes, parameters)
 ```
 
 
-```{r PlotPeaks}
+
+```{r PlotPeaks, fig.height=5, fig.width=7.2}
 PlotPeaks(summary)
 ```
 
 
-```{r PlotMSMS}
+```{r PlotMSMS, fig.height=5, fig.width=7.2}
 PlotMsMs(summary)
 ```
 
 
-```{r isotope}
+```{r isotope, fig.height=5, fig.width=7.2}
 PlotIsotopePattern(summary)
 ```
 
 
-```{r PeptidesIdentified, warning=FALSE }
+```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
 PLotPeptidesIdentified(summary)
 ```
 
-```{r PlotIntensity, warning = FALSE}
+```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
 
-PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10)
+PlotIntensity(proteinGroups, intensity_type = 'LFQ')
 
 ```
 
 
 
-```{r IdentificationType, warning = FALSE}
+```{r IdentificationType, warning = FALSE, fig.height=5, fig.width=7.2}
 PlotIdentificationType(peptides)
 ```
 
 
-```{r Charg, warning=FALSE, message=FALSE}
+```{r Charg, warning=FALSE, message=FALSE, fig.height=5, fig.width=7.2}
 PlotCharge(evidence)
 ```
 
-```{r TotalIonCurrent}
+```{r TotalIonCurrent, fig.height=5, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans)
 ```
 
-```{r DynamicRange}
+```{r DynamicRange, fig.height=5, fig.width=7.2}
 PlotCombinedDynamicRange(proteinGroups)
 ```
-```{r DynamicRangeAll, fig.height=14, fig.width=10}
+
+```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
 PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
 ```
-
 

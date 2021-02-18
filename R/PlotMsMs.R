@@ -8,26 +8,26 @@
 #' @export
 #'
 #' @examples
-PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12){
+PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_names = FALSE, sep_names = '-'){
   Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- value <- variable <- NULL
 
   a <- summary %>% select(c(Experiment, `MS/MS Submitted`, `MS/MS Identified`))
   a_melt <- melt(a, id.vars = 'Experiment' )
 
 
- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
-    geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
-    theme_bw(base_size = font_size)+
-    ggtitle('MS/MS Submitted and Identified')
+ b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
+        geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
+        theme_bw(base_size = font_size)+
+        ggtitle('MS/MS Submitted and Identified')
 
 
 
-# if (long_sample_name == TRUE) {
-#   b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_sample_name,' ',x), width_sample_name))
-#
-# } else{
-#   b
-# }
+if (long_names == TRUE) {
+  b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+
+} else{
+  b
+}
 
 
 

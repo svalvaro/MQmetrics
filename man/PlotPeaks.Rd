@@ -4,7 +4,13 @@
 \alias{PlotPeaks}
 \title{Total number of peaks detected and sequenced}
 \usage{
-PlotPeaks(summary, position_dodge_width = 1, font_size = 12)
+PlotPeaks(
+  summary,
+  position_dodge_width = 1,
+  font_size = 12,
+  long_names = FALSE,
+  sep_names = "-"
+)
 }
 \arguments{
 \item{summary}{The summary.txt table from  MaxQuant Output.}

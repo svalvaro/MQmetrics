@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base = 10){
+PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base = 10,  long_names = FALSE, sep_names = '-'){
   id <- variable <- value <- NULL
 
   if (intensity_type == 'Intensity') {
@@ -59,13 +59,21 @@ PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base 
     ylab <- expression('Log'[10]*'(LFQ intensity)')
   }
 
-  ggplot(melted_intensities, aes(x = variable, y = value, fill = variable))+
-    geom_violin()+
-    geom_boxplot(width=0.2)+
-    ggtitle(label = title)+
-    xlab('Experiment')+
-    ylab(ylab)+
-    theme(legend.position = 'none')
+b <-   ggplot(melted_intensities, aes(x = variable, y = value, fill = variable))+
+          geom_violin()+
+          geom_boxplot(width=0.2)+
+          ggtitle(label = title)+
+          xlab('Experiment')+
+          ylab(ylab)+
+          theme(legend.position = 'none')
+
+
+if(long_names==TRUE){
+  b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+} else{
+  b
+}
+
 
 
 

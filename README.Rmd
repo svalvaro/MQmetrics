@@ -65,17 +65,17 @@ ExperimentInformation(runningTimes, parameters)
 
 
 ```{r PlotPeaks, fig.height=5, fig.width=7.2}
-PlotPeaks(summary)
+PlotPeaks(summary, long_names = TRUE, sep_names = '_')
 ```
 
 
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
-PlotMsMs(summary)
+PlotMsMs(summary,long_names = TRUE, sep_names = '_')
 ```
 
 
 ```{r isotope, fig.height=5, fig.width=7.2}
-PlotIsotopePattern(summary)
+PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 ```
 
 
@@ -85,7 +85,7 @@ PLotPeptidesIdentified(summary)
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
 
-PlotIntensity(proteinGroups, intensity_type = 'LFQ')
+PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names = TRUE, sep_names = '_')
 
 ```
 

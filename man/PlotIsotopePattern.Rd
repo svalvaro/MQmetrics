@@ -4,7 +4,13 @@
 \alias{PlotIsotopePattern}
 \title{Plot Isotope Pattern and Isotope Pattern Sequenced}
 \usage{
-PlotIsotopePattern(summary, position_dodge_width = 1, font_size = 12)
+PlotIsotopePattern(
+  summary,
+  position_dodge_width = 1,
+  font_size = 12,
+  long_names = FALSE,
+  sep_names = "-"
+)
 }
 \arguments{
 \item{summary}{The summary.txt table from  MaxQuant Output.}

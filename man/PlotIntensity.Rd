@@ -4,7 +4,13 @@
 \alias{PlotIntensity}
 \title{Intensity / LFQ intensity per sample.}
 \usage{
-PlotIntensity(proteinGroups, intensity_type = "Intensity", log_base = 10)
+PlotIntensity(
+  proteinGroups,
+  intensity_type = "Intensity",
+  log_base = 10,
+  long_names = FALSE,
+  sep_names = "-"
+)
 }
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}

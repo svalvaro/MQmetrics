@@ -10,22 +10,22 @@
 #' @export
 #'
 #' @examples
-PlotIsotopePattern <- function(summary,position_dodge_width=1, font_size=12){
+PlotIsotopePattern <- function(summary,position_dodge_width=1, font_size=12,  long_names = FALSE, sep_names = '-'){
   Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <- value <- variable <- NULL
 
   a <- summary %>% select(c(Experiment, `Isotope Patterns`, `Isotope Patterns Sequenced`))
   a_melt <- melt(a, id.vars = 'Experiment' )
 
-ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
-    geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
-    theme_bw(base_size = 12)+
-    ggtitle('Isotope Patterns detected and sequenced')
+b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
+      geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
+      theme_bw(base_size = 12)+
+      ggtitle('Isotope Patterns detected and sequenced')
 
 
-# if (long_sample_name == TRUE) {
-#   b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_sample_name,' ',x), width_sample_name))
-# }  else{
-#   b
-# }
+if (long_names == TRUE) {
+  b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+}  else{
+  b
+}
 
 }

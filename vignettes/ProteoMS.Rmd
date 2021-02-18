@@ -19,9 +19,11 @@ library(ProteoMS)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-dir <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
+MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
 
-files <- ReadDataFromDir(dir) #This function will read the tables needed for creating the outputs.
+#MQPathCombined <- '/home/alvaro/Documents/MaxQuant_results/combined/'
+
+files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
 #files can be extracted like this:
 summary <- files[["summary.txt"]]

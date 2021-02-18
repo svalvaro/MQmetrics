@@ -1,6 +1,6 @@
 #' Read MaxQuant Tables From Directory
 #'
-#' @param x The directory containing the MaxQuant Output.
+#' @param MQPathCombined The directory to the "combined" folder where the MaxQuant results are stored.
 #' @param remove_contaminants Whether or not to remove contaminants, reverse and identified by one one peptide.
 #'
 #' @return The output from \code{ReadDataFromR}
@@ -19,10 +19,10 @@
 #'
 #'
 #' @examples
-ReadDataFromDir <- function(x, remove_contaminants = TRUE){
+ReadDataFromDir <- function(MQPathCombined, remove_contaminants = TRUE){
 
   #open summary.txt
-  summary_table <- read_delim(file.path(x, "txt/summary.txt"),
+  summary_table <- read_delim(file.path(MQPathCombined, "txt/summary.txt"),
                               "\t", escape_double = FALSE, trim_ws = TRUE,na = c("NA", "NaN", "", " "))
 
   summary_table <- head(summary_table,-1)
@@ -30,7 +30,7 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
 
   #Open the peptides.txt table
 
-  peptides_table <- read_delim(file.path(x,"txt/peptides.txt"),
+  peptides_table <- read_delim(file.path(MQPathCombined,"txt/peptides.txt"),
                                "\t", escape_double = FALSE,na = c("NA", "NaN", "", " "),trim_ws = TRUE)
 
   if(remove_contaminants==TRUE){
@@ -39,7 +39,7 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
   }
 
   #Open the evidence table
-  evidence_table <- read_delim(file.path(x,"txt/evidence.txt"),
+  evidence_table <- read_delim(file.path(MQPathCombined,"txt/evidence.txt"),
                                "\t", escape_double = FALSE,na = c("NA", "NaN", "", " "),trim_ws = TRUE)
 
   if(remove_contaminants==TRUE){
@@ -52,7 +52,7 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
 
   #msmsScans.txt
 
-  msscans_table <- read_delim(file.path(x,"txt/msmsScans.txt"),
+  msscans_table <- read_delim(file.path(MQPathCombined,"txt/msmsScans.txt"),
                               "\t", escape_double = FALSE, na = c("NA", "NaN", "", " "),
                               trim_ws = TRUE)
 
@@ -61,7 +61,7 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
   }
   #proteinGroups.txt
 
-  prot_groups <- read_delim(file.path(x,"txt/proteinGroups.txt"),
+  prot_groups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
                             "\t", escape_double = FALSE,
                             trim_ws = TRUE)
 
@@ -75,12 +75,12 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
 
   #runningTimes.txt
 
-  running_time <- read_delim(file.path(x, "#runningTimes.txt"),
+  running_time <- read_delim(file.path(MQPathCombined, "#runningTimes.txt"),
                              "\t", escape_double = FALSE, trim_ws = TRUE,na = c("NA", "NaN", "", " "))
 
 
   #parameters.txt
-  parameters_table <- read_delim(file.path(x,"txt/parameters.txt"),
+  parameters_table <- read_delim(file.path(MQPathCombined,"txt/parameters.txt"),
                            "\t", escape_double = FALSE, na = "NA",
                            trim_ws = TRUE)
 

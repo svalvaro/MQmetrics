@@ -4,12 +4,14 @@
 \alias{PlotIntensity}
 \title{Intensity / LFQ intensity per sample.}
 \usage{
-PlotIntensity(proteinGroups, intensity_type = "Intensity")
+PlotIntensity(proteinGroups, intensity_type = "Intensity", log_base = 10)
 }
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 
 \item{intensity_type}{The type of intensity. Values: 'Intensity', 'LFQ'.}
+
+\item{log_base}{The logarithmic scale for the intensity. Values: '10', '2', 'none'.}
 }
 \value{
 A violin plot of the intensities in each sample.

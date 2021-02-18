@@ -89,7 +89,7 @@ ReadDataFromDir <- function(x, remove_contaminants = TRUE){
 
   alltables <- list(summary_table, peptides_table, evidence_table,  msscans_table, prot_groups, running_time, parameters_table)
 
-  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'proteinGroups.txt', 'runningTimes.txt', 'parameters.txt')
+  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'proteinGroups.txt', '#runningTimes.txt', 'parameters.txt')
 
 
   return(alltables)

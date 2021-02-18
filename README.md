@@ -53,7 +53,7 @@ evidence <- files[["evidence.txt"]]#tomodify
 peptides <- files[["peptides.txt"]]#
 msmsScans <- files[["msmsScans.txt"]]#tomodify  
 proteinGroups <- files[["proteinGroups.txt"]]#
-runningTimes <-  files[["runningTimes.txt"]]#
+runningTimes <-  files[["#runningTimes.txt"]]#
 parameters <- files[["parameters.txt"]]#
 ```
 
@@ -95,7 +95,7 @@ PLotPeptidesIdentified(summary)
 
 ``` r
 
-PlotIntensity(proteinGroups, intensity_type = 'LFQ')
+PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10)
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />

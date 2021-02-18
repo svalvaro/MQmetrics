@@ -52,11 +52,11 @@ parameters <- files[["parameters.txt"]]
 
 ``` r
 ExperimentInformation(runningTimes, parameters) 
-#> [1] "The experiment started the day: 03/02/2021 at the time: 14:14:22."
-#> [1] "The whole experiment lasted: 01:33 (hours:minutes)."
+#> [1] "The experiment started the day: 17/02/2021 at the time: 18:57:27."
+#> [1] "The whole experiment lasted: 05:48 (hours:minutes)."
 #> [1] "The MaxQuant version used was: 1.6.12.0"
-#> [1] "The user was: alvaro.sanchez"
-#> [1] "The machine name was: FGU045PC004"
+#> [1] "The user was: marek.vrbacky"
+#> [1] "The machine name was: FGU013PC029"
 #> [1] "The protein FDR was: 0.01"
 #> [1] "The match between runs was: True"
 #> [1] "The fasta file used was: C:\\MaxQuant_Databases\\UP000000589_10090.fasta"
@@ -94,12 +94,6 @@ PlotIntensity(proteinGroups, intensity_type = 'LFQ')
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
 
 ``` r
-PlotMissedCleavages(peptides)
-```
-
-<img src="man/figures/README-MissedCleavages-1.png" width="100%" />
-
-``` r
 PlotIdentificationType(peptides)
 #> Using sample as id variables
 ```
@@ -128,4 +122,4 @@ PlotCombinedDynamicRange(proteinGroups)
 PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
 ```
 
-<img src="man/figures/README-DynamicRangeAll-1.png" width="100%" />
+<img src="man/figures/README-DynamicRangeAll-1.png" width="100%" /><img src="man/figures/README-DynamicRangeAll-2.png" width="100%" />

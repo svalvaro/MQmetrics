@@ -94,6 +94,12 @@ PlotIntensity(proteinGroups, intensity_type = 'LFQ')
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
 
 ``` r
+PlotMissedCleavages(peptides)
+```
+
+<img src="man/figures/README-MissedCleavages-1.png" width="100%" />
+
+``` r
 PlotIdentificationType(peptides)
 #> Using sample as id variables
 ```

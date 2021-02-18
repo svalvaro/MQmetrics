@@ -67,7 +67,9 @@ PlotIntensity(proteinGroups, intensity_type = 'LFQ')
 
 ```
 
-
+```{r MissedCleavages, warning = FALSE, fig.height=5, fig.width=7.2}
+PlotMissedCleavages(peptides)
+```
 
 ```{r IdentificationType, warning = FALSE, fig.height=5, fig.width=7.2}
 PlotIdentificationType(peptides)
@@ -89,5 +91,4 @@ PlotCombinedDynamicRange(proteinGroups)
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
 PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
 ```
-
 

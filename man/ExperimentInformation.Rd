@@ -4,12 +4,12 @@
 \alias{ExperimentInformation}
 \title{Experiment Duration}
 \usage{
-ExperimentInformation(running_times, parameters)
+ExperimentInformation(runningTimes, parameters)
 }
 \arguments{
-\item{running_times}{The runningTimes.txt table from  MaxQuant Output.}
-
 \item{parameters}{The parameters.txt table from  MaxQuant Output.}
+
+\item{running_times}{The runningTimes.txt table from  MaxQuant Output.}
 }
 \value{
 Returns the time in hours:minutes that lasted the whole Experiment.

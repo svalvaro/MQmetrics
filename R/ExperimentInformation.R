@@ -6,15 +6,15 @@
 #' @export
 #'
 #' @examples
-ExperimentInformation <- function(running_times, parameters){
+ExperimentInformation <- function(runningTimes, parameters){
   #Runningtimes
-  time <- sum(running_times$`Running time [min]`)
+  time <- sum(runningTimes$`Running time [min]`)
 
   time <- substr(times((time%/%60 +  time%%60 /60)/24), 1, 5)
 
-  start_date <- running_times$`Start date`[1]
+  start_date <- runningTimes$`Start date`[1]
 
-  start_time <- running_times$`Start time`[1]
+  start_time <- runningTimes$`Start time`[1]
 
   #Parameters
 

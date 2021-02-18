@@ -4,10 +4,10 @@
 \alias{ReadDataFromDir}
 \title{Read MaxQuant Tables From Directory}
 \usage{
-ReadDataFromDir(MQpathCombined, remove_contaminants = TRUE)
+ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE)
 }
 \arguments{
-\item{MQpathCombined}{The directory containing the MaxQuant Output.}
+\item{MQPathCombined}{The directory to the "combined" folder where the MaxQuant results are stored.}
 
 \item{remove_contaminants}{Whether or not to remove contaminants, reverse and identified by one one peptide.}
 }

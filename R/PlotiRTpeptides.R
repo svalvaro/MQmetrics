@@ -12,27 +12,56 @@ PlotiRT <- function(msmsScans){
                      "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
                      "LFLQFGAQGSPFLK")
 
+  iRT_sequences <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
+                     "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK",
+                     "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
+                     "LFLQFGAQGSPFLK")
 
+
+
+  tolerance <- 0.001
+
+  in_range <- unlist(sapply(msmsScans$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
+
+  indexes <- which(msmsScans$`m/z` %in% in_range)
+
+  iRT_table <- msmsScans[indexes,]
+
+  iRT_table <- iRT_table %>% select(c(Experiment,`m/z`,`Retention time`,
+                                      `Total ion current`, Sequence))
+
+
+  #inrange with peptide names
+
+  indexes_prot <-  which(msmsScans$Sequence %in% iRT_sequences)
+
+  iRT_table_prot <- msmsScans[indexes_prot,]
+
+  iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,`Retention time`,
+                                      `Total ion current`, Sequence))
+
+
+  # ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
+  #   geom_line(color= 'grey')+
+  #   facet_grid(Experiment ~ .)+
+  #   geom_line(iRT_table, mapping = aes(x = `Retention time`, y = `Total ion current`,
+  #                            colour = Experiment))
+
+  ggplot(iRT_table_prot, mapping = aes(x = `Retention time`, y = `Total ion current`,
+                                  colour = Experiment))+
+    geom_point()+
+    facet_grid(Experiment ~ .)
 
   # tolerance <- 0.001
   #
-  # in_range <- unlist(sapply(A, function(x) x[any(abs(x-B) < tolerance)]))
-  # C <- sapply(A, function(x) which.min(abs(x-B)))
+  # msmsScans[which(msmsScans$`m/z` == 354.89)
+  #
+  #
+  # C <- sapply(msmsScans$`, function(x) which.min(abs(x-iRT.mZ)))
   # C <- C[match(in_range, A)]
   #
   # ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
   #   geom_line(aes(colour = Experiment))
-
-  tolerance <- 0.001
-
-  msmsScans[which(msmsScans$`m/z` == 354.89)
-
-
-  C <- sapply(msmsScans$`, function(x) which.min(abs(x-iRT.mZ)))
-  C <- C[match(in_range, A)]
-
-  ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
-    geom_line(aes(colour = Experiment))
 
 
 

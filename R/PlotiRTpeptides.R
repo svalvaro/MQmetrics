@@ -1,3 +1,11 @@
+#' Title
+#'
+#' @param msmsScans
+#'
+#' @return
+#' @export
+#'
+#' @examples
 PlotiRT <- function(msmsScans){
 
 
@@ -18,17 +26,17 @@ PlotiRT <- function(msmsScans){
                      "LFLQFGAQGSPFLK")
 
 
-
-  tolerance <- 0.001
-
-  in_range <- unlist(sapply(msmsScans$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
-
-  indexes <- which(msmsScans$`m/z` %in% in_range)
-
-  iRT_table <- msmsScans[indexes,]
-
-  iRT_table <- iRT_table %>% select(c(Experiment,`m/z`,`Retention time`,
-                                      `Total ion current`, Sequence))
+#
+#   tolerance <- 0.001
+#
+#   in_range <- unlist(sapply(msmsScans$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
+#
+#   indexes <- which(msmsScans$`m/z` %in% in_range)
+#
+#   iRT_table <- msmsScans[indexes,]
+#
+#   iRT_table <- iRT_table %>% select(c(Experiment,`m/z`,`Retention time`,
+#                                       `Total ion current`, Sequence))
 
 
   #inrange with peptide names
@@ -38,8 +46,11 @@ PlotiRT <- function(msmsScans){
   iRT_table_prot <- msmsScans[indexes_prot,]
 
   iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,`Retention time`,
-                                      `Total ion current`, Sequence))
-
+                                      `Total ion current`, Sequence,
+                                      `Precursor intensity`, `Base peak intensity`))
+  iRT_table_prot_maxvalues <- iRT_table_prot %>%
+                                 group_by(Experiment, Sequence) %>%
+                                 filter(`Base peak intensity`== max(`Base peak intensity`))
 
   # ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
   #   geom_line(color= 'grey')+
@@ -47,10 +58,22 @@ PlotiRT <- function(msmsScans){
   #   geom_line(iRT_table, mapping = aes(x = `Retention time`, y = `Total ion current`,
   #                            colour = Experiment))
 
-  ggplot(iRT_table_prot, mapping = aes(x = `Retention time`, y = `Total ion current`,
-                                  colour = Experiment))+
+  # ggplot(iRT_table_prot, mapping = aes(x = `Retention time`,
+  #                                      y = `Precursor intensity`,
+  #                                      colour = Sequence))+
+  #         geom_point()+
+  #         facet_grid(Experiment ~ .)+
+  #         theme(legend.position = 'none')
+
+
+
+  ggplot(iRT_table_prot_maxvalues,aes(x = `Retention time`,
+                                       y = `Base peak intensity`,
+                                       colour = Sequence))+
     geom_point()+
-    facet_grid(Experiment ~ .)
+    facet_grid(Experiment ~ .)+
+    theme(legend.position = 'bottom')
+
 
   # tolerance <- 0.001
   #

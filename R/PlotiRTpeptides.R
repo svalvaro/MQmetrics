@@ -14,6 +14,22 @@ PlotiRT <- function(msmsScans){
 
 
 
+  # tolerance <- 0.001
+  #
+  # in_range <- unlist(sapply(A, function(x) x[any(abs(x-B) < tolerance)]))
+  # C <- sapply(A, function(x) which.min(abs(x-B)))
+  # C <- C[match(in_range, A)]
+  #
+  # ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
+  #   geom_line(aes(colour = Experiment))
+
+  tolerance <- 0.001
+
+  msmsScans[which(msmsScans$`m/z` == 354.89)
+
+
+  C <- sapply(msmsScans$`, function(x) which.min(abs(x-iRT.mZ)))
+  C <- C[match(in_range, A)]
 
   ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
     geom_line(aes(colour = Experiment))

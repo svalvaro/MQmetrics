@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotiRT <- function(msmsScans){
+PlotiRT <- function(evidence){
 
 
   iRT.mZ <- c(487.2571, 547.2984, 622.8539, 636.8695, 644.8230, 669.8384,
@@ -41,16 +41,16 @@ PlotiRT <- function(msmsScans){
 
   #inrange with peptide names
 
-  indexes_prot <-  which(msmsScans$Sequence %in% iRT_sequences)
+  indexes_prot <-  which(evidence$Sequence %in% iRT_sequences)
 
-  iRT_table_prot <- msmsScans[indexes_prot,]
+  iRT_table_prot <- evidence[indexes_prot,]
 
   iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,`Retention time`,
-                                      `Total ion current`, Sequence,
-                                      `Precursor intensity`, `Base peak intensity`))
+                                               Sequence, Intensity))
   iRT_table_prot_maxvalues <- iRT_table_prot %>%
                                  group_by(Experiment, Sequence) %>%
-                                 filter(`Base peak intensity`== max(`Base peak intensity`))
+                                 filter(Intensity
+                                        == max(Intensity))
 
   # ggplot(msmsScans, aes(x = `Retention time`, y = `Total ion current`))+
   #   geom_line(color= 'grey')+
@@ -68,9 +68,10 @@ PlotiRT <- function(msmsScans){
 
 
   ggplot(iRT_table_prot_maxvalues,aes(x = `Retention time`,
-                                       y = `Base peak intensity`,
-                                       colour = Sequence))+
+                                      y = Intensity,
+                                      colour = as.character(`m/z`)))+
     geom_point()+
+    geom_segment(aes(xend=`Retention time`, yend=0))+
     facet_grid(Experiment ~ .)+
     theme(legend.position = 'bottom')
 

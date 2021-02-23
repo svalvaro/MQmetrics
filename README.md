@@ -94,6 +94,17 @@ PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names =
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
 
 ``` r
+Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
+
+files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
+
+evidence_irt <- files_irt[['evidence.txt']]
+PlotiRT(evidence_irt)
+```
+
+<img src="man/figures/README-irt_peps1-1.png" width="100%" />
+
+``` r
 PlotIdentificationType(peptides)
 #> Using sample as id variables
 ```

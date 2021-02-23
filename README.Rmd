@@ -90,8 +90,13 @@ PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names =
 ```
 
 
-```{r}
+```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=5, fig.width=7.2}
+Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
 
+files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
+
+evidence_irt <- files_irt[['evidence.txt']]
+PlotiRT(evidence_irt)
 ```
 
 

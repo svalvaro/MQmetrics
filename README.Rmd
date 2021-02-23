@@ -114,8 +114,14 @@ PlotIdentificationType(peptides)
 
 
 ```{r Charg, warning=FALSE, message=FALSE, fig.height=5, fig.width=7.2}
-PlotCharge(evidence)
+PlotCharge(evidence_irt)
 ```
+```{r missed_cleavages}
+
+PlotMissedCleavages(peptides)
+
+```
+
 
 ```{r TotalIonCurrent, fig.height=5, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans)

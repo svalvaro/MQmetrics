@@ -20,7 +20,9 @@ Imports:
     gridExtra,
     utils,
     stringr,
-    chron
+    chron,
+    ggpubr,
+    stats
 Suggests: 
     knitr,
     rmarkdown

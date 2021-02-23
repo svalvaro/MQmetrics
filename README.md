@@ -119,10 +119,17 @@ PlotIdentificationType(peptides)
 <img src="man/figures/README-IdentificationType-1.png" width="100%" />
 
 ``` r
-PlotCharge(evidence)
+PlotCharge(evidence_irt)
 ```
 
 <img src="man/figures/README-Charg-1.png" width="100%" />
+
+``` r
+
+PlotMissedCleavages(peptides)
+```
+
+<img src="man/figures/README-missed_cleavages-1.png" width="100%" />
 
 ``` r
 PlotTotalIonCurrent(msmsScans)

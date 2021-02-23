@@ -6,8 +6,13 @@
 \usage{
 PlotMissedCleavages(peptides, position_dodge_width = 1)
 }
-\value{
+\arguments{
+\item{peptides}{peptides.txt table from MaxQuant ouput.}
 
+\item{position_dodge_width}{position of the columns within each others.}
+}
+\value{
+A plot showing the missed cleavages in each column.
 }
 \description{
 Missed Cleavages

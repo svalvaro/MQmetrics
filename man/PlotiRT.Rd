@@ -2,16 +2,16 @@
 % Please edit documentation in R/PlotiRT.R
 \name{PlotiRT}
 \alias{PlotiRT}
-\title{Title}
+\title{Max intensities of the iRT peptides in each sample.}
 \usage{
-PlotiRT(evidence)
+PlotiRT(evidence, tolerance = 0.001)
 }
 \arguments{
-\item{msmsScans}{}
+\item{evidence}{evidence.txt table from the MaxQuant ouptut.}
 }
 \value{
-
+A plot showing the iRT peptide in each sample vs the Retention time.
 }
 \description{
-Title
+Max intensities of the iRT peptides in each sample.
 }

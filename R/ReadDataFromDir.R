@@ -7,6 +7,7 @@
 #' @export
 #'
 #'@import ggplot2
+#'@import ggpubr
 #'@importFrom readr read_delim
 #'@importFrom magrittr %>%
 #'@importFrom dplyr contains
@@ -16,6 +17,8 @@
 #'@importFrom utils head
 #'@importFrom stringr str_count
 #'@importFrom chron times
+#'@importFrom stats aggregate complete.cases lm coef
+#'
 #'
 #'
 #' @examples

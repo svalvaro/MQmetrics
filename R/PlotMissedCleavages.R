@@ -1,10 +1,13 @@
 #' Missed Cleavages
+#' @param peptides peptides.txt table from MaxQuant ouput.
+#' @param  position_dodge_width position of the columns within each others.
 #'
-#' @return
+#' @return A plot showing the missed cleavages in each column.
 #' @export
 #'
 #' @examples
 PlotMissedCleavages <- function(peptides, position_dodge_width = 1){
+  `Missed cleavages` <- value <- variable <- NULL
 
   pep_melt <-  melt(peptides, id.vars ="Missed cleavages", measure.vars = colnames(peptides %>% select(contains('Experiment'))))
   pep_melt<- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)

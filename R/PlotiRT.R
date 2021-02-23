@@ -12,19 +12,11 @@ PlotiRT <- function(evidence){
   iRT.mZ <- c(487.2571, 547.2984, 622.8539, 636.8695, 644.8230, 669.8384,
               683.8282, 683.8541, 699.3388, 726.8361, 776.9301)
 
-  iRT.score <- c(-24.92, 19.79, 70.52, 87.23, 0, 28.71, 12.39, 33.38, 42.26,
-                 54.62, 100)
 
-  names(iRT.mZ) <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
+  names(iRT.mZ) <- iRT_sequences <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
                      "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK",
                      "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
                      "LFLQFGAQGSPFLK")
-
-  iRT_sequences <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
-                     "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK",
-                     "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
-                     "LFLQFGAQGSPFLK")
-
 
 #
 #   tolerance <- 0.001
@@ -44,6 +36,11 @@ PlotiRT <- function(evidence){
   indexes_prot <-  which(evidence$Sequence %in% iRT_sequences)
 
   iRT_table_prot <- evidence[indexes_prot,]
+
+
+  #remove rows with NA in intensity
+  iRT_table_prot <- iRT_table_prot[complete.cases(iRT_table_prot$Intensity),]
+
 
   iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,`Retention time`,
                                                Sequence, Intensity))
@@ -69,10 +66,13 @@ PlotiRT <- function(evidence){
 
   ggplot(iRT_table_prot_maxvalues,aes(x = `Retention time`,
                                       y = Intensity,
-                                      colour = as.character(`m/z`)))+
+                                      colour = Sequence))+
+                                      # colour = as.character(`m/z`)))+
     geom_point()+
     geom_segment(aes(xend=`Retention time`, yend=0))+
     facet_grid(Experiment ~ .)+
+    ggtitle('Biognosys iRT peptides in each sample.')+
+    #labs(colour='iRT peptides m/z')+
     theme(legend.position = 'bottom')
 
 

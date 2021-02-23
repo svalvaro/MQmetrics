@@ -105,6 +105,13 @@ PlotiRT(evidence_irt)
 <img src="man/figures/README-irt_peps1-1.png" width="100%" />
 
 ``` r
+library(ggpubr)
+PlotiRTScore(evidence_irt)
+```
+
+<img src="man/figures/README-irt_peps2-1.png" width="100%" />
+
+``` r
 PlotIdentificationType(peptides)
 #> Using sample as id variables
 ```

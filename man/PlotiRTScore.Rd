@@ -4,7 +4,7 @@
 \alias{PlotiRTScore}
 \title{Title}
 \usage{
-PlotiRTScore(msmsScans)
+PlotiRTScore(evidence)
 }
 \arguments{
 \item{msmsScans}{}

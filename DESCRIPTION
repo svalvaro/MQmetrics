@@ -22,8 +22,8 @@ Imports:
     stringr,
     chron,
     ggpubr,
-    stats
-Suggests: 
-    knitr,
+    stats,
     rmarkdown
+Suggests: 
+    knitr
 VignetteBuilder: knitr

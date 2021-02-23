@@ -8,6 +8,7 @@
 #'
 #'@import ggplot2
 #'@import ggpubr
+#'@import rmarkdown
 #'@importFrom readr read_delim
 #'@importFrom magrittr %>%
 #'@importFrom dplyr contains

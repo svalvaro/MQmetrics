@@ -1,0 +1,112 @@
+---
+title: "Report"
+output: html_document
+params:
+  input_dir: ''
+
+---
+
+
+```{r setup, echo=FALSE}
+library(ProteoMS)
+```
+
+```{r,echo= FALSE,  message=FALSE, warning=FALSE}
+# MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
+
+MQPathCombined <- params$input_dir
+
+#MQPathCombined <- '/home/alvaro/Documents/MaxQuant_results/combined/'
+
+files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
+
+#files can be extracted like this:
+summary <- files[["summary.txt"]]
+evidence <- files[["evidence.txt"]]
+peptides <- files[["peptides.txt"]]
+msmsScans <- files[["msmsScans.txt"]]  
+proteinGroups <- files[["proteinGroups.txt"]]
+runningTimes <-  files[["#runningTimes.txt"]]
+parameters <- files[["parameters.txt"]]
+```
+
+
+```{r ExperimentDuration, echo=FALSE}
+ExperimentInformation(runningTimes, parameters) 
+```
+
+
+
+```{r PlotPeaks, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotPeaks(summary, long_names = TRUE, sep_names = '_')
+```
+
+
+```{r PlotMSMS, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotMsMs(summary,long_names = TRUE, sep_names = '_')
+```
+
+
+```{r isotope, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
+```
+
+
+```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2, echo=FALSE}
+PLotPeptidesIdentified(summary)
+```
+
+
+```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
+
+PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names = TRUE, sep_names = '_')
+
+```
+
+
+```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=5, fig.width=9.2, echo=FALSE}
+Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
+
+files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
+
+evidence_irt <- files_irt[['evidence.txt']]
+PlotiRT(evidence_irt)
+```
+
+
+```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=5, fig.width=9.2, echo=FALSE}
+library(ggpubr)
+PlotiRTScore(evidence_irt)
+
+```
+
+
+
+```{r IdentificationType, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotIdentificationType(peptides)
+```
+
+
+```{r Charg, warning=FALSE, message=FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotCharge(evidence_irt)
+```
+
+
+```{r missed_cleavages, echo=FALSE}
+
+PlotMissedCleavages(peptides)
+
+```
+
+
+```{r TotalIonCurrent, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotTotalIonCurrent(msmsScans)
+```
+
+```{r DynamicRange, fig.height=5, fig.width=7.2, echo=FALSE}
+PlotCombinedDynamicRange(proteinGroups)
+```
+
+```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
+PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
+```

@@ -20,12 +20,13 @@ PlotCharge <- function(evidence){
 
   ev_agrup_m <- melt(ev_agrup, id.vars = "Experiment")
 
-  ggplot(ev_agrup_m, aes(x = variable, y = value , fill = Experiment)) +
-    geom_bar(stat='identity', color = 'black')+
-    facet_grid(Experiment~.)+
-    ggtitle(label = 'The charge-state of the precursor ion.')+
-    theme(legend.position = 'none')+
-    xlab(label = 'Charge')
+ggplot(ev_agrup_m, aes(x = variable, y = value , fill = Experiment)) +
+  geom_bar(stat='identity', color = 'black')+
+  facet_wrap(.~ Experiment, ncol =1)+
+  ggtitle(label = 'The charge-state of the precursor ion.')+
+  theme(legend.position = 'none')+
+  xlab(label = 'Charge')
+
 
 
 }

@@ -4,7 +4,7 @@
 \alias{PLotPeptidesIdentified}
 \title{Total number of peaks detected and sequenced}
 \usage{
-PLotPeptidesIdentified(peptides)
+PLotPeptidesIdentified(peptides, long_names = FALSE, sep_names = "-")
 }
 \arguments{
 \item{peptides}{The peptides.txt table from  MaxQuant Output.}

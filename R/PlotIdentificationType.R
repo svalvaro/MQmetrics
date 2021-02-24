@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-PlotIdentificationType <- function(peptides){
+PlotIdentificationType <- function(peptides,  long_names = FALSE, sep_names = '-'){
 
   value <- variable <- NULL
 
@@ -23,12 +23,23 @@ PlotIdentificationType <- function(peptides){
   ide_data$sample <- rownames(ide_data)
   ide_data_melted <- melt(ide_data)
 
-  ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
-    geom_col()+
-    ggtitle('Peptide Identification type')+
-    geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
-    theme(axis.title.y = element_text(margin = margin(r = 20)))#+
-    #scale_x_discrete(labels = function(x) stringr::str_wrap(gsub('_',' ',x), width_vertical_plots))
+  b <- ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
+          geom_col()+
+          ggtitle('Peptide Identification type')+
+          geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+          theme(axis.title.y = element_text(margin = margin(r = 20)))
+
+  if (long_names == TRUE) {
+    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+
+  } else{
+    b
+  }
+
+
+
+
+
 
 }
 

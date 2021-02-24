@@ -97,6 +97,7 @@ PlotiRTScore <- function(evidence, tolerance= 0.001){
       stat_cor(label.x = 3, label.y = 120) +
       stat_regline_equation(label.x = 3, label.y = 110)+
       facet_wrap(~Experiment)+
+      ggtitle(label = 'Retention time of the Biognosys iRT peptides.')+
       theme(legend.position =  'bottom')
 
 

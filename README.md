@@ -81,7 +81,7 @@ PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 <img src="man/figures/README-isotope-1.png" width="100%" />
 
 ``` r
-PLotPeptidesIdentified(summary)
+PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PeptidesIdentified-1.png" width="100%" />
@@ -105,14 +105,14 @@ PlotiRT(evidence_irt)
 <img src="man/figures/README-irt_peps1-1.png" width="100%" />
 
 ``` r
-library(ggpubr)
+
 PlotiRTScore(evidence_irt)
 ```
 
 <img src="man/figures/README-irt_peps2-1.png" width="100%" />
 
 ``` r
-PlotIdentificationType(peptides)
+PlotIdentificationType(peptides, long_names = TRUE, sep_names = '_')
 #> Using sample as id variables
 ```
 

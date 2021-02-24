@@ -7,14 +7,21 @@
 #' @export
 #'
 #' @examples
-PLotPeptidesIdentified <- function(peptides){
+PLotPeptidesIdentified <- function(peptides, long_names = FALSE, sep_names = '-'){
   `Peptide Sequences Identified` <- Experiment<- NULL
 
-  ggplot(peptides, aes(x=Experiment , y = `Peptide Sequences Identified`, fill = Experiment))+
-  geom_bar(stat = 'identity', color='black')+
-  theme_bw(base_size = 12)+
-  ggtitle('Peptides Sequences Identified')+
-  theme(legend.position = 'none')
-  #
-  # scale_y_discrete(labels = function(x) stringr::str_wrap(gsub('_',' ',x), width_horizontal_plots))
+  b <- ggplot(peptides, aes(x=Experiment , y = `Peptide Sequences Identified`, fill = Experiment))+
+          geom_bar(stat = 'identity', color='black')+
+          theme_bw(base_size = 12)+
+          ggtitle('Peptides Sequences Identified')+
+          theme(legend.position = 'none')
+          #
+
+  if (long_names == TRUE) {
+    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+
+  } else{
+    b
   }
+
+}

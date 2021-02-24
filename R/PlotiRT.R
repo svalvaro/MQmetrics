@@ -64,7 +64,7 @@ PlotiRT <- function(evidence, tolerance=0.001){
                                       # colour = as.character(`m/z`)))+
     geom_point()+
     geom_segment(aes(xend=`Retention time`, yend=0))+
-    facet_grid(Experiment ~ .)+
+    facet_wrap(. ~ Experiment, ncol= 1)+
     ggtitle('Biognosys iRT peptides in each sample.')+
     #labs(colour='iRT peptides m/z')+
     theme(legend.position = 'bottom')

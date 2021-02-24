@@ -13,7 +13,7 @@ PlotTotalIonCurrent <- function(msmsScans){
     geom_line(aes(colour=Experiment))+
     geom_label(data = . %>% group_by(Experiment) %>% filter(`Total ion current`== max(`Total ion current`)),
                aes(label= format(`Total ion current`, digits = 2, scientific = TRUE)), hjust=0.5)+
-    facet_grid(Experiment~ .)+
+    facet_wrap(.~ Experiment, ncol =1)+
     ggtitle('Total Ion Current')+
     theme(legend.position = 'none')
 

@@ -59,7 +59,7 @@ PLotPeptidesIdentified(summary)
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
 
-PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names = TRUE, sep_names = '_')
+PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10, long_names = TRUE, sep_names = '_')
 
 ```
 
@@ -75,15 +75,23 @@ PlotiRT(evidence_irt)
 
 
 ```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=5, fig.width=9.2, echo=FALSE}
-library(ggpubr)
+#library(ggpubr)
 PlotiRTScore(evidence_irt)
 
 ```
 
 
 
-```{r IdentificationType, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
-PlotIdentificationType(peptides)
+```{r IdentificationType, message= FALSE, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
+
+if(parameters$Value[27] == TRUE){
+  PlotIdentificationType(peptides)  
+  
+} else{
+  print('Match Between Runs was not used during the MaxQuant analysis.No Identification Type to show.')
+}
+
+
 ```
 
 
@@ -92,7 +100,7 @@ PlotCharge(evidence_irt)
 ```
 
 
-```{r missed_cleavages, echo=FALSE}
+```{r missed_cleavages, warning=FALSE, message=FALSE,echo=FALSE}
 
 PlotMissedCleavages(peptides)
 

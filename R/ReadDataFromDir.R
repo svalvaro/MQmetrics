@@ -52,7 +52,9 @@ ReadDataFromDir <- function(MQPathCombined, remove_contaminants = TRUE){
   }
 
 
-
+  #allPeptides.txt
+  # allPeptides_table <- read_delim(file.path(MQPathCombined, 'txt/allPeptides.txt'),
+  #                                 "\t", escape_double = FALSE,na = c("NA"),trim_ws = TRUE)
 
   #msmsScans.txt
 
@@ -91,7 +93,7 @@ ReadDataFromDir <- function(MQPathCombined, remove_contaminants = TRUE){
 
   #Vector of tables
 
-  alltables <- list(summary_table, peptides_table, evidence_table,  msscans_table, prot_groups, running_time, parameters_table)
+  alltables <- list( summary_table, peptides_table, evidence_table,  msscans_table, prot_groups, running_time, parameters_table)
 
   names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'proteinGroups.txt', '#runningTimes.txt', 'parameters.txt')
 

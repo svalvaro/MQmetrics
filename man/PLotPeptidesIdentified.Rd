@@ -4,10 +4,10 @@
 \alias{PLotPeptidesIdentified}
 \title{Total number of peaks detected and sequenced}
 \usage{
-PLotPeptidesIdentified(peptides, long_names = FALSE, sep_names = "-")
+PLotPeptidesIdentified(summary, long_names = FALSE, sep_names = "-")
 }
 \arguments{
-\item{peptides}{The peptides.txt table from  MaxQuant Output.}
+\item{summary}{The peptides.txt table from  MaxQuant Output.}
 }
 \value{
 Plots the total number of unique peptide amino acid sequences identified from the recorded tandem mass spectra.

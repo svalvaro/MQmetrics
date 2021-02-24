@@ -1,16 +1,17 @@
 
 #' Total number of peaks detected and sequenced
 #'
-#' @param peptides The peptides.txt table from  MaxQuant Output.
+#' @param summary The peptides.txt table from  MaxQuant Output.
 #'
 #' @return Plots the total number of unique peptide amino acid sequences identified from the recorded tandem mass spectra.
 #' @export
 #'
 #' @examples
-PLotPeptidesIdentified <- function(peptides, long_names = FALSE,sep_names = '-'){
+PLotPeptidesIdentified <- function(summary, long_names = FALSE,sep_names = '-'){
   `Peptide Sequences Identified` <- Experiment<- NULL
 
-  b <- ggplot(peptides, aes(x=Experiment , y = `Peptide Sequences Identified`, fill = Experiment))+
+  b <- ggplot(summary, aes(x=Experiment , y = `Peptide Sequences Identified`,
+                            fill = Experiment))+
           geom_bar(stat = 'identity', color='black')+
           theme_bw(base_size = 12)+
           ggtitle('Peptides Sequences Identified')+

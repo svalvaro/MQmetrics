@@ -48,6 +48,7 @@ MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
 #files can be extracted like this:
+
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
 peptides <- files[["peptides.txt"]]
@@ -126,6 +127,10 @@ PlotMissedCleavages(peptides)
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans)
 ```
+```{r protein_degradation}
+PlotProteinCoverage(peptides)
+```
+
 
 ```{r DynamicRange, fig.height=5, fig.width=7.2}
 PlotCombinedDynamicRange(proteinGroups)

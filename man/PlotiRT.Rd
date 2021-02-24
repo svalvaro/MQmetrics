@@ -4,7 +4,12 @@
 \alias{PlotiRT}
 \title{Max intensities of the iRT peptides in each sample.}
 \usage{
-PlotiRT(evidence, tolerance = 0.001, font_size = 12)
+PlotiRT(
+  evidence,
+  show_calibrated_rt = FALSE,
+  tolerance = 0.001,
+  font_size = 12
+)
 }
 \arguments{
 \item{evidence}{evidence.txt table from the MaxQuant ouptut.}

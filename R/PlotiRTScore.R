@@ -22,9 +22,14 @@ PlotiRTScore <- function(evidence, tolerance= 0.001){
                                                      "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK",
                                                      "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
                                                      "LFLQFGAQGSPFLK")
+  names_Sequence <- names(Sequence) <- c('iRT Kit_a', 'iRT Kit_d', 'iRT Kit_i', 'iRT Kit_k',
+                                         'iRT Kit_b',  'iRT Kit_e', 'iRT Kit_c', 'iRT Kit_f',
+                                         'iRT Kit_g', 'iRT Kit_h', 'iRT Kit_l')
+
 
   iRT_score <- data.frame(iRT.score, Sequence)
 
+  irt_names_table <- data.frame(Sequence, names_Sequence)
 
 
 
@@ -68,6 +73,9 @@ PlotiRTScore <- function(evidence, tolerance= 0.001){
     #Add a new column score
     iRT_table_prot_final <- merge(iRT_table_prot_final, iRT_score, by = "Sequence")
 
+    #Add a new column names
+    iRT_table_prot_final <- merge(iRT_table_prot_final, irt_names_table, by = "Sequence")
+
     #obtain the maximum intensity values for each experiment, and sequence.
     iRT_table_prot_maxvalues <- iRT_table_prot_final %>%
       group_by(Experiment, Sequence) %>%
@@ -91,12 +99,12 @@ PlotiRTScore <- function(evidence, tolerance= 0.001){
   #plot it.
     ggscatter(iRT_table_prot_maxvalues, x = "iRT.score", y = "Retention time",
               add = 'reg.line')+
-      geom_point(aes(colour = Sequence))+
       theme_bw()+
       geom_vline(xintercept = 0, size = 0.5, linetype = 2)+
       stat_cor(label.x = 3, label.y = 120) +
       stat_regline_equation(label.x = 3, label.y = 110)+
       facet_wrap(~Experiment)+
+      geom_point(aes(fill = names_Sequence),shape = 21, colour ='black', size =3)+
       ggtitle(label = 'Retention time of the Biognosys iRT peptides.')+
       theme(legend.position =  'bottom')
 

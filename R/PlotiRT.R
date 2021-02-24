@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotiRT <- function(evidence, tolerance=0.001, font_size=12){
+PlotiRT <- function(evidence,show_calibrated_rt = FALSE, tolerance=0.001, font_size=12){
 
   Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
 
@@ -14,14 +14,20 @@ PlotiRT <- function(evidence, tolerance=0.001, font_size=12){
               683.8282, 683.8541, 699.3388, 726.8361, 776.9301)
 
 
-  names(iRT.mZ) <- iRT_sequences <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
-                     "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK",
-                     "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
-                     "LFLQFGAQGSPFLK")
+  names(iRT.mZ) <- Sequence <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
+                     "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK", "TPVITGAPYEYR",
+                     "DGLDAASYYAPVR", "ADVTPADFSEWSK","LFLQFGAQGSPFLK")
 
 
+  names_Sequence <- names(Sequence) <- c('iRT Kit_a', 'iRT Kit_d', 'iRT Kit_i', 'iRT Kit_k',
+                           'iRT Kit_b',  'iRT Kit_e', 'iRT Kit_c', 'iRT Kit_f',
+                            'iRT Kit_g', 'iRT Kit_h', 'iRT Kit_l')
+
+
+
+  irt_names_table <- data.frame(Sequence, names_Sequence)
   #Check for the iRT peptides by sequence
-  indexes_prot <-  which(evidence$Sequence %in% iRT_sequences)
+  indexes_prot <-  which(evidence$Sequence %in% Sequence)
 
 
 
@@ -40,7 +46,7 @@ PlotiRT <- function(evidence, tolerance=0.001, font_size=12){
 
   #make table smaller
   iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,`Retention time`,
-                                               Sequence, Intensity))
+                                                `Calibrated retention time`  ,Sequence, Intensity))
 
   #from the irt obtained, filter them by the theoretical m/z with tolerance
   in_range <- unlist(sapply(iRT_table_prot$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
@@ -51,6 +57,8 @@ PlotiRT <- function(evidence, tolerance=0.001, font_size=12){
 
   iRT_table_prot_final  <- iRT_table_prot[indexes,]
 
+  iRT_table_prot_final <- merge(iRT_table_prot_final, irt_names_table, by = "Sequence")
+
   #obtain the maximum intensity values for each experiment, and sequence.
   iRT_table_prot_maxvalues <- iRT_table_prot_final %>%
                                  group_by(Experiment, Sequence) %>%
@@ -58,18 +66,33 @@ PlotiRT <- function(evidence, tolerance=0.001, font_size=12){
                                         == max(Intensity))
 
 
-  ggplot(iRT_table_prot_maxvalues,aes(x = `Retention time`,
-                                      y = Intensity,
-                                      colour = Sequence))+
-                                      # colour = as.character(`m/z`)))+
-    geom_point()+
-    geom_segment(aes(xend=`Retention time`, yend=0))+
-    facet_wrap(. ~ Experiment, ncol= 1)+
-    ggtitle('Biognosys iRT peptides in each sample.')+
-    theme_bw(base_size = font_size)+
-    #labs(colour='iRT peptides m/z')+
-    theme(legend.position = 'bottom')
+  b <- ggplot(iRT_table_prot_maxvalues,aes(y = Intensity,
+                                            colour = names_Sequence))+
+                                            # colour = as.character(`m/z`)))+
+          geom_point(aes(x = `Retention time`), size = 2)+
+          geom_segment(aes(x = `Retention time`, xend=`Retention time`, yend=0))+
+          facet_wrap(. ~ Experiment, ncol= 1)+
+          ggtitle('Biognosys iRT peptides in each sample.')+
+          theme_bw(base_size = font_size)+
+          labs(colour='iRT peptides')+
+          theme(legend.position = 'bottom')
 
+  if(show_calibrated_rt == TRUE){
+     irt_melted <- melt(iRT_table_prot_maxvalues,
+                        id.vars = c('Sequence', 'Experiment','m/z',
+                                    'names_Sequence', 'Intensity'))
+      ggplot(irt_melted, aes(x = value, y = Intensity, colour = names_Sequence))+
+        geom_point(aes(shape = variable), size = 2)+
+        geom_segment(aes(x = value, xend=value, yend=0))+
+        facet_wrap(. ~ Experiment, ncol= 1)+
+        ggtitle('Biognosys iRT peptides in each sample.')+
+        theme_bw(base_size = font_size)+
+        labs(colour='iRT peptides')+
+        theme(legend.position = 'bottom')
+
+  }else{
+    b
+  }
 
 }
 }

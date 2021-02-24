@@ -99,7 +99,7 @@ Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
 files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
 
 evidence_irt <- files_irt[['evidence.txt']]
-PlotiRT(evidence_irt)
+PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
 ```
 
 <img src="man/figures/README-irt_peps1-1.png" width="100%" />

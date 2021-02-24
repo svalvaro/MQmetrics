@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-PlotCharge <- function(evidence){
+PlotCharge <- function(evidence, font_size = 12){
   Experiment <- Charge <-  value <- variable <- NULL
 
   ev <- evidence %>%
@@ -25,7 +25,8 @@ ggplot(ev_agrup_m, aes(x = variable, y = value , fill = Experiment)) +
   facet_wrap(.~ Experiment, ncol =1)+
   ggtitle(label = 'The charge-state of the precursor ion.')+
   theme(legend.position = 'none')+
-  xlab(label = 'Charge')
+  xlab(label = 'Charge')+
+  theme_bw(base_size = font_size)
 
 
 

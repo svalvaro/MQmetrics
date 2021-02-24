@@ -15,6 +15,7 @@ PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_name
   a_melt <- melt(a, id.vars = 'Experiment' )
 
 
+
  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
         geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
         theme_bw(base_size = font_size)+

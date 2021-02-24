@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-PLotPeptidesIdentified <- function(peptides, long_names = FALSE, sep_names = '-'){
+PLotPeptidesIdentified <- function(peptides, long_names = FALSE,sep_names = '-'){
   `Peptide Sequences Identified` <- Experiment<- NULL
 
   b <- ggplot(peptides, aes(x=Experiment , y = `Peptide Sequences Identified`, fill = Experiment))+

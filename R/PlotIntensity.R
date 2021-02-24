@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base = 10,  long_names = FALSE, sep_names = '-'){
+PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base = 10, font_size = 12, long_names = FALSE, sep_names = '-'){
   id <- variable <- value <- NULL
 
   if (intensity_type == 'Intensity') {
@@ -65,6 +65,7 @@ b <-   ggplot(melted_intensities, aes(x = variable, y = value, fill = variable))
           ggtitle(label = title)+
           xlab('Experiment')+
           ylab(ylab)+
+          theme_bw(base_size = font_size)+
           theme(legend.position = 'none')
 
 

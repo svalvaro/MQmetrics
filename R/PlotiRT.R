@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotiRT <- function(evidence, tolerance=0.001){
+PlotiRT <- function(evidence, tolerance=0.001, font_size=12){
 
   Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
 
@@ -66,6 +66,7 @@ PlotiRT <- function(evidence, tolerance=0.001){
     geom_segment(aes(xend=`Retention time`, yend=0))+
     facet_wrap(. ~ Experiment, ncol= 1)+
     ggtitle('Biognosys iRT peptides in each sample.')+
+    theme_bw(base_size = font_size)+
     #labs(colour='iRT peptides m/z')+
     theme(legend.position = 'bottom')
 

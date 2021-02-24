@@ -4,7 +4,12 @@
 \alias{PlotIdentificationType}
 \title{Compares the type of identification of each sample}
 \usage{
-PlotIdentificationType(peptides, long_names = FALSE, sep_names = "-")
+PlotIdentificationType(
+  peptides,
+  font_size = 12,
+  long_names = FALSE,
+  sep_names = "-"
+)
 }
 \arguments{
 \item{peptides}{The peptides.txt table from  MaxQuant Output.}

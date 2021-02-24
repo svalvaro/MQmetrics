@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotMissedCleavages <- function(peptides, font_size =12, position_dodge_width = 1){
+PlotMissedCleavages <- function(peptides, font_size =12 , position_dodge_width = 1){
   `Missed cleavages` <- value <- variable <- NULL
 
   pep_melt <-  melt(peptides, id.vars ="Missed cleavages", measure.vars = colnames(peptides %>% select(contains('Experiment'))))
@@ -19,6 +19,8 @@ PlotMissedCleavages <- function(peptides, font_size =12, position_dodge_width = 
     #theme(legend.position = 'none')+
     xlab(label = 'Missed Cleavages')+
     theme_bw(base_size = font_size)
+
+
 
 }
 

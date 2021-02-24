@@ -8,6 +8,7 @@ PlotIntensity(
   proteinGroups,
   intensity_type = "Intensity",
   log_base = 10,
+  font_size = 12,
   long_names = FALSE,
   sep_names = "-"
 )

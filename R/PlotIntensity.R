@@ -59,14 +59,17 @@ PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base 
     ylab <- expression('Log'[10]*'(LFQ intensity)')
   }
 
-b <-   ggplot(melted_intensities, aes(x = variable, y = value, fill = variable))+
-          geom_violin()+
-          geom_boxplot(width=0.2)+
-          ggtitle(label = title)+
-          xlab('Experiment')+
-          ylab(ylab)+
-          theme_bw(base_size = font_size)+
-          theme(legend.position = 'none')
+
+  b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
+            geom_violin(fill = 'gray80', size = 1, alpha = .5)+
+            geom_boxplot(width=0.2)+
+            ggtitle(label = title)+
+            xlab('Experiment')+
+            ylab(ylab)+
+            theme_bw(base_size = font_size)+
+            theme(legend.position = 'none')
+
+
 
 
 if(long_names==TRUE){

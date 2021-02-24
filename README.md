@@ -52,14 +52,14 @@ parameters <- files[["parameters.txt"]]
 
 ``` r
 ExperimentInformation(runningTimes, parameters) 
-#> [1] "The experiment started the day: 17/02/2021 at the time: 18:57:27."
-#> [1] "The whole experiment lasted: 05:48 (hours:minutes)."
-#> [1] "The MaxQuant version used was: 1.6.12.0"
-#> [1] "The user was: marek.vrbacky"
-#> [1] "The machine name was: FGU013PC029"
-#> [1] "The protein FDR was: 0.01"
-#> [1] "The match between runs was: True"
-#> [1] "The fasta file used was: C:\\MaxQuant_Databases\\UP000000589_10090.fasta"
+[1] "The experiment started the day: 17/02/2021 at the time: 18:57:27."
+[1] "The whole experiment lasted: 05:48 (hours:minutes)."
+[1] "The MaxQuant version used was: 1.6.12.0"
+[1] "The user was: marek.vrbacky"
+[1] "The machine name was: FGU013PC029"
+[1] "The protein FDR was: 0.01"
+[1] "The match between runs was: True"
+[1] "The fasta file used was: C:\\MaxQuant_Databases\\UP000000589_10090.fasta"
 ```
 
 ``` r

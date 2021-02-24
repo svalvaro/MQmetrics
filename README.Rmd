@@ -58,7 +58,7 @@ parameters <- files[["parameters.txt"]]
 ```
 
 
-```{r ExperimentDuration}
+```{r ExperimentDuration, comment= NA}
 ExperimentInformation(runningTimes, parameters) 
 ```
 

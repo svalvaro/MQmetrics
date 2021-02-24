@@ -4,7 +4,7 @@
 \alias{PlotMissedCleavages}
 \title{Missed Cleavages}
 \usage{
-PlotMissedCleavages(peptides, position_dodge_width = 1)
+PlotMissedCleavages(peptides, font_size = 12, position_dodge_width = 1)
 }
 \arguments{
 \item{peptides}{peptides.txt table from MaxQuant ouput.}

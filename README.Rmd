@@ -119,7 +119,7 @@ PlotCharge(evidence_irt)
 ```
 ```{r missed_cleavages}
 
-PlotMissedCleavages(peptides)
+PlotProteaseSpecificity(peptides)
 
 ```
 

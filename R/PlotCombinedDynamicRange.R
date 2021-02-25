@@ -31,6 +31,8 @@ PlotCombinedDynamicRange <- function(proteinGroups){
 
     geom_point(colour='darkgrey', alpha=0.75, shape=21)+
 
+    theme_bw()+
+
     ggtitle('Dynamic range of protein abundance all samples')+
 
     ylab(expression('log'[10]*'(Intensity)'))+

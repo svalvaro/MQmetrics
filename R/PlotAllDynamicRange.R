@@ -51,6 +51,8 @@ PLotAllDynamicRange <- function(proteinGroups, columns =1, rows=1){
 
     ggtitle(colnames(rank_groups)[i])+
 
+    theme_bw()+
+
     ylab(expression('log'[10]*'(Intensity)'))+
 
     xlab('Protein Abundance Rank')#+

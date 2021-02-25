@@ -15,6 +15,7 @@ PlotTotalIonCurrent <- function(msmsScans){
                aes(label= format(`Total ion current`, digits = 2, scientific = TRUE)), hjust=0.5)+
     facet_wrap(.~ Experiment, ncol =1)+
     ggtitle('Total Ion Current')+
+    theme_bw()+
     theme(legend.position = 'none')
 
 }

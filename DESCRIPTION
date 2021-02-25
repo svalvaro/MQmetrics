@@ -23,7 +23,8 @@ Imports:
     chron,
     ggpubr,
     stats,
-    rmarkdown
+    rmarkdown,
+    cowplot
 Suggests: 
     knitr
 VignetteBuilder: knitr

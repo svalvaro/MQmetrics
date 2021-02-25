@@ -100,7 +100,7 @@ Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
 files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
 
 evidence_irt <- files_irt[['evidence.txt']]
-PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
+PlotiRT(evidence_irt, show_calibrated_rt = TRUE)
 ```
 
 <img src="man/figures/README-irt_peps1-1.png" width="100%" />
@@ -139,7 +139,7 @@ PlotTotalIonCurrent(msmsScans)
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides)
+PlotProteinCoverage(peptides, UniprotID = "Q9QXS1")
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />

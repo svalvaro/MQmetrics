@@ -19,6 +19,7 @@
 #'@importFrom stringr str_count
 #'@importFrom chron times
 #'@importFrom stats aggregate complete.cases lm coef
+#'@importFrom cowplot plot_grid ggdraw draw_label
 #'
 #'
 #'

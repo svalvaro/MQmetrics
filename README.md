@@ -44,6 +44,7 @@ files <- ReadDataFromDir(MQPathCombined) #This function will read the tables nee
 
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
+msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]  
 proteinGroups <- files[["proteinGroups.txt"]]
@@ -139,10 +140,19 @@ PlotTotalIonCurrent(msmsScans)
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides, UniprotID = "Q9QXS1")
+PlotProteinCoverage(peptides, UniprotID = "Q3UMF0")
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />
+
+``` r
+PlotAcquisitionCycle(msScans)
+#> Warning: Removed 6 rows containing missing values (geom_point).
+
+#> Warning: Removed 6 rows containing missing values (geom_point).
+```
+
+<img src="man/figures/README-PlotAcquisition-1.png" width="100%" />
 
 ``` r
 PlotCombinedDynamicRange(proteinGroups)

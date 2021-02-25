@@ -3,6 +3,7 @@
 export(ExperimentInformation)
 export(PLotAllDynamicRange)
 export(PLotPeptidesIdentified)
+export(PlotAcquisitionCycle)
 export(PlotCharge)
 export(PlotCombinedDynamicRange)
 export(PlotIdentificationType)

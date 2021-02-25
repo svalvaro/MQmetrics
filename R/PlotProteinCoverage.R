@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotProteinCoverage <- function(peptides, UniprotID = 'P04406'){
+PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2'){
   table_peptides <- peptides %>% select(contains(c( 'Intensity', 'Start position',
                                                     'End position', 'Proteins'))) %>%
     select(-contains(c('LFQ', 'Unique'))) %>%  select(-'Intensity')
@@ -28,12 +28,37 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'P04406'){
           geom_point( alpha = 0.75)+
           theme_bw()+
           facet_wrap(.~ variable, ncol =1)
+
+
+  #For the Intensity vs start position
+
+  # prot_selected <- proteinGroups[(proteinGroups$`Protein IDs`)==UniprotID,]
+  #
+  # x_axis_length <- range(1:prot_selected$`Sequence length`)
+
+
+
+
+
+  # #Plot for Intensity vs Start position
+  #  b <- ggplot(pep_melt , aes(x = x_axis_length, y = log10(value)))+
+  #           geom_point( alpha = 0.75)+
+  #           theme_bw()+
+  #           ylab(expression('Log'[10]*'(Intensity)'))+
+  #           facet_wrap(.~ variable, ncol =1)
+
   #Plot for Intensity vs Start position
-   b <- ggplot(pep_melt , aes(x = `Start position`, y = log10(value)))+
-            geom_point( alpha = 0.75)+
+  b <- ggplot(pep_melt )+
+            geom_segment(aes(x=`Start position`,
+                             xend=`End position`,
+                             y = log10(value),
+                             yend =log10(value)))+
             theme_bw()+
             ylab(expression('Log'[10]*'(Intensity)'))+
             facet_wrap(.~ variable, ncol =1)
+
+
+
   #Plot them together
    c <- plot_grid(a,b)
    #Make a title

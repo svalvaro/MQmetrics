@@ -51,6 +51,7 @@ files <- ReadDataFromDir(MQPathCombined) #This function will read the tables nee
 
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
+msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]  
 proteinGroups <- files[["proteinGroups.txt"]]
@@ -128,7 +129,11 @@ PlotProteaseSpecificity(peptides)
 PlotTotalIonCurrent(msmsScans)
 ```
 ```{r protein_degradation}
-PlotProteinCoverage(peptides, UniprotID = "Q9QXS1")
+PlotProteinCoverage(peptides, UniprotID = "Q3UMF0")
+```
+```{r PlotAcquisition, fig.height= 10}
+PlotAcquisitionCycle(msScans)
+
 ```
 
 

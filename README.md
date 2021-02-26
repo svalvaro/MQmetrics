@@ -121,7 +121,7 @@ PlotIdentificationType(peptides, long_names = TRUE, sep_names = '_')
 <img src="man/figures/README-IdentificationType-1.png" width="100%" />
 
 ``` r
-PlotCharge(evidence_irt)
+PlotCharge(evidence)
 ```
 
 <img src="man/figures/README-Charg-1.png" width="100%" />
@@ -140,7 +140,7 @@ PlotTotalIonCurrent(msmsScans)
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides, UniprotID = "Q3UMF0", log_base = 2, segment_width = 2)
+PlotProteinCoverage(peptides, UniprotID = "A0A286YCV9", log_base = 2, segment_width = 2)
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />

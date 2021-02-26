@@ -6,14 +6,25 @@
 #' @export
 #'
 #' @examples
-PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2', log_base = 2, segment_width =1 ){
+PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2, segment_width =1 ){
+
+
   table_peptides <- peptides %>% select(contains(c( 'Intensity', 'Start position',
                                                     'End position', 'Proteins'))) %>%
     select(-contains(c('LFQ', 'Unique'))) %>%  select(-'Intensity')
 
   #Select rows for the protein selected
-  table_peptides <- table_peptides[(table_peptides$Proteins == UniprotID),]
+  table_peptides <- table_peptides[grepl(UniprotID, table_peptides$Proteins ),]
 
+
+  #Protein Length
+
+  # prot_length <- proteinGroups[grepl(UniprotID, proteinGroups$`Protein IDs` ),]
+  # prot_length <- proteinGroups[1,]
+  # prot_length <- proteinGroups$`Sequence length`[1]
+
+
+  #table_peptides <- table_peptides[1,]
 
   pep_melt <- melt(table_peptides, id.vars = c('Start position', 'End position', 'Proteins'))
 
@@ -24,12 +35,26 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2', log_base = 2, se
 
 
   #Create a plot for the start vs end position
-  a <- ggplot(pep_melt, aes(x = `Start position`, y = `End position`,
-                            colour = variable))+
-          geom_point( alpha = 0.75)+
-          theme_bw()+
-          facet_wrap(.~ variable, ncol =1)+
-          theme(legend.position = 'none')
+  # a <- ggplot(pep_melt, aes(x = `Start position`, y = `End position`,
+  #                           colour = variable))+
+  #         geom_point( alpha = 0.75)+
+  #         theme_bw()+
+  #         facet_wrap(.~ variable, ncol =1)+
+  #         #scale_x_continuous(limits = c(1, prot_length))+
+  #         theme(legend.position = 'none')
+  a <- ggplot(pep_melt)+
+            geom_segment(aes(x = `Start position`,
+                             xend = `End position`,
+                             y = `Start position`,
+                             yend = `End position`,
+                             colour = variable),
+                             size = segment_width)+
+            theme_bw()+
+            facet_wrap(.~ variable, ncol =1)+
+            ylab('End position')+
+            #scale_x_continuous(limits = c(1, prot_length))+
+            theme(legend.position = 'none')
+
 
 
   #Create a plot for the protein lenght vs the coverage
@@ -44,6 +69,7 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2', log_base = 2, se
               theme_bw()+
               ylab(expression('Log'[10]*'(Intensity)'))+
               facet_wrap(.~ variable, ncol =1)+
+              #scale_x_continuous(limits = c(1, prot_length))+
               theme(legend.position = 'none')
 
   } else{
@@ -56,6 +82,7 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2', log_base = 2, se
               theme_bw()+
               ylab(expression('Log'[2]*'(Intensity)'))+
               facet_wrap(.~ variable, ncol =1)+
+              #scale_x_continuous(limits = c(1, prot_length))+
               theme(legend.position = 'none')
   }
 

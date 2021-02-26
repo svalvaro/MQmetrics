@@ -6,7 +6,7 @@
 \usage{
 PlotProteinCoverage(
   peptides,
-  UniprotID = "A3KMP2",
+  UniprotID = "A0A286YCV9",
   log_base = 2,
   segment_width = 1
 )

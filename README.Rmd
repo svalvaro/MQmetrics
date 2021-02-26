@@ -116,7 +116,7 @@ PlotIdentificationType(peptides, long_names = TRUE, sep_names = '_')
 
 
 ```{r Charg, warning=FALSE, message=FALSE, fig.height=5, fig.width=7.2}
-PlotCharge(evidence_irt)
+PlotCharge(evidence)
 ```
 ```{r missed_cleavages}
 
@@ -129,7 +129,7 @@ PlotProteaseSpecificity(peptides)
 PlotTotalIonCurrent(msmsScans)
 ```
 ```{r protein_degradation}
-PlotProteinCoverage(peptides, UniprotID = "Q3UMF0", log_base = 2, segment_width = 2)
+PlotProteinCoverage(peptides, UniprotID = "A0A286YCV9", log_base = 2, segment_width = 2)
 ```
 
 

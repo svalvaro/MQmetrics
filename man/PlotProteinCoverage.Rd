@@ -4,7 +4,12 @@
 \alias{PlotProteinCoverage}
 \title{Protein coverage and degradation}
 \usage{
-PlotProteinCoverage(peptides, UniprotID = "A3KMP2")
+PlotProteinCoverage(
+  peptides,
+  UniprotID = "A3KMP2",
+  log_base = 2,
+  segment_width = 1
+)
 }
 \arguments{
 \item{peptides}{}

@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2'){
+PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2', log_base = 2, segment_width =1 ){
   table_peptides <- peptides %>% select(contains(c( 'Intensity', 'Start position',
                                                     'End position', 'Proteins'))) %>%
     select(-contains(c('LFQ', 'Unique'))) %>%  select(-'Intensity')
@@ -24,38 +24,42 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A3KMP2'){
 
 
   #Create a plot for the start vs end position
-  a <- ggplot(pep_melt, aes(x = `Start position`, y = `End position`))+
+  a <- ggplot(pep_melt, aes(x = `Start position`, y = `End position`,
+                            colour = variable))+
           geom_point( alpha = 0.75)+
           theme_bw()+
-          facet_wrap(.~ variable, ncol =1)
+          facet_wrap(.~ variable, ncol =1)+
+          theme(legend.position = 'none')
 
 
-  #For the Intensity vs start position
+  #Create a plot for the protein lenght vs the coverage
 
-  # prot_selected <- proteinGroups[(proteinGroups$`Protein IDs`)==UniprotID,]
-  #
-  # x_axis_length <- range(1:prot_selected$`Sequence length`)
+  if(log_base == 10){
+    b <- ggplot(pep_melt )+
+              geom_segment(aes(x=`Start position`,
+                               xend=`End position`,
+                               y = log10(value),
+                               yend =log10(value),
+                               colour = variable), size = segment_width )+
+              theme_bw()+
+              ylab(expression('Log'[10]*'(Intensity)'))+
+              facet_wrap(.~ variable, ncol =1)+
+              theme(legend.position = 'none')
+
+  } else{
+    b <- ggplot(pep_melt )+
+              geom_segment(aes(x=`Start position`,
+                               xend=`End position`,
+                               y = log2(value),
+                               yend =log2(value),
+                               colour = variable),size = segment_width )+
+              theme_bw()+
+              ylab(expression('Log'[2]*'(Intensity)'))+
+              facet_wrap(.~ variable, ncol =1)+
+              theme(legend.position = 'none')
+  }
 
 
-
-
-
-  # #Plot for Intensity vs Start position
-  #  b <- ggplot(pep_melt , aes(x = x_axis_length, y = log10(value)))+
-  #           geom_point( alpha = 0.75)+
-  #           theme_bw()+
-  #           ylab(expression('Log'[10]*'(Intensity)'))+
-  #           facet_wrap(.~ variable, ncol =1)
-
-  #Plot for Intensity vs Start position
-  b <- ggplot(pep_melt )+
-            geom_segment(aes(x=`Start position`,
-                             xend=`End position`,
-                             y = log10(value),
-                             yend =log10(value)))+
-            theme_bw()+
-            ylab(expression('Log'[10]*'(Intensity)'))+
-            facet_wrap(.~ variable, ncol =1)
 
 
 

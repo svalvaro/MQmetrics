@@ -140,7 +140,7 @@ PlotTotalIonCurrent(msmsScans)
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides, UniprotID = "Q3UMF0")
+PlotProteinCoverage(peptides, UniprotID = "Q3UMF0", log_base = 2, segment_width = 2)
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />

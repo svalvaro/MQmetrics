@@ -129,8 +129,10 @@ PlotProteaseSpecificity(peptides)
 PlotTotalIonCurrent(msmsScans)
 ```
 ```{r protein_degradation}
-PlotProteinCoverage(peptides, UniprotID = "Q3UMF0")
+PlotProteinCoverage(peptides, UniprotID = "Q3UMF0", log_base = 2, segment_width = 2)
 ```
+
+
 ```{r PlotAcquisition, fig.height= 10}
 PlotAcquisitionCycle(msScans)
 

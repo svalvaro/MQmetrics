@@ -87,10 +87,15 @@ ReadDataFromDir <- function(MQPathCombined, remove_contaminants = TRUE){
   running_time <- read_delim(file.path(MQPathCombined, "proc/#runningTimes.txt"),
                              "\t", escape_double = FALSE, trim_ws = TRUE,na = c("NA", "NaN", "", " "))
 
-  #oxidation_(M)sites.txt
-  oxidation_table <- read_delim(file.path(MQPathCombined, "txt/Oxidation (M)Sites.txt"),
-                                "\t", escape_double = FALSE, trim_ws = TRUE,na = c("NA", "NaN", "", " "))
+  #modificationSpecificPeptides
 
+  modification_table <- read_delim(file.path(MQPathCombined,"txt/modificationSpecificPeptides.txt"),
+                              "\t", escape_double = FALSE, na = c("NA", "NaN", "", " "),
+                              trim_ws = TRUE)
+  if(remove_contaminants==TRUE){
+
+    modification_table <- modification_table[is.na(modification_table$`Potential contaminant`) & is.na(modification_table$Reverse),]
+  }
 
   #parameters.txt
   parameters_table <- read_delim(file.path(MQPathCombined,"txt/parameters.txt"),
@@ -100,9 +105,9 @@ ReadDataFromDir <- function(MQPathCombined, remove_contaminants = TRUE){
 
   #Vector of tables
 
-  alltables <- list( summary_table, peptides_table, evidence_table,  msscans_table, msScans_table,prot_groups, running_time, oxidation_table,parameters_table)
+  alltables <- list( summary_table, peptides_table, evidence_table,  msscans_table, msScans_table,prot_groups, running_time, modification_table,parameters_table)
 
-  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'msScans.txt','proteinGroups.txt', '#runningTimes.txt','Oxidation (M)Sites.txt' ,'parameters.txt')
+  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'msScans.txt','proteinGroups.txt', '#runningTimes.txt','modificationSpecificPeptides.txt' ,'parameters.txt')
 
 
   return(alltables)

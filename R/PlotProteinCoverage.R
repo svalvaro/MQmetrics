@@ -9,9 +9,12 @@
 PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2, segment_width =1 ){
 
 
-  table_peptides <- peptides %>% select(contains(c( 'Intensity', 'Start position',
-                                                    'End position', 'Proteins'))) %>%
-    select(-contains(c('LFQ', 'Unique'))) %>%  select(-'Intensity')
+  table_peptides <- peptides %>%
+        select(contains(c('Intensity ', 'Start position',
+                          'End position', 'Proteins')))%>%
+    select(-contains('Unique')) %>%
+    select(-starts_with('LFQ'))# %>%
+    #select(-'Intensity')
 
   #Select rows for the protein selected
   table_peptides <- table_peptides[grepl(UniprotID, table_peptides$Proteins ),]

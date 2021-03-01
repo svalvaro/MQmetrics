@@ -26,7 +26,8 @@ ggplot(ev_agrup_m, aes(x = variable, y = value , fill = Experiment)) +
   ggtitle(label = 'The charge-state of the precursor ion.')+
   theme(legend.position = 'none')+
   xlab(label = 'Charge')+
-  theme_bw(base_size = font_size)
+  theme_bw(base_size = font_size)+
+  theme(legend.position='none')
 
 
 

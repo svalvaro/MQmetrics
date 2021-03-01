@@ -55,6 +55,7 @@ msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]  
 proteinGroups <- files[["proteinGroups.txt"]]
+oxidation_MSittes <- files[["Oxidation (M)Sites.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
 ```
@@ -129,7 +130,7 @@ PlotProteaseSpecificity(peptides)
 PlotTotalIonCurrent(msmsScans)
 ```
 ```{r protein_degradation}
-PlotProteinCoverage(peptides, UniprotID = "A0A286YCV9", log_base = 2, segment_width = 2)
+PlotProteinCoverage(peptides, UniprotID = "A0A286YCV9", log_base = 10, segment_width = 3)
 ```
 
 
@@ -144,6 +145,6 @@ PlotCombinedDynamicRange(proteinGroups)
 ```
 
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
-PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
+PLotAllDynamicRange(proteinGroups,columns = 1,rows = 2)
 ```
 

@@ -15,7 +15,7 @@ PLotAllDynamicRange <- function(proteinGroups, columns =1, rows=1){
 
 
 
-  rank_groups<-  proteinGroups %>%  select(contains("Intensity ")) %>% select(-contains('LFQ'))
+  rank_groups<-  proteinGroups %>%  select(contains("Intensity ")) %>% select(-starts_with('LFQ'))
 
   rank_groups <- log10(rank_groups)
 

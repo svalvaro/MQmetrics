@@ -1,120 +1,116 @@
 ---
 title: "Report"
-output: html_document
+output: pdf_document
 params:
   input_dir: ''
+  UniprotID: ''
 
 ---
 
-
-```{r setup, echo=FALSE}
+```{r,echo=TRUE,  message=FALSE, warning=FALSE}
 library(ProteoMS)
-```
-
-```{r,echo= FALSE,  message=FALSE, warning=FALSE}
-# MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
 
 MQPathCombined <- params$input_dir
 
-#MQPathCombined <- '/home/alvaro/Documents/MaxQuant_results/combined/'
+files <- ReadDataFromDir(MQPathCombined) 
 
-files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
-
-#files can be extracted like this:
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
+msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
-msmsScans <- files[["msmsScans.txt"]]  
+msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
+modificationSpecificPeptides.txt  <- files[["modificationSpecificPeptides.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
 ```
 
 
-```{r ExperimentDuration, echo=FALSE}
+\newpage
+```{r ExperimentDuration, echo=TRUE}
 ExperimentInformation(runningTimes, parameters) 
 ```
 
 
-
-```{r PlotPeaks, fig.height=5, fig.width=7.2, echo=FALSE}
+\newpage
+```{r PlotPeaks, fig.height = 9, fig.width=7.2, echo=TRUE}
 PlotPeaks(summary, long_names = TRUE, sep_names = '_')
 ```
 
-
-```{r PlotMSMS, fig.height=5, fig.width=7.2, echo=FALSE}
+\newpage
+```{r PlotMSMS, fig.height = 9, fig.width=7.2, echo=TRUE}
 PlotMsMs(summary,long_names = TRUE, sep_names = '_')
 ```
 
-
-```{r isotope, fig.height=5, fig.width=7.2, echo=FALSE}
+\newpage
+```{r isotope, fig.height = 9, fig.width=7.2, echo=TRUE}
 PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 ```
 
+\newpage
+```{r PeptidesIdentified, warning=FALSE , fig.height = 9, fig.width=7.2, echo=TRUE}
+PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
+```
 
-```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2, echo=FALSE}
-PLotPeptidesIdentified(summary)
+\newpage
+```{r PlotIntensity, warning = FALSE, fig.height = 9, fig.width=7.2, echo=TRUE}
+PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10, 
+              long_names = TRUE, sep_names = '_')
+```
+
+\newpage
+```{r irt_peps1, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=TRUE}
+PlotiRT(evidence, show_calibrated_rt = FALSE)
+```
+\newpage
+
+```{r irt_peps2, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=TRUE}
+PlotiRTScore(evidence)
 ```
 
 
-```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
-
-PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10, long_names = TRUE, sep_names = '_')
-
-```
-
-
-```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=5, fig.width=9.2, echo=FALSE}
-Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
-
-files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
-
-evidence_irt <- files_irt[['evidence.txt']]
-PlotiRT(evidence_irt)
-```
-
-
-```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=5, fig.width=9.2, echo=FALSE}
-#library(ggpubr)
-PlotiRTScore(evidence_irt)
-
-```
-
-
-
-```{r IdentificationType, message= FALSE, warning = FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
-
-if(parameters$Value[27] == TRUE){
-  PlotIdentificationType(peptides)  
-  
+\newpage
+```{r IdentificationType, message= FALSE, warning = FALSE, fig.height = 8, fig.width=7.2, echo=TRUE}
+if(parameters$Value[27] == "True"){
+  PlotIdentificationType(peptides, long_names = TRUE, sep_names = '_')  
 } else{
-  print('Match Between Runs was not used during the MaxQuant analysis.No Identification Type to show.')
+  print('Match Between Runs was not used during the MaxQuant analysis.
+        No Identification Type to show.')
 }
+```
 
+\newpage
+```{r Charg, warning=FALSE, message=FALSE, fig.height = 9, fig.width=7.2, echo=TRUE}
+PlotCharge(evidence)
+```
+
+\newpage
+```{r missed_cleavages, warning=FALSE, message=FALSE, echo=TRUE,fig.height = 9, fig.width=7.2, echo=TRUE}
+
+PlotProteaseSpecificity(peptides)
 
 ```
 
-
-```{r Charg, warning=FALSE, message=FALSE, fig.height=5, fig.width=7.2, echo=FALSE}
-PlotCharge(evidence_irt)
-```
-
-
-```{r missed_cleavages, warning=FALSE, message=FALSE,echo=FALSE}
-
-PlotMissedCleavages(peptides)
-
-```
-
-
-```{r TotalIonCurrent, fig.height=5, fig.width=7.2, echo=FALSE}
+\newpage
+```{r TotalIonCurrent, fig.height = 9, fig.width=7.2, echo=TRUE}
 PlotTotalIonCurrent(msmsScans)
 ```
+\newpage
 
-```{r DynamicRange, fig.height=5, fig.width=7.2, echo=FALSE}
-PlotCombinedDynamicRange(proteinGroups)
+```{r ProteinCoverage, fig.height = 9, fig.width=7.2, echo=TRUE}
+PlotProteinCoverage(peptides, UniprotID = params$UniprotID, 
+                    log_base = 10, segment_width = 3)
 ```
 
-```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
+\newpage
+```{r PlotAcquisition, fig.height= 8, echo=TRUE, warning=FALSE}
+PlotAcquisitionCycle(msScans)
+```
+\newpage
+```{r DynamicRange, fig.height = 8, fig.width=7.2, echo=TRUE}
+PlotCombinedDynamicRange(proteinGroups)
+```
+\newpage
+```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=TRUE}
 PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
 ```

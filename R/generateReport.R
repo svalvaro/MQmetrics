@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-generateReport = function(input_dir, dir = getwd()){
+generateReport = function(input_dir, dir = getwd(), UniprotID=NULL){
 
 
 
@@ -20,8 +20,9 @@ generateReport = function(input_dir, dir = getwd()){
 
 
   rmarkdown::render(input = input,
-                    params = list(input_dir=input_dir),
-                    output_file = "report.html",
+                    params = list(input_dir=input_dir,
+                                  UniprotID=UniprotID),
+                    output_file = "report.pdf",
                     output_dir = dir,
                     clean = TRUE)
   # #Run the render

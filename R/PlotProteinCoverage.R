@@ -11,7 +11,7 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
 
   table_peptides <- peptides %>%
         select(contains(c('Intensity ', 'Start position',
-                          'End position', 'Proteins')))%>%
+                          'End position', 'Proteins', 'Gene names')))%>%
     select(-contains('Unique')) %>%
     select(-starts_with('LFQ'))# %>%
     #select(-'Intensity')
@@ -29,7 +29,7 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
 
   #table_peptides <- table_peptides[1,]
 
-  pep_melt <- melt(table_peptides, id.vars = c('Start position', 'End position', 'Proteins'))
+  pep_melt <- melt(table_peptides, id.vars = c('Start position', 'End position', 'Proteins', 'Gene names'))
 
 
   # If intensity is 0, remove it.
@@ -96,7 +96,7 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
   #Plot them together
    c <- plot_grid(a,b)
    #Make a title
-   title <- ggdraw()+ draw_label(paste0('Protein Coverage of: ', UniprotID))
+   title <- ggdraw()+ draw_label(paste0('Protein Coverage of: ', UniprotID, ', Gene: ', pep_melt$`Gene names`[1] ))
 
    plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
 

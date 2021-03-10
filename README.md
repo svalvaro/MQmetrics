@@ -134,7 +134,7 @@ PlotProteaseSpecificity(peptides)
 <img src="man/figures/README-missed_cleavages-1.png" width="100%" />
 
 ``` r
-PlotTotalIonCurrent(msmsScans)
+PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
 ```
 
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />

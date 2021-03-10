@@ -127,7 +127,7 @@ PlotProteaseSpecificity(peptides)
 
 
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
-PlotTotalIonCurrent(msmsScans)
+PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
 ```
 ```{r protein_degradation}
 PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)

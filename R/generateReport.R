@@ -10,7 +10,11 @@
 #' @export
 #'
 #' @examples
-generateReport = function(input_dir, dir = getwd(), UniprotID=NULL){
+generateReport = function(input_dir,
+                          output_dir = getwd(),
+                          UniprotID = NULL,
+                          long_names = FALSE,
+                          sep_names = NULL){
 
 
 
@@ -21,9 +25,11 @@ generateReport = function(input_dir, dir = getwd(), UniprotID=NULL){
 
   rmarkdown::render(input = input,
                     params = list(input_dir=input_dir,
-                                  UniprotID=UniprotID),
+                                  UniprotID=UniprotID,
+                                  long_names = long_names,
+                                  sep_names = sep_names),
                     output_file = "report.pdf",
-                    output_dir = dir,
+                    output_dir = output_dir,
                     clean = TRUE)
   # #Run the render
   # outputFileName  = do.call('render',args=args)

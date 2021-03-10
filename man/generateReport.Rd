@@ -4,7 +4,13 @@
 \alias{generateReport}
 \title{Genearte a report with all functions combined}
 \usage{
-generateReport(input_dir, dir = getwd(), UniprotID = NULL)
+generateReport(
+  input_dir,
+  output_dir = getwd(),
+  UniprotID = NULL,
+  long_names = FALSE,
+  sep_names = NULL
+)
 }
 \arguments{
 \item{...}{}

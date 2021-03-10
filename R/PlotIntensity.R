@@ -63,7 +63,7 @@ PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base 
   b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
             geom_violin(fill = 'gray80', size = 1, alpha = .5)+
             geom_boxplot(width=0.2)+
-            ggtitle(label = title)+
+            ggtitle('Protein Intensity')+
             xlab('Experiment')+
             ylab(ylab)+
             theme_bw(base_size = font_size)+

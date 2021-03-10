@@ -20,7 +20,7 @@ msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides.txt  <- files[["modificationSpecificPeptides.txt"]]
+modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
 ```
@@ -112,5 +112,5 @@ PlotCombinedDynamicRange(proteinGroups)
 ```
 \newpage
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=TRUE}
-PLotAllDynamicRange(proteinGroups,columns = 1,rows = 3)
+PLotAllDynamicRange(proteinGroups,columns = 2,rows = 4)
 ```

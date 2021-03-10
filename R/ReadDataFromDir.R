@@ -11,7 +11,7 @@
 #'@import rmarkdown
 #'@importFrom readr read_delim
 #'@importFrom magrittr %>%
-#'@importFrom dplyr contains
+#'@importFrom dplyr contains summarise
 #'@importFrom reshape2 melt dcast
 #'@importFrom dplyr select group_by filter
 #'@importFrom gridExtra marrangeGrob

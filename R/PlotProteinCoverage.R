@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2, segment_width =1 ){
+PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_base = 2, segment_width =1 ){
 
 
   table_peptides <- peptides %>%
@@ -20,11 +20,13 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
   table_peptides <- table_peptides[grepl(UniprotID, table_peptides$Proteins ),]
 
 
-  #Protein Length
+  #Total protein coverage
 
-  # prot_length <- proteinGroups[grepl(UniprotID, proteinGroups$`Protein IDs` ),]
-  # prot_length <- proteinGroups[1,]
-  # prot_length <- proteinGroups$`Sequence length`[1]
+   prot_info <- proteinGroups[grepl(UniprotID, proteinGroups$`Protein IDs` ),]
+   prot_cov <- prot_info$`Sequence coverage [%]`[1]
+
+   prot_len <- prot_info$`Sequence length`[1]
+
 
 
   #table_peptides <- table_peptides[1,]
@@ -37,14 +39,6 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
   pep_melt <- pep_melt[!pep_melt$value==0,]
 
 
-  #Create a plot for the start vs end position
-  # a <- ggplot(pep_melt, aes(x = `Start position`, y = `End position`,
-  #                           colour = variable))+
-  #         geom_point( alpha = 0.75)+
-  #         theme_bw()+
-  #         facet_wrap(.~ variable, ncol =1)+
-  #         #scale_x_continuous(limits = c(1, prot_length))+
-  #         theme(legend.position = 'none')
   a <- ggplot(pep_melt)+
             geom_segment(aes(x = `Start position`,
                              xend = `End position`,
@@ -55,7 +49,6 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
             theme_bw()+
             facet_wrap(.~ variable, ncol =1)+
             ylab('End position')+
-            #scale_x_continuous(limits = c(1, prot_length))+
             theme(legend.position = 'none')
 
 
@@ -96,7 +89,9 @@ PlotProteinCoverage <- function(peptides, UniprotID = 'A0A286YCV9', log_base = 2
   #Plot them together
    c <- plot_grid(a,b)
    #Make a title
-   title <- ggdraw()+ draw_label(paste0('Protein Coverage of: ', UniprotID, ', Gene: ', pep_melt$`Gene names`[1] ))
+   title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ', UniprotID, ' (',prot_len,' amino acids)',
+                                        ', Gene: ', pep_melt$`Gene names`[1],
+                                        '\n is: ', prot_cov, '%'))
 
    plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
 

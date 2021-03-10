@@ -36,7 +36,7 @@ library(ProteoMS)
 ``` r
 MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
 
-#MQPathCombined <- '/home/alvaro/Documents/MaxQuant_results/combined/'
+#MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
@@ -48,7 +48,7 @@ msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides.txt  <- files[["modificationSpecificPeptides.txt"]]
+modificationSpecificPeptides<- files[["modificationSpecificPeptides.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
 ```
@@ -141,7 +141,7 @@ PlotTotalIonCurrent(msmsScans)
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides, UniprotID = "A0A286YCV9", log_base = 10, segment_width = 3)
+PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "A0A286YCV9", log_base = 10, segment_width = 3)
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />
@@ -166,3 +166,10 @@ PLotAllDynamicRange(proteinGroups,columns = 1,rows = 2)
 ```
 
 <img src="man/figures/README-DynamicRangeAll-1.png" width="100%" /><img src="man/figures/README-DynamicRangeAll-2.png" width="100%" />
+
+``` r
+
+PlotPTM(modificationSpecificPeptides, freq_min = 3)
+```
+
+<img src="man/figures/README-PTM-1.png" width="100%" />

@@ -4,7 +4,13 @@
 \alias{PLotAllDynamicRange}
 \title{Plots the dynamic range for all samples}
 \usage{
-PLotAllDynamicRange(proteinGroups, columns = 1, rows = 1)
+PLotAllDynamicRange(
+  proteinGroups,
+  show_shade = TRUE,
+  percent_proteins = 0.9,
+  columns = 1,
+  rows = 1
+)
 }
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}

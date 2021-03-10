@@ -4,7 +4,11 @@
 \alias{PlotCombinedDynamicRange}
 \title{Plots the dynamic range of all the samples combined}
 \usage{
-PlotCombinedDynamicRange(proteinGroups)
+PlotCombinedDynamicRange(
+  proteinGroups,
+  show_shade = TRUE,
+  percent_proteins = 0.9
+)
 }
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}

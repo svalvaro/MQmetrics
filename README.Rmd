@@ -141,11 +141,11 @@ PlotAcquisitionCycle(msScans)
 
 
 ```{r DynamicRange, fig.height=5, fig.width=7.2}
-PlotCombinedDynamicRange(proteinGroups)
+PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
 ```
 
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
-PLotAllDynamicRange(proteinGroups,columns = 1,rows = 2)
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 1,rows = 2)
 ```
 
 ```{r PTM, fig.height=8, fig.width=7.2}

@@ -155,13 +155,13 @@ PlotAcquisitionCycle(msScans)
 <img src="man/figures/README-PlotAcquisition-1.png" width="100%" />
 
 ``` r
-PlotCombinedDynamicRange(proteinGroups)
+PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
 ```
 
 <img src="man/figures/README-DynamicRange-1.png" width="100%" />
 
 ``` r
-PLotAllDynamicRange(proteinGroups,columns = 1,rows = 2)
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 1,rows = 2)
 ```
 
 <img src="man/figures/README-DynamicRangeAll-1.png" width="100%" /><img src="man/figures/README-DynamicRangeAll-2.png" width="100%" />

@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-PlotCombinedDynamicRange <- function(proteinGroups){
+PlotCombinedDynamicRange <- function(proteinGroups, show_shade = TRUE, percent_proteins = 0.90 ){
 
   Intensity <- NULL
 
@@ -18,39 +18,50 @@ PlotCombinedDynamicRange <- function(proteinGroups){
 
   vector1 <- seq(1:nrow(rank))
   #Plot error bar to include the 90% of the proteins, 5% on left side, 5% on the right one
-  hor_error <- round(nrow(rank)*0.05)
-
-  yminimium = rank$Intensity[hor_error]
-
-  ymaximum = rank$Intensity[nrow(rank)-hor_error]
-
-  orders_abundance <- paste(round(yminimium-ymaximum,digits = 1), 'orders\n of abundance')
-
-
-  ggplot(rank, aes(x=vector1,y = Intensity))+
-
-    geom_point(colour='darkgrey', alpha=0.75, shape=21)+
-
-    theme_bw()+
-
-    ggtitle('Dynamic range of protein abundance all samples')+
-
-    ylab(expression('log'[10]*'(Intensity)'))+
-
-    xlab('Protein Abundance Rank')#+
-#
-#     annotate("errorbar", x = nrow(rank)/2, y =(ymaximum+yminimium)/2, xmin = hor_error, xmax =
-#                nrow(rank)-hor_error,  colour = "black", size = 1.0)+
-#
-#     annotate(geom="text", x=hor_error +0.1*nrow(rank), y=(ymaximum+yminimium)/2-0.05*yminimium, label="90% \n proteins", size=5)+
-#
-#     annotate("errorbar", x = nrow(rank)/2, y = (ymaximum+yminimium)/2 , ymin = yminimium,
-#              ymax = ymaximum ,  colour = "black", size = 1.0, width=0.1*nrow(rank))+
-#
-#     annotate(geom="text", x=nrow(rank)/2 +0.07*nrow(rank), y=yminimium-0.05*yminimium, label=orders_abundance, size=5)
 
 
 
+
+
+
+
+  a <- ggplot(rank, aes(x=vector1,y = Intensity))+
+          geom_point(colour='darkgrey', alpha=0.75, shape=21)+
+          theme_bw()+
+          ggtitle('Dynamic range of protein abundance all samples')+
+          ylab(expression('log'[10]*'(Intensity)'))+
+          xlab('Protein Abundance Rank')
+
+  if (show_shade == TRUE){
+
+    limits <-  (1 - percent_proteins)/2
+
+    limits_row <- round(nrow(rank)*limits)
+
+    upper_y <- rank$Intensity[limits_row]
+    bottom_y <- rank$Intensity[nrow(rank)-limits_row]
+
+    orders_abundance <- paste(round(upper_y-bottom_y,digits = 1), 'orders of abundance')
+
+
+    a + annotate('rect',
+                 xmin = limits_row,
+                 xmax = nrow(rank)-limits_row,
+                 ymin = bottom_y ,
+                 ymax = upper_y,
+                 alpha=0.3)+
+        annotate('text',
+                 x = nrow(rank)/2,
+                 y = bottom_y,
+                 label = orders_abundance)+
+        annotate('text',
+                 x = nrow(rank)/2,
+                 y = upper_y,
+                 label = paste0(percent_proteins*100, ' % of proteins represented.'))
+
+  } else{
+    a
+  }
 
 }
 

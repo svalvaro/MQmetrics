@@ -1,22 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ProteoMS
+# MQmetrics
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of ProteoMS is to analyze Proteomics data from LC-MS/MS. It
+The goal of MQmetrics is to analyze Proteomics data from LC-MS/MS. It
 takes the output tables from MaxQuant and plots multiple parameters.
 
 ## Installation
 
-<!-- You can install thess released version of ProteoMS from [CRAN](https://CRAN.R-project.org) with: -->
+<!-- You can install thess released version of MQmetrics from [CRAN](https://CRAN.R-project.org) with: -->
 
 <!-- ``` r -->
 
-<!-- install.packages("ProteoMS") -->
+<!-- install.packages("MQmetrics") -->
 
 <!-- ``` -->
 
@@ -24,17 +24,17 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("BioAlvaro/ProteoMS")
+devtools::install_github("BioAlvaro/MQmetrics")
 ```
 
 ## Example
 
 ``` r
-library(ProteoMS)
+library(MQmetrics)
 ```
 
 ``` r
-MQPathCombined <- system.file('extdata', package = 'ProteoMS') #is the directory with the output of the MaxQuant analysis.
+MQPathCombined <- system.file('extdata', package = 'MQmetrics') #is the directory with the output of the MaxQuant analysis.
 
 #MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 

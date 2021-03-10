@@ -1,4 +1,4 @@
-Package: ProteoMS
+Package: MQmetrics
 Type: Package
 Title: Analyses LC-MS/MS data from MaxQuant output files
 Version: 0.1.0

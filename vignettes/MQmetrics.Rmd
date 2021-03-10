@@ -1,40 +1,18 @@
 ---
-output: github_document
+title: "MQmetrics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MQmetrics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
 ```
-
-# MQmetrics
-
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of MQmetrics is to analyze Proteomics data from LC-MS/MS. It takes the output tables from MaxQuant and plots multiple parameters.
-
-## Installation
-
-<!-- You can install thess released version of MQmetrics from [CRAN](https://CRAN.R-project.org) with: -->
-
-<!-- ``` r -->
-<!-- install.packages("MQmetrics") -->
-<!-- ``` -->
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("BioAlvaro/MQmetrics")
-```
-## Example
 
 ```{r setup}
 library(MQmetrics)

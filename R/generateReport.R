@@ -16,7 +16,7 @@ generateReport = function(input_dir, dir = getwd(), UniprotID=NULL){
 
 
   #Determine the template
-  input = system.file("rmd/template_report.Rmd", package="ProteoMS")
+  input = system.file("rmd/template_report.Rmd", package="MQmetrics")
 
 
   rmarkdown::render(input = input,

@@ -115,8 +115,7 @@ PlotiRTScore(evidence_irt)
 <img src="man/figures/README-irt_peps2-1.png" width="100%" />
 
 ``` r
-PlotIdentificationType(peptides, long_names = TRUE, sep_names = '_')
-#> Using sample as id variables
+PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-IdentificationType-1.png" width="100%" />

@@ -6,6 +6,7 @@
 \usage{
 PlotIdentificationType(
   peptides,
+  proteinGroups,
   font_size = 12,
   long_names = FALSE,
   sep_names = "-"

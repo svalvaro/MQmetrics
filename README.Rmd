@@ -111,8 +111,8 @@ PlotiRTScore(evidence_irt)
 
 
 
-```{r IdentificationType, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIdentificationType(peptides, long_names = TRUE, sep_names = '_')
+```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
+PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
 ```
 
 

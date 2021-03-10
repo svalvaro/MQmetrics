@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-PLotAllDynamicRange <- function(proteinGroups, show_shade = TRUE, percent_proteins = 0.90, columns =1, rows=1){
+PLotAllDynamicRange <- function(proteinGroups, show_shade = TRUE, percent_proteins = 0.90){
 
 
 
@@ -20,6 +20,21 @@ PLotAllDynamicRange <- function(proteinGroups, show_shade = TRUE, percent_protei
   rank_groups <- log10(rank_groups)
 
   pl <- vector("list", length = ncol(rank_groups))
+
+
+  ##columns and rows depending of number of samples
+
+  if(ncol(rank_groups)<=4){
+    columns_grid <- 1
+    rows_grid <- 4
+  }
+
+  if(ncol(rank_groups)>4){
+    columns_grid <- 2
+    rows_grid <- 4
+  }
+
+
 
   for(i in 1:ncol(rank_groups)){
 
@@ -95,7 +110,9 @@ PLotAllDynamicRange <- function(proteinGroups, show_shade = TRUE, percent_protei
 
   }
 
-  marrangeGrob(grobs=pl, ncol=columns, nrow = rows, top = NULL)
+
+
+  marrangeGrob(grobs=pl, ncol=columns_grid, nrow = rows_grid, top = NULL)
 
 
 

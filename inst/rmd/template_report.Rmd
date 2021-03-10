@@ -36,7 +36,7 @@ ExperimentInformation(runningTimes, parameters)
 \newpage
 
 ```{r PlotProteins, fig.height = 9, fig.width=7.2, echo=FALSE}
-#Proteins Identified
+PlotProteinsIdentified(proteinGroups,long_names = params$long_names, sep_names = params$sep_names)
 
 ```
 
@@ -108,7 +108,7 @@ PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.
 ```
 \newpage
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
-PLotAllDynamicRange(proteinGroups,columns = 2,rows = 4,show_shade = TRUE, percent_proteins = 0.9)
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.9)
 ```
 
 \newpage

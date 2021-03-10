@@ -67,7 +67,7 @@ ExperimentInformation(runningTimes, parameters)
 
 
 ```{r PlotProteins}
-#Proteins identified
+PlotProteinsIdentified(proteinGroups, long_names = TRUE, sep_names = '_')
 
 ```
 
@@ -138,8 +138,8 @@ PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.
 ```
 
 
-```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
-PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
+```{r DynamicRangeAll, fig.height=10, fig.width=7.2}
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
 ```
 
 

@@ -4,7 +4,12 @@
 \alias{PlotProteaseSpecificity}
 \title{Missed Cleavages}
 \usage{
-PlotProteaseSpecificity(peptides, font_size = 12, position_dodge_width = 1)
+PlotProteaseSpecificity(
+  peptides,
+  font_size = 12,
+  position_dodge_width = 1,
+  palette = "Set2"
+)
 }
 \arguments{
 \item{peptides}{peptides.txt table from MaxQuant ouput.}

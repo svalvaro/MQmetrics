@@ -9,7 +9,8 @@ PlotIdentificationType(
   proteinGroups,
   font_size = 12,
   long_names = FALSE,
-  sep_names = "-"
+  sep_names = "-",
+  palette = "Set2"
 )
 }
 \arguments{

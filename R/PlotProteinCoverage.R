@@ -6,7 +6,8 @@
 #' @export
 #'
 #' @examples
-PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_base = 2, segment_width =1 ){
+PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_base = 2, segment_width =1,
+                                palette = 'Set2'){
 
 
   table_peptides <- peptides %>%
@@ -49,7 +50,8 @@ PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_ba
             theme_bw()+
             facet_wrap(.~ variable, ncol =1)+
             ylab('End position')+
-            theme(legend.position = 'none')
+            theme(legend.position = 'none')+
+            scale_colour_brewer(palette = palette)
 
 
 
@@ -66,7 +68,8 @@ PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_ba
               ylab(expression('Log'[10]*'(Intensity)'))+
               facet_wrap(.~ variable, ncol =1)+
               #scale_x_continuous(limits = c(1, prot_length))+
-              theme(legend.position = 'none')
+              theme(legend.position = 'none')+
+              scale_colour_brewer(palette = palette)
 
   } else{
     b <- ggplot(pep_melt )+
@@ -79,7 +82,8 @@ PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_ba
               ylab(expression('Log'[2]*'(Intensity)'))+
               facet_wrap(.~ variable, ncol =1)+
               #scale_x_continuous(limits = c(1, prot_length))+
-              theme(legend.position = 'none')
+              theme(legend.position = 'none')+
+              scale_colour_brewer(palette = palette)
   }
 
 

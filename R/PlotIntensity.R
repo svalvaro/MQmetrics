@@ -8,7 +8,9 @@
 #' @export
 #'
 #' @examples
-PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base = 10, font_size = 12, long_names = FALSE, sep_names = '-'){
+PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base = 10,
+                          font_size = 12, long_names = FALSE, sep_names = NULL,
+                          palette = 'Set2'){
   id <- variable <- value <- NULL
 
   if (intensity_type == 'Intensity') {
@@ -67,7 +69,8 @@ PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base 
             xlab('Experiment')+
             ylab(ylab)+
             theme_bw(base_size = font_size)+
-            theme(legend.position = 'none')
+            theme(legend.position = 'none')+
+            scale_color_brewer(palette = palette)
 
 
 

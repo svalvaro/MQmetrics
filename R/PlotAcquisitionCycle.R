@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotAcquisitionCycle <- function(msScans){
+PlotAcquisitionCycle <- function(msScans, palette = 'Set2'){
   data_table <- msScans %>%  select(contains(c('Experiment','Retention time',
                                                'Cycle time', 'MS/MS count' )))
 
@@ -14,13 +14,15 @@ PlotAcquisitionCycle <- function(msScans){
             geom_point(alpha = 0.5, show.legend = FALSE)+
             facet_wrap(.~ Experiment, ncol =1)+
             ggtitle('Cycle time')+
-            theme_bw()
+            theme_bw()+
+            scale_colour_brewer(palette = palette)
 
   b <- ggplot(data_table, aes(x= `Retention time`, y = `MS/MS count`,colour = Experiment))+
               geom_point(alpha = 0.5, show.legend = FALSE)+
               facet_wrap(.~ Experiment, ncol =1)+
               ggtitle('MS/MS count')+
-              theme_bw()
+              theme_bw()+
+              scale_colour_brewer(palette = palette)
 
 
   #Plot them together

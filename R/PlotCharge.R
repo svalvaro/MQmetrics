@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-PlotCharge <- function(evidence, font_size = 12){
+PlotCharge <- function(evidence, font_size = 12, palette = 'Set2'){
   Experiment <- Charge <-  value <- variable <- NULL
 
   ev <- evidence %>%
@@ -27,7 +27,8 @@ ggplot(ev_agrup_m, aes(x = variable, y = value , fill = Experiment)) +
   theme(legend.position = 'none')+
   xlab(label = 'Charge')+
   theme_bw(base_size = font_size)+
-  theme(legend.position='none')
+  theme(legend.position='none')+
+  scale_fill_brewer(palette = palette)
 
 
 

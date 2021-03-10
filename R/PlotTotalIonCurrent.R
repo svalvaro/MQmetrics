@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotTotalIonCurrent <- function(msmsScans){
+PlotTotalIonCurrent <- function(msmsScans, palette = 'Set2'){
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
   msmsScans %>%   ggplot(aes(`Retention time`,`Total ion current`))+
@@ -16,7 +16,8 @@ PlotTotalIonCurrent <- function(msmsScans){
     facet_wrap(.~ Experiment, ncol =1)+
     ggtitle('Total Ion Current')+
     theme_bw()+
-    theme(legend.position = 'none')
+    theme(legend.position = 'none')+
+    scale_colour_brewer(palette = palette)
 
 }
 

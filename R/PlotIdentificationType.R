@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-PlotIdentificationType <- function(peptides, proteinGroups, font_size=12,  long_names = FALSE, sep_names = '-'){
+PlotIdentificationType <- function(peptides, proteinGroups, font_size=12,  long_names = FALSE, sep_names = '-', palette = 'Set2'){
 
   value <- variable <- NULL
 
@@ -31,7 +31,8 @@ PlotIdentificationType <- function(peptides, proteinGroups, font_size=12,  long_
           ggtitle('Peptide Identification type')+
           geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
           theme(axis.title.y = element_text(margin = margin(r = 20)))+
-          theme_bw(base_size = font_size)
+          theme_bw(base_size = font_size)+
+          scale_fill_brewer(palette = palette)
 
   if (long_names == TRUE) {
     a <- a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
@@ -62,7 +63,8 @@ PlotIdentificationType <- function(peptides, proteinGroups, font_size=12,  long_
     ggtitle('Protein Identification type')+
     geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
     theme(axis.title.y = element_text(margin = margin(r = 20)))+
-    theme_bw(base_size = font_size)
+    theme_bw(base_size = font_size)+
+    scale_fill_brewer(palette = palette)
 
   if (long_names == TRUE) {
     b <- b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))

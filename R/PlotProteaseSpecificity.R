@@ -6,7 +6,8 @@
 #' @export
 #'
 #' @examples
-PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_width = 1){
+PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_width = 1,
+                                    palette = 'Set2'){
   `Missed cleavages` <- value <- variable <- NULL
 
   peptides2 <- peptides %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
@@ -22,7 +23,8 @@ PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_wid
                           ggtitle(label = 'Missed enzymatic cleavages')+
                           facet_wrap(.~ variable, ncol =1)+
                           theme_bw(base_size = font_size)+
-                          xlab(label = 'Missed Cleavages')
+                          xlab(label = 'Missed Cleavages')+
+                          scale_fill_brewer(palette = palette)
 
   #Create plot2 for length peptides
   pep_melt2 <-   pep_melt
@@ -36,7 +38,8 @@ PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_wid
                      xlab(label = 'Length')+
                      facet_wrap(.~ variable, ncol =1)+
                      theme_bw(base_size = font_size)+
-                     xlab(label = 'Peptide length')
+                     xlab(label = 'Peptide length')+
+                     scale_fill_brewer(palette = palette)
 
 
  #Plot them together

@@ -4,7 +4,7 @@
 \alias{PlotPTM}
 \title{Title}
 \usage{
-PlotPTM(modificationSpecificPeptides, freq_min = 5)
+PlotPTM(modificationSpecificPeptides, freq_min = 5, palette = "Set2")
 }
 \arguments{
 \item{modificationSpecificPeptides}{}

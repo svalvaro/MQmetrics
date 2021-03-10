@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-PlotIsotopePattern <- function(summary,position_dodge_width=1, font_size=12,  long_names = FALSE, sep_names = '-'){
+PlotIsotopePattern <- function(summary,position_dodge_width=1, font_size=12,  long_names = FALSE, sep_names = NULL, palette = 'Set2'){
   Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <- value <- variable <- NULL
 
   a <- summary %>% select(c(Experiment, `Isotope Patterns`, `Isotope Patterns Sequenced`))
@@ -19,7 +19,8 @@ PlotIsotopePattern <- function(summary,position_dodge_width=1, font_size=12,  lo
 b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
       geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
       theme_bw(base_size = 12)+
-      ggtitle('Isotope Patterns detected and sequenced')
+      ggtitle('Isotope Patterns detected and sequenced')+
+      scale_fill_brewer(palette = palette)
 
 
 if (long_names == TRUE) {

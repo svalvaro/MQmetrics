@@ -9,7 +9,8 @@ PlotIsotopePattern(
   position_dodge_width = 1,
   font_size = 12,
   long_names = FALSE,
-  sep_names = "-"
+  sep_names = NULL,
+  palette = "Set2"
 )
 }
 \arguments{

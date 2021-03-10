@@ -4,7 +4,7 @@
 \alias{PlotAcquisitionCycle}
 \title{Title}
 \usage{
-PlotAcquisitionCycle(msScans)
+PlotAcquisitionCycle(msScans, palette = "Set2")
 }
 \arguments{
 \item{msScans}{}

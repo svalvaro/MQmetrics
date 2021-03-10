@@ -10,7 +10,8 @@ PlotIntensity(
   log_base = 10,
   font_size = 12,
   long_names = FALSE,
-  sep_names = "-"
+  sep_names = NULL,
+  palette = "Set2"
 )
 }
 \arguments{

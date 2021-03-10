@@ -9,7 +9,8 @@ PlotProteinCoverage(
   proteinGroups,
   UniprotID = NULL,
   log_base = 2,
-  segment_width = 1
+  segment_width = 1,
+  palette = "Set2"
 )
 }
 \arguments{

@@ -140,16 +140,13 @@ PlotTotalIonCurrent(msmsScans)
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "A0A286YCV9", log_base = 10, segment_width = 3)
+PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />
 
 ``` r
 PlotAcquisitionCycle(msScans)
-#> Warning: Removed 6 rows containing missing values (geom_point).
-
-#> Warning: Removed 6 rows containing missing values (geom_point).
 ```
 
 <img src="man/figures/README-PlotAcquisition-1.png" width="100%" />
@@ -161,10 +158,10 @@ PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.
 <img src="man/figures/README-DynamicRange-1.png" width="100%" />
 
 ``` r
-PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 1,rows = 2)
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
 ```
 
-<img src="man/figures/README-DynamicRangeAll-1.png" width="100%" /><img src="man/figures/README-DynamicRangeAll-2.png" width="100%" />
+<img src="man/figures/README-DynamicRangeAll-1.png" width="100%" />
 
 ``` r
 

@@ -116,10 +116,10 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 ```
 
 
-```{r Charg, warning=FALSE, message=FALSE, fig.height=5, fig.width=7.2}
+```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
 PlotCharge(evidence)
 ```
-```{r missed_cleavages}
+```{r missed_cleavages,fig.height=10}
 
 PlotProteaseSpecificity(peptides)
 
@@ -130,11 +130,11 @@ PlotProteaseSpecificity(peptides)
 PlotTotalIonCurrent(msmsScans)
 ```
 ```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "A0A286YCV9", log_base = 10, segment_width = 3)
+PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
 ```
 
 
-```{r PlotAcquisition, fig.height= 10}
+```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE}
 PlotAcquisitionCycle(msScans)
 
 ```
@@ -145,7 +145,7 @@ PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.
 ```
 
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
-PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 1,rows = 2)
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
 ```
 
 ```{r PTM, fig.height=8, fig.width=7.2}

@@ -24,7 +24,8 @@ Imports:
     ggpubr,
     stats,
     rmarkdown,
-    cowplot
+    cowplot,
+    RColorBrewer
 Suggests: 
     knitr
 VignetteBuilder: knitr

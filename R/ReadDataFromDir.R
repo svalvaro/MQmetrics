@@ -6,6 +6,7 @@
 #' @return The output from \code{ReadDataFromR}
 #' @export
 #'
+#'@import RColorBrewer
 #'@import ggplot2
 #'@import ggpubr
 #'@import rmarkdown

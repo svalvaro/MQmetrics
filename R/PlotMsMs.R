@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_names = FALSE, sep_names = '-'){
+PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_names = FALSE, sep_names = '-', palette = 'Set2'){
   Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- value <- variable <- NULL
 
   a <- summary %>% select(c(Experiment, `MS/MS Submitted`, `MS/MS Identified`))
@@ -19,7 +19,8 @@ PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_name
  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
         geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
         theme_bw(base_size = font_size)+
-        ggtitle('MS/MS Submitted and Identified')
+        ggtitle('MS/MS Submitted and Identified')+
+        scale_fill_brewer(palette = palette)
 
 
 

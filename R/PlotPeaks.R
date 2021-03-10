@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-PlotPeaks <- function(summary, position_dodge_width = 1, font_size = 12, long_names = FALSE, sep_names = '-'){
+PlotPeaks <- function(summary, position_dodge_width = 1, font_size = 12, long_names = FALSE, sep_names = '-', palette = 'Set2'){
 
    Experiment <- `Peaks Sequenced` <- Peaks <- value <- variable <- NULL
 
@@ -20,7 +20,8 @@ PlotPeaks <- function(summary, position_dodge_width = 1, font_size = 12, long_na
 b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
       geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
       theme_bw(base_size = font_size)+
-      ggtitle('Peaks detected and sequenced in the full scans')
+      ggtitle('Peaks detected and sequenced in the full scans')+
+      scale_fill_brewer(palette = palette)
 
 
  if(long_names==TRUE){

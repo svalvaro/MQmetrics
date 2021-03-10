@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotPTM <- function(modificationSpecificPeptides, freq_min = 5){
+PlotPTM <- function(modificationSpecificPeptides, freq_min = 5, palette = 'Set2'){
 
   modification_table <- modificationSpecificPeptides %>%
                           select(contains(c('Modifications', 'Proteins',
@@ -33,17 +33,17 @@ PlotPTM <- function(modificationSpecificPeptides, freq_min = 5){
   modifications_unique <- unique(mod_frequencies$Modifications)#This are the names
   #of the modifications that will be used for the other plot.
 
-  ggplot(mod_frequencies, aes(x = Modifications, y = Freq, fill = Modifications))+
+  a <- ggplot(mod_frequencies, aes(x = Modifications, y = Freq, fill = Modifications))+
           geom_bar(stat = 'identity')+
           facet_wrap(.~ variable, ncol =1)+
           theme_bw()+
           ylab('Frequency')+
-          ggtitle('Post-Translational Modification')+
           theme(legend.position = 'bottom',
                 axis.title.x = element_blank(),
                 axis.text.x = element_blank(),
                 axis.ticks.x = element_blank())+
-          guides(fill = guide_legend(ncol=2))
+          guides(fill = guide_legend(ncol=3))+
+          scale_fill_brewer(palette =  palette)
 
 
 
@@ -63,25 +63,27 @@ PlotPTM <- function(modificationSpecificPeptides, freq_min = 5){
 
   mod_intensities2 <- mod_intensities[mod_intensities$Modifications %in% modifications_unique,]
 
-  ggplot(mod_intensities2, aes(x = Modifications, y = log10(value), color = Modifications))+
-    geom_violin(fill = 'gray80', size = 1, alpha = .5)+
-    geom_boxplot(width=0.2)+
-    facet_wrap(.~ variable, ncol =1)+
-    theme_bw()+
-    ylab('Frequency')+
-    ggtitle('Post-Translational Modification')+
-    theme(legend.position = 'bottom',
-          axis.title.x = element_blank(),
-          axis.text.x = element_blank(),
-          axis.ticks.x = element_blank())
+  b <- ggplot(mod_intensities2, aes(x = Modifications, y = log10(value), color = Modifications))+
+            geom_violin(fill = 'gray80', size = 1, alpha = .5)+
+            geom_boxplot(width=0.2)+
+            facet_wrap(.~ variable, ncol =1)+
+            theme_bw()+
+            ylab(expression('Log'[10]*'Intensity'))+
+            theme(legend.position = 'bottom',
+                  axis.title.x = element_blank(),
+                  axis.text.x = element_blank(),
+                  axis.ticks.x = element_blank())+
+            scale_color_brewer(palette = palette)
 
-  # colnames(mod_intensities)[colnames(mod_intensities) == 'value'] <- 'Freq'
-  # colnames(mod_intensities)[colnames(mod_intensities) == 'variable'] <- 'Experiment'
-  #
-  # mod_intensities2 <- melt(mod_intensities,
-  #                          id.vars = c('Modifications','Proteins','Freq', 'Experiment'))
-  #
-  # mod_intensities2[is.na(mod_intensities2)] <- 0
-  #
-  # mod_intensities2 <- mod_intensities2[mod_intensities2$Freq !=0 | mod_intensities2$value!=0,]
+
+  c <- plot_grid( a+ theme(legend.position = 'none'),
+                  b+theme(legend.position = 'none'),
+                  ncol = 2, rel_heights=c(0.1, 1))
+  title <- ggdraw()+draw_label('Post-Translational Modifications')
+
+  prow <-  plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
+
+  legend <- get_legend(a)
+
+  plot_grid(prow, legend, ncol = 1, rel_heights=c(freq_min, 1))
 }

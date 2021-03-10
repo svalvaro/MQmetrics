@@ -28,25 +28,16 @@ parameters <- files[["parameters.txt"]]
 ```
 
 
-\newpage
+
 ```{r ExperimentDuration, echo=FALSE}
 ExperimentInformation(runningTimes, parameters) 
 ```
 
-
 \newpage
-```{r PlotPeaks, fig.height = 9, fig.width=7.2, echo=FALSE}
-PlotPeaks(summary, long_names = params$long_names, sep_names = params$sep_names)
-```
 
-\newpage
-```{r PlotMSMS, fig.height = 9, fig.width=7.2, echo=FALSE}
-PlotMsMs(summary,long_names = params$long_names, sep_names = params$sep_names)
-```
+```{r PlotProteins, fig.height = 9, fig.width=7.2, echo=FALSE}
+#Proteins Identified
 
-\newpage
-```{r isotope, fig.height = 9, fig.width=7.2, echo=FALSE}
-PlotIsotopePattern(summary,long_names = params$long_names, sep_names = params$sep_names)
 ```
 
 \newpage
@@ -55,31 +46,28 @@ PLotPeptidesIdentified(summary, long_names = params$long_names, sep_names = para
 ```
 
 \newpage
-```{r PlotIntensity, warning = FALSE, fig.height = 9, fig.width=7.2, echo=FALSE}
-PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10, 
-              long_names = params$long_names, sep_names = params$sep_names)
+```{r PlotPSMs, fig.height = 9, fig.width=7.2, echo=FALSE}
+#PSMs identified
+
 ```
 
 \newpage
-```{r irt_peps1, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
-PlotiRT(evidence, show_calibrated_rt = FALSE)
-```
-\newpage
-
-```{r irt_peps2, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
-PlotiRTScore(evidence)
+```{r PlotMSMS, fig.height = 9, fig.width=7.2, echo=FALSE}
+PlotMsMs(summary,long_names = params$long_names, sep_names = params$sep_names)
 ```
 
 
 \newpage
-```{r IdentificationType, message= FALSE, warning = FALSE, fig.height = 8, fig.width=7.2, echo=FALSE}
-if(parameters$Value[27] == "True"){
-  PlotIdentificationType(peptides, proteinGroups,long_names = params$long_names, sep_names = params$sep_names)  
-} else{
-  print('Match Between Runs was not used during the MaxQuant analysis.
-        No Identification Type to show.')
-}
+```{r PlotPeaks, fig.height = 9, fig.width=7.2, echo=FALSE}
+PlotPeaks(summary, long_names = params$long_names, sep_names = params$sep_names)
 ```
+
+
+\newpage
+```{r isotope, fig.height = 9, fig.width=7.2, echo=FALSE}
+PlotIsotopePattern(summary,long_names = params$long_names, sep_names = params$sep_names)
+```
+
 
 \newpage
 ```{r Charg, warning=FALSE, message=FALSE, fig.height = 9, fig.width=7.2, echo=FALSE}
@@ -93,10 +81,36 @@ PlotProteaseSpecificity(peptides)
 
 ```
 
+
 \newpage
-```{r TotalIonCurrent, fig.height = 9, fig.width=7.2, echo=FALSE}
-PlotTotalIonCurrent(msmsScans,  show_max_value = TRUE)
+```{r IdentificationType, message= FALSE, warning = FALSE, fig.height = 8, fig.width=7.2, echo=FALSE}
+if(parameters$Value[27] == "True"){
+  PlotIdentificationType(peptides, proteinGroups,long_names = params$long_names, sep_names = params$sep_names)  
+} else{
+  print('Match Between Runs was not used during the MaxQuant analysis.
+        No Identification Type to show.')
+}
 ```
+
+
+
+\newpage
+```{r PlotIntensity, warning = FALSE, fig.height = 9, fig.width=7.2, echo=FALSE}
+PlotIntensity(proteinGroups, intensity_type = 'Intensity', log_base = 10, 
+              long_names = params$long_names, sep_names = params$sep_names)
+```
+
+\newpage
+```{r DynamicRange, fig.height = 8, fig.width=7.2, echo=FALSE}
+
+PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.9) 
+
+```
+\newpage
+```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
+PLotAllDynamicRange(proteinGroups,columns = 2,rows = 4,show_shade = TRUE, percent_proteins = 0.9)
+```
+
 \newpage
 
 ```{r ProteinCoverage, fig.height = 9, fig.width=7.2, echo=FALSE}
@@ -107,19 +121,31 @@ PlotProteinCoverage(peptides, proteinGroups, UniprotID = params$UniprotID, log_b
 }
 ```
 
+
+
+\newpage
+```{r irt_peps1, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
+PlotiRT(evidence, show_calibrated_rt = FALSE)
+```
+\newpage
+
+```{r irt_peps2, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
+PlotiRTScore(evidence)
+```
+
+
+
+
+
+\newpage
+```{r TotalIonCurrent, fig.height = 9, fig.width=7.2, echo=FALSE}
+PlotTotalIonCurrent(msmsScans,  show_max_value = TRUE)
+```
+
+
 \newpage
 ```{r PlotAcquisition, fig.height= 8, echo=FALSE, warning=FALSE}
 PlotAcquisitionCycle(msScans)
-```
-\newpage
-```{r DynamicRange, fig.height = 8, fig.width=7.2, echo=FALSE}
-
-PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.9) 
-
-```
-\newpage
-```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
-PLotAllDynamicRange(proteinGroups,columns = 2,rows = 4,show_shade = TRUE, percent_proteins = 0.9)
 ```
 
 \newpage

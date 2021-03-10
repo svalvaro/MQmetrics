@@ -66,10 +66,22 @@ ExperimentInformation(runningTimes, parameters)
 ```
 
 
+```{r PlotProteins}
+#Proteins identified
 
-```{r PlotPeaks, fig.height=5, fig.width=7.2}
-PlotPeaks(summary, long_names = TRUE, sep_names = '_')
 ```
+
+
+
+```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
+PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
+```
+
+
+```{r Plot PSM}
+#PSMs identified
+```
+
 
 
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
@@ -77,20 +89,65 @@ PlotMsMs(summary,long_names = TRUE, sep_names = '_')
 ```
 
 
+```{r PlotPeaks, fig.height=5, fig.width=7.2}
+PlotPeaks(summary, long_names = TRUE, sep_names = '_')
+```
+
+
+
 ```{r isotope, fig.height=5, fig.width=7.2}
 PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 ```
 
 
-```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
-PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
+
+
+
+```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
+PlotCharge(evidence)
 ```
+
+
+
+```{r missed_cleavages,fig.height=10}
+
+PlotProteaseSpecificity(peptides)
+
+```
+
+
+
+
+```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
+PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+```
+
+
+
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
 
 PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names = TRUE, sep_names = '_')
 
 ```
+
+
+
+```{r DynamicRange, fig.height=5, fig.width=7.2}
+PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
+```
+
+
+```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
+```
+
+
+
+```{r protein_degradation}
+PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
+```
+
 
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
@@ -111,42 +168,15 @@ PlotiRTScore(evidence_irt)
 
 
 
-```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
-```
-
-
-```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
-PlotCharge(evidence)
-```
-```{r missed_cleavages,fig.height=10}
-
-PlotProteaseSpecificity(peptides)
-
-```
-
-
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
 ```
-```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
-```
-
 
 ```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE}
 PlotAcquisitionCycle(msScans)
 
 ```
 
-
-```{r DynamicRange, fig.height=5, fig.width=7.2}
-PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
-```
-
-```{r DynamicRangeAll, fig.height=8, fig.width=7.2}
-PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
-```
 
 ```{r PTM, fig.height=8, fig.width=7.2}
 

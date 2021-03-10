@@ -66,22 +66,8 @@ ExperimentInformation(runningTimes, parameters)
 ```
 
 ``` r
-PlotPeaks(summary, long_names = TRUE, sep_names = '_')
+#Proteins identified
 ```
-
-<img src="man/figures/README-PlotPeaks-1.png" width="100%" />
-
-``` r
-PlotMsMs(summary,long_names = TRUE, sep_names = '_')
-```
-
-<img src="man/figures/README-PlotMSMS-1.png" width="100%" />
-
-``` r
-PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
-```
-
-<img src="man/figures/README-isotope-1.png" width="100%" />
 
 ``` r
 PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
@@ -90,11 +76,70 @@ PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 <img src="man/figures/README-PeptidesIdentified-1.png" width="100%" />
 
 ``` r
+#PSMs identified
+```
+
+``` r
+PlotMsMs(summary,long_names = TRUE, sep_names = '_')
+```
+
+<img src="man/figures/README-PlotMSMS-1.png" width="100%" />
+
+``` r
+PlotPeaks(summary, long_names = TRUE, sep_names = '_')
+```
+
+<img src="man/figures/README-PlotPeaks-1.png" width="100%" />
+
+``` r
+PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
+```
+
+<img src="man/figures/README-isotope-1.png" width="100%" />
+
+``` r
+PlotCharge(evidence)
+```
+
+<img src="man/figures/README-Charg-1.png" width="100%" />
+
+``` r
+
+PlotProteaseSpecificity(peptides)
+```
+
+<img src="man/figures/README-missed_cleavages-1.png" width="100%" />
+
+``` r
+PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+```
+
+<img src="man/figures/README-IdentificationType-1.png" width="100%" />
+
+``` r
 
 PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
+
+``` r
+PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
+```
+
+<img src="man/figures/README-DynamicRange-1.png" width="100%" />
+
+``` r
+PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
+```
+
+<img src="man/figures/README-DynamicRangeAll-1.png" width="100%" />
+
+``` r
+PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
+```
+
+<img src="man/figures/README-protein_degradation-1.png" width="100%" />
 
 ``` r
 Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
@@ -115,53 +160,16 @@ PlotiRTScore(evidence_irt)
 <img src="man/figures/README-irt_peps2-1.png" width="100%" />
 
 ``` r
-PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
-```
-
-<img src="man/figures/README-IdentificationType-1.png" width="100%" />
-
-``` r
-PlotCharge(evidence)
-```
-
-<img src="man/figures/README-Charg-1.png" width="100%" />
-
-``` r
-
-PlotProteaseSpecificity(peptides)
-```
-
-<img src="man/figures/README-missed_cleavages-1.png" width="100%" />
-
-``` r
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
 ```
 
 <img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
-```
-
-<img src="man/figures/README-protein_degradation-1.png" width="100%" />
-
-``` r
 PlotAcquisitionCycle(msScans)
 ```
 
 <img src="man/figures/README-PlotAcquisition-1.png" width="100%" />
-
-``` r
-PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
-```
-
-<img src="man/figures/README-DynamicRange-1.png" width="100%" />
-
-``` r
-PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90,columns = 2,rows = 2)
-```
-
-<img src="man/figures/README-DynamicRangeAll-1.png" width="100%" />
 
 ``` r
 

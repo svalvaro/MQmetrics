@@ -20,6 +20,9 @@ PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_ba
   #Select rows for the protein selected
   table_peptides <- table_peptides[grepl(UniprotID, table_peptides$Proteins ),]
 
+  if(nrow(table_peptides) == 0){
+    print(paste0('The protein: ',UniprotID ,' provided was not identified in any of the samples.'))
+  } else{
 
   #Total protein coverage
 
@@ -100,5 +103,5 @@ PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_ba
    plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
 
 
-
+}
 }

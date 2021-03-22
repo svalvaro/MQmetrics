@@ -46,6 +46,9 @@ PlotIntensity <- function(proteinGroups, intensity_type = 'Intensity', log_base 
 
   }
 
+
+
+
   #For the y_lab
 
   if(intensity_type == 'Intensity' & log_base == 2){

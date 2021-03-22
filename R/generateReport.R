@@ -12,9 +12,12 @@
 #' @examples
 generateReport = function(input_dir,
                           output_dir = getwd(),
+                          log_base = 2,
                           UniprotID = NULL,
                           long_names = FALSE,
-                          sep_names = NULL){
+                          sep_names = NULL,
+                          intensity_type = 'Intensity',
+                          palette = 'Set2'){
 
 
 
@@ -26,8 +29,11 @@ generateReport = function(input_dir,
   rmarkdown::render(input = input,
                     params = list(input_dir=input_dir,
                                   UniprotID=UniprotID,
+                                  log_base = log_base,
                                   long_names = long_names,
-                                  sep_names = sep_names),
+                                  sep_names = sep_names,
+                                  intensity_type = intensity_type,
+                                  palette = palette),
                     output_file = "report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)

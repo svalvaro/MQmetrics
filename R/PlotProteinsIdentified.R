@@ -6,16 +6,39 @@
 #' @export
 #'
 #' @examples
-PlotProteinsIdentified <- function(proteinGroups,long_names = FALSE, sep_names = NULL, palette = 'Set2',  font_size = 12 ){
+PlotProteinsIdentified <- function(proteinGroups,intensity_type = 'Intensity',long_names = FALSE, sep_names = NULL, palette = 'Set2',  font_size = 12 ){
 
-  protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
+  if (intensity_type == 'Intensity') {
+    protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
+    #Remove Intensity from name
+    colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
 
-  #LFQ?
+    title <- 'Proteins Identified based on Intensity'
 
-  # int[int == "-Inf"] <- 0
-  #Remove Intensity from name
-  colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
-  #
+  }
+
+  if (intensity_type == 'LFQ'){
+    protein_table<- proteinGroups[,grep("LFQ", colnames(proteinGroups))]
+    #Remove LFQ Intensity from name
+    colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
+    title <- 'Proteins Identified based on LFQ intensity'
+
+
+
+    #Error if LFQ Intensity not found.
+
+    if (length(protein_table) == 0) {
+      print('LFQ intensities not found, changing automatically to Intensity.')
+
+      protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
+      #Remove Intensity from name
+      colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
+
+      title <- 'Proteins Identified based on Intensity'
+
+    }
+
+  }
 
 
   #Proteins Identified
@@ -47,7 +70,7 @@ PlotProteinsIdentified <- function(proteinGroups,long_names = FALSE, sep_names =
 
 
   a <- ggplot(table_melt, aes(x=Experiment, y=value, fill=variable))+
-            ggtitle('Proteins Identified')+
+            ggtitle(title)+
             geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
             theme(axis.title.y = element_text(margin = margin(r = 20)))+
             theme_bw(base_size = font_size)+

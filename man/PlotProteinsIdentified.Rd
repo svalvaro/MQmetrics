@@ -6,6 +6,7 @@
 \usage{
 PlotProteinsIdentified(
   proteinGroups,
+  intensity_type = "Intensity",
   long_names = FALSE,
   sep_names = NULL,
   palette = "Set2",

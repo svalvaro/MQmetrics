@@ -6,9 +6,9 @@
 \usage{
 PlotIntensity(
   proteinGroups,
+  split_violin_intensity = TRUE,
   intensity_type = "Intensity",
   log_base = 10,
-  font_size = 12,
   long_names = FALSE,
   sep_names = NULL,
   palette = "Set2"

@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-PlotCharge <- function(evidence, font_size = 12, palette = 'Set2'){
+PlotCharge <- function(evidence, palette = 'Set2'){
   Experiment <- Charge <-  value <- variable <- NULL
 
   ev <- evidence %>%
@@ -26,7 +26,7 @@ ggplot(ev_agrup_m, aes(x = variable, y = value , fill = Experiment)) +
   ggtitle(label = 'The charge-state of the precursor ion.')+
   theme(legend.position = 'none')+
   xlab(label = 'Charge')+
-  theme_bw(base_size = font_size)+
+  theme_bw()+
   theme(legend.position='none')+
   scale_fill_brewer(palette = palette)
 

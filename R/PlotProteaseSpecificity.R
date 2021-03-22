@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_width = 1,
+PlotProteaseSpecificity <- function(peptides, position_dodge_width = 1,
                                     palette = 'Set2'){
   `Missed cleavages` <- value <- variable <- NULL
 
@@ -22,7 +22,7 @@ PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_wid
                                    show.legend = FALSE)+
                           ggtitle(label = 'Missed enzymatic cleavages')+
                           facet_wrap(.~ variable, ncol =1)+
-                          theme_bw(base_size = font_size)+
+                          theme_bw()+
                           xlab(label = 'Missed Cleavages')+
                           scale_fill_brewer(palette = palette)
 
@@ -37,7 +37,7 @@ PlotProteaseSpecificity <- function(peptides, font_size =12 , position_dodge_wid
                      ggtitle(label = 'Peptide Length')+
                      xlab(label = 'Length')+
                      facet_wrap(.~ variable, ncol =1)+
-                     theme_bw(base_size = font_size)+
+                     theme_bw()+
                      xlab(label = 'Peptide length')+
                      scale_fill_brewer(palette = palette)
 

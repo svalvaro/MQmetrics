@@ -7,9 +7,12 @@
 generateReport(
   input_dir,
   output_dir = getwd(),
+  log_base = 2,
   UniprotID = NULL,
   long_names = FALSE,
-  sep_names = NULL
+  sep_names = NULL,
+  intensity_type = "Intensity",
+  palette = "Set2"
 )
 }
 \arguments{

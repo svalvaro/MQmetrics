@@ -66,7 +66,7 @@ ExperimentInformation(runningTimes, parameters)
 ```
 
 ``` r
-PlotProteinsIdentified(proteinGroups, long_names = TRUE, sep_names = '_')
+PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity',long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotProteins-1.png" width="100%" />
@@ -120,7 +120,8 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 
 ``` r
 
-PlotIntensity(proteinGroups, intensity_type = 'LFQ', log_base = 10, long_names = TRUE, sep_names = '_')
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
+              log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />

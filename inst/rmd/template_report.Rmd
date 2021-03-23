@@ -3,12 +3,18 @@ title: "Report"
 output: pdf_document
 params:
   input_dir: ''
-  UniprotID: ''
   log_base: ''
   long_names: ''
   sep_names: ''
   intensity_type: ''
   palette: ''
+  UniprotID: ''
+  segment_width: ''
+  show_shade: ''
+  percent_proteins: ''
+  show_calibrated_rt: ''
+  show_max_value: ''
+  freq_min: ''
 
 ---
 
@@ -133,15 +139,15 @@ PlotIntensity(proteinGroups,
 ```{r DynamicRange, fig.height = 8, fig.width=7.2, echo=FALSE}
 
 PlotCombinedDynamicRange(proteinGroups,
-                         show_shade = TRUE, 
-                         percent_proteins = 0.9) 
+                         show_shade = params$show_shade, 
+                         percent_proteins = params$percent_proteins) 
 
 ```
 \newpage
 ```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
 PLotAllDynamicRange(proteinGroups,
-                    show_shade = TRUE, 
-                    percent_proteins = 0.9)
+                    show_shade = params$show_shade, 
+                    percent_proteins = params$percent_proteins)
 ```
 
 \newpage
@@ -154,7 +160,7 @@ PlotProteinCoverage(peptides,
                     proteinGroups, 
                     UniprotID = params$UniprotID, 
                     log_base = params$log_base,
-                    segment_width = 1,
+                    segment_width = params$segment_width,
                     palette = params$palette)
 }
 ```
@@ -164,7 +170,7 @@ PlotProteinCoverage(peptides,
 \newpage
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
 PlotiRT(evidence, 
-        show_calibrated_rt = FALSE)
+        show_calibrated_rt = params$show_calibrated_rt)
 ```
 \newpage
 
@@ -177,7 +183,7 @@ PlotiRTScore(evidence)
 \newpage
 ```{r TotalIonCurrent, fig.height = 9, fig.width=7.2, echo=FALSE}
 PlotTotalIonCurrent(msmsScans,
-                    show_max_value = TRUE,
+                    show_max_value = params$show_max_value,
                     palette = params$palette)
 ```
 
@@ -189,10 +195,10 @@ PlotAcquisitionCycle(msScans,
 ```
 
 \newpage
-```{r PTM, fig.height=8, fig.width=7.2}
+```{r PTM, fig.height=8, fig.width=7.2, echo = FALSE}
 
 PlotPTM(modificationSpecificPeptides, 
-        freq_min = 3,
+        freq_min = params$freq_min,
         palette = params$palette)
 
 ```

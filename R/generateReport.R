@@ -13,11 +13,17 @@
 generateReport = function(input_dir,
                           output_dir = getwd(),
                           log_base = 2,
-                          UniprotID = NULL,
                           long_names = FALSE,
                           sep_names = NULL,
                           intensity_type = 'Intensity',
-                          palette = 'Set2'){
+                          palette = 'Set2',
+                          UniprotID = NULL,
+                          segment_width = 1,
+                          show_shade = TRUE,
+                          percent_proteins = 0.90,
+                          show_calibrated_rt = FALSE,
+                          show_max_value = TRUE,
+                          freq_min = 3){
 
 
 
@@ -28,12 +34,18 @@ generateReport = function(input_dir,
 
   rmarkdown::render(input = input,
                     params = list(input_dir=input_dir,
-                                  UniprotID=UniprotID,
                                   log_base = log_base,
                                   long_names = long_names,
                                   sep_names = sep_names,
                                   intensity_type = intensity_type,
-                                  palette = palette),
+                                  palette = palette,
+                                  UniprotID=UniprotID,
+                                  segment_width = segment_width,
+                                  show_shade = show_shade,
+                                  percent_proteins = percent_proteins,
+                                  show_calibrated_rt = show_calibrated_rt,
+                                  show_max_value = show_max_value,
+                                  freq_min = freq_min),
                     output_file = "report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)

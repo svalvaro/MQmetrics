@@ -119,7 +119,6 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 <img src="man/figures/README-IdentificationType-1.png" width="100%" />
 
 ``` r
-
 PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
               log_base = 2, long_names = TRUE, sep_names = '_')
 ```

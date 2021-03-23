@@ -8,11 +8,17 @@ generateReport(
   input_dir,
   output_dir = getwd(),
   log_base = 2,
-  UniprotID = NULL,
   long_names = FALSE,
   sep_names = NULL,
   intensity_type = "Intensity",
-  palette = "Set2"
+  palette = "Set2",
+  UniprotID = NULL,
+  segment_width = 1,
+  show_shade = TRUE,
+  percent_proteins = 0.9,
+  show_calibrated_rt = FALSE,
+  show_max_value = TRUE,
+  freq_min = 3
 )
 }
 \arguments{

@@ -71,16 +71,13 @@ PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity',long_names = 
 ```
 
 
-
 ```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
 PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 ```
 
-
 ```{r Plot PSM}
 #PSMs identified
 ```
-
 
 
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
@@ -93,11 +90,9 @@ PlotPeaks(summary, long_names = TRUE, sep_names = '_')
 ```
 
 
-
 ```{r isotope, fig.height=5, fig.width=7.2}
 PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 ```
-
 
 
 ```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
@@ -105,12 +100,9 @@ PlotCharge(evidence)
 ```
 
 
-
 ```{r missed_cleavages,fig.height=10}
 PlotProteaseSpecificity(peptides)
 ```
-
-
 
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
@@ -119,9 +111,8 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 
 
 
-
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
+PlotIntensity(proteinGroups, split_violin_intensity = FALSE, intensity_type = 'LFQ', 
               log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 

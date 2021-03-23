@@ -5,8 +5,9 @@
 \title{Genearte a report with all functions combined}
 \usage{
 generateReport(
-  input_dir,
+  MQPathCombined,
   output_dir = getwd(),
+  report_tables = FALSE,
   log_base = 2,
   long_names = FALSE,
   sep_names = NULL,

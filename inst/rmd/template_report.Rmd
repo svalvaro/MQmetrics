@@ -1,5 +1,6 @@
 ---
-title: "Report"
+title: "MQmetrics Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 params:
   input_dir: ''
@@ -14,9 +15,9 @@ params:
   percent_proteins: ''
   show_calibrated_rt: ''
   show_max_value: ''
-  peptides_modified: '' #peptides_modified
+  peptides_modified: ''
   # upper limit cutoff, to remove unomidified, oxidation
-  # table parameter in same file or new file, maybe the best is in another output. 
+   
 
 ---
 

@@ -22,6 +22,7 @@
 #'@importFrom stats aggregate complete.cases lm coef
 #'@importFrom cowplot plot_grid ggdraw draw_label
 #'@importFrom tidyr pivot_longer
+#'@importFrom knitr kable
 #'
 #'
 #'

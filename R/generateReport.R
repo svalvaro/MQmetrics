@@ -10,8 +10,9 @@
 #' @export
 #'
 #' @examples
-generateReport = function(input_dir,
+generateReport = function(MQPathCombined,
                           output_dir = getwd(),
+                          report_tables = FALSE,
                           log_base = 2,
                           long_names = FALSE,
                           sep_names = NULL,
@@ -32,14 +33,15 @@ generateReport = function(input_dir,
   input = system.file("rmd/template_report.Rmd", package="MQmetrics")
 
 
+
   rmarkdown::render(input = input,
-                    params = list(input_dir=input_dir,
+                    params = list(input_dir = MQPathCombined,
                                   log_base = log_base,
                                   long_names = long_names,
                                   sep_names = sep_names,
                                   intensity_type = intensity_type,
                                   palette = palette,
-                                  UniprotID=UniprotID,
+                                  UniprotID = UniprotID,
                                   segment_width = segment_width,
                                   show_shade = show_shade,
                                   percent_proteins = percent_proteins,
@@ -49,6 +51,34 @@ generateReport = function(input_dir,
                     output_file = "report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)
+
+
+  #Determine the template for the report table,
+
+  if(report_tables == TRUE){
+
+    input2 = system.file("rmd/tables_template.Rmd", package = "MQmetrics")
+
+    rmarkdown::render(input = input2,
+                      params = list(input_dir = MQPathCombined,
+                                    log_base = log_base,
+                                    long_names = long_names,
+                                    sep_names = sep_names,
+                                    intensity_type = intensity_type,
+                                    palette = palette,
+                                    UniprotID = UniprotID,
+                                    segment_width = segment_width,
+                                    show_shade = show_shade,
+                                    percent_proteins = percent_proteins,
+                                    show_calibrated_rt = show_calibrated_rt,
+                                    show_max_value = show_max_value,
+                                    peptides_modified = peptides_modified),
+                      output_file = "tables_report.pdf",
+                      output_dir = output_dir,
+                      clean = TRUE)
+
+  }
+
   # #Run the render
   # outputFileName  = do.call('render',args=args)
   # invisible(outputFileName)

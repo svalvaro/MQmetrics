@@ -23,7 +23,7 @@ generateReport = function(input_dir,
                           percent_proteins = 0.90,
                           show_calibrated_rt = FALSE,
                           show_max_value = TRUE,
-                          freq_min = 3){
+                          peptides_modified = 3){
 
 
 
@@ -45,7 +45,7 @@ generateReport = function(input_dir,
                                   percent_proteins = percent_proteins,
                                   show_calibrated_rt = show_calibrated_rt,
                                   show_max_value = show_max_value,
-                                  freq_min = freq_min),
+                                  peptides_modified = peptides_modified),
                     output_file = "report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)

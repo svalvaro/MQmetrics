@@ -16,6 +16,8 @@ PlotIntensity <- function(proteinGroups,
                           sep_names = NULL,
                           palette = 'Set2'){
 
+#add boxplot for for both of the intensities
+#
 
   GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin,
                              draw_group = function(self, data, ..., draw_quantiles = NULL) {

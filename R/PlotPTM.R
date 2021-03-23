@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-PlotPTM <- function(modificationSpecificPeptides, freq_min = 5, palette = 'Set2'){
+PlotPTM <- function(modificationSpecificPeptides, peptides_modified = 5, palette = 'Set2'){
 
   modification_table <- modificationSpecificPeptides %>%
                           select(contains(c('Modifications', 'Proteins',
@@ -20,7 +20,7 @@ PlotPTM <- function(modificationSpecificPeptides, freq_min = 5, palette = 'Set2'
 
   mod_melted[is.na(mod_melted)] <- 0
 
-  mod_melted <- mod_melted[(mod_melted$value > freq_min),]
+  mod_melted <- mod_melted[(mod_melted$value > peptides_modified),]
 
 
   mod_frequencies <- mod_melted %>%
@@ -85,5 +85,5 @@ PlotPTM <- function(modificationSpecificPeptides, freq_min = 5, palette = 'Set2'
 
   legend <- get_legend(a)
 
-  plot_grid(prow, legend, ncol = 1, rel_heights=c(freq_min, 1))
+  plot_grid(prow, legend, ncol = 1, rel_heights=c(peptides_modified, 1))
 }

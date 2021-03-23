@@ -14,7 +14,9 @@ params:
   percent_proteins: ''
   show_calibrated_rt: ''
   show_max_value: ''
-  freq_min: ''
+  peptides_modified: '' #peptides_modified
+  # upper limit cutoff, to remove unomidified, oxidation
+  # table parameter in same file or new file, maybe the best is in another output. 
 
 ---
 
@@ -198,7 +200,7 @@ PlotAcquisitionCycle(msScans,
 ```{r PTM, fig.height=8, fig.width=7.2, echo = FALSE}
 
 PlotPTM(modificationSpecificPeptides, 
-        freq_min = params$freq_min,
+        peptides_modified = params$peptides_modified,
         palette = params$palette)
 
 ```

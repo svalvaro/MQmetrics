@@ -175,7 +175,7 @@ PlotAcquisitionCycle(msScans)
 
 ``` r
 
-PlotPTM(modificationSpecificPeptides, freq_min = 3)
+PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
 ```
 
 <img src="man/figures/README-PTM-1.png" width="100%" />

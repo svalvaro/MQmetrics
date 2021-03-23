@@ -68,7 +68,6 @@ ExperimentInformation(runningTimes, parameters)
 
 ```{r PlotProteins}
 PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity',long_names = TRUE, sep_names = '_')
-
 ```
 
 
@@ -108,9 +107,7 @@ PlotCharge(evidence)
 
 
 ```{r missed_cleavages,fig.height=10}
-
 PlotProteaseSpecificity(peptides)
-
 ```
 
 
@@ -126,7 +123,6 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
 PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
               log_base = 2, long_names = TRUE, sep_names = '_')
-
 ```
 
 
@@ -159,27 +155,22 @@ PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
 
 
 ```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
-
 PlotiRTScore(evidence_irt)
-
 ```
-
 
 
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
 ```
 
+
 ```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE}
 PlotAcquisitionCycle(msScans)
-
 ```
 
 
 ```{r PTM, fig.height=8, fig.width=7.2}
-
 PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
-
 ```
 
 

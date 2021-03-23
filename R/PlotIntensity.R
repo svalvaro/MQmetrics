@@ -16,8 +16,7 @@ PlotIntensity <- function(proteinGroups,
                           sep_names = NULL,
                           palette = 'Set2'){
 
-#add boxplot for for both of the intensities
-#
+
 
   GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin,
                              draw_group = function(self, data, ..., draw_quantiles = NULL) {
@@ -78,22 +77,25 @@ PlotIntensity <- function(proteinGroups,
      if (log_base == 10) {
        a <- ggplot(df, aes(sample, log10(value), fill = intensity_type))+
                    geom_split_violin()+
+                   geom_boxplot(width=0.2, outlier.shape = NA)+
                    ggtitle('Protein Intensity & LFQ intensity')+
                    xlab('Experiment')+
                    ylab(expression('Log'[10]*'(Intensity)'))+
                    theme_bw()+
-                  scale_fill_brewer(palette = palette)
-
+                   scale_fill_brewer(palette = palette)+
+                   theme(legend.position = 'bottom')
      }
 
      if (log_base == 2) {
        a <- ggplot(df, aes(sample, log2(value), fill = intensity_type))+
                    geom_split_violin()+
+                   geom_boxplot(width=0.2, outlier.shape = NA)+
                    ggtitle('Protein Intensity & LFQ intensity')+
                    xlab('Experiment')+
                    ylab(expression('Log'[2]*'(Intensity)'))+
                    theme_bw()+
-                   scale_fill_brewer(palette = palette)
+                   scale_fill_brewer(palette = palette)+
+                   theme(legend.position = 'bottom')
      }
 
     if(long_names==TRUE){
@@ -170,7 +172,7 @@ PlotIntensity <- function(proteinGroups,
 
       b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
                 geom_violin(fill = 'gray80', size = 1, alpha = .5)+
-                geom_boxplot(width=0.2)+
+                geom_boxplot(width=0.2, outlier.shape = NA)+
                 ggtitle('Protein Intensity')+
                 xlab('Experiment')+
                 ylab(ylab)+

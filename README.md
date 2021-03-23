@@ -106,7 +106,6 @@ PlotCharge(evidence)
 <img src="man/figures/README-Charg-1.png" width="100%" />
 
 ``` r
-
 PlotProteaseSpecificity(peptides)
 ```
 
@@ -155,7 +154,6 @@ PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
 <img src="man/figures/README-irt_peps1-1.png" width="100%" />
 
 ``` r
-
 PlotiRTScore(evidence_irt)
 ```
 
@@ -174,7 +172,6 @@ PlotAcquisitionCycle(msScans)
 <img src="man/figures/README-PlotAcquisition-1.png" width="100%" />
 
 ``` r
-
 PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
 ```
 

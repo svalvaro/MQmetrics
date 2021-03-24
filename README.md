@@ -112,6 +112,12 @@ PlotProteaseSpecificity(peptides)
 <img src="man/figures/README-missed_cleavages-1.png" width="100%" />
 
 ``` r
+PlotGRAVY(peptides)
+```
+
+<img src="man/figures/README-PLotGRAVY-1.png" width="100%" />
+
+``` r
 PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
 ```
 

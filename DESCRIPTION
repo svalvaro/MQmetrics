@@ -25,7 +25,8 @@ Imports:
     stats,
     rmarkdown,
     cowplot,
-    RColorBrewer
+    RColorBrewer,
+    ggridges
 Suggests: 
     knitr
 VignetteBuilder: knitr

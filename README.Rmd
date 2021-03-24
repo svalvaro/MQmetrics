@@ -103,6 +103,9 @@ PlotCharge(evidence)
 ```{r missed_cleavages,fig.height=10}
 PlotProteaseSpecificity(peptides)
 ```
+```{r PLotGRAVY}
+PlotGRAVY(peptides)
+```
 
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}

@@ -10,6 +10,7 @@
 #'@import ggplot2
 #'@import ggpubr
 #'@import rmarkdown
+#'@import ggridges
 #'@importFrom readr read_delim
 #'@importFrom magrittr %>%
 #'@importFrom dplyr contains summarise select group_by filter
@@ -23,6 +24,7 @@
 #'@importFrom tidyr pivot_longer
 #'@importFrom knitr kable
 #'@importFrom stats prcomp
+#'
 #'
 #'
 #'

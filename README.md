@@ -112,7 +112,8 @@ PlotProteaseSpecificity(peptides)
 <img src="man/figures/README-missed_cleavages-1.png" width="100%" />
 
 ``` r
-PlotGRAVY(peptides)
+PlotGRAVY(peptides, palette = 'Set2')
+#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 <img src="man/figures/README-PLotGRAVY-1.png" width="100%" />

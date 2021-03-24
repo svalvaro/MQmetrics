@@ -59,20 +59,21 @@ PlotGRAVY <- function(peptides, palette = 'Set2'){
 
 
 
-  ggplot(df_out, aes(x=  GRAVY,variable ,color = variable))+
-    geom_density_ridges(stat = 'density', aes(height = ..count..), alpha = 0.5)+
-    ggtitle('Peptide hidropathy distribution')+
-    theme_ridges()+
+  # ggplot(df_out, aes(x=  GRAVY ,color = variable))+
+  #   geom_density(stat = 'density',  alpha = 0.5)+
+  #   ggtitle('Peptide hydropathy distribution')+
+  #   theme_ridges()+
+  #   theme(legend.position = 'none')+
+  #   scale_colour_brewer(palette = palette)
+
+
+  ggplot(df_expanded, aes(x=  GRAVY, fill = variable))+
+    geom_histogram(color = 'black')+
+    facet_wrap(.~ variable, ncol =1)+
+    ggtitle('Peptide hydropathy distribution')+
+    theme_bw()+
     theme(legend.position = 'none')+
-    scale_colour_brewer(palette = palette)
-
-
-  # ggplot(df_out, aes(x=  GRAVY, color = variable))+
-  #   geom_density(aes(y = ..count..), alpha = 0.5)+
-  #   facet_wrap(.~ variable, ncol =1)+
-  #   ggtitle('Peptide hidropathy distribution')+
-  #   theme_bw()
-
+    scale_fill_brewer(palette = palette)
 
 
 }

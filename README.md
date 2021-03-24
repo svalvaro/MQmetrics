@@ -118,11 +118,17 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 <img src="man/figures/README-IdentificationType-1.png" width="100%" />
 
 ``` r
-PlotIntensity(proteinGroups, split_violin_intensity = FALSE, intensity_type = 'LFQ', 
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
               log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
+
+``` r
+PlotPCA(proteinGroups, intensity_type = 'Intensity')
+```
+
+<img src="man/figures/README-PlotPCA-1.png" width="100%" />
 
 ``` r
 PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)

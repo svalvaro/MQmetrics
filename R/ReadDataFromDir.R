@@ -12,9 +12,8 @@
 #'@import rmarkdown
 #'@importFrom readr read_delim
 #'@importFrom magrittr %>%
-#'@importFrom dplyr contains summarise
+#'@importFrom dplyr contains summarise select group_by filter
 #'@importFrom reshape2 melt dcast
-#'@importFrom dplyr select group_by filter
 #'@importFrom gridExtra marrangeGrob
 #'@importFrom utils head
 #'@importFrom stringr str_count
@@ -23,6 +22,7 @@
 #'@importFrom cowplot plot_grid ggdraw draw_label
 #'@importFrom tidyr pivot_longer
 #'@importFrom knitr kable
+#'@importFrom stats prcomp
 #'
 #'
 #'

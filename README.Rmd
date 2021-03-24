@@ -112,10 +112,13 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups, split_violin_intensity = FALSE, intensity_type = 'LFQ', 
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
               log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 
+```{r PlotPCA, warning = FALSE, fig.height=5, fig.width=7.2}
+PlotPCA(proteinGroups, intensity_type = 'Intensity')
+```
 
 
 ```{r DynamicRange, fig.height=5, fig.width=7.2}

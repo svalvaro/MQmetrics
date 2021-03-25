@@ -103,8 +103,8 @@ PlotCharge(evidence)
 ```{r missed_cleavages,fig.height=10}
 PlotProteaseSpecificity(peptides)
 ```
-```{r PLotGRAVY}
-PlotGRAVY(peptides, palette = 'Set2')
+```{r PLotGRAVY, warning= FALSE, message= FALSE}
+PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE)
 ```
 
 

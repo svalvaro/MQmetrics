@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-PlotGRAVY <- function(peptides, palette = 'Set2'){
+PlotGRAVY <- function(peptides, palette = 'Set2', show_median = TRUE){
   df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
 
 
@@ -59,21 +59,37 @@ PlotGRAVY <- function(peptides, palette = 'Set2'){
 
 
 
-  # ggplot(df_out, aes(x=  GRAVY ,color = variable))+
-  #   geom_density(stat = 'density',  alpha = 0.5)+
-  #   ggtitle('Peptide hydropathy distribution')+
-  #   theme_ridges()+
-  #   theme(legend.position = 'none')+
-  #   scale_colour_brewer(palette = palette)
 
 
-  ggplot(df_expanded, aes(x=  GRAVY, fill = variable))+
-    geom_histogram(color = 'black')+
-    facet_wrap(.~ variable, ncol =1)+
-    ggtitle('Peptide hydropathy distribution')+
-    theme_bw()+
-    theme(legend.position = 'none')+
-    scale_fill_brewer(palette = palette)
+a <-  df_expanded %>%
+          group_by(variable) %>%
+          ggplot(aes(x = GRAVY, fill = variable, group = variable))+
+          geom_histogram(color = 'black')+
+          facet_wrap(.~ variable, ncol =1)+
+          theme_bw()+
+          theme(legend.position = 'none')+
+          scale_fill_brewer(palette = palette)+
+          ggtitle('Peptide hydropathy distribution')+
+         ylab('Peptide Frequency')+
+         xlab('GRAVY score')
+
+
+  if (show_median ==TRUE) {
+
+    median_groups <-  df_expanded %>%
+      group_by(variable) %>%
+      summarise(median(GRAVY))
+
+    a + geom_vline(data = median_groups,
+                   aes(xintercept = `median(GRAVY)`,group = variable),
+                   color = 'red',  linetype = 'dashed')
+
+  } else{
+
+    a
+  }
+
+
 
 
 }

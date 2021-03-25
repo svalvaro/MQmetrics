@@ -112,7 +112,7 @@ PlotProteaseSpecificity(peptides)
 <img src="man/figures/README-missed_cleavages-1.png" width="100%" />
 
 ``` r
-PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE)
+PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 ```
 
 <img src="man/figures/README-PLotGRAVY-1.png" width="100%" />

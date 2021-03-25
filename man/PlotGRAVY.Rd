@@ -4,7 +4,7 @@
 \alias{PlotGRAVY}
 \title{Title}
 \usage{
-PlotGRAVY(peptides, palette = "Set2", show_median = TRUE)
+PlotGRAVY(peptides, palette = "Set2", show_median = TRUE, binwidth = 0.2)
 }
 \arguments{
 \item{palette}{}

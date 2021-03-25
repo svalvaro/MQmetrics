@@ -104,7 +104,7 @@ PlotCharge(evidence)
 PlotProteaseSpecificity(peptides)
 ```
 ```{r PLotGRAVY, warning= FALSE, message= FALSE}
-PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE)
+PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 ```
 
 

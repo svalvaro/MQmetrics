@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-PlotGRAVY <- function(peptides, palette = 'Set2', show_median = TRUE){
+PlotGRAVY <- function(peptides, palette = 'Set2', show_median = TRUE, binwidth = 0.2){
   df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
 
 
@@ -64,7 +64,7 @@ PlotGRAVY <- function(peptides, palette = 'Set2', show_median = TRUE){
 a <-  df_expanded %>%
           group_by(variable) %>%
           ggplot(aes(x = GRAVY, fill = variable, group = variable))+
-          geom_histogram(color = 'black')+
+          geom_histogram(color = 'black', binwidth = binwidth )+
           facet_wrap(.~ variable, ncol =1)+
           theme_bw()+
           theme(legend.position = 'none')+

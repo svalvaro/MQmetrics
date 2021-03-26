@@ -19,7 +19,9 @@ generateReport(
   percent_proteins = 0.9,
   show_calibrated_rt = FALSE,
   show_max_value = TRUE,
-  peptides_modified = 3
+  peptides_modified = 3,
+  show_median = TRUE,
+  binwidth = 0.1
 )
 }
 \arguments{

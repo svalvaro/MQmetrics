@@ -24,7 +24,9 @@ generateReport = function(MQPathCombined,
                           percent_proteins = 0.90,
                           show_calibrated_rt = FALSE,
                           show_max_value = TRUE,
-                          peptides_modified = 3){
+                          peptides_modified = 3,
+                          show_median = TRUE,
+                          binwidth = 0.1){
 
 
 
@@ -47,7 +49,9 @@ generateReport = function(MQPathCombined,
                                   percent_proteins = percent_proteins,
                                   show_calibrated_rt = show_calibrated_rt,
                                   show_max_value = show_max_value,
-                                  peptides_modified = peptides_modified),
+                                  peptides_modified = peptides_modified,
+                                  show_median = show_median,
+                                  binwidth = binwidth),
                     output_file = "report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)
@@ -72,7 +76,9 @@ generateReport = function(MQPathCombined,
                                     percent_proteins = percent_proteins,
                                     show_calibrated_rt = show_calibrated_rt,
                                     show_max_value = show_max_value,
-                                    peptides_modified = peptides_modified),
+                                    peptides_modified = peptides_modified,
+                                    show_median = show_median,
+                                    binwidth = binwidth),
                       output_file = "tables_report.pdf",
                       output_dir = output_dir,
                       clean = TRUE)

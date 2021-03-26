@@ -2,6 +2,8 @@
 title: "MQmetrics Report"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
+fig_width: 6
+fig_height: 
 params:
   input_dir: ''
   log_base: ''
@@ -16,12 +18,24 @@ params:
   show_calibrated_rt: ''
   show_max_value: ''
   peptides_modified: ''
+  show_median: ''
+  binwidth: ''
   # upper limit cutoff, to remove unomidified, oxidation
    
 
 ---
 
-```{r,echo=FALSE,  message=FALSE, warning=FALSE}
+```{r setup, include=FALSE}
+## global options
+knitr::opts_chunk$set(echo=FALSE,
+                      warning=FALSE,
+                      error=FALSE,
+                      message=FALSE,
+                      fig.width=10,
+                      fig.height = 12)
+```
+
+```{r library}
 library(MQmetrics)
 
 MQPathCombined <- params$input_dir
@@ -41,14 +55,14 @@ parameters <- files[["parameters.txt"]]
 
 
 
-```{r ExperimentDuration, echo=FALSE}
+```{r ExperimentDuration}
 ExperimentInformation(runningTimes, 
                       parameters) 
 ```
 
 \newpage
 
-```{r PlotProteins, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r PlotProteins}
 PlotProteinsIdentified(proteinGroups,
                        intensity_type =params$intensity_type,
                        long_names = params$long_names, 
@@ -58,21 +72,17 @@ PlotProteinsIdentified(proteinGroups,
 ```
 
 \newpage
-```{r PeptidesIdentified, warning=FALSE , fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r PeptidesIdentified}
 PLotPeptidesIdentified(summary, 
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
                        palette = params$palette)
 ```
 
-\newpage
-```{r PlotPSMs, fig.height = 9, fig.width=7.2, echo=FALSE}
-#PSMs identified
 
-```
 
 \newpage
-```{r PlotMSMS, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r PlotMSMS}
 PlotMsMs(summary,
          long_names = params$long_names, 
          sep_names = params$sep_names, 
@@ -81,7 +91,7 @@ PlotMsMs(summary,
 
 
 \newpage
-```{r PlotPeaks, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r PlotPeaks}
 PlotPeaks(summary, 
           long_names = params$long_names, 
           sep_names = params$sep_names, 
@@ -90,7 +100,7 @@ PlotPeaks(summary,
 
 
 \newpage
-```{r isotope, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r isotope}
 PlotIsotopePattern(summary,
                    long_names = params$long_names, 
                    sep_names = params$sep_names, 
@@ -99,13 +109,13 @@ PlotIsotopePattern(summary,
 
 
 \newpage
-```{r Charg, warning=FALSE, message=FALSE, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r Charge}
 PlotCharge(evidence, 
            palette = params$palette)
 ```
 
 \newpage
-```{r missed_cleavages, warning=FALSE, message=FALSE, echo=FALSE,fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r missed_cleavages}
 
 PlotProteaseSpecificity(peptides, 
                         palette = params$palette)
@@ -113,8 +123,16 @@ PlotProteaseSpecificity(peptides,
 ```
 
 
+\nepage
+```{r PLotGRAVY}
+PlotGRAVY(peptides,
+          palette = params$palette,
+          show_median =  params$show_median,
+          binwidth = params$binwidth)
+```
+
 \newpage
-```{r IdentificationType, message= FALSE, warning = FALSE, fig.height = 8, fig.width=7.2, echo=FALSE}
+```{r IdentificationType}
 if(parameters$Value[27] == "True"){
   PlotIdentificationType(peptides, proteinGroups,
                          palette = params$palette,
@@ -129,7 +147,7 @@ if(parameters$Value[27] == "True"){
 
 
 \newpage
-```{r PlotIntensity, warning = FALSE, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r PlotIntensity}
 PlotIntensity(proteinGroups, 
               intensity_type = params$intensity_type, 
               log_base = params$log_base, 
@@ -137,9 +155,14 @@ PlotIntensity(proteinGroups,
               sep_names = params$sep_names,
               palette = params$palette)
 ```
+\newpage
+
+```{r PlotPCA}
+PlotPCA(proteinGroups, intensity_type = params$intensity_type)
+```
 
 \newpage
-```{r DynamicRange, fig.height = 8, fig.width=7.2, echo=FALSE}
+```{r DynamicRange}
 
 PlotCombinedDynamicRange(proteinGroups,
                          show_shade = params$show_shade, 
@@ -147,7 +170,7 @@ PlotCombinedDynamicRange(proteinGroups,
 
 ```
 \newpage
-```{r DynamicRangeAll, fig.height=8, fig.width=7.2, echo=FALSE}
+```{r DynamicRangeAll}
 PLotAllDynamicRange(proteinGroups,
                     show_shade = params$show_shade, 
                     percent_proteins = params$percent_proteins)
@@ -155,7 +178,7 @@ PLotAllDynamicRange(proteinGroups,
 
 \newpage
 
-```{r ProteinCoverage, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r ProteinCoverage}
 if(is.null(params$UniprotID)){
   print('No UniprotID provided.')
 } else{
@@ -171,20 +194,20 @@ PlotProteinCoverage(peptides,
 
 
 \newpage
-```{r irt_peps1, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
+```{r irt_peps1}
 PlotiRT(evidence, 
         show_calibrated_rt = params$show_calibrated_rt)
 ```
 \newpage
 
-```{r irt_peps2, warning = FALSE, message= FALSE, fig.height = 9, fig.width=9.2, echo=FALSE}
+```{r irt_peps2}
 PlotiRTScore(evidence)
 ```
 
 
 
 \newpage
-```{r TotalIonCurrent, fig.height = 9, fig.width=7.2, echo=FALSE}
+```{r TotalIonCurrent}
 PlotTotalIonCurrent(msmsScans,
                     show_max_value = params$show_max_value,
                     palette = params$palette)
@@ -192,13 +215,13 @@ PlotTotalIonCurrent(msmsScans,
 
 
 \newpage
-```{r PlotAcquisition, fig.height= 8, echo=FALSE, warning=FALSE}
+```{r PlotAcquisition}
 PlotAcquisitionCycle(msScans, 
                      palette = params$palette)
 ```
 
 \newpage
-```{r PTM, fig.height=8, fig.width=7.2, echo = FALSE}
+```{r PTM}
 
 PlotPTM(modificationSpecificPeptides, 
         peptides_modified = params$peptides_modified,

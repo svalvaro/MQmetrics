@@ -5,29 +5,27 @@ output: pdf_document
 params:
   input_dir: ''
   log_base: ''
-  long_names: ''
-  sep_names: ''
   intensity_type: ''
-  palette: ''
-  UniprotID: ''
-  segment_width: ''
-  show_shade: ''
-  percent_proteins: ''
-  show_calibrated_rt: ''
-  show_max_value: ''
-  peptides_modified: ''
+
 ---
 
 ```{r,echo=FALSE,  message=FALSE, warning=FALSE}
 library(MQmetrics)
+library(knitr)
 
 ```
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ReportTables(MQPathCombined =  params$input_dir,
+a <- ReportTables(MQPathCombined =  params$input_dir,
              log_base = params$log_base,
              intensity_type = params$intensity_type)
+
+
+kable(a[[1]], caption = 'Protein Information')
+kable(a[[2]], caption = 'Intensity Information')
+kable(a[[3]], caption = 'Charge Information')
+
 
 ```
 

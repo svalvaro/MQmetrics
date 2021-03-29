@@ -2,8 +2,6 @@
 title: "MQmetrics Report"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
-fig_width: 6
-fig_height: 
 params:
   input_dir: ''
   log_base: ''
@@ -20,9 +18,6 @@ params:
   peptides_modified: ''
   show_median: ''
   binwidth: ''
-  # upper limit cutoff, to remove unomidified, oxidation
-   
-
 ---
 
 ```{r setup, include=FALSE}
@@ -30,18 +25,15 @@ params:
 knitr::opts_chunk$set(echo=FALSE,
                       warning=FALSE,
                       error=FALSE,
-                      message=FALSE,
-                      fig.width=10,
-                      fig.height = 12)
+                      message=FALSE, 
+                      fig.height = 12,
+                      fig.width = 10)
 ```
 
 ```{r library}
 library(MQmetrics)
-
 MQPathCombined <- params$input_dir
-
 files <- ReadDataFromDir(MQPathCombined) 
-
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
 msScans <- files[['msScans.txt']]
@@ -68,7 +60,6 @@ PlotProteinsIdentified(proteinGroups,
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
                        palette = params$palette)
-
 ```
 
 \newpage
@@ -116,14 +107,12 @@ PlotCharge(evidence,
 
 \newpage
 ```{r missed_cleavages}
-
 PlotProteaseSpecificity(peptides, 
                         palette = params$palette)
-
 ```
 
 
-\nepage
+\newpage
 ```{r PLotGRAVY}
 PlotGRAVY(peptides,
           palette = params$palette,
@@ -163,11 +152,9 @@ PlotPCA(proteinGroups, intensity_type = params$intensity_type)
 
 \newpage
 ```{r DynamicRange}
-
 PlotCombinedDynamicRange(proteinGroups,
                          show_shade = params$show_shade, 
                          percent_proteins = params$percent_proteins) 
-
 ```
 \newpage
 ```{r DynamicRangeAll}
@@ -222,9 +209,7 @@ PlotAcquisitionCycle(msScans,
 
 \newpage
 ```{r PTM}
-
 PlotPTM(modificationSpecificPeptides, 
         peptides_modified = params$peptides_modified,
         palette = params$palette)
-
 ```

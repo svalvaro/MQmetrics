@@ -95,7 +95,11 @@ ReportTables <- function(MQPathCombined, log_base = 2, intensity_type = 'Intensi
 
   rownames(dynamic_table) <- gsub('Intensity', 'Log10 Intensity', rownames(dynamic_table))
 
+  dynamic_table$Experiment  <- rownames(dynamic_table)
 
+  rownames(dynamic_table) <- NULL
+
+  dynamic_table <- dynamic_table[,c(7,1,2,3,4,5,6)]
   #expression('Information of the log'[10]*'(Intensity)'))
   #dynamic_table <- kable(dynamic_table) #%>%
                         #kable_styling(position = "center")
@@ -121,11 +125,67 @@ ReportTables <- function(MQPathCombined, log_base = 2, intensity_type = 'Intensi
 
 
 
+  #Table 4, GRAVY with median and retention times
+
+  df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
+
+
+
+  df$GRAVY <-  (df$`A Count` * 1.8 +
+                  df$`R Count` * -4.5 +
+                  df$`N Count` * -3.5 +
+                  df$`D Count` * -3.5 +
+                  df$`C Count` * 2.5 +
+                  df$`Q Count` * -3.5 +
+                  df$`E Count` * -3.5 +
+                  df$`G Count` * -0.4 +
+                  df$`H Count` * -3.2 +
+                  df$`I Count` * 4.5 +
+                  df$`L Count` * 3.8 +
+                  df$`K Count` * -3.9 +
+                  df$`M Count` * 1.9 +
+                  df$`F Count` * 2.8 +
+                  df$`P Count` * -1.6 +
+                  df$`S Count` * -0.8 +
+                  df$`T Count` * -0.7 +
+                  df$`W Count` * -0.9 +
+                  df$`Y Count` * -1.3 +
+                  df$`V Count` * 4.2)/df$Length
+
+
+  df <- df %>% select(contains(c('GRAVY', 'Experiment')))
+
+  df_out <- melt(df, id.vars = 'GRAVY')
+
+  df_out$variable <- gsub('Experiment ', '', df_out$variable)
+
+  #Remove value 0,
+
+  #df_out<-df_out[!is.na(df_out$value),]
+
+  df_out[is.na(df_out$value),] <- 0
+
+  #Repeat rows n numbers of times, being n the frequency (value)
+  df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
+
+  GRAVY <- df_expanded %>%
+                group_by(variable) %>%
+                summarise(Mean = mean(GRAVY),
+                          Max = max(GRAVY),
+                          Min = min(GRAVY),
+                          Median = median(GRAVY),
+                          Std = sd(GRAVY))
+  names(GRAVY)[1] <- 'Experiment'
+
+  GRAVY
+
    out <- list()
 
   out$proteins <- table_proteins
   out$intensities <- dynamic_table
   out$charge <- charge_percentage
+  out$GRAVY <- GRAVY
+
 
 
 

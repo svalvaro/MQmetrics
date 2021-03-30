@@ -12,7 +12,6 @@ params:
 ```{r,echo=FALSE,  message=FALSE, warning=FALSE}
 library(MQmetrics)
 library(knitr)
-
 ```
 
 

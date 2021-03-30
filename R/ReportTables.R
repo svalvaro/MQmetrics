@@ -85,15 +85,31 @@ ReportTables <- function(MQPathCombined, log_base = 2, intensity_type = 'Intensi
   int_info[int_info == 0] <- NA
 
   #log10 intensities
-  dynamic_table <- do.call(data.frame,
-                           list(mean = format(log10(apply(int_info, 2, mean,na.rm=TRUE)), digits = 4),
-                                sd = format(log10(apply(int_info, 2, sd,na.rm=TRUE)), digits = 4),
-                                median = format(log10(apply(int_info, 2, median,na.rm=TRUE)), digits =4),
-                                min = format(log10(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
-                                max = format(log10(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
-                                n = apply(int_info, 2, length)-colSums(is.na(int_info))))
 
-  rownames(dynamic_table) <- gsub('Intensity', 'Log10 Intensity', rownames(dynamic_table))
+  if(log_base == 2){
+    dynamic_table <- do.call(data.frame,
+                             list(mean = format(log2(apply(int_info, 2, mean,na.rm=TRUE)), digits = 4),
+                                  sd = format(log2(apply(int_info, 2, sd,na.rm=TRUE)), digits = 4),
+                                  median = format(log2(apply(int_info, 2, median,na.rm=TRUE)), digits =4),
+                                  min = format(log2(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
+                                  max = format(log2(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
+                                  n = apply(int_info, 2, length)-colSums(is.na(int_info))))
+
+    rownames(dynamic_table) <- gsub('Intensity', 'Log2 Intensity', rownames(dynamic_table))
+  }
+
+  if(log_base == 10){
+    dynamic_table <- do.call(data.frame,
+                             list(mean = format(log10(apply(int_info, 2, mean,na.rm=TRUE)), digits = 4),
+                                  sd = format(log10(apply(int_info, 2, sd,na.rm=TRUE)), digits = 4),
+                                  median = format(log10(apply(int_info, 2, median,na.rm=TRUE)), digits =4),
+                                  min = format(log10(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
+                                  max = format(log10(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
+                                  n = apply(int_info, 2, length)-colSums(is.na(int_info))))
+
+    rownames(dynamic_table) <- gsub('Intensity', 'Log10 Intensity', rownames(dynamic_table))
+  }
+
 
   dynamic_table$Experiment  <- rownames(dynamic_table)
 

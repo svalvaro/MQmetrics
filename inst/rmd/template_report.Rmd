@@ -63,6 +63,12 @@ PlotProteinsIdentified(proteinGroups,
 ```
 
 \newpage
+```{r protein_coverage_all}
+PlotProteinCoverageAll(proteinGroups)
+
+```
+
+\newpage
 ```{r PeptidesIdentified}
 PLotPeptidesIdentified(summary, 
                        long_names = params$long_names, 

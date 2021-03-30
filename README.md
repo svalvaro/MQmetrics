@@ -149,6 +149,12 @@ PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
 <img src="man/figures/README-DynamicRangeAll-1.png" width="100%" />
 
 ``` r
+PlotProteinCoverageAll(proteinGroups)
+```
+
+<img src="man/figures/README-protein_coverage_all-1.png" width="100%" />
+
+``` r
 PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
 ```
 

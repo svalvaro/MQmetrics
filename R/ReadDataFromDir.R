@@ -13,7 +13,7 @@
 #'@import ggridges
 #'@importFrom readr read_delim
 #'@importFrom magrittr %>%
-#'@importFrom dplyr contains summarise select group_by filter
+#'@importFrom dplyr contains summarise select group_by filter n
 #'@importFrom reshape2 melt dcast
 #'@importFrom gridExtra marrangeGrob
 #'@importFrom utils head

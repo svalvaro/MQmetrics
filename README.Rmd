@@ -133,6 +133,11 @@ PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.
 PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
 ```
 
+```{r protein_coverage_all}
+PlotProteinCoverageAll(proteinGroups)
+
+```
+
 
 
 ```{r protein_degradation}

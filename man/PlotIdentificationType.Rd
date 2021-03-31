@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotIdentificationType.R
 \name{PlotIdentificationType}
 \alias{PlotIdentificationType}
-\title{Compares the type of identification of each sample}
+\title{Protein and Peptide Identification type.}
 \usage{
 PlotIdentificationType(
   peptides,
@@ -26,11 +26,11 @@ names will be split. By default is NULL.}
 \item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-Plots the compares of the type of identification of each sample.
+Plots the compares of the protein and peptide  identification of each sample.
  It will only work if in MaxQuant the Match Between Run was selected.
 }
 \description{
-Compares the type of identification of each sample
+Protein and Peptide Identification type.
 }
 \examples{
 files <- ReadDataFromDir(MQPathCombined)

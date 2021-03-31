@@ -1,11 +1,17 @@
-#' Title
+#' Post Translational Modifications
 #'
-#' @param modificationSpecificPeptides
+#' @param modificationSpecificPeptides modificationSpecificPeptides table from MaxQuant ouput.
+#' @param peptides_modified Minimum number of peptides modified. Default  is 5.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return
+#' @return Two plots per sample
 #' @export
 #'
 #' @examples
+#' files <- ReadDataFromDir(MQPathCombined)
+#' modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
+#' PlotPTM(modificationSpecificPeptides)
+#'
 PlotPTM <- function(modificationSpecificPeptides, peptides_modified = 5, palette = 'Set2'){
 
   modification_table <- modificationSpecificPeptides %>%

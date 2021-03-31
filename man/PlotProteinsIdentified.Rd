@@ -2,23 +2,40 @@
 % Please edit documentation in R/PlotProteinsIdentified.R
 \name{PlotProteinsIdentified}
 \alias{PlotProteinsIdentified}
-\title{Title}
+\title{Proteins Identified per sample.}
 \usage{
 PlotProteinsIdentified(
   proteinGroups,
   intensity_type = "Intensity",
   long_names = FALSE,
   sep_names = NULL,
-  palette = "Set2",
-  font_size = 12
+  palette = "Set2"
 )
 }
 \arguments{
-\item{proteinGroups}{}
+\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
+
+\item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.
+Only useful if split_violin_intensity = FALSE.  Default is Intensity.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-
+A plot showing the number of proteins identified per sample and the
+ number of missing values.
 }
 \description{
-Title
+Proteins Identified per sample.
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[['proteinGroups.txt']]
+PlotProteinsIdentified(proteinGroups)
+
 }

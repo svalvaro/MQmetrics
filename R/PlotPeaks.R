@@ -38,7 +38,8 @@ b <- ggplot(a_melt, aes(x=Experiment,
                position = position_dodge(width = position_dodge_width))+
       theme_bw()+
       ggtitle('Peaks detected and sequenced in the full scans')+
-      scale_fill_brewer(palette = palette)
+      scale_fill_brewer(palette = palette)+
+      theme(legend.position = 'bottom')
 
 
  if(long_names==TRUE){

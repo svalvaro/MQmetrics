@@ -2,16 +2,27 @@
 % Please edit documentation in R/PlotTotalIonCurrent.R
 \name{PlotTotalIonCurrent}
 \alias{PlotTotalIonCurrent}
-\title{Plot Total Ion Current}
+\title{Total Ion Current}
 \usage{
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE, palette = "Set2")
 }
 \arguments{
 \item{msmsScans}{The msmsScans.txt table from  MaxQuant Output.}
+
+\item{show_max_value}{If TRUE, it will show the max TIC value of each sample.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
 Returns a plot the Total Ion Current in each sample. The maximum value is also plotted.
 }
 \description{
-Plot Total Ion Current
+Total Ion Current
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+msmsScans <- files[['msmsScans.txt']]
+PlotTotalIonCurrent(msmsScans)
+
+
 }

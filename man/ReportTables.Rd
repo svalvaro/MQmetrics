@@ -2,16 +2,31 @@
 % Please edit documentation in R/ReportTables.R
 \name{ReportTables}
 \alias{ReportTables}
-\title{Title}
+\title{Report Tables with summary data}
 \usage{
 ReportTables(MQPathCombined, log_base = 2, intensity_type = "Intensity")
 }
 \arguments{
-\item{intensity_type}{}
+\item{MQPathCombined}{The directory to the "combined" folder where the MaxQuant results are stored.}
+
+\item{log_base}{The logarithmic scale for the intensity. Default is 2.}
+
+\item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.
+Only useful if split_violin_intensity = FALSE.  Default is Intensity.}
 }
 \value{
-
+A list with four tables are generated:
+ - Protein Information
+ - Intensity Information
+ - Peptide Charge Information
+ - Peptide hydrophobicity Information
 }
 \description{
-Title
+Report Tables with summary data
+}
+\examples{
+MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
+
+tables <- ReportTables(MQPathCombined)
+
 }

@@ -13,9 +13,11 @@ PlotCombinedDynamicRange(
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 
-\item{show_shade}{Creates a shade showing where the percent_proteins are. Default is TRUE.}
+\item{show_shade}{Creates a shade showing where the \code{percent_proteins} are.
+Default is TRUE.}
 
-\item{percent_proteins}{Determines the percentage for the show_shade parameter. Default is 0.90 (90% of the proteins).}
+\item{percent_proteins}{Determines the percentage for the show_shade parameter.
+Default is 0.90 (90% of the proteins).}
 }
 \value{
 Returns the dynamic range for all samples combined. Besides, it can shows where 90\% of the proteins are and their orders of abundance.

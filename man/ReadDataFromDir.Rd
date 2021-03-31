@@ -12,8 +12,15 @@ ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE)
 \item{remove_contaminants}{Whether or not to remove contaminants, reverse and identified by one one peptide.}
 }
 \value{
-The output from \code{ReadDataFromR}
+The files from the MaxQuant with the contaminants and Reverse hits removed.
 }
 \description{
 Read MaxQuant Tables From Directory
+}
+\examples{
+
+MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
+
+files <- ReadDataFromDir(MQPathCombined)
+
 }

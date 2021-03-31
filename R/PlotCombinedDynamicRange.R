@@ -1,8 +1,10 @@
 #' Dynamic range of all the samples combined
 #'
 #' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
-#' @param show_shade Creates a shade showing where the percent_proteins are. Default is TRUE.
-#' @param percent_proteins Determines the percentage for the show_shade parameter. Default is 0.90 (90% of the proteins).
+#' @param show_shade Creates a shade showing where the \code{percent_proteins} are.
+#'  Default is TRUE.
+#' @param percent_proteins Determines the percentage for the show_shade parameter.
+#'  Default is 0.90 (90% of the proteins).
 #'
 #' @return Returns the dynamic range for all samples combined. Besides, it can shows where 90\% of the proteins are and their orders of abundance.
 #' @export

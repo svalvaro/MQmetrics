@@ -2,16 +2,26 @@
 % Please edit documentation in R/PlotPTM.R
 \name{PlotPTM}
 \alias{PlotPTM}
-\title{Title}
+\title{Post Translational Modifications}
 \usage{
 PlotPTM(modificationSpecificPeptides, peptides_modified = 5, palette = "Set2")
 }
 \arguments{
-\item{modificationSpecificPeptides}{}
+\item{modificationSpecificPeptides}{modificationSpecificPeptides table from MaxQuant ouput.}
+
+\item{peptides_modified}{Minimum number of peptides modified. Default  is 5.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-
+Two plots per sample
 }
 \description{
-Title
+Post Translational Modifications
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
+PlotPTM(modificationSpecificPeptides)
+
 }

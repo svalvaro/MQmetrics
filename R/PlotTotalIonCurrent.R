@@ -1,12 +1,22 @@
-#' Plot Total Ion Current
+#' Total Ion Current
 #'
 #' @param msmsScans The msmsScans.txt table from  MaxQuant Output.
+#' @param show_max_value If TRUE, it will show the max TIC value of each sample.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
 #' @return Returns a plot the Total Ion Current in each sample. The maximum value is also plotted.
 #' @export
 #'
 #' @examples
-PlotTotalIonCurrent <- function(msmsScans, show_max_value = TRUE, palette = 'Set2'){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' msmsScans <- files[['msmsScans.txt']]
+#' PlotTotalIonCurrent(msmsScans)
+#'
+#'
+PlotTotalIonCurrent <- function(msmsScans,
+                                show_max_value = TRUE,
+                                palette = 'Set2'){
+
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
   a <- msmsScans %>%   ggplot(aes(`Retention time`,`Total ion current`))+

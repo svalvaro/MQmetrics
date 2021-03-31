@@ -28,7 +28,7 @@ The goal of MQmetrics is to analyze Proteomics data from LC-MS/MS. It takes the 
 <!-- install.packages("MQmetrics") -->
 <!-- ``` -->
 
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -43,11 +43,11 @@ library(MQmetrics)
 ```{r, message=FALSE, warning=FALSE}
 MQPathCombined <- system.file('extdata', package = 'MQmetrics') #is the directory with the output of the MaxQuant analysis.
 
-#MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+# MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example1/combined/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
-#files can be extracted like this:
+# files can be extracted like this:
 
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
@@ -55,7 +55,7 @@ msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides<- files[["modificationSpecificPeptides.txt"]]
+modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
 ```
@@ -67,7 +67,7 @@ ExperimentInformation(runningTimes, parameters)
 
 
 ```{r PlotProteins}
-PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity',long_names = TRUE, sep_names = '_')
+PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names = TRUE, sep_names = '_')
 ```
 
 
@@ -103,8 +103,8 @@ PlotCharge(evidence)
 ```{r missed_cleavages,fig.height=10}
 PlotProteaseSpecificity(peptides)
 ```
-```{r PLotGRAVY, warning= FALSE, message= FALSE}
-PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
+```{r PlotHydrophobicity, warning= FALSE, message= FALSE}
+PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 ```
 
 
@@ -141,7 +141,7 @@ PlotProteinCoverageAll(proteinGroups)
 
 
 ```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
+PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
 ```
 
 

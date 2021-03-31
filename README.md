@@ -20,7 +20,8 @@ takes the output tables from MaxQuant and plots multiple parameters.
 
 <!-- ``` -->
 
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -36,11 +37,11 @@ library(MQmetrics)
 ``` r
 MQPathCombined <- system.file('extdata', package = 'MQmetrics') #is the directory with the output of the MaxQuant analysis.
 
-#MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+# MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example1/combined/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
-#files can be extracted like this:
+# files can be extracted like this:
 
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
@@ -48,7 +49,7 @@ msScans <- files[['msScans.txt']]
 peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides<- files[["modificationSpecificPeptides.txt"]]
+modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
 ```
@@ -66,7 +67,7 @@ ExperimentInformation(runningTimes, parameters)
 ```
 
 ``` r
-PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity',long_names = TRUE, sep_names = '_')
+PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotProteins-1.png" width="100%" />
@@ -112,10 +113,10 @@ PlotProteaseSpecificity(peptides)
 <img src="man/figures/README-missed_cleavages-1.png" width="100%" />
 
 ``` r
-PlotGRAVY(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
+PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 ```
 
-<img src="man/figures/README-PLotGRAVY-1.png" width="100%" />
+<img src="man/figures/README-PlotHydrophobicity-1.png" width="100%" />
 
 ``` r
 PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
@@ -155,7 +156,7 @@ PlotProteinCoverageAll(proteinGroups)
 <img src="man/figures/README-protein_coverage_all-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides,proteinGroups ,UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
+PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
 ```
 
 <img src="man/figures/README-protein_degradation-1.png" width="100%" />

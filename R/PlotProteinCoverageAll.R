@@ -1,12 +1,17 @@
-#' Title
+#' Protein Coverage of all samples.
 #'
-#' @param proteinGroups
+#' @param proteinGroups proteinGroups.txt table from MaxQuant output.
 #'
-#' @return
+#' @return A plot showing the protein coverage in all samples.
 #' @export
 #'
 #' @examples
+#' files <- ReadDataFromDir(MQPathCombined)
+#' proteinGroups <- files[['proteinGroups.txt']]
+#' PlotProteinCoverageAll(proteinGroups)
+#'
 PlotProteinCoverageAll <- function(proteinGroups){
+
   df <- proteinGroups %>% select(contains(c('Protein IDs', 'peptides '))) %>%
                           select(-contains(c('unique', 'Majority')))
 

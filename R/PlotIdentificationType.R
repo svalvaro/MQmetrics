@@ -1,4 +1,4 @@
-#' Compares the type of identification of each sample
+#' Protein and Peptide Identification type.
 #'
 #' @param peptides  The peptides.txt table from  MaxQuant Output.
 #' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
@@ -8,8 +8,9 @@
 #'  names will be split. By default is NULL.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return Plots the compares of the type of identification of each sample.
+#' @return Plots the compares of the protein and peptide  identification of each sample.
 #'  It will only work if in MaxQuant the Match Between Run was selected.
+#'
 #' @export
 #'
 #' @examples
@@ -50,7 +51,8 @@ PlotIdentificationType <- function(peptides,
           geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
           theme(axis.title.y = element_text(margin = margin(r = 20)))+
           theme_bw()+
-          scale_fill_brewer(palette = palette)
+          scale_fill_brewer(palette = palette)+
+          theme(legend.position = 'bottom')
 
   if (long_names == TRUE) {
     a <- a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
@@ -81,8 +83,9 @@ PlotIdentificationType <- function(peptides,
     ggtitle('Protein Identification type')+
     geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
     theme(axis.title.y = element_text(margin = margin(r = 20)))+
-    theme_bw(base_size = font_size)+
-    scale_fill_brewer(palette = palette)
+    theme_bw()+
+    scale_fill_brewer(palette = palette)+
+    theme(legend.position = 'bottom')
 
   if (long_names == TRUE) {
     b <- b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))

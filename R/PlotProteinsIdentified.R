@@ -1,12 +1,28 @@
-#' Title
+#' Proteins Identified per sample.
 #'
-#' @param proteinGroups
+#' @param proteinGroups  The proteinGroups.txt table from  MaxQuant Output.
+#' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
+#'  Only useful if split_violin_intensity = FALSE.  Default is Intensity.
+#' @param long_names If TRUE, samples having long names will be considered, and
+#'  the name will be split by sep_names. By default = FALSE.
+#' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
+#'  names will be split. By default is NULL.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return
+#' @return A plot showing the number of proteins identified per sample and the
+#'  number of missing values.
 #' @export
 #'
 #' @examples
-PlotProteinsIdentified <- function(proteinGroups,intensity_type = 'Intensity',long_names = FALSE, sep_names = NULL, palette = 'Set2',  font_size = 12 ){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' proteinGroups <- files[['proteinGroups.txt']]
+#' PlotProteinsIdentified(proteinGroups)
+#'
+PlotProteinsIdentified <- function(proteinGroups,
+                                   intensity_type = 'Intensity',
+                                   long_names = FALSE,
+                                   sep_names = NULL,
+                                   palette = 'Set2'){
 
   if (intensity_type == 'Intensity') {
     protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
@@ -73,8 +89,9 @@ PlotProteinsIdentified <- function(proteinGroups,intensity_type = 'Intensity',lo
             ggtitle(title)+
             geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
             theme(axis.title.y = element_text(margin = margin(r = 20)))+
-            theme_bw(base_size = font_size)+
-            scale_fill_brewer(palette = palette)
+            theme_bw()+
+            scale_fill_brewer(palette = palette)+
+            theme(legend.position = 'bottom')
 
 
   if(long_names==TRUE){

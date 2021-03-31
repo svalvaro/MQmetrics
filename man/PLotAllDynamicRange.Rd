@@ -9,9 +9,11 @@ PLotAllDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.9)
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 
-\item{show_shade}{Creates a shade showing where the percent_proteins are. Default is TRUE.}
+\item{show_shade}{Creates a shade showing where the \code{percent_proteins} are.
+Default is TRUE.}
 
-\item{percent_proteins}{Determines the percentage for the show_shade parameter. Default is 0.90 (90% of the proteins).}
+\item{percent_proteins}{Determines the percentage for the show_shade parameter.
+Default is 0.90 (90% of the proteins).}
 }
 \value{
 Returns one plot for each sample, being the dynamic range.

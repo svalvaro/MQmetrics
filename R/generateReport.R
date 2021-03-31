@@ -1,10 +1,53 @@
-#' Genearte a report with all functions combined
+#' Generates a report including all the plots of MQmetrics.
 #'
-#' @param input_dir
-#' @param output_format
-#' @param output_file
-#' @param output_dir
-#' @param ...
+#' @param MQPathCombined The directory to the "combined" folder where the
+#'  MaxQuant results are stored.
+#'
+#' @param output_dir The directory where the results will be stored. By default
+#'  is the working directory.
+#'
+#' @param report_tables If true, the function \code{ReportTables()} will be used and a
+#'  new pdf will be generated with four information tables. By default = TRUE.
+#'
+#' @param log_base The logarithmic scale for the intensity. Default is 2.
+#'
+#' @param long_names If TRUE, samples having long names will be considered, and
+#'  the name will be split by sep_names. By default = FALSE.
+#'
+#' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
+#'  names will be split. By default is NULL.
+#'
+#' @param intensity_type The type of intensity of interest. Values: 'Intensity'
+#'  or 'LFQ'. Default = 'Intensity'.
+#'
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#'
+#' @param UniprotID Uniprot ID of the protein of interest. \code{PlotProteinCoverage()}.
+#'
+#' @param segment_width Width of the segments to improve visualization. Default is 1.
+#'  (PlotProteinCoverage).
+#'
+#' @param show_shade Creates a shade showing where the \code{percent_proteins} are.
+#'  Default is TRUE. \code{PlotAllDynamicRange(), PlotCombinedDynamicRange()}.
+#'
+#' @param percent_proteins  Determines the percentage for the show_shade parameter.
+#'  Default is 0.90 (90\% of the proteins). \code{PlotAllDynamicRange(), PlotCombinedDynamicRange()}.
+#'
+#' @param show_calibrated_rt  If TRUE, it will also show the calibrated retention
+#'  time of each iRT peptide. By default = FALSE. \code{PlotiRT()}.
+#'
+#' @param tolerance Error maximum to find the iRT peptides by m/z value.
+#'  by default is 0.001.
+#' @param show_max_value If TRUE, it will show the max TIC value of each sample. \code{PlotTotalIonCurrent()}.
+#'
+#' @param peptides_modified Minimum number of peptides modified. Default  is 5. \code{PlotPTM()}.
+#'
+#' @param show_median If true it will show the median of each group, as a red
+#'  dashed line.By default is TRUE. \code{PlotHydrophobicity()}.
+#'
+#' @param binwidth Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.
+#'
+
 #'
 #' @return
 #' @export
@@ -25,8 +68,9 @@ generateReport = function(MQPathCombined,
                           show_shade = TRUE,
                           percent_proteins = 0.90,
                           show_calibrated_rt = FALSE,
+                          tolerance = 0.001,
                           show_max_value = TRUE,
-                          peptides_modified = 3,
+                          peptides_modified = 5,
                           show_median = TRUE,
                           binwidth = 0.1){
 
@@ -50,6 +94,7 @@ generateReport = function(MQPathCombined,
                                   show_shade = show_shade,
                                   percent_proteins = percent_proteins,
                                   show_calibrated_rt = show_calibrated_rt,
+                                  tolerance = tolerance,
                                   show_max_value = show_max_value,
                                   peptides_modified = peptides_modified,
                                   show_median = show_median,

@@ -3,33 +3,36 @@
 #' @param MQPathCombined The directory to the "combined" folder where the MaxQuant results are stored.
 #' @param remove_contaminants Whether or not to remove contaminants, reverse and identified by one one peptide.
 #'
-#' @return The output from \code{ReadDataFromR}
+#' @return The files from the MaxQuant with the contaminants and Reverse hits removed.
 #' @export
 #'
-#'@import RColorBrewer
-#'@import ggplot2
-#'@import ggpubr
-#'@import rmarkdown
-#'@import ggridges
-#'@importFrom readr read_delim
-#'@importFrom magrittr %>%
-#'@importFrom dplyr contains summarise select group_by filter n
-#'@importFrom reshape2 melt dcast
-#'@importFrom gridExtra marrangeGrob
-#'@importFrom utils head
-#'@importFrom stringr str_count
-#'@importFrom chron times
-#'@importFrom stats aggregate complete.cases lm coef
-#'@importFrom cowplot plot_grid ggdraw draw_label
-#'@importFrom tidyr pivot_longer
-#'@importFrom knitr kable
-#'@importFrom stats prcomp
-#'
-#'
-#'
+#' @import RColorBrewer
+#' @import ggplot2
+#' @import ggpubr
+#' @import rmarkdown
+#' @import ggridges
+#' @importFrom readr read_delim
+#' @importFrom magrittr %>%
+#' @importFrom dplyr contains summarise select group_by filter n
+#' @importFrom reshape2 melt dcast
+#' @importFrom gridExtra marrangeGrob
+#' @importFrom utils head
+#' @importFrom stringr str_count
+#' @importFrom chron times
+#' @importFrom stats aggregate complete.cases lm coef
+#' @importFrom cowplot plot_grid ggdraw draw_label
+#' @importFrom tidyr pivot_longer
+#' @importFrom knitr kable
+#' @importFrom stats prcomp
 #'
 #' @examples
-ReadDataFromDir <- function(MQPathCombined, remove_contaminants = TRUE){
+#'
+#' MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
+#'
+#' files <- ReadDataFromDir(MQPathCombined)
+#'
+ReadDataFromDir <- function(MQPathCombined,
+                            remove_contaminants = TRUE){
 
   #open summary.txt
   summary_table <- read_delim(file.path(MQPathCombined, "txt/summary.txt"),

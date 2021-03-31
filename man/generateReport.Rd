@@ -2,7 +2,7 @@
 % Please edit documentation in R/generateReport.R
 \name{generateReport}
 \alias{generateReport}
-\title{Genearte a report with all functions combined}
+\title{Generates a report including all the plots of MQmetrics.}
 \usage{
 generateReport(
   MQPathCombined,
@@ -18,20 +18,67 @@ generateReport(
   show_shade = TRUE,
   percent_proteins = 0.9,
   show_calibrated_rt = FALSE,
+  tolerance = 0.001,
   show_max_value = TRUE,
-  peptides_modified = 3,
+  peptides_modified = 5,
   show_median = TRUE,
   binwidth = 0.1
 )
 }
 \arguments{
-\item{...}{}
+\item{MQPathCombined}{The directory to the "combined" folder where the
+MaxQuant results are stored.}
+
+\item{output_dir}{The directory where the results will be stored. By default
+is the working directory.}
+
+\item{report_tables}{If true, the function \code{ReportTables()} will be used and a
+new pdf will be generated with four information tables. By default = TRUE.}
+
+\item{log_base}{The logarithmic scale for the intensity. Default is 2.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
+
+\item{intensity_type}{The type of intensity of interest. Values: 'Intensity'
+or 'LFQ'. Default = 'Intensity'.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+
+\item{UniprotID}{Uniprot ID of the protein of interest. \code{PlotProteinCoverage()}.}
+
+\item{segment_width}{Width of the segments to improve visualization. Default is 1.
+(PlotProteinCoverage).}
+
+\item{show_shade}{Creates a shade showing where the \code{percent_proteins} are.
+Default is TRUE. \code{PlotAllDynamicRange(), PlotCombinedDynamicRange()}.}
+
+\item{percent_proteins}{Determines the percentage for the show_shade parameter.
+Default is 0.90 (90\% of the proteins). \code{PlotAllDynamicRange(), PlotCombinedDynamicRange()}.}
+
+\item{show_calibrated_rt}{If TRUE, it will also show the calibrated retention
+time of each iRT peptide. By default = FALSE. \code{PlotiRT()}.}
+
+\item{tolerance}{Error maximum to find the iRT peptides by m/z value.
+by default is 0.001.}
+
+\item{show_max_value}{If TRUE, it will show the max TIC value of each sample. \code{PlotTotalIonCurrent()}.}
+
+\item{peptides_modified}{Minimum number of peptides modified. Default  is 5. \code{PlotPTM()}.}
+
+\item{show_median}{If true it will show the median of each group, as a red
+dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
+
+\item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
 }
 \value{
 
 }
 \description{
-Genearte a report with all functions combined
+Generates a report including all the plots of MQmetrics.
 }
 \examples{
 

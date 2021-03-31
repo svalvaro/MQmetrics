@@ -1,14 +1,26 @@
-#' Title
+#' Report Tables with summary data
 #'
-#' @param MQPathCombined
-#' @param log_base
-#' @param intensity_type
+#' @param MQPathCombined The directory to the "combined" folder where the MaxQuant results are stored.
+#' @param log_base The logarithmic scale for the intensity. Default is 2.
+#' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
+#'  Only useful if split_violin_intensity = FALSE.  Default is Intensity.
 #'
-#' @return
+#' @return A list with four tables are generated:
+#'  - Protein Information
+#'  - Intensity Information
+#'  - Peptide Charge Information
+#'  - Peptide hydrophobicity Information
 #' @export
 #'
 #' @examples
-ReportTables <- function(MQPathCombined, log_base = 2, intensity_type = 'Intensity'){
+#' MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
+#'
+#' tables <- ReportTables(MQPathCombined)
+#'
+ReportTables <- function(MQPathCombined,
+                         log_base = 2,
+                         intensity_type = 'Intensity'){
+
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 

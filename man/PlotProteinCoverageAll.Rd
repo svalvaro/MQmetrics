@@ -2,16 +2,22 @@
 % Please edit documentation in R/PlotProteinCoverageAll.R
 \name{PlotProteinCoverageAll}
 \alias{PlotProteinCoverageAll}
-\title{Title}
+\title{Protein Coverage of all samples.}
 \usage{
 PlotProteinCoverageAll(proteinGroups)
 }
 \arguments{
-\item{proteinGroups}{}
+\item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}
 }
 \value{
-
+A plot showing the protein coverage in all samples.
 }
 \description{
-Title
+Protein Coverage of all samples.
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[['proteinGroups.txt']]
+PlotProteinCoverageAll(proteinGroups)
+
 }

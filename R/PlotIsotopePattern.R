@@ -31,7 +31,8 @@ b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variabl
       geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
       theme_bw()+
       ggtitle('Isotope Patterns detected and sequenced')+
-      scale_fill_brewer(palette = palette)
+      scale_fill_brewer(palette = palette)+
+      theme(legend.position = 'bottom')
 
 
 if (long_names == TRUE) {

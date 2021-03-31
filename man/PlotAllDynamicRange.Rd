@@ -13,7 +13,7 @@ PlotAllDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.9)
 Default is TRUE.}
 
 \item{percent_proteins}{Determines the percentage for the show_shade parameter.
-Default is 0.90 (90% of the proteins).}
+Default is 0.90 (90\% of the proteins).}
 }
 \value{
 Returns one plot for each sample, being the dynamic range.

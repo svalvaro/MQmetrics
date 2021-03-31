@@ -11,8 +11,7 @@ ReportTables(MQPathCombined, log_base = 2, intensity_type = "Intensity")
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 
-\item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.
-Only useful if split_violin_intensity = FALSE.  Default is Intensity.}
+\item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.}
 }
 \value{
 A list with four tables are generated:

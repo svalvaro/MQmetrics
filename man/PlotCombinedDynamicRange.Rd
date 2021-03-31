@@ -17,10 +17,10 @@ PlotCombinedDynamicRange(
 Default is TRUE.}
 
 \item{percent_proteins}{Determines the percentage for the show_shade parameter.
-Default is 0.90 (90% of the proteins).}
+Default is 0.90 (90\% of the proteins).}
 }
 \value{
-Returns the dynamic range for all samples combined. Besides, it can shows where 90\% of the proteins are and their orders of abundance.
+Returns the dynamic range for all samples combined.
 }
 \description{
 Dynamic range of all the samples combined

@@ -3,7 +3,7 @@
 #' @param MQPathCombined The directory to the "combined" folder where the MaxQuant results are stored.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
-#'  Only useful if split_violin_intensity = FALSE.  Default is Intensity.
+#'
 #'
 #' @return A list with four tables are generated:
 #'  - Protein Information

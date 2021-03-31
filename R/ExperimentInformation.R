@@ -1,6 +1,6 @@
 #' Experiment Information
 #'
-#' @param running_times The runningTimes.txt table from  MaxQuant Output.
+#' @param runningTimes The runningTimes.txt table from  MaxQuant Output.
 #' @param  parameters The parameters.txt table from  MaxQuant Output.
 #' @return Returns the time in hours:minutes that lasted the whole Experiment.
 #' @export

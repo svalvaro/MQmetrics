@@ -59,7 +59,6 @@
 #'
 generateReport = function(MQPathCombined,
                           output_dir = getwd(),
-                          #report_tables = TRUE,
                           log_base = 2,
                           long_names = FALSE,
                           sep_names = NULL,

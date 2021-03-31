@@ -8,11 +8,14 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
 #' PlotPTM(modificationSpecificPeptides)
 #'
 PlotPTM <- function(modificationSpecificPeptides, peptides_modified = 5, palette = 'Set2'){
+
+  Modifications <- variable <- value <- Freq <-
 
   modification_table <- modificationSpecificPeptides %>%
                           select(contains(c('Modifications', 'Proteins',

@@ -53,11 +53,13 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+#' generateReport(MQPathCombined)
 #'
 #'
 generateReport = function(MQPathCombined,
                           output_dir = getwd(),
-                          report_tables = TRUE,
+                          #report_tables = TRUE,
                           log_base = 2,
                           long_names = FALSE,
                           sep_names = NULL,
@@ -104,21 +106,21 @@ generateReport = function(MQPathCombined,
                     clean = TRUE)
 
 
-  #Determine the template for the report table,
-
-  if(report_tables == TRUE){
-
-    input2 = system.file("rmd/tables_template.Rmd", package = "MQmetrics")
-
-    rmarkdown::render(input = input2,
-                      params = list(input_dir = MQPathCombined,
-                                    log_base = log_base,
-                                    intensity_type = intensity_type),
-                      output_file = "MQmetrics_report_tables.pdf",
-                      output_dir = output_dir,
-                      clean = TRUE)
-
-  }
+  # #Determine the template for the report table,
+  #
+  # if(report_tables == TRUE){
+  #
+  #   input2 = system.file("rmd/tables_template.Rmd", package = "MQmetrics")
+  #
+  #   rmarkdown::render(input = input2,
+  #                     params = list(input_dir = MQPathCombined,
+  #                                   log_base = log_base,
+  #                                   intensity_type = intensity_type),
+  #                     output_file = "MQmetrics_report_tables.pdf",
+  #                     output_dir = output_dir,
+  #                     clean = TRUE)
+  #
+  # }
 
   # #Run the render
   # outputFileName  = do.call('render',args=args)

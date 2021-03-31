@@ -18,6 +18,7 @@ Returns the time in hours:minutes that lasted the whole Experiment.
 Experiment Information
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]

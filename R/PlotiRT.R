@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' evidence <- files[['evidence.txt']]
 #' PlotiRT(evidence)
@@ -18,7 +19,7 @@ PlotiRT <- function(evidence,
                     show_calibrated_rt = FALSE,
                     tolerance=0.001){
 
-  Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
+  Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- `Calibrated retention time` <- value <- variable <- NULL
 
   iRT.mZ <- c(487.2571, 547.2984, 622.8539, 636.8695, 644.8230, 669.8384,
               683.8282, 683.8541, 699.3388, 726.8361, 776.9301)

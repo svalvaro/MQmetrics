@@ -12,11 +12,12 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' summary <- files[['summary.txt']]
 #' PlotPeptidesIdentified(summary)
 #'
-PLotPeptidesIdentified <- function(summary,
+PlotPeptidesIdentified <- function(summary,
                                    long_names = FALSE,
                                    sep_names = NULL,
                                    palette = 'Set2'){

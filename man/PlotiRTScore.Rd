@@ -20,6 +20,7 @@ A plot for each sample showing a linear regression of the iRT peptides'
 Score vs retention time of the iRT peptides
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
 evidence <- files[['evidence.txt']]
 PlotiRT(evidence)

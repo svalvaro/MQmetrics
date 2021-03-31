@@ -32,6 +32,7 @@ Returns a plot Isotope Pattern and Isotope Pattern Sequenced.
 Plot Isotope Pattern and Isotope Pattern Sequenced
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
 summary <- files[['summary.txt']]
 PlotIsotopePattern(summary)

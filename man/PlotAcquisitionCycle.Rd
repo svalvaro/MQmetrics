@@ -19,6 +19,7 @@ Two plots per sample, one with the cycle tyme vs retention time,
 Acquisition Cycle and MS/MS
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
 msScans <- files[['msScans.txt']]
 PlotAcquisitionCycle(msScans)

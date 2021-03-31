@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' peptides <- files[['peptides.txt']]
 #' proteinGroups <- files[['proteinGroups.txt']]
@@ -25,6 +26,7 @@ PlotProteinCoverage <- function(peptides,
                                 segment_width = 1,
                                 palette = 'Set2'){
 
+  `Start position` <-  `End position` <- variable <- value <- NULL
 
   table_peptides <- peptides %>%
         select(contains(c('Intensity ', 'Start position',

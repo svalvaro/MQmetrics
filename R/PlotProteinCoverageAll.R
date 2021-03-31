@@ -6,11 +6,14 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinCoverageAll(proteinGroups)
 #'
 PlotProteinCoverageAll <- function(proteinGroups){
+
+  samples <- value <- NULL
 
   df <- proteinGroups %>% select(contains(c('Protein IDs', 'peptides '))) %>%
                           select(-contains(c('unique', 'Majority')))

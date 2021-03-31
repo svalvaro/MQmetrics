@@ -8,12 +8,16 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' msScans <- files[['msScans.txt']]
 #' PlotAcquisitionCycle(msScans)
 #'
 PlotAcquisitionCycle <- function(msScans,
                                  palette = 'Set2'){
+  `Retention time` <- `Cycle time` <- `Experiment` <- `MS/MS count` <- NULL
+
+
   data_table <- msScans %>%  select(contains(c('Experiment','Retention time',
                                                'Cycle time', 'MS/MS count' )))
 

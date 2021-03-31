@@ -13,11 +13,12 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[["proteinGroups.txt"]]
 #' PlotAllDynamicRange(proteinGroups)
 #'
-PLotAllDynamicRange <- function(proteinGroups,
+PlotAllDynamicRange <- function(proteinGroups,
                                 show_shade = TRUE,
                                 percent_proteins = 0.90){
 

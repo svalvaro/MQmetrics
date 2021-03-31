@@ -7,7 +7,6 @@
 generateReport(
   MQPathCombined,
   output_dir = getwd(),
-  report_tables = TRUE,
   log_base = 2,
   long_names = FALSE,
   sep_names = NULL,
@@ -31,9 +30,6 @@ MaxQuant results are stored.}
 
 \item{output_dir}{The directory where the results will be stored. By default
 is the working directory.}
-
-\item{report_tables}{If true, the function \code{ReportTables()} will be used and a
-new pdf will be generated with four information tables. By default = TRUE.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 
@@ -73,6 +69,9 @@ by default is 0.001.}
 dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
+
+\item{report_tables}{If true, the function \code{ReportTables()} will be used and a
+new pdf will be generated with four information tables. By default = TRUE.}
 }
 \value{
 
@@ -81,6 +80,8 @@ dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 Generates a report including all the plots of MQmetrics.
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+generateReport(MQPathCombined)
 
 
 }

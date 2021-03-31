@@ -71,7 +71,7 @@ PlotProteinCoverageAll(proteinGroups)
 
 \newpage
 ```{r PeptidesIdentified}
-PLotPeptidesIdentified(summary, 
+PlotPeptidesIdentified(summary, 
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
                        palette = params$palette)
@@ -165,7 +165,7 @@ PlotCombinedDynamicRange(proteinGroups,
 ```
 \newpage
 ```{r DynamicRangeAll}
-PLotAllDynamicRange(proteinGroups,
+PlotAllDynamicRange(proteinGroups,
                     show_shade = params$show_shade, 
                     percent_proteins = params$percent_proteins)
 ```
@@ -219,4 +219,18 @@ PlotAcquisitionCycle(msScans,
 PlotPTM(modificationSpecificPeptides, 
         peptides_modified = params$peptides_modified,
         palette = params$palette)
+```
+
+\newpage
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+a <- ReportTables(MQPathCombined =  params$input_dir,
+             log_base = params$log_base,
+             intensity_type = params$intensity_type)
+
+
+kable(a[[1]], caption = 'Protein Information')
+kable(a[[2]], caption = 'Intensity Information')
+kable(a[[3]], caption = 'Charge Information')
+kable(a[[4]], caption = 'Peptide hydrophobicity (GRAVY)')
+
 ```

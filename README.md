@@ -73,7 +73,7 @@ PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names =
 <img src="man/figures/README-PlotProteins-1.png" width="100%" />
 
 ``` r
-PLotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
+PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PeptidesIdentified-1.png" width="100%" />
@@ -144,7 +144,7 @@ PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.
 <img src="man/figures/README-DynamicRange-1.png" width="100%" />
 
 ``` r
-PLotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
+PlotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
 ```
 
 <img src="man/figures/README-DynamicRangeAll-1.png" width="100%" />

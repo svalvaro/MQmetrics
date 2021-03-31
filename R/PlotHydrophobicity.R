@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' peptides <- files[['peptides.txt']]
 #' PlotHydrophobicity(peptides)
@@ -20,6 +21,8 @@ PlotHydrophobicity <- function(peptides,
                       show_median = TRUE,
                       binwidth = 0.2,
                       palette = 'Set2'){
+
+  variable <- GRAVY <- `median(GRAVY)` <- NULL
 
   df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
 

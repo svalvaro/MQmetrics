@@ -6,6 +6,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' runningTimes <-  files[["#runningTimes.txt"]]
 #' parameters <- files[["parameters.txt"]]

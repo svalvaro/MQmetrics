@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' evidence <- files[['evidence.txt']]
 #' PlotiRT(evidence)

@@ -9,6 +9,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' peptides <- files[['peptides.txt']]
 #' PlotProteaseSpecificity(peptides)
@@ -17,7 +18,7 @@ PlotProteaseSpecificity <- function(peptides,
                                     position_dodge_width = 0.2,
                                     palette = 'Set2'){
 
-  `Missed cleavages` <- value <- variable <- NULL
+  `Missed cleavages` <- value <- variable <- Length  <- NULL
 
   peptides2 <- peptides %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
 

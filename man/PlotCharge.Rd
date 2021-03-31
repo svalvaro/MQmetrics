@@ -18,6 +18,7 @@ Plots the charge-state of the precursor ion.
 The charge-state of the precursor ion.
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
 evidence <- files[['evidence.txt']]
 PlotCharge(evidence)

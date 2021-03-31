@@ -17,6 +17,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotIntensity(proteinGroups)
@@ -30,7 +31,7 @@ PlotIntensity <- function(proteinGroups,
                           sep_names = NULL,
                           palette = 'Set2'){
 
-
+  x <- `violinwidth` <- xmin <- xmax <- xminv <- xmaxv <- y <- NULL
 
   GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin,
                              draw_group = function(self, data, ..., draw_quantiles = NULL) {

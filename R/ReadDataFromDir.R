@@ -21,13 +21,13 @@
 #' @importFrom chron times
 #' @importFrom stats aggregate complete.cases lm coef
 #' @importFrom cowplot plot_grid ggdraw draw_label
-#' @importFrom tidyr pivot_longer
+#' @importFrom tidyr pivot_longer starts_with
 #' @importFrom knitr kable
-#' @importFrom stats prcomp
+#' @importFrom stats prcomp median
 #'
 #' @examples
 #'
-#' MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #'
 #' files <- ReadDataFromDir(MQPathCombined)
 #'

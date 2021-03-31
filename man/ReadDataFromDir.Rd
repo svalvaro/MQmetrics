@@ -19,7 +19,7 @@ Read MaxQuant Tables From Directory
 }
 \examples{
 
-MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 
 files <- ReadDataFromDir(MQPathCombined)
 

@@ -25,8 +25,7 @@ A list with four tables are generated:
 Report Tables with summary data
 }
 \examples{
-MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
-
-tables <- ReportTables(MQPathCombined)
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+ReportTables(MQPathCombined)
 
 }

@@ -13,14 +13,14 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/MaxQuant_Results/Example1/combined/'
-#'
-#' tables <- ReportTables(MQPathCombined)
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+#' ReportTables(MQPathCombined)
 #'
 ReportTables <- function(MQPathCombined,
                          log_base = 2,
                          intensity_type = 'Intensity'){
 
+  sd <- median <- Experiment <- Charge <- variable <- NULL
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 
@@ -154,6 +154,7 @@ ReportTables <- function(MQPathCombined,
 
 
   #Table 4, GRAVY with median and retention times
+  peptides <- files[['peptides.txt']]
 
   df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
 

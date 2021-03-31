@@ -14,6 +14,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinsIdentified(proteinGroups)
@@ -23,6 +24,8 @@ PlotProteinsIdentified <- function(proteinGroups,
                                    long_names = FALSE,
                                    sep_names = NULL,
                                    palette = 'Set2'){
+
+  Experiment <- value <- variable <- NULL
 
   if (intensity_type == 'Intensity') {
     protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]

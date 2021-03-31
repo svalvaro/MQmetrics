@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[["proteinGroups.txt"]]
 #' PlotCombinedDynamicRange(proteinGroups)

@@ -34,6 +34,7 @@ A plot showing the number of proteins identified per sample and the
 Proteins Identified per sample.
 }
 \examples{
+MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
 proteinGroups <- files[['proteinGroups.txt']]
 PlotProteinsIdentified(proteinGroups)

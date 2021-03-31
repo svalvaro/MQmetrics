@@ -14,6 +14,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' peptides <- files[['peptides.txt']]
 #' proteinGroups <- files[['proteinGroups.txt']]

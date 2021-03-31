@@ -8,6 +8,7 @@
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotPCA(proteinGroups)
@@ -15,6 +16,7 @@
 PlotPCA <- function(proteinGroups,
                     intensity_type = 'Intensity'){
 
+  PC1 <- PC2 <- Modifications <- variable <- value <- Freq <- NULL
 
   if (intensity_type == 'Intensity') {
     intensities <-  proteinGroups %>%  select(contains('Intensity ')& -contains('LFQ'))

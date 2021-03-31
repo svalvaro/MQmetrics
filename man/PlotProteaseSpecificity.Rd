@@ -2,18 +2,27 @@
 % Please edit documentation in R/PlotProteaseSpecificity.R
 \name{PlotProteaseSpecificity}
 \alias{PlotProteaseSpecificity}
-\title{Missed Cleavages}
+\title{Protease Specificity}
 \usage{
-PlotProteaseSpecificity(peptides, position_dodge_width = 1, palette = "Set2")
+PlotProteaseSpecificity(peptides, position_dodge_width = 0.2, palette = "Set2")
 }
 \arguments{
 \item{peptides}{peptides.txt table from MaxQuant ouput.}
 
 \item{position_dodge_width}{position of the columns within each others.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-A plot showing the missed cleavages in each column.
+Two plots per sample: Peptide length distribution and the number of
+ missed enzymatic cleavages.
 }
 \description{
-Missed Cleavages
+Protease Specificity
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+PlotProteaseSpecificity(peptides)
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ExperimentInformation.R
 \name{ExperimentInformation}
 \alias{ExperimentInformation}
-\title{Experiment Duration}
+\title{Experiment Information}
 \usage{
 ExperimentInformation(runningTimes, parameters)
 }
@@ -15,5 +15,12 @@ ExperimentInformation(runningTimes, parameters)
 Returns the time in hours:minutes that lasted the whole Experiment.
 }
 \description{
-Experiment Duration
+Experiment Information
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+runningTimes <-  files[["#runningTimes.txt"]]
+parameters <- files[["parameters.txt"]]
+ExperimentInformation(runningTimes, parameters)
+
 }

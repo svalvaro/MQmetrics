@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotCombinedDynamicRange.R
 \name{PlotCombinedDynamicRange}
 \alias{PlotCombinedDynamicRange}
-\title{Plots the dynamic range of all the samples combined}
+\title{Dynamic range of all the samples combined}
 \usage{
 PlotCombinedDynamicRange(
   proteinGroups,
@@ -12,10 +12,21 @@ PlotCombinedDynamicRange(
 }
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
+
+\item{show_shade}{Creates a shade showing where the percent_proteins are. Default is TRUE.}
+
+\item{percent_proteins}{Determines the percentage for the show_shade parameter. Default is 0.90 (90% of the proteins).}
 }
 \value{
 Returns the dynamic range for all samples combined. Besides, it can shows where 90\% of the proteins are and their orders of abundance.
 }
 \description{
-Plots the dynamic range of all the samples combined
+Dynamic range of all the samples combined
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[["proteinGroups.txt"]]
+PlotCombinedDynamicRange(proteinGroups)
+
+
 }

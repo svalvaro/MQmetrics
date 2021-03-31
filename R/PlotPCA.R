@@ -1,12 +1,19 @@
-#' Title
+#' Principal Component Analysis of the Intensity values.
 #'
-#' @param proteinGroups
+#' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
+#' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
+#'  Default is Intensity.
 #'
-#' @return
+#' @return A PCA plot of the Intesities of all the samples.
 #' @export
 #'
 #' @examples
-PlotPCA <- function(proteinGroups,intensity_type = 'Intensity'){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' proteinGroups <- files[['proteinGroups.txt']]
+#' PlotPCA(proteinGroups)
+#'
+PlotPCA <- function(proteinGroups,
+                    intensity_type = 'Intensity'){
 
 
   if (intensity_type == 'Intensity') {
@@ -44,7 +51,7 @@ PlotPCA <- function(proteinGroups,intensity_type = 'Intensity'){
   rownames(df_out) <- NULL
 
   ggplot(df_out, aes(PC1, PC2, color = sample))+
-    geom_point()+
+    geom_point(size = 3)+
     ggtitle(title)+
     theme_bw()+
     theme(legend.position = 'bottom')+

@@ -2,16 +2,25 @@
 % Please edit documentation in R/PlotAcquisitionCycle.R
 \name{PlotAcquisitionCycle}
 \alias{PlotAcquisitionCycle}
-\title{Title}
+\title{Acquisition Cycle and MS/MS}
 \usage{
 PlotAcquisitionCycle(msScans, palette = "Set2")
 }
 \arguments{
-\item{msScans}{}
+\item{msScans}{The msScans.txt file from the MaxQuant ouptut.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-
+Two plots per sample, one with the cycle tyme vs retention time,
+ and MS/MS count vs retention time.
 }
 \description{
-Title
+Acquisition Cycle and MS/MS
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+msScans <- files[['msScans.txt']]
+PlotAcquisitionCycle(msScans)
+
 }

@@ -8,11 +8,20 @@ PlotiRTScore(evidence, tolerance = 0.001)
 }
 \arguments{
 \item{evidence}{evidence.txt file from the MaxQuant output.}
+
+\item{tolerance}{Error maximum to find the iRT peptides by m/z value.
+by default is 0.001.}
 }
 \value{
 A plot for each sample showing a linear regression of the iRT peptides'
-retention time vs the score.
+ retention time vs the score.
 }
 \description{
 Score vs retention time of the iRT peptides
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+evidence <- files[['evidence.txt']]
+PlotiRT(evidence)
+
 }

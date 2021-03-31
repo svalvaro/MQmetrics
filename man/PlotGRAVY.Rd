@@ -2,16 +2,30 @@
 % Please edit documentation in R/PlotGRAVY.R
 \name{PlotGRAVY}
 \alias{PlotGRAVY}
-\title{Title}
+\title{Peptide hydrophobicity by GRAVY score}
 \usage{
-PlotGRAVY(peptides, palette = "Set2", show_median = TRUE, binwidth = 0.2)
+PlotGRAVY(peptides, show_median = TRUE, binwidth = 0.2, palette = "Set2")
 }
 \arguments{
-\item{palette}{}
+\item{peptides}{The peptides file from the MaxQuant ouptut.}
+
+\item{show_median}{If true it will show the median of each group, as a red
+dashed line.By default is TRUE.}
+
+\item{binwidth}{Selects the binwidth of the histogram. By default = 0.2}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-
+Returns a histogram per sample, showing the frequency of the peptide's
+ hydrophobicity GRAVY value.
 }
 \description{
-Title
+Peptide hydrophobicity by GRAVY score
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+PlotGRAVY(peptides)
+
 }

@@ -1,12 +1,28 @@
-#' Protein coverage and degradation
+#' Protein coverage and degradation.
 #'
-#' @param peptides
+#' @param peptides peptides.txt table from MaxQuant ouput.
+#' @param proteinGroups proteinGroups.txt table from MaxQuant output.
+#' @param UniprotID Uniprot ID of the protein of interest.
+#' @param log_base The logarithmic scale for the intensity. Default is 2.
+#' @param segment_width Width of the segments to improve visualization. Default is 1.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return
+#' @return Two plots for each sample, the end position vs the start position of
+#'  each peptide of the given protein found. And the Intensity of a given peptide
+#'  and its length.
 #' @export
 #'
 #' @examples
-PlotProteinCoverage <- function(peptides,proteinGroups, UniprotID = NULL, log_base = 2, segment_width =1,
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
+#' proteinGroups <- files[['proteinGroups.txt']]
+#' PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
+#'
+PlotProteinCoverage <- function(peptides,
+                                proteinGroups,
+                                UniprotID = NULL,
+                                log_base = 2,
+                                segment_width = 1,
                                 palette = 'Set2'){
 
 

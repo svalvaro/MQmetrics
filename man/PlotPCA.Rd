@@ -2,16 +2,25 @@
 % Please edit documentation in R/PlotPCA.R
 \name{PlotPCA}
 \alias{PlotPCA}
-\title{Title}
+\title{Principal Component Analysis of the Intensity values.}
 \usage{
 PlotPCA(proteinGroups, intensity_type = "Intensity")
 }
 \arguments{
-\item{proteinGroups}{}
+\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
+
+\item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.
+Default is Intensity.}
 }
 \value{
-
+A PCA plot of the Intesities of all the samples.
 }
 \description{
-Title
+Principal Component Analysis of the Intensity values.
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[['proteinGroups.txt']]
+PlotPCA(proteinGroups)
+
 }

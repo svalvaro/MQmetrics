@@ -1,13 +1,22 @@
-#' Missed Cleavages
+#' Protease Specificity
+#'
 #' @param peptides peptides.txt table from MaxQuant ouput.
 #' @param  position_dodge_width position of the columns within each others.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return A plot showing the missed cleavages in each column.
+#' @return Two plots per sample: Peptide length distribution and the number of
+#'  missed enzymatic cleavages.
 #' @export
 #'
 #' @examples
-PlotProteaseSpecificity <- function(peptides, position_dodge_width = 1,
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
+#' PlotProteaseSpecificity(peptides)
+#'
+PlotProteaseSpecificity <- function(peptides,
+                                    position_dodge_width = 0.2,
                                     palette = 'Set2'){
+
   `Missed cleavages` <- value <- variable <- NULL
 
   peptides2 <- peptides %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
@@ -41,6 +50,16 @@ PlotProteaseSpecificity <- function(peptides, position_dodge_width = 1,
                      xlab(label = 'Peptide length')+
                      scale_fill_brewer(palette = palette)
 
+
+ plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
+   geom_bar(stat = 'identity', color = 'black',
+            show.legend = FALSE)+
+   ggtitle(label = 'Peptide Length')+
+   xlab(label = 'Length')+
+   facet_wrap(.~ variable, ncol =1)+
+   theme_bw()+
+   xlab(label = 'Peptide length')+
+   scale_fill_brewer(palette = palette)
 
  #Plot them together
  c <- plot_grid(plot_length, plot_cleavages)

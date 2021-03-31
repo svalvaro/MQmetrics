@@ -1,14 +1,20 @@
 #' Score vs retention time of the iRT peptides
 #'
 #' @param evidence evidence.txt file from the MaxQuant output.
+#' @param tolerance Error maximum to find the iRT peptides by m/z value.
+#'  by default is 0.001.
 #'
 #' @return A plot for each sample showing a linear regression of the iRT peptides'
-#' retention time vs the score.
-#'
+#'  retention time vs the score.
 #' @export
 #'
 #' @examples
-PlotiRTScore <- function(evidence, tolerance= 0.001){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' evidence <- files[['evidence.txt']]
+#' PlotiRT(evidence)
+#'
+PlotiRTScore <- function(evidence,
+                         tolerance= 0.001){
 
   Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
 

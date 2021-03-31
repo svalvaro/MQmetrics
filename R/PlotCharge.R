@@ -1,15 +1,20 @@
-#From Evidence_table
-
 #' The charge-state of the precursor ion.
 #'
 #' @param evidence The evidence.txt file from the MaxQuant ouptut.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
 #'
 #' @return Plots the charge-state of the precursor ion.
 #' @export
 #'
 #' @examples
-PlotCharge <- function(evidence, palette = 'Set2'){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' evidence <- files[['evidence.txt']]
+#' PlotCharge(evidence)
+#'
+#'
+PlotCharge <- function(evidence,
+                       palette = 'Set2'){
   Experiment <- Charge <-  value <- variable <- NULL
 
   ev <- evidence %>%

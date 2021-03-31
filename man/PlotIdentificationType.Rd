@@ -7,18 +7,38 @@
 PlotIdentificationType(
   peptides,
   proteinGroups,
-  font_size = 12,
   long_names = FALSE,
-  sep_names = "-",
+  sep_names = NULL,
   palette = "Set2"
 )
 }
 \arguments{
 \item{peptides}{The peptides.txt table from  MaxQuant Output.}
+
+\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-Plots the compares of the type of identification of each sample. It will not work if in MaxQuant the Match Between Run was not selected.
+Plots the compares of the type of identification of each sample.
+ It will only work if in MaxQuant the Match Between Run was selected.
 }
 \description{
 Compares the type of identification of each sample
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+proteinGroups <- files[['proteinGroups.txt']]
+PlotIdentificationType(peptides,proteinGroups)
+
+# If there are long names separated by underscore:
+PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+
 }

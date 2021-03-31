@@ -1,4 +1,4 @@
-#' Experiment Duration
+#' Experiment Information
 #'
 #' @param running_times The runningTimes.txt table from  MaxQuant Output.
 #' @param  parameters The parameters.txt table from  MaxQuant Output.
@@ -6,7 +6,13 @@
 #' @export
 #'
 #' @examples
-ExperimentInformation <- function(runningTimes, parameters){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' runningTimes <-  files[["#runningTimes.txt"]]
+#' parameters <- files[["parameters.txt"]]
+#' ExperimentInformation(runningTimes, parameters)
+#'
+ExperimentInformation <- function(runningTimes,
+                                  parameters){
   #Runningtimes
   time <- sum(runningTimes$`Running time [min]`)
 

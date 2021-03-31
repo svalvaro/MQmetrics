@@ -13,10 +13,25 @@ PLotPeptidesIdentified(
 }
 \arguments{
 \item{summary}{The peptides.txt table from  MaxQuant Output.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-Plots the total number of unique peptide amino acid sequences identified from the recorded tandem mass spectra.
+Plots the total number of unique peptide amino acid sequences
+identified from the recorded tandem mass spectra.
 }
 \description{
 Total number of peaks detected and sequenced
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+summary <- files[['summary.txt']]
+PlotPeptidesIdentified(summary)
+
 }

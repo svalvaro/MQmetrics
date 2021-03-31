@@ -8,10 +8,19 @@ PlotCharge(evidence, palette = "Set2")
 }
 \arguments{
 \item{evidence}{The evidence.txt file from the MaxQuant ouptut.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
 Plots the charge-state of the precursor ion.
 }
 \description{
 The charge-state of the precursor ion.
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+evidence <- files[['evidence.txt']]
+PlotCharge(evidence)
+
+
 }

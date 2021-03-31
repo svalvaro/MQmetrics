@@ -1,16 +1,27 @@
-#' Title
+#' Peptide hydrophobicity by GRAVY score
 #'
-#' @param peptides
-#' @param palette
+#' @param peptides The peptides file from the MaxQuant ouptut.
+#' @param show_median If true it will show the median of each group, as a red
+#'  dashed line.By default is TRUE.
+#' @param binwidth Selects the binwidth of the histogram. By default = 0.2
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return
+#' @return Returns a histogram per sample, showing the frequency of the peptide's
+#'  hydrophobicity GRAVY value.
+#'
 #' @export
 #'
 #' @examples
-PlotGRAVY <- function(peptides, palette = 'Set2', show_median = TRUE, binwidth = 0.2){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
+#' PlotGRAVY(peptides)
+#'
+PlotGRAVY <- function(peptides,
+                      show_median = TRUE,
+                      binwidth = 0.2,
+                      palette = 'Set2'){
+
   df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
-
-
 
   df$GRAVY <-  (df$`A Count` * 1.8 +
                 df$`R Count` * -4.5 +

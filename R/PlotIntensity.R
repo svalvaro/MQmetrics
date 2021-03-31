@@ -1,17 +1,31 @@
 #' Intensity / LFQ intensity per sample.
 #'
 #' @param proteinGroups  The proteinGroups.txt table from  MaxQuant Output.
-#' @param intensity_type The type of intensity. Values: 'Intensity', 'LFQ'.
-#' @param  log_base The logarithmic scale for the intensity. Values: '10', '2', 'none'.
+#' @param split_violin_intensity If TRUE, both the LFQ and the Intensity will be
+#'  shown in the same plot. If FALSE, it can be specified in the intensity_type
+#'  which intensity to visualize.
+#' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
+#'  Only useful if split_violin_intensity = FALSE.  Default is Intensity.
+#' @param  log_base The logarithmic scale for the intensity. Default is 2.
+#' @param long_names If TRUE, samples having long names will be considered, and
+#'  the name will be split by sep_names. By default = FALSE.
+#' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
+#'  names will be split. By default is NULL.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return A violin plot of the intensities in each sample.
+#' @return A violin plot and boxplot of the intensities in each sample.
 #' @export
 #'
 #' @examples
+#' files <- ReadDataFromDir(MQPathCombined)
+#' proteinGroups <- files[['proteinGroups.txt']]
+#' PlotIntensity(proteinGroups)
+#'
+#'
 PlotIntensity <- function(proteinGroups,
                           split_violin_intensity = TRUE,
                           intensity_type = 'Intensity',
-                          log_base = 10,
+                          log_base = 2,
                           long_names = FALSE,
                           sep_names = NULL,
                           palette = 'Set2'){

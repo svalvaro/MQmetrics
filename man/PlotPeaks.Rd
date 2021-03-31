@@ -6,23 +6,35 @@
 \usage{
 PlotPeaks(
   summary,
-  position_dodge_width = 1,
-  font_size = 12,
   long_names = FALSE,
-  sep_names = "-",
+  sep_names = NULL,
+  position_dodge_width = 1,
   palette = "Set2"
 )
 }
 \arguments{
 \item{summary}{The summary.txt table from  MaxQuant Output.}
 
-\item{position_dodge_width}{Width overlapping columns.}
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
 
-\item{font_size}{Size of the font in the labels.}
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
+
+\item{position_dodge_width}{Position of the columns within each others.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-Plots the total number of peaks detected in the full scans and the total number of peaks sequenced by tandem MS.
+Plots the total number of peaks detected in the full scans and the
+ total number of peaks sequenced by tandem MS.
 }
 \description{
 Total number of peaks detected and sequenced
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+summary <- files[['summary.txt']]
+PlotPeaks(summary)
+
 }

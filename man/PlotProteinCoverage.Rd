@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotProteinCoverage.R
 \name{PlotProteinCoverage}
 \alias{PlotProteinCoverage}
-\title{Protein coverage and degradation}
+\title{Protein coverage and degradation.}
 \usage{
 PlotProteinCoverage(
   peptides,
@@ -14,11 +14,30 @@ PlotProteinCoverage(
 )
 }
 \arguments{
-\item{peptides}{}
+\item{peptides}{peptides.txt table from MaxQuant ouput.}
+
+\item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}
+
+\item{UniprotID}{Uniprot ID of the protein of interest.}
+
+\item{log_base}{The logarithmic scale for the intensity. Default is 2.}
+
+\item{segment_width}{Width of the segments to improve visualization. Default is 1.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-
+Two plots for each sample, the end position vs the start position of
+ each peptide of the given protein found. And the Intensity of a given peptide
+ and its length.
 }
 \description{
-Protein coverage and degradation
+Protein coverage and degradation.
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+proteinGroups <- files[['proteinGroups.txt']]
+PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
+
 }

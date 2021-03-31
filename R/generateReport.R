@@ -10,6 +10,8 @@
 #' @export
 #'
 #' @examples
+#'
+#'
 generateReport = function(MQPathCombined,
                           output_dir = getwd(),
                           report_tables = TRUE,

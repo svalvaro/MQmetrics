@@ -1,14 +1,27 @@
-#' Comparison of the MS/MS submmited and identified in each sample.
+#' Comparison of the MS/MS submitted and identified in each sample.
 #'
-#' @param summary The summary.txt table from  MaxQuant Output.
-#' @param position_dodge_width Width overlapping columns.
-#' @param font_size Size of the font in the labels.
+#' @param  summary The summary.txt table from  MaxQuant Output.
+#' @param long_names If TRUE, samples having long names will be considered, and
+#'  the name will be split by sep_names. By default = FALSE.
+#' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
+#'  names will be split. By default is NULL.
+#' @param position_dodge_width Position of the columns within each others.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return Plots the MS/MS submited and Identified in each sample.
+#' @return Plots the MS/MS submitted and Identified in each sample.
 #' @export
 #'
 #' @examples
-PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_names = FALSE, sep_names = '-', palette = 'Set2'){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' summary <- files[['summary.txt']]
+#' PlotMsMs(summary)
+#'
+PlotMsMs <- function(summary,
+                     long_names = FALSE,
+                     sep_names = NULL,
+                     position_dodge_width = 1,
+                     palette = 'Set2'){
+
   Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- value <- variable <- NULL
 
   a <- summary %>% select(c(Experiment, `MS/MS Submitted`, `MS/MS Identified`))
@@ -18,9 +31,10 @@ PlotMsMs <- function(summary, position_dodge_width = 1, font_size=12,  long_name
 
  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
         geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
-        theme_bw(base_size = font_size)+
+        theme_bw()+
         ggtitle('MS/MS Submitted and Identified')+
-        scale_fill_brewer(palette = palette)
+        scale_fill_brewer(palette = palette)+
+        theme(legend.position = 'bottom')
 
 
 

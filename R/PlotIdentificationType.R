@@ -1,13 +1,31 @@
-
 #' Compares the type of identification of each sample
 #'
 #' @param peptides  The peptides.txt table from  MaxQuant Output.
+#' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
+#' @param long_names If TRUE, samples having long names will be considered, and
+#'  the name will be split by sep_names. By default = FALSE.
+#' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
+#'  names will be split. By default is NULL.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return Plots the compares of the type of identification of each sample. It will not work if in MaxQuant the Match Between Run was not selected.
+#' @return Plots the compares of the type of identification of each sample.
+#'  It will only work if in MaxQuant the Match Between Run was selected.
 #' @export
 #'
 #' @examples
-PlotIdentificationType <- function(peptides, proteinGroups, font_size=12,  long_names = FALSE, sep_names = '-', palette = 'Set2'){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
+#' proteinGroups <- files[['proteinGroups.txt']]
+#' PlotIdentificationType(peptides,proteinGroups)
+#'
+#' # If there are long names separated by underscore:
+#' PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+#'
+PlotIdentificationType <- function(peptides,
+                                   proteinGroups,
+                                   long_names = FALSE,
+                                   sep_names = NULL,
+                                   palette = 'Set2'){
 
   value <- variable <- NULL
 
@@ -31,7 +49,7 @@ PlotIdentificationType <- function(peptides, proteinGroups, font_size=12,  long_
           ggtitle('Peptide Identification type')+
           geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
           theme(axis.title.y = element_text(margin = margin(r = 20)))+
-          theme_bw(base_size = font_size)+
+          theme_bw()+
           scale_fill_brewer(palette = palette)
 
   if (long_names == TRUE) {

@@ -1,12 +1,22 @@
 #' Max intensities of the iRT peptides in each sample.
 #'
 #' @param evidence evidence.txt table from the MaxQuant ouptut.
+#' @param show_calibrated_rt If TRUE, it will also show the calibrated retention
+#'  time of each iRT peptide. By default = FALSE.
+#' @param tolerance Error maximum to find the iRT peptides by m/z value.
+#'  by default is 0.001.
 #'
 #' @return A plot showing the iRT peptide in each sample vs the Retention time.
 #' @export
 #'
 #' @examples
-PlotiRT <- function(evidence,show_calibrated_rt = FALSE, tolerance=0.001, font_size=12){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' evidence <- files[['evidence.txt']]
+#' PlotiRT(evidence)
+#'
+PlotiRT <- function(evidence,
+                    show_calibrated_rt = FALSE,
+                    tolerance=0.001){
 
   Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
 
@@ -73,7 +83,7 @@ PlotiRT <- function(evidence,show_calibrated_rt = FALSE, tolerance=0.001, font_s
           geom_segment(aes(x = `Retention time`, xend=`Retention time`, yend=0))+
           facet_wrap(. ~ Experiment, ncol= 1)+
           ggtitle('Biognosys iRT peptides in each sample.')+
-          theme_bw(base_size = font_size)+
+          theme_bw()+
           labs(colour='iRT peptides')+
           theme(legend.position = 'bottom')
 
@@ -86,7 +96,7 @@ PlotiRT <- function(evidence,show_calibrated_rt = FALSE, tolerance=0.001, font_s
         geom_segment(aes(x = value, xend=value, yend=0))+
         facet_wrap(. ~ Experiment, ncol= 1)+
         ggtitle('Biognosys iRT peptides in each sample.')+
-        theme_bw(base_size = font_size)+
+        theme_bw()+
         labs(colour='iRT peptides')+
         theme(legend.position = 'bottom')
 

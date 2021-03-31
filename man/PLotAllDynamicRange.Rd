@@ -9,13 +9,19 @@ PLotAllDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.9)
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 
-\item{columns}{The number of column to show the output.}
+\item{show_shade}{Creates a shade showing where the percent_proteins are. Default is TRUE.}
 
-\item{rows}{The number of rows to show the output.}
+\item{percent_proteins}{Determines the percentage for the show_shade parameter. Default is 0.90 (90% of the proteins).}
 }
 \value{
-Returns one plot for each sample, being the dynamic range. Besides, it can shows where 90\% of the proteins are and their orders of abundance.
+Returns one plot for each sample, being the dynamic range.
 }
 \description{
 Plots the dynamic range for all samples
+}
+\examples{
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[["proteinGroups.txt"]]
+PlotAllDynamicRange(proteinGroups)
+
 }

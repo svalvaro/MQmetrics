@@ -33,3 +33,7 @@ generateReport(
 \description{
 Genearte a report with all functions combined
 }
+\examples{
+
+
+}

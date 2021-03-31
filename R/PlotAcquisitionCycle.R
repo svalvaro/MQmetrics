@@ -1,12 +1,19 @@
-#' Title
+#' Acquisition Cycle and MS/MS
 #'
-#' @param msScans
+#' @param msScans The msScans.txt file from the MaxQuant ouptut.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return
+#' @return Two plots per sample, one with the cycle tyme vs retention time,
+#'  and MS/MS count vs retention time.
 #' @export
 #'
 #' @examples
-PlotAcquisitionCycle <- function(msScans, palette = 'Set2'){
+#' files <- ReadDataFromDir(MQPathCombined)
+#' msScans <- files[['msScans.txt']]
+#' PlotAcquisitionCycle(msScans)
+#'
+PlotAcquisitionCycle <- function(msScans,
+                                 palette = 'Set2'){
   data_table <- msScans %>%  select(contains(c('Experiment','Retention time',
                                                'Cycle time', 'MS/MS count' )))
 

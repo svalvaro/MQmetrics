@@ -11,7 +11,7 @@
 #' @import ggpubr
 #' @import rmarkdown
 #' @import ggridges
-#' @import stats
+#' @importFrom stats aggregate complete.cases lm coef median
 #' @importFrom readr read_delim
 #' @importFrom magrittr %>%
 #' @importFrom dplyr contains summarise select group_by filter n arrange
@@ -20,7 +20,6 @@
 #' @importFrom utils head
 #' @importFrom stringr str_count str_wrap
 #' @importFrom chron times
-#' @importFrom stats aggregate complete.cases lm coef
 #' @importFrom cowplot plot_grid ggdraw draw_label
 #' @importFrom tidyr pivot_longer starts_with
 #' @importFrom knitr kable

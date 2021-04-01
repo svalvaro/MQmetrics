@@ -69,9 +69,6 @@ by default is 0.001.}
 dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
-
-\item{report_tables}{If true, the function \code{ReportTables()} will be used and a
-new pdf will be generated with four information tables. By default = TRUE.}
 }
 \value{
 
@@ -81,7 +78,7 @@ Generates a report including all the plots of MQmetrics.
 }
 \examples{
 MQPathCombined <- system.file('extdata', package = 'MQmetrics')
-generateReport(MQPathCombined)
+#generateReport(MQPathCombined)
 
 
 }

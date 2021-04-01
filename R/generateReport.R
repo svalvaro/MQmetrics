@@ -6,9 +6,6 @@
 #' @param output_dir The directory where the results will be stored. By default
 #'  is the working directory.
 #'
-#' @param report_tables If true, the function \code{ReportTables()} will be used and a
-#'  new pdf will be generated with four information tables. By default = TRUE.
-#'
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #'
 #' @param long_names If TRUE, samples having long names will be considered, and
@@ -54,7 +51,7 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
-#' generateReport(MQPathCombined)
+#' #generateReport(MQPathCombined)
 #'
 #'
 generateReport = function(MQPathCombined,

@@ -28,5 +28,7 @@ Imports:
     RColorBrewer,
     ggridges,
     tidyr,
-    knitr
+    knitr,
+    scales,
+    grid
 VignetteBuilder: knitr

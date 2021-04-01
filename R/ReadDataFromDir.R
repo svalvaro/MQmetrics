@@ -27,6 +27,7 @@
 #' @importFrom scales zero_range
 #' @importFrom grid grobName grobTree
 #' @importFrom rlang abort
+#' @importFrom ggforce facet_wrap_paginate
 #'
 #'
 #' @examples

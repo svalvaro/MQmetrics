@@ -31,5 +31,6 @@ Imports:
     knitr,
     scales,
     grid,
-    rlang
+    rlang,
+    ggforce
 VignetteBuilder: knitr

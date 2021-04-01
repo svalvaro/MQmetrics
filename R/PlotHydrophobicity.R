@@ -63,37 +63,50 @@ PlotHydrophobicity <- function(peptides,
   df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
 
 
+  n_pages_needed <- ceiling(
+    (length(df)-1)/ 5
+  )
 
 
 
-a <-  df_expanded %>%
-          group_by(variable) %>%
-          ggplot(aes(x = GRAVY, fill = variable, group = variable))+
-          geom_histogram(color = 'black', binwidth = binwidth )+
-          facet_wrap(.~ variable, ncol =1)+
-          theme_bw()+
-          theme(legend.position = 'none')+
-          scale_fill_brewer(palette = palette)+
-          ggtitle('Peptide hydropathy distribution')+
-         ylab('Peptide Frequency')+
-         xlab('GRAVY score')
+  for (ii in seq_len(n_pages_needed)) {
 
+    if ((length(df)-1)<5) {
+      nrow = length(df)-1
 
-  if (show_median ==TRUE) {
+    } else{
+      nrow = 5
+    }
 
-    median_groups <-  df_expanded %>%
+    p <- df_expanded %>%
       group_by(variable) %>%
-      summarise(median(GRAVY))
+      ggplot(aes(x = GRAVY, fill = variable, group = variable))+
+      geom_histogram(color = 'black', binwidth = binwidth )+
+      facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+      theme_bw()+
+      theme(legend.position = 'none')+
+      scale_fill_brewer(palette = palette)+
+      ggtitle('Peptide hydropathy distribution')+
+      ylab('Peptide Frequency')+
+      xlab('GRAVY score')
 
-    a + geom_vline(data = median_groups,
-                   aes(xintercept = `median(GRAVY)`,group = variable),
-                   color = 'red',  linetype = 'dashed')
 
-  } else{
+    if (show_median ==TRUE) {
 
-    a
+      median_groups <-  df_expanded %>%
+        group_by(variable) %>%
+        summarise(median(GRAVY))
+
+      print(p + geom_vline(data = median_groups,
+                     aes(xintercept = `median(GRAVY)`,group = variable),
+                     color = 'red',  linetype = 'dashed'))
+
+    } else{
+
+      print(p)
+    }
+
   }
-
 
 
 

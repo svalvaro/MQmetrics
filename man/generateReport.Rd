@@ -71,14 +71,14 @@ dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
 }
 \value{
-
+A pdf document with all the results of MQmetrics package.
 }
 \description{
 Generates a report including all the plots of MQmetrics.
 }
 \examples{
-MQPathCombined <- system.file('extdata', package = 'MQmetrics')
-#generateReport(MQPathCombined)
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+generateReport(MQPathCombined)
 
 
 }

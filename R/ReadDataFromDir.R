@@ -26,11 +26,12 @@
 #' @importFrom knitr kable
 #' @importFrom scales zero_range
 #' @importFrom grid grobName grobTree
+#' @importFrom rlang abort
 #'
 #'
 #' @examples
 #'
-#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 #'
 #' files <- ReadDataFromDir(MQPathCombined)
 #'

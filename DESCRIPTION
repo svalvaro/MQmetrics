@@ -30,5 +30,6 @@ Imports:
     tidyr,
     knitr,
     scales,
-    grid
+    grid,
+    rlang
 VignetteBuilder: knitr

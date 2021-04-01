@@ -32,12 +32,13 @@ devtools::install_github("BioAlvaro/MQmetrics")
 
 ``` r
 library(MQmetrics)
+#> Warning: replacing previous import 'stats::filter' by 'dplyr::filter' when
+#> loading 'MQmetrics'
 ```
 
 ``` r
-MQPathCombined <- system.file('extdata', package = 'MQmetrics') #is the directory with the output of the MaxQuant analysis.
 
-# MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example1/combined/'
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
@@ -56,14 +57,14 @@ parameters <- files[["parameters.txt"]]
 
 ``` r
 ExperimentInformation(runningTimes, parameters) 
-[1] "The experiment started the day: 17/02/2021 at the time: 18:57:27."
-[1] "The whole experiment lasted: 05:48 (hours:minutes)."
+[1] "The experiment started the day: 17/12/2020 at the time: 01:18:03."
+[1] "The whole experiment lasted: 01:19 (hours:minutes)."
 [1] "The MaxQuant version used was: 1.6.12.0"
 [1] "The user was: marek.vrbacky"
-[1] "The machine name was: FGU013PC029"
+[1] "The machine name was: FGU045PC004"
 [1] "The protein FDR was: 0.01"
 [1] "The match between runs was: True"
-[1] "The fasta file used was: C:\\MaxQuant_Databases\\UP000000589_10090.fasta"
+[1] "The fasta file used was: C:\\MaxQuant_Databases\\UP000005640_9606.fasta"
 ```
 
 ``` r
@@ -157,9 +158,8 @@ PlotProteinCoverageAll(proteinGroups)
 
 ``` r
 PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
+#> [1] "The protein: Q8R0Y6 provided was not identified in any of the samples."
 ```
-
-<img src="man/figures/README-protein_degradation-1.png" width="100%" />
 
 ``` r
 Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'

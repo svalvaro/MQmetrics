@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 #' files <- ReadDataFromDir(MQPathCombined)
 #' peptides <- files[['peptides.txt']]
 #' proteinGroups <- files[['proteinGroups.txt']]

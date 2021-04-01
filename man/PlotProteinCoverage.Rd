@@ -35,7 +35,7 @@ Two plots for each sample, the end position vs the start position of
 Protein coverage and degradation.
 }
 \examples{
-MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 files <- ReadDataFromDir(MQPathCombined)
 peptides <- files[['peptides.txt']]
 proteinGroups <- files[['proteinGroups.txt']]

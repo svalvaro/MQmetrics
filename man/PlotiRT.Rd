@@ -22,7 +22,7 @@ A plot showing the iRT peptide in each sample vs the Retention time.
 Max intensities of the iRT peptides in each sample.
 }
 \examples{
-MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 files <- ReadDataFromDir(MQPathCombined)
 evidence <- files[['evidence.txt']]
 PlotiRT(evidence)

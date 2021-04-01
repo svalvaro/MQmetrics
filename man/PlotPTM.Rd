@@ -20,7 +20,7 @@ Two plots per sample
 Post Translational Modifications
 }
 \examples{
-MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 files <- ReadDataFromDir(MQPathCombined)
 modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
 PlotPTM(modificationSpecificPeptides)

@@ -30,7 +30,7 @@ identified from the recorded tandem mass spectra.
 Total number of peaks detected and sequenced
 }
 \examples{
-MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 files <- ReadDataFromDir(MQPathCombined)
 summary <- files[['summary.txt']]
 PlotPeptidesIdentified(summary)

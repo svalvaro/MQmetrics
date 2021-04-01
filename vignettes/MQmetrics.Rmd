@@ -20,9 +20,9 @@ library(MQmetrics)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-MQPathCombined <- system.file('extdata', package = 'MQmetrics') #is the directory with the output of the MaxQuant analysis.
 
-# MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example1/combined/'
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 

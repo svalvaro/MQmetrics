@@ -44,14 +44,15 @@
 #'
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.
 #'
-
 #'
-#' @return
+#' @return A pdf document with all the results of MQmetrics package.
+#'
+#'
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
-#' #generateReport(MQPathCombined)
+#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+#' generateReport(MQPathCombined)
 #'
 #'
 generateReport = function(MQPathCombined,

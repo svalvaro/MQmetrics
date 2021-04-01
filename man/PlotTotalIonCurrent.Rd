@@ -20,7 +20,7 @@ Returns a plot the Total Ion Current in each sample. The maximum value is also p
 Total Ion Current
 }
 \examples{
-MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 files <- ReadDataFromDir(MQPathCombined)
 msmsScans <- files[['msmsScans.txt']]
 PlotTotalIonCurrent(msmsScans)

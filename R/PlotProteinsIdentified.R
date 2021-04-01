@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinsIdentified(proteinGroups)

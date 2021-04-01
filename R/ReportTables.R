@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata', package = 'MQmetrics')
+#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 #' ReportTables(MQPathCombined)
 #'
 ReportTables <- function(MQPathCombined,

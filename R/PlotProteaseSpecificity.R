@@ -26,48 +26,66 @@ PlotProteaseSpecificity <- function(peptides,
   pep_melt1<- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
 
 
-  #create plot1 for missed cleavages
-  plot_cleavages <- ggplot(pep_melt1, aes(x = `Missed cleavages`  , y = value, fill = variable))+
-                          geom_bar(stat = 'identity', color = 'black', position = position_dodge(width = position_dodge_width),
-                                   show.legend = FALSE)+
-                          ggtitle(label = 'Missed enzymatic cleavages')+
-                          facet_wrap(.~ variable, ncol =1)+
-                          theme_bw()+
-                          xlab(label = 'Missed Cleavages')+
-                          scale_fill_brewer(palette = palette)
-
   #Create plot2 for length peptides
   pep_melt2 <-   pep_melt
   pep_melt2$value = 1
   pep_melt2 <- aggregate(value ~ variable + Length , data=pep_melt, sum)
 
- plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
-                     geom_bar(stat = 'identity', color = 'black', position = position_dodge(width = position_dodge_width),
-                              show.legend = FALSE)+
-                     ggtitle(label = 'Peptide Length')+
-                     xlab(label = 'Length')+
-                     facet_wrap(.~ variable, ncol =1)+
-                     theme_bw()+
-                     xlab(label = 'Peptide length')+
-                     scale_fill_brewer(palette = palette)
 
 
- plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
-   geom_bar(stat = 'identity', color = 'black',
-            show.legend = FALSE)+
-   ggtitle(label = 'Peptide Length')+
-   xlab(label = 'Length')+
-   facet_wrap(.~ variable, ncol =1)+
-   theme_bw()+
-   xlab(label = 'Peptide length')+
-   scale_fill_brewer(palette = palette)
+  n_samples <- length(peptides2)-2
 
- #Plot them together
- c <- plot_grid(plot_length, plot_cleavages)
- #Make a title
- title <- ggdraw()+ draw_label('Protease Specificity', size = 15)
+  n_pages_needed <- ceiling(
+    n_samples/ 5
+  )
 
- plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1.5))
+  for (ii in seq_len(n_pages_needed)) {
+
+    if(n_samples <5){
+      nrow = n_samples
+    } else{
+      nrow = 5
+    }
+
+    #create plot1 for missed cleavages
+    plot_cleavages <- ggplot(pep_melt1, aes(x = `Missed cleavages`  , y = value, fill = variable))+
+      geom_bar(stat = 'identity', color = 'black', position = position_dodge(width = position_dodge_width),
+               show.legend = FALSE)+
+      ggtitle(label = 'Missed enzymatic cleavages')+
+      facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+      theme_bw()+
+      xlab(label = 'Missed Cleavages')+
+      scale_fill_brewer(palette = palette)
+
+
+
+
+    plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
+      geom_bar(stat = 'identity', color = 'black', position = position_dodge(width = position_dodge_width),
+               show.legend = FALSE)+
+      ggtitle(label = 'Peptide Length')+
+      xlab(label = 'Length')+
+      facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+      theme_bw()+
+      xlab(label = 'Peptide length')+
+      scale_fill_brewer(palette = palette)
+
+
+
+
+    #Plot them together
+    c <- plot_grid(plot_length, plot_cleavages)
+    #Make a title
+    title <- ggdraw()+ draw_label('Protease Specificity', size = 15)
+
+    print(plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1.5)))
+
+  }
+
+
+
+
+
 
 }
 

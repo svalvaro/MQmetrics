@@ -15,7 +15,7 @@
 #' PlotProteaseSpecificity(peptides)
 #'
 PlotProteaseSpecificity <- function(peptides,
-                                    position_dodge_width = 0.2,
+                                    position_dodge_width = 1,
                                     palette = 'Set2'){
 
   `Missed cleavages` <- value <- variable <- Length  <- NULL

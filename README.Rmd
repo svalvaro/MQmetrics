@@ -41,7 +41,6 @@ library(MQmetrics)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.

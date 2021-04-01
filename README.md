@@ -32,12 +32,9 @@ devtools::install_github("BioAlvaro/MQmetrics")
 
 ``` r
 library(MQmetrics)
-#> Warning: replacing previous import 'stats::filter' by 'dplyr::filter' when
-#> loading 'MQmetrics'
 ```
 
 ``` r
-
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
@@ -105,19 +102,19 @@ PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 PlotCharge(evidence)
 ```
 
-<img src="man/figures/README-Charg-1.png" width="100%" />
+<img src="man/figures/README-Charg-1.png" width="100%" /><img src="man/figures/README-Charg-2.png" width="100%" />
 
 ``` r
 PlotProteaseSpecificity(peptides)
 ```
 
-<img src="man/figures/README-missed_cleavages-1.png" width="100%" />
+<img src="man/figures/README-missed_cleavages-1.png" width="100%" /><img src="man/figures/README-missed_cleavages-2.png" width="100%" />
 
 ``` r
 PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 ```
 
-<img src="man/figures/README-PlotHydrophobicity-1.png" width="100%" />
+<img src="man/figures/README-PlotHydrophobicity-1.png" width="100%" /><img src="man/figures/README-PlotHydrophobicity-2.png" width="100%" />
 
 ``` r
 PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
@@ -182,16 +179,16 @@ PlotiRTScore(evidence_irt)
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
 ```
 
-<img src="man/figures/README-TotalIonCurrent-1.png" width="100%" />
+<img src="man/figures/README-TotalIonCurrent-1.png" width="100%" /><img src="man/figures/README-TotalIonCurrent-2.png" width="100%" />
 
 ``` r
 PlotAcquisitionCycle(msScans)
 ```
 
-<img src="man/figures/README-PlotAcquisition-1.png" width="100%" />
+<img src="man/figures/README-PlotAcquisition-1.png" width="100%" /><img src="man/figures/README-PlotAcquisition-2.png" width="100%" />
 
 ``` r
 PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
 ```
 
-<img src="man/figures/README-PTM-1.png" width="100%" />
+<img src="man/figures/README-PTM-1.png" width="100%" /><img src="man/figures/README-PTM-2.png" width="100%" />

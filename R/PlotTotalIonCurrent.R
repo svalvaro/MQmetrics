@@ -36,7 +36,7 @@ PlotTotalIonCurrent <- function(msmsScans,
 
     p <- msmsScans %>%   ggplot(aes(`Retention time`,`Total ion current`))+
       geom_line(aes(colour=Experiment))+
-      facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii)+
+      facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii, scales = 'fixed')+
       ggtitle('Total Ion Current')+
       theme_bw()+
       theme(legend.position = 'none')+

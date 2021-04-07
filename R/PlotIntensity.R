@@ -130,10 +130,15 @@ PlotIntensity <- function(proteinGroups,
   if(split_violin_intensity == TRUE){
     split_intensities <-  proteinGroups %>%  select(id, contains('Intensity '))
 
-    #Error if no LFQ was found
+    #Error if no LFQ was found, plot intensities
     if(length(split_intensities %>% select(contains('LFQ')))== 0){
       print('LFQ intensities not found, split_violin_plot can not be created')
-      print('Change the parameter split_violin_intensity to FALSE')
+      print('Changing intensity automatically to "Intensity"')
+
+      intensities <-  proteinGroups %>%  select(id, contains('Intensity ')& -contains('LFQ'))
+      title <- 'Intensity'
+
+
     } else{
 
       #create a table with the columns : id, sample, group, value

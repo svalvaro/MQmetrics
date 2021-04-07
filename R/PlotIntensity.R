@@ -125,7 +125,16 @@ PlotIntensity <- function(proteinGroups,
 
 
 
+
+
   intensities <- proteinGroups %>%  select(id, contains('Intensity '))
+
+
+
+  colourCount = length(colnames(intensities %>%  select(-contains(c("id",'LFQ')))))
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
 
   if(split_violin_intensity == TRUE){
 
@@ -256,7 +265,7 @@ PlotIntensity <- function(proteinGroups,
                 ylab(ylab)+
                 theme_bw()+
                 theme(legend.position = 'none')+
-                scale_color_brewer(palette = palette)
+                scale_color_manual(values = getPalette(colourCount))
 
 
 

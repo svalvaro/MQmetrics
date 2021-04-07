@@ -32,7 +32,8 @@ PlotPeptidesIdentified <- function(summary,
 
   b <- ggplot(summary, aes(x=Experiment , y = `Peptide Sequences Identified`,
                             fill = Experiment))+
-          geom_bar(stat = 'identity', color='black', fill = getPalette(colourCount))+
+          geom_bar(stat = 'identity', color='black')+
+          scale_fill_manual(values =  getPalette(colourCount))+
           theme_bw(base_size = 12)+
           ggtitle('Peptides Sequences Identified')+
           theme(legend.position = 'none')

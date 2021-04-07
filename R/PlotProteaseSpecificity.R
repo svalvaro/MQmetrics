@@ -39,6 +39,10 @@ PlotProteaseSpecificity <- function(peptides,
     n_samples/ 5
   )
 
+  colourCount = n_samples
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
   for (ii in seq_len(n_pages_needed)) {
 
     if(n_samples <5){
@@ -55,7 +59,7 @@ PlotProteaseSpecificity <- function(peptides,
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
       theme_bw()+
       xlab(label = 'Missed Cleavages')+
-      scale_fill_brewer(palette = palette)
+      scale_fill_manual(values = getPalette(colourCount))
 
 
 
@@ -68,7 +72,7 @@ PlotProteaseSpecificity <- function(peptides,
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
       theme_bw()+
       xlab(label = 'Peptide length')+
-      scale_fill_brewer(palette = palette)
+      scale_fill_manual(values = getPalette(colourCount))
 
 
 

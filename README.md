@@ -71,7 +71,7 @@ PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names =
 <img src="man/figures/README-PlotProteins-1.png" width="100%" />
 
 ``` r
-PlotPeptidesIdentified(summary, long_names = FALSE, sep_names = '_')
+PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PeptidesIdentified-1.png" width="100%" />
@@ -119,14 +119,14 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 <img src="man/figures/README-IdentificationType-1.png" width="100%" />
 
 ``` r
-PlotIntensity(proteinGroups, split_violin_intensity = FALSE, intensity_type = 'Intensity', 
-              log_base = 2, long_names = FALSE, sep_names = '_')
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
+              log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
 
 ``` r
-PlotPCA(proteinGroups, intensity_type = 'Intensity')
+PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
 ```
 
 <img src="man/figures/README-PlotPCA-1.png" width="100%" />

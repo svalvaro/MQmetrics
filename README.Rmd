@@ -70,7 +70,7 @@ PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names =
 
 
 ```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
-PlotPeptidesIdentified(summary, long_names = FALSE, sep_names = '_')
+PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 ```
 
 
@@ -109,12 +109,12 @@ PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_
 
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups, split_violin_intensity = FALSE, intensity_type = 'Intensity', 
-              log_base = 2, long_names = FALSE, sep_names = '_')
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
+              log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 
 ```{r PlotPCA, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotPCA(proteinGroups, intensity_type = 'Intensity')
+PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
 ```
 
 

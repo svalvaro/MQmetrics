@@ -14,7 +14,8 @@
 #' PlotPCA(proteinGroups)
 #'
 PlotPCA <- function(proteinGroups,
-                    intensity_type = 'Intensity'){
+                    intensity_type = 'Intensity',
+                    palette = 'Set2'){
 
   PC1 <- PC2 <- Modifications <- variable <- value <- Freq <- NULL
 
@@ -52,12 +53,20 @@ PlotPCA <- function(proteinGroups,
   df_out$sample <- rownames(df_out)
   rownames(df_out) <- NULL
 
+
+  colourCount = length(rownames(df_out))
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
+
+
   ggplot(df_out, aes(PC1, PC2, color = sample))+
     geom_point(size = 3)+
     ggtitle(title)+
     theme_bw()+
     theme(legend.position = 'bottom')+
-    guides(color=guide_legend(ncol=2))
+    guides(color=guide_legend(ncol=2))+
+    scale_color_manual(values = getPalette(colourCount))
 
 
 }

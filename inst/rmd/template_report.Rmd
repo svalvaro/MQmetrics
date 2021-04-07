@@ -154,7 +154,9 @@ PlotIntensity(proteinGroups,
 \newpage
 
 ```{r PlotPCA}
-PlotPCA(proteinGroups, intensity_type = params$intensity_type)
+PlotPCA(proteinGroups,
+        intensity_type = params$intensity_type,
+        palette = params$palette)
 ```
 
 \newpage

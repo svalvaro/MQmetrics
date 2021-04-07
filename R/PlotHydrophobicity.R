@@ -63,10 +63,16 @@ PlotHydrophobicity <- function(peptides,
   df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
 
 
-  n_pages_needed <- ceiling(
-    (length(df)-1)/ 5
-  )
 
+
+
+  colourCount = length(df)-1
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
+  n_pages_needed <- ceiling(
+    (colourCount)/ 5
+  )
 
 
   for (ii in seq_len(n_pages_needed)) {
@@ -85,7 +91,7 @@ PlotHydrophobicity <- function(peptides,
       facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
       theme_bw()+
       theme(legend.position = 'none')+
-      scale_fill_brewer(palette = palette)+
+      scale_fill_manual(values = getPalette(colourCount))+
       ggtitle('Peptide hydropathy distribution')+
       ylab('Peptide Frequency')+
       xlab('GRAVY score')

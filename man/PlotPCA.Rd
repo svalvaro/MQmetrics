@@ -4,7 +4,7 @@
 \alias{PlotPCA}
 \title{Principal Component Analysis of the Intensity values.}
 \usage{
-PlotPCA(proteinGroups, intensity_type = "Intensity")
+PlotPCA(proteinGroups, intensity_type = "Intensity", palette = "Set2")
 }
 \arguments{
 \item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}

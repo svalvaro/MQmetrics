@@ -125,24 +125,19 @@ PlotIntensity <- function(proteinGroups,
 
 
 
-
+  intensities <- proteinGroups %>%  select(id, contains('Intensity '))
 
   if(split_violin_intensity == TRUE){
-    split_intensities <-  proteinGroups %>%  select(id, contains('Intensity '))
 
     #Error if no LFQ was found, plot intensities
-    if(length(split_intensities %>% select(contains('LFQ')))== 0){
+    if(length(intensities %>% select(contains('LFQ')))== 0){
       print('LFQ intensities not found, split_violin_plot can not be created')
-      print('Changing intensity automatically to "Intensity"')
-
-      intensities <-  proteinGroups %>%  select(id, contains('Intensity ')& -contains('LFQ'))
-      title <- 'Intensity'
-
+      print('Changing intensity automatically to Intensity')
 
     } else{
 
       #create a table with the columns : id, sample, group, value
-      df <-split_intensities %>%
+      df <-intensities %>%
              pivot_longer(-id,
                      names_to = c("intensity_type", "sample" ),
                      names_prefix = 'LFQ intensity',
@@ -182,19 +177,24 @@ PlotIntensity <- function(proteinGroups,
       a
     }
     }
-  #if split_violin_plot == FALSE, Intensity or LFQ intensity will be plotted.
-  } else{
+
+    #if split_violin_plot == FALSE, Intensity or LFQ intensity will be plotted.
+    #or if split_violin_intensity is true but there are no LFQ intensities to divide the plot.
+
+  } else if  (split_violin_intensity == FALSE ||     (split_violin_intensity == TRUE &
+                                                      length(intensities %>% select(contains('LFQ')))== 0)) {
 
 
       if (intensity_type == 'Intensity') {
-        intensities <-  proteinGroups %>%  select(id, contains('Intensity ')& -contains('LFQ'))
+        intensities <-  intensities %>%  select(-contains('LFQ'))
         title <- 'Intensity'
-
+        colnames(intensities)[-1] <- gsub('Intensity','',colnames(intensities)[-1])
       }
 
       if (intensity_type == 'LFQ'){
-        intensities <-  proteinGroups %>%  select(id, contains('LFQ intensity '))
+        intensities <-  intensities %>%  select(id, contains('LFQ intensity '))
         title <- 'LFQ intensity'
+        colnames(intensities)[-1] <- gsub('LFQ intensity','',colnames(intensities)[-1])
 
         #Error if LFQ Intensity not found.
 
@@ -251,7 +251,7 @@ PlotIntensity <- function(proteinGroups,
       b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
                 geom_violin(fill = 'gray80', size = 1, alpha = .5)+
                 geom_boxplot(width=0.2, outlier.shape = NA)+
-                ggtitle('Protein Intensity')+
+                ggtitle(title)+
                 xlab('Experiment')+
                 ylab(ylab)+
                 theme_bw()+

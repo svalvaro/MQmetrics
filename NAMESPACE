@@ -3,6 +3,7 @@
 export(ExperimentInformation)
 export(PlotAcquisitionCycle)
 export(PlotAllDynamicRange)
+export(PlotAndromedaScore)
 export(PlotCharge)
 export(PlotCombinedDynamicRange)
 export(PlotHydrophobicity)

@@ -113,6 +113,12 @@ PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0
 <img src="man/figures/README-PlotHydrophobicity-1.png" width="100%" /><img src="man/figures/README-PlotHydrophobicity-2.png" width="100%" />
 
 ``` r
+PlotAndromedaScore(peptides)
+```
+
+<img src="man/figures/README-AndromedaScore-1.png" width="100%" /><img src="man/figures/README-AndromedaScore-2.png" width="100%" />
+
+``` r
 PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
 ```
 
@@ -155,21 +161,22 @@ PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10,
 ```
 
 ``` r
-Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
+# Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
+# 
+# files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
+# 
+# evidence_irt <- files_irt[['evidence.txt']]
+# PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
 
-files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
 
-evidence_irt <- files_irt[['evidence.txt']]
-PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
+PlotiRT(evidence)
+#> [1] "No iRT peptides found in the MaxQuant output."
 ```
-
-<img src="man/figures/README-irt_peps1-1.png" width="100%" />
 
 ``` r
-PlotiRTScore(evidence_irt)
+PlotiRTScore(evidence)
+#> [1] "No iRT peptides found in the MaxQuant output."
 ```
-
-<img src="man/figures/README-irt_peps2-1.png" width="100%" />
 
 ``` r
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)

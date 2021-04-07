@@ -31,6 +31,8 @@ PlotProteaseSpecificity <- function(peptides,
   pep_melt2$value = 1
   pep_melt2 <- aggregate(value ~ variable + Length , data=pep_melt, sum)
 
+  pep_melt2$variable <- gsub('Experiment', '', pep_melt2$variable)
+
 
 
   n_samples <- length(peptides2)-2

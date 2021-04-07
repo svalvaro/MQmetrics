@@ -128,6 +128,13 @@ PlotHydrophobicity(peptides,
 ```
 
 \newpage
+```{r PlotAndromedaScore}
+PlotAndromedaScore(peptides, 
+                   palette = params$palette)
+```
+
+
+\newpage
 ```{r IdentificationType}
 if(parameters$Value[27] == "True"){
   PlotIdentificationType(peptides, proteinGroups,

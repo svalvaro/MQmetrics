@@ -24,9 +24,11 @@ PlotAllDynamicRange <- function(proteinGroups,
 
 
 
-  rank_groups<-  proteinGroups %>%  select(contains("Intensity ")) %>% select(-starts_with('LFQ'))
+  rank_groups <-  proteinGroups %>%  select(contains("Intensity ")) %>% select(-starts_with('LFQ'))
 
   rank_groups <- log10(rank_groups)
+
+  colnames(rank_groups) <- gsub('Intensity', '', colnames(rank_groups))
 
   pl <- vector("list", length = ncol(rank_groups))
 

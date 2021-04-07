@@ -59,7 +59,6 @@ PlotPCA <- function(proteinGroups,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
 
-
   ggplot(df_out, aes(PC1, PC2, color = sample))+
     geom_point(size = 3)+
     ggtitle(title)+

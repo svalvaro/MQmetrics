@@ -60,6 +60,15 @@ PlotProteinCoverage <- function(peptides,
 
   pep_melt <- pep_melt[!pep_melt$value==0,]
 
+  pep_melt$variable <- gsub('Intensity', '', pep_melt$variable)
+
+
+
+  colourCount = length(unique(pep_melt$variable))
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
+
 
   a <- ggplot(pep_melt)+
             geom_segment(aes(x = `Start position`,
@@ -72,7 +81,7 @@ PlotProteinCoverage <- function(peptides,
             facet_wrap(.~ variable, ncol =1)+
             ylab('End position')+
             theme(legend.position = 'none')+
-            scale_colour_brewer(palette = palette)
+            scale_color_manual(values = getPalette(colourCount))
 
 
 
@@ -90,7 +99,7 @@ PlotProteinCoverage <- function(peptides,
               facet_wrap(.~ variable, ncol =1)+
               #scale_x_continuous(limits = c(1, prot_length))+
               theme(legend.position = 'none')+
-              scale_colour_brewer(palette = palette)
+      scale_color_manual(values = getPalette(colourCount))
 
   } else{
     b <- ggplot(pep_melt )+
@@ -104,7 +113,7 @@ PlotProteinCoverage <- function(peptides,
               facet_wrap(.~ variable, ncol =1)+
               #scale_x_continuous(limits = c(1, prot_length))+
               theme(legend.position = 'none')+
-              scale_colour_brewer(palette = palette)
+      scale_color_manual(values = getPalette(colourCount))
   }
 
 

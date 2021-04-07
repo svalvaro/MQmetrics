@@ -27,6 +27,10 @@ PlotAcquisitionCycle <- function(msScans,
     n_samples/ 5
   )
 
+  colourCount = n_samples
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
   for (ii in seq_len(n_pages_needed)) {
     if(n_samples <5){
       nrow = n_samples
@@ -39,14 +43,14 @@ PlotAcquisitionCycle <- function(msScans,
       facet_wrap_paginate(.~ Experiment, ncol = 1, nrow = nrow, page = ii)+
       ggtitle('Cycle time')+
       theme_bw()+
-      scale_colour_brewer(palette = palette)
+      scale_color_manual(values = getPalette(colourCount))
 
     b <- ggplot(data_table, aes(x= `Retention time`, y = `MS/MS count`,colour = Experiment))+
       geom_point(alpha = 0.5, show.legend = FALSE)+
       facet_wrap_paginate(.~ Experiment, ncol = 1, nrow = nrow, page = ii)+
       ggtitle('MS/MS count')+
       theme_bw()+
-      scale_colour_brewer(palette = palette)
+      scale_color_manual(values = getPalette(colourCount))
 
 
     #Plot them together
@@ -59,11 +63,5 @@ PlotAcquisitionCycle <- function(msScans,
     print(d)
 
   }
-
-
-
-
-
-
 
   }

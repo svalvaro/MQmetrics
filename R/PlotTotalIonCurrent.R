@@ -26,6 +26,11 @@ PlotTotalIonCurrent <- function(msmsScans,
     n_samples / 5
   )
 
+  colourCount = n_samples
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
+
   for(ii in seq_len(n_pages_needed)){
     if(n_samples < 5){
       nrow = n_samples
@@ -40,7 +45,7 @@ PlotTotalIonCurrent <- function(msmsScans,
       ggtitle('Total Ion Current')+
       theme_bw()+
       theme(legend.position = 'none')+
-      scale_colour_brewer(palette = palette)
+      scale_colour_manual(values = getPalette(colourCount))
 
 
     if (show_max_value==TRUE) {

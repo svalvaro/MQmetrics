@@ -69,6 +69,11 @@ PlotPTM <- function(modificationSpecificPeptides,
     n_samples/ 5
   )
 
+
+  colourCount = n_samples
+
+  getPalette = colorRampPalette(brewer.pal(8, palette))
+
   for (ii  in seq_len(n_pages_needed)) {
 
     if(n_samples < 5){
@@ -88,7 +93,7 @@ PlotPTM <- function(modificationSpecificPeptides,
             axis.text.x = element_blank(),
             axis.ticks.x = element_blank())+
       guides(fill = guide_legend(ncol=3))+
-      scale_fill_brewer(palette =  palette)
+      scale_fill_manual(values = getPalette(colourCount))
 
 
 
@@ -102,7 +107,7 @@ PlotPTM <- function(modificationSpecificPeptides,
             axis.title.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.x = element_blank())+
-      scale_color_brewer(palette = palette)
+      scale_colour_manual(values = getPalette(colourCount))
 
 
 

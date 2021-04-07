@@ -25,7 +25,11 @@ PlotMsMs <- function(summary,
 
   Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- value <- variable <- NULL
 
+
   a <- summary %>% select(c(Experiment, `MS/MS Submitted`, `MS/MS Identified`))
+
+
+
   a_melt <- melt(a, id.vars = 'Experiment' )
 
 
@@ -36,6 +40,8 @@ PlotMsMs <- function(summary,
         ggtitle('MS/MS Submitted and Identified')+
         scale_fill_brewer(palette = palette)+
         theme(legend.position = 'bottom')
+
+
 
 
 

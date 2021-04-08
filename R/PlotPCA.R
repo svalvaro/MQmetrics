@@ -42,7 +42,7 @@ PlotPCA <- function(proteinGroups,
 
   }
 
-  if (length(intensities<2)) {
+  if (length(intensities)<2) {
     cat('Only one sample was analyzed, PCA can not be applied')
 
   } else{

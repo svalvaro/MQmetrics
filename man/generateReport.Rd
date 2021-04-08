@@ -19,9 +19,10 @@ generateReport(
   show_calibrated_rt = FALSE,
   tolerance = 0.001,
   show_max_value = TRUE,
-  peptides_modified = 5,
+  peptides_modified = 1,
   show_median = TRUE,
-  binwidth = 0.1
+  binwidth = 0.1,
+  plot_unmodified_peptides = FALSE
 )
 }
 \arguments{

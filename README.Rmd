@@ -154,7 +154,7 @@ PlotAcquisitionCycle(msScans)
 ```
 
 ```{r PTM, fig.height=8, fig.width=7.2}
-PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
+PlotPTM(modificationSpecificPeptides, peptides_modified = 1, plot_unmodified_peptides = FALSE)
 ```
 
 

@@ -14,7 +14,9 @@
 #' PlotPTM(modificationSpecificPeptides)
 #'
 PlotPTM <- function(modificationSpecificPeptides,
-                    peptides_modified = 5,
+                    peptides_modified = 1,
+                    plot_unmodified_peptides = FALSE,
+                    log_base = 2,
                     palette = 'Set2'){
 
   Modifications <- variable <- value <- Freq <- NULL
@@ -24,6 +26,7 @@ PlotPTM <- function(modificationSpecificPeptides,
                                           'Intensity ', 'Experiment '))) %>%
                           select(-contains(c('calibrated', 'Unique (Proteins)')))
 
+
   mod_melted <- modification_table %>%
                     select(-contains('Intensity'))
 
@@ -31,25 +34,37 @@ PlotPTM <- function(modificationSpecificPeptides,
 
   mod_melted[is.na(mod_melted)] <- 0
 
-  mod_melted <- mod_melted[(mod_melted$value > peptides_modified),]
-
+  #Min peptides modified per Protein, change it to per group.
+  #mod_melted <- mod_melted[(mod_melted$value > peptides_modified),]
 
   mod_frequencies <- mod_melted %>%
                         group_by(Modifications, variable) %>%
                         summarise(Freq= sum(value))
 
 
+  mod_join <- mod_frequencies %>% separate_rows(Modifications, sep = ';') %>%
+            group_by(Modifications, variable) %>% summarise(Freq = sum(Freq))
+
+  #Remove the Experiment patter from the variable
+
+  mod_join$variable <- gsub('Experiment', '', mod_join$variable)
+
+  mod_join <- mod_join[mod_join$Freq >=  peptides_modified,]
 
 
-  modifications_unique <- unique(mod_frequencies$Modifications)#This are the names
-  #of the modifications that will be used for the other plot.
+  if (plot_unmodified_peptides == FALSE) {
+    mod_join <- mod_join[!mod_join$Modifications == 'Unmodified',]
+
+  } else{
+    mod_join <- mod_join
+  }
 
 
-  # Freq vs intensity
+  ###############For Intensity plot
 
-  # mod_intensities <- melt(modification_table, id.vars = c('Modifications',
-  #                         'Proteins',
-  #                         select(colnames(modification_table), contains('Experiment'))))
+
+  modifications_unique <- unique(mod_join$Modifications)#This are the names
+
   mod_intensities <- modification_table %>%
     select(-contains('Experiment'))
 
@@ -58,8 +73,24 @@ PlotPTM <- function(modificationSpecificPeptides,
 
   mod_intensities <- mod_intensities[mod_intensities$value !=0,]
 
-
+  #Select only the same modifications as in the Frequency
   mod_intensities2 <- mod_intensities[mod_intensities$Modifications %in% modifications_unique,]
+
+
+  mod_intensities2$variable <- gsub('Intensity', '', mod_intensities2$variable)
+
+
+  if (log_base == 2) {
+
+    mod_intensities2$value <- log2(mod_intensities2$value)
+    ylab = expression('Log'[2]*'(Intensity)')
+
+  } else if (log_base == 10) {
+
+    mod_intensities2$value <- log10(mod_intensities2$value)
+    ylab = expression('Log'[10]*'(Intensity)')
+
+  }
 
   #samples for paginate
 
@@ -83,31 +114,33 @@ PlotPTM <- function(modificationSpecificPeptides,
     }
 
 
-    a <- ggplot(mod_frequencies, aes(x = Modifications, y = Freq, fill = Modifications))+
-      geom_bar(stat = 'identity')+
-      facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
-      theme_bw()+
-      ylab('Frequency')+
-      theme(legend.position = 'bottom',
-            axis.title.x = element_blank(),
-            axis.text.x = element_blank(),
-            axis.ticks.x = element_blank())+
-      guides(fill = guide_legend(ncol=3))+
-      scale_fill_manual(values = getPalette(nrow(mod_frequencies)))
+    a <- ggplot(mod_join, aes(x = Modifications, y = Freq, fill = Modifications))+
+            geom_bar(stat = 'identity')+
+            facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+            theme_bw()+
+            ggtitle('Frequency of modified peptides')+
+            ylab('Frequency')+
+            theme(legend.position = 'bottom',
+                  axis.title.x = element_blank(),
+                  axis.text.x = element_blank(),
+                  axis.ticks.x = element_blank())+
+                  guides(fill = guide_legend(ncol=3))+
+                  scale_fill_manual(values = getPalette(nrow(mod_frequencies)))
 
 
 
-    b <- ggplot(mod_intensities2, aes(x = Modifications, y = log10(value), color = Modifications))+
-      geom_violin(fill = 'gray80', size = 1, alpha = .5)+
-      geom_boxplot(width=0.2)+
-      facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
-      theme_bw()+
-      ylab(expression('Log'[10]*'Intensity'))+
-      theme(legend.position = 'bottom',
-            axis.title.x = element_blank(),
-            axis.text.x = element_blank(),
-            axis.ticks.x = element_blank())+
-      scale_colour_manual(values = getPalette(nrow(mod_frequencies)))
+    b <- ggplot(mod_intensities2, aes(x = Modifications, y = value, color = Modifications))+
+              geom_violin(fill = 'gray80', size = 1, alpha = .5)+
+              geom_boxplot(width=0.2)+
+              facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+              theme_bw()+
+              ggtitle('Intensities of modified peptides')+
+              ylab(ylab)+
+              theme(legend.position = 'bottom',
+                    axis.title.x = element_blank(),
+                    axis.text.x = element_blank(),
+                    axis.ticks.x = element_blank())+
+              scale_colour_manual(values = getPalette(nrow(mod_frequencies)))
 
 
 
@@ -116,14 +149,13 @@ PlotPTM <- function(modificationSpecificPeptides,
                     ncol = 2, rel_heights=c(0.1, 1))
     title <- ggdraw()+draw_label('Post-Translational Modifications')
 
-    prow <-  plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
+    prow <-  plot_grid(title, c, ncol = 1, rel_heights=c(0.1, 1))
 
     legend <- get_legend(a)
 
-    d <- plot_grid(prow, legend, ncol = 1, rel_heights=c(peptides_modified, 1))
+    d <- plot_grid(prow, legend, ncol = 1, rel_heights=c(9, 1))
 
     print(d)
-
 
   }
 

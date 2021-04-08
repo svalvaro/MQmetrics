@@ -144,8 +144,9 @@ PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LF
 
 ``` r
 PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
-#> Only one sample was analyzed, PCA can not be applied
 ```
+
+<img src="man/figures/README-PlotPCA-1.png" width="100%" />
 
 ``` r
 PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
@@ -195,7 +196,7 @@ PlotAcquisitionCycle(msScans)
 <img src="man/figures/README-PlotAcquisition-1.png" width="100%" /><img src="man/figures/README-PlotAcquisition-2.png" width="100%" />
 
 ``` r
-PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
+PlotPTM(modificationSpecificPeptides, peptides_modified = 1, plot_unmodified_peptides = FALSE)
 ```
 
 <img src="man/figures/README-PTM-1.png" width="100%" /><img src="man/figures/README-PTM-2.png" width="100%" />

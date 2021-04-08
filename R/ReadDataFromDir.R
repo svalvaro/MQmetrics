@@ -21,7 +21,7 @@
 #' @importFrom stringr str_count str_wrap
 #' @importFrom chron times
 #' @importFrom cowplot plot_grid ggdraw draw_label
-#' @importFrom tidyr pivot_longer starts_with
+#' @importFrom tidyr pivot_longer starts_with separate_rows
 #' @importFrom knitr kable
 #' @importFrom scales zero_range
 #' @importFrom grid grobName grobTree
@@ -35,7 +35,6 @@
 #' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 #'
 #' files <- ReadDataFromDir(MQPathCombined)
-
 #'
 ReadDataFromDir <- function(MQPathCombined,
                             remove_contaminants = TRUE){

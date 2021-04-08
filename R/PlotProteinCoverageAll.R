@@ -41,12 +41,8 @@ PlotProteinCoverageAll <- function(proteinGroups){
     geom_col(col = 'white')+
     scale_fill_grey(start = 0.8, end = 0.2)+
     theme_bw()+
+    ggtitle('Protein Coverage of all samples')+
     labs(fill = 'samples',
          x = NULL)
-
-
-
-
-
 
 }

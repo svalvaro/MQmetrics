@@ -19,6 +19,7 @@ params:
   peptides_modified: ''
   show_median: ''
   binwidth: ''
+  plot_unmodified_peptides: ''
 ---
 
 ```{r setup, include=FALSE}
@@ -228,6 +229,8 @@ PlotAcquisitionCycle(msScans,
 ```{r PTM}
 PlotPTM(modificationSpecificPeptides, 
         peptides_modified = params$peptides_modified,
+        log_base = params$log_base,
+        plot_unmodified_peptides = params$plot_unmodified_peptides,
         palette = params$palette)
 ```
 

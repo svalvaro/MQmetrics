@@ -4,7 +4,13 @@
 \alias{PlotPTM}
 \title{Post Translational Modifications}
 \usage{
-PlotPTM(modificationSpecificPeptides, peptides_modified = 5, palette = "Set2")
+PlotPTM(
+  modificationSpecificPeptides,
+  peptides_modified = 1,
+  plot_unmodified_peptides = FALSE,
+  log_base = 2,
+  palette = "Set2"
+)
 }
 \arguments{
 \item{modificationSpecificPeptides}{modificationSpecificPeptides table from MaxQuant ouput.}

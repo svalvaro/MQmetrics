@@ -69,9 +69,10 @@ generateReport = function(MQPathCombined,
                           show_calibrated_rt = FALSE,
                           tolerance = 0.001,
                           show_max_value = TRUE,
-                          peptides_modified = 5,
+                          peptides_modified = 1,
                           show_median = TRUE,
-                          binwidth = 0.1){
+                          binwidth = 0.1,
+                          plot_unmodified_peptides = FALSE){
 
 
 
@@ -97,7 +98,8 @@ generateReport = function(MQPathCombined,
                                   show_max_value = show_max_value,
                                   peptides_modified = peptides_modified,
                                   show_median = show_median,
-                                  binwidth = binwidth),
+                                  binwidth = binwidth,
+                                  plot_unmodified_peptides = plot_unmodified_peptides),
                     output_file = "MQmetrics_report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)

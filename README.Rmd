@@ -99,8 +99,6 @@ PlotAndromedaScore(peptides)
 ```
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-
-
 if(parameters$Value[27] == "True"){
   PlotIdentificationType(peptides, 
                          proteinGroups,
@@ -111,7 +109,6 @@ if(parameters$Value[27] == "True"){
   cat('Match Between Runs was not used during the MaxQuant analysis.
 No Identification Type to show.')
 }
-
 ```
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}

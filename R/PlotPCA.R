@@ -42,30 +42,39 @@ PlotPCA <- function(proteinGroups,
 
   }
 
-  intensities_t <- t(intensities)
-  #Remove columns with 0 in all the column
-  intensities_t <- intensities_t[, colSums(intensities_t !=0)>0]
+  if (length(intensities<2)) {
+    cat('Only one sample was analyzed, PCA can not be applied')
 
-  pca <- stats::prcomp(intensities_t, scale = TRUE)
+  } else{
 
-  df_out <- as.data.frame(pca$x)
+    intensities_t <- t(intensities)
+    #Remove columns with 0 in all the column
+    intensities_t <- intensities_t[, colSums(intensities_t !=0)>0]
 
-  df_out$sample <- rownames(df_out)
-  rownames(df_out) <- NULL
+    pca <- stats::prcomp(intensities_t, scale = TRUE)
+
+    df_out <- as.data.frame(pca$x)
+
+    df_out$sample <- rownames(df_out)
+    rownames(df_out) <- NULL
 
 
-  colourCount = length(rownames(df_out))
+    colourCount = length(rownames(df_out))
 
-  getPalette = colorRampPalette(brewer.pal(8, palette))
+    getPalette = colorRampPalette(brewer.pal(8, palette))
 
 
-  ggplot(df_out, aes(PC1, PC2, color = sample))+
-    geom_point(size = 3)+
-    ggtitle(title)+
-    theme_bw()+
-    theme(legend.position = 'bottom')+
-    guides(color=guide_legend(ncol=2))+
-    scale_color_manual(values = getPalette(colourCount))
+    ggplot(df_out, aes(PC1, PC2, color = sample))+
+      geom_point(size = 3)+
+      ggtitle(title)+
+      theme_bw()+
+      theme(legend.position = 'bottom')+
+      guides(color=guide_legend(ncol=2))+
+      scale_color_manual(values = getPalette(colourCount))
+
+
+  }
+
 
 
 }

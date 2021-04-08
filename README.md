@@ -119,8 +119,6 @@ PlotAndromedaScore(peptides)
 <img src="man/figures/README-AndromedaScore-1.png" width="100%" /><img src="man/figures/README-AndromedaScore-2.png" width="100%" />
 
 ``` r
-
-
 if(parameters$Value[27] == "True"){
   PlotIdentificationType(peptides, 
                          proteinGroups,
@@ -146,9 +144,8 @@ PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LF
 
 ``` r
 PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
+#> Only one sample was analyzed, PCA can not be applied
 ```
-
-<img src="man/figures/README-PlotPCA-1.png" width="100%" />
 
 ``` r
 PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)

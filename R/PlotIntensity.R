@@ -31,7 +31,6 @@ PlotIntensity <- function(proteinGroups,
                           sep_names = NULL,
                           palette = 'Set2'){
 
-
   id <- variable <- value <- x <- `violinwidth` <- xmin <- xmax <- xminv <- xmaxv <- y <- NULL
 
   ggname <- function(prefix, grob) {
@@ -85,7 +84,6 @@ PlotIntensity <- function(proteinGroups,
     }
   }
 
-
   GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin,
                              draw_group = function(self, data, ..., draw_quantiles = NULL) {
                                data <- transform(data, xminv = x - violinwidth * (x - xmin), xmaxv = x + violinwidth * (xmax - x))
@@ -117,14 +115,7 @@ PlotIntensity <- function(proteinGroups,
           params = list(trim = trim, scale = scale, draw_quantiles = draw_quantiles, na.rm = na.rm, ...))
   }
 
-
-
-
-
-
   intensities <- proteinGroups %>%  select(id, contains('Intensity '))
-
-
 
   colourCount = length(colnames(intensities %>%  select(-contains(c("id",'LFQ')))))
 
@@ -139,7 +130,6 @@ PlotIntensity <- function(proteinGroups,
       #Print a warning that split violin will not be created and the intensities will be plotted.
       print('LFQ intensities not found, split_violin_plot can not be created')
       print('Changing intensity automatically to Intensity')
-
 
         intensities <-  intensities %>%  select(-contains('LFQ'))
         title <- 'Intensity'
@@ -157,9 +147,6 @@ PlotIntensity <- function(proteinGroups,
         melted_intensities <- melt(log10(intensities), id.vars = 'id', measure.vars = intensities_measure)
         ylab <- expression('Log'[10]*'(Intensity)')
       }
-
-
-
       b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
                 geom_violin(fill = 'gray80', size = 1, alpha = .5)+
                 geom_boxplot(width=0.2, outlier.shape = NA)+
@@ -177,7 +164,6 @@ PlotIntensity <- function(proteinGroups,
       }
     #Create the split_violin_plots
     } else{
-
           #create a table with the columns : id, sample, group, value
           df <-intensities %>%
                  pivot_longer(-id,
@@ -218,7 +204,6 @@ PlotIntensity <- function(proteinGroups,
           a
         }
     }
-
   #if split_violin_plot == FALSE, Intensity or LFQ intensity will be plotted.
 
   } else if  (split_violin_intensity == FALSE) {

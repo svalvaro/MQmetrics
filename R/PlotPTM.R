@@ -93,7 +93,7 @@ PlotPTM <- function(modificationSpecificPeptides,
             axis.text.x = element_blank(),
             axis.ticks.x = element_blank())+
       guides(fill = guide_legend(ncol=3))+
-      scale_fill_manual(values = getPalette(colourCount))
+      scale_fill_manual(values = getPalette(nrow(mod_frequencies)))
 
 
 
@@ -107,7 +107,7 @@ PlotPTM <- function(modificationSpecificPeptides,
             axis.title.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.x = element_blank())+
-      scale_colour_manual(values = getPalette(colourCount))
+      scale_colour_manual(values = getPalette(nrow(mod_frequencies)))
 
 
 

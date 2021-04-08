@@ -35,6 +35,7 @@
 #' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 #'
 #' files <- ReadDataFromDir(MQPathCombined)
+
 #'
 ReadDataFromDir <- function(MQPathCombined,
                             remove_contaminants = TRUE){
@@ -93,13 +94,6 @@ ReadDataFromDir <- function(MQPathCombined,
   }
 
 
-
-
-  #runningTimes.txt
-
-  running_time <- read_delim(file.path(MQPathCombined, "proc/#runningTimes.txt"),
-                             "\t", escape_double = FALSE, trim_ws = TRUE,na = c("NA", "NaN", "", " "))
-
   #modificationSpecificPeptides
 
   modification_table <- read_delim(file.path(MQPathCombined,"txt/modificationSpecificPeptides.txt"),
@@ -116,12 +110,35 @@ ReadDataFromDir <- function(MQPathCombined,
                            trim_ws = TRUE)
 
 
-  #Vector of tables
+  #Check if the running times is present, if so, add it to alltables
+  if ('#runningTimes.txt' %in% list.files(paste0(MQPathCombined, 'proc/'))) {
 
-  alltables <- list( summary_table, peptides_table, evidence_table,  msscans_table, msScans_table,prot_groups, running_time, modification_table,parameters_table)
 
-  names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt', 'msScans.txt','proteinGroups.txt', '#runningTimes.txt','modificationSpecificPeptides.txt' ,'parameters.txt')
 
+    running_time <- read_delim(file.path(MQPathCombined, "proc/#runningTimes.txt"),
+                               "\t", escape_double = FALSE, trim_ws = TRUE,na = c("NA", "NaN", "", " "))
+
+
+    alltables <- list(summary_table, peptides_table, evidence_table,  msscans_table,
+                      msScans_table,prot_groups, modification_table,
+                      parameters_table, running_time)
+
+    names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt',
+                          'msScans.txt','proteinGroups.txt','modificationSpecificPeptides.txt',
+                          'parameters.txt', '#runningTimes.txt')
+
+  } else{
+    print('#runningTimes.txt not found.')
+
+    alltables <- list(summary_table, peptides_table, evidence_table,  msscans_table,
+                      msScans_table,prot_groups, modification_table,
+                      parameters_table)
+
+    names(alltables) <- c('summary.txt', 'peptides.txt', 'evidence.txt','msmsScans.txt',
+                          'msScans.txt','proteinGroups.txt','modificationSpecificPeptides.txt',
+                          'parameters.txt')
+
+  }
 
   return(alltables)
 

@@ -86,11 +86,6 @@ PlotIntensity <- function(proteinGroups,
   }
 
 
-
-
-
-
-
   GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin,
                              draw_group = function(self, data, ..., draw_quantiles = NULL) {
                                data <- transform(data, xminv = x - violinwidth * (x - xmin), xmaxv = x + violinwidth * (xmax - x))
@@ -140,59 +135,93 @@ PlotIntensity <- function(proteinGroups,
 
     #Error if no LFQ was found, plot intensities
     if(length(intensities %>% select(contains('LFQ')))== 0){
+
+      #Print a warning that split violin will not be created and the intensities will be plotted.
       print('LFQ intensities not found, split_violin_plot can not be created')
       print('Changing intensity automatically to Intensity')
 
+
+        intensities <-  intensities %>%  select(-contains('LFQ'))
+        title <- 'Intensity'
+        colnames(intensities)[-1] <- gsub('Intensity','',colnames(intensities)[-1])
+
+        intensities_measure <- colnames(intensities)
+        intensities_measure <- intensities_measure[! intensities_measure %in% 'id']
+
+      if(log_base == 2){
+        melted_intensities <- melt(log2(intensities), id.vars = 'id', measure.vars = intensities_measure)
+        ylab <- expression('Log'[2]*'(Intensity)')
+      }
+
+      if (log_base == 10){
+        melted_intensities <- melt(log10(intensities), id.vars = 'id', measure.vars = intensities_measure)
+        ylab <- expression('Log'[10]*'(Intensity)')
+      }
+
+
+
+      b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
+                geom_violin(fill = 'gray80', size = 1, alpha = .5)+
+                geom_boxplot(width=0.2, outlier.shape = NA)+
+                ggtitle(title)+
+                xlab('Experiment')+
+                ylab(ylab)+
+                theme_bw()+
+                theme(legend.position = 'none')+
+                scale_color_manual(values = getPalette(colourCount))
+
+      if(long_names==TRUE){
+        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+      } else{
+        b
+      }
+    #Create the split_violin_plots
     } else{
 
-      #create a table with the columns : id, sample, group, value
-      df <-intensities %>%
-             pivot_longer(-id,
-                     names_to = c("intensity_type", "sample" ),
-                     names_prefix = 'LFQ intensity',
-                     names_sep = ' ',
-                     values_to = "value")
+          #create a table with the columns : id, sample, group, value
+          df <-intensities %>%
+                 pivot_longer(-id,
+                         names_to = c("intensity_type", "sample" ),
+                         names_prefix = 'LFQ intensity',
+                         names_sep = ' ',
+                         values_to = "value")
 
-      df$intensity_type[df$intensity_type == ''] = 'LFQ intensity'
+          df$intensity_type[df$intensity_type == ''] = 'LFQ intensity'
 
+         if (log_base == 10) {
 
-     if (log_base == 10) {
-       a <- ggplot(df, aes(sample, log10(value), fill = intensity_type))+
-                   geom_split_violin()+
-                   geom_boxplot(width=0.2, outlier.shape = NA)+
-                   ggtitle('Protein Intensity & LFQ intensity')+
-                   xlab('Experiment')+
-                   ylab(expression('Log'[10]*'(Intensity)'))+
-                   theme_bw()+
-                   scale_fill_brewer(palette = palette)+
-                   theme(legend.position = 'bottom')
-     }
+           df$value <- log10(df$value)
+           ylab <- expression('Log'[10]*'(Intensity)')
 
-     if (log_base == 2) {
-       a <- ggplot(df, aes(sample, log2(value), fill = intensity_type))+
-                   geom_split_violin()+
-                   geom_boxplot(width=0.2, outlier.shape = NA)+
-                   ggtitle('Protein Intensity & LFQ intensity')+
-                   xlab('Experiment')+
-                   ylab(expression('Log'[2]*'(Intensity)'))+
-                   theme_bw()+
-                   scale_fill_brewer(palette = palette)+
-                   theme(legend.position = 'bottom')
-     }
+         }
 
-    if(long_names==TRUE){
-      a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
-    } else{
-      a
+         if (log_base == 2) {
+
+           df$value <- log2(df$value)
+           ylab <- expression('Log'[2]*'(Intensity)')
+
+         }
+
+          a <- ggplot(df, aes(sample, value, fill = intensity_type))+
+                    geom_split_violin()+
+                    geom_boxplot(width=0.2, outlier.shape = NA)+
+                    ggtitle('Protein Intensity & LFQ intensity')+
+                    xlab('Experiment')+
+                    ylab(ylab)+
+                    theme_bw()+
+                    scale_fill_brewer(palette = palette)+
+                    theme(legend.position = 'bottom')
+
+        if(long_names==TRUE){
+          a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+        } else{
+          a
+        }
     }
-    }
 
-    #if split_violin_plot == FALSE, Intensity or LFQ intensity will be plotted.
-    #or if split_violin_intensity is true but there are no LFQ intensities to divide the plot.
+  #if split_violin_plot == FALSE, Intensity or LFQ intensity will be plotted.
 
-  } else if  (split_violin_intensity == FALSE ||     (split_violin_intensity == TRUE &
-                                                      length(intensities %>% select(contains('LFQ')))== 0)) {
-
+  } else if  (split_violin_intensity == FALSE) {
 
       if (intensity_type == 'Intensity') {
         intensities <-  intensities %>%  select(-contains('LFQ'))
@@ -212,34 +241,19 @@ PlotIntensity <- function(proteinGroups,
 
           intensities <-  proteinGroups %>%  select(id, contains('Intensity ')& -contains('LFQ'))
           title <- 'Intensity'
-
         }
-
       }
-
-
 
       intensities_measure <- colnames(intensities)
       intensities_measure <- intensities_measure[! intensities_measure %in% 'id']
 
       if(log_base == 2){
         melted_intensities <- melt(log2(intensities), id.vars = 'id', measure.vars = intensities_measure)
-
-
       }
 
       if (log_base == 10){
         melted_intensities <- melt(log10(intensities), id.vars = 'id', measure.vars = intensities_measure)
-
       }
-
-      if (log_base == 'none'){
-        melted_intensities <- melt(intensities, id.vars = 'id', measure.vars = intensities_measure)
-
-      }
-
-
-
 
       #For the y_lab
 
@@ -256,7 +270,6 @@ PlotIntensity <- function(proteinGroups,
         ylab <- expression('Log'[10]*'(LFQ intensity)')
       }
 
-
       b <-   ggplot(melted_intensities, aes(x = variable, y = value, color = variable))+
                 geom_violin(fill = 'gray80', size = 1, alpha = .5)+
                 geom_boxplot(width=0.2, outlier.shape = NA)+
@@ -266,9 +279,6 @@ PlotIntensity <- function(proteinGroups,
                 theme_bw()+
                 theme(legend.position = 'none')+
                 scale_color_manual(values = getPalette(colourCount))
-
-
-
 
     if(long_names==TRUE){
       b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))

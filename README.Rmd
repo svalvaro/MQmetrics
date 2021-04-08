@@ -41,7 +41,7 @@ library(MQmetrics)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example2/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
@@ -54,8 +54,8 @@ peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
 modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
+runningTimes <-  files[["#runningTimes.txt"]]
 ```
 
 ```{r ExperimentDuration, comment= NA}
@@ -99,11 +99,23 @@ PlotAndromedaScore(peptides)
 ```
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+
+
+if(parameters$Value[27] == "True"){
+  PlotIdentificationType(peptides, 
+                         proteinGroups,
+                         palette = 'Set2',
+                         long_names = TRUE, 
+                         sep_names = '_')  
+} else{
+  cat('Match Between Runs was not used during the MaxQuant analysis.
+No Identification Type to show.')
+}
+
 ```
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
               log_base = 2, long_names = TRUE, sep_names = '_')
 ```
 
@@ -129,14 +141,6 @@ PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10,
 ```
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
-# Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
-# 
-# files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
-# 
-# evidence_irt <- files_irt[['evidence.txt']]
-# PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
-
-
 PlotiRT(evidence)
 ```
 

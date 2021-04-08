@@ -137,13 +137,14 @@ PlotAndromedaScore(peptides,
 \newpage
 ```{r IdentificationType}
 if(parameters$Value[27] == "True"){
-  PlotIdentificationType(peptides, proteinGroups,
+  PlotIdentificationType(peptides, 
+                         proteinGroups,
                          palette = params$palette,
                          long_names = params$long_names, 
                          sep_names = params$sep_names)  
 } else{
-  print('Match Between Runs was not used during the MaxQuant analysis.
-        No Identification Type to show.')
+  cat('Match Between Runs was not used during the MaxQuant analysis.
+No Identification Type to show.')
 }
 ```
 

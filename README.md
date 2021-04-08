@@ -35,7 +35,7 @@ library(MQmetrics)
 ```
 
 ``` r
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example2/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
@@ -48,20 +48,20 @@ peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
 modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
+runningTimes <-  files[["#runningTimes.txt"]]
 ```
 
 ``` r
 ExperimentInformation(runningTimes, parameters) 
-[1] "The experiment started the day: 17/12/2020 at the time: 01:18:03."
-[1] "The whole experiment lasted: 01:19 (hours:minutes)."
+[1] "The experiment started the day: 03/02/2021 at the time: 14:14:22."
+[1] "The whole experiment lasted: 01:33 (hours:minutes)."
 [1] "The MaxQuant version used was: 1.6.12.0"
 [1] "The user was: marek.vrbacky"
-[1] "The machine name was: FGU045PC004"
+[1] "The machine name was: FGU013PC029"
 [1] "The protein FDR was: 0.01"
-[1] "The match between runs was: True"
-[1] "The fasta file used was: C:\\MaxQuant_Databases\\UP000005640_9606.fasta"
+[1] "The match between runs was: False"
+[1] "The fasta file used was: "
 ```
 
 ``` r
@@ -119,14 +119,27 @@ PlotAndromedaScore(peptides)
 <img src="man/figures/README-AndromedaScore-1.png" width="100%" /><img src="man/figures/README-AndromedaScore-2.png" width="100%" />
 
 ``` r
-PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+
+
+if(parameters$Value[27] == "True"){
+  PlotIdentificationType(peptides, 
+                         proteinGroups,
+                         palette = 'Set2',
+                         long_names = TRUE, 
+                         sep_names = '_')  
+} else{
+  cat('Match Between Runs was not used during the MaxQuant analysis.
+No Identification Type to show.')
+}
+#> Match Between Runs was not used during the MaxQuant analysis.
+#> No Identification Type to show.
 ```
 
-<img src="man/figures/README-IdentificationType-1.png" width="100%" />
-
 ``` r
-PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'Intensity', 
+PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
               log_base = 2, long_names = TRUE, sep_names = '_')
+#> [1] "LFQ intensities not found, split_violin_plot can not be created"
+#> [1] "Changing intensity automatically to Intensity"
 ```
 
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
@@ -161,22 +174,16 @@ PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10,
 ```
 
 ``` r
-# Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
-# 
-# files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
-# 
-# evidence_irt <- files_irt[['evidence.txt']]
-# PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
-
-
 PlotiRT(evidence)
-#> [1] "No iRT peptides found in the MaxQuant output."
 ```
+
+<img src="man/figures/README-irt_peps1-1.png" width="100%" />
 
 ``` r
 PlotiRTScore(evidence)
-#> [1] "No iRT peptides found in the MaxQuant output."
 ```
+
+<img src="man/figures/README-irt_peps2-1.png" width="100%" />
 
 ``` r
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)

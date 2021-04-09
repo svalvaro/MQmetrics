@@ -196,7 +196,7 @@ PlotAcquisitionCycle(msScans)
 <img src="man/figures/README-PlotAcquisition-1.png" width="100%" /><img src="man/figures/README-PlotAcquisition-2.png" width="100%" />
 
 ``` r
-PlotPTM(modificationSpecificPeptides, peptides_modified = 1, plot_unmodified_peptides = FALSE)
+PlotPTM(modificationSpecificPeptides, peptides_modified = 1, plot_unmodified_peptides = FALSE, palette = 'Set2')
 ```
 
 <img src="man/figures/README-PTM-1.png" width="100%" /><img src="man/figures/README-PTM-2.png" width="100%" />

@@ -45,7 +45,7 @@ PlotPTM <- function(modificationSpecificPeptides,
   mod_join <- mod_frequencies %>% separate_rows(Modifications, sep = ';') %>%
             group_by(Modifications, variable) %>% summarise(Freq = sum(Freq))
 
-  #Remove the Experiment patter from the variable
+  #Remove the Experiment pattern from the variable
 
   mod_join$variable <- gsub('Experiment', '', mod_join$variable)
 
@@ -60,10 +60,50 @@ PlotPTM <- function(modificationSpecificPeptides,
   }
 
 
+  #Combine multiple oxidation into the same group
+
+  mod_join_combined <- mod_join
+
+  #Multiply the freq by number of oxidations
+  mod_join_combined$Freq[mod_join_combined$Modifications == '2 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '2 Oxidation (M)']*2
+
+  mod_join_combined$Freq[mod_join_combined$Modifications == '2 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '3 Oxidation (M)']*3
+
+  mod_join_combined$Freq[mod_join_combined$Modifications == '4 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '4 Oxidation (M)']*4
+
+  mod_join_combined$Freq[mod_join_combined$Modifications == '5 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '5 Oxidation (M)']*5
+
+
+
+  combined_oxidations <- aggregate(x = mod_join_combined[grep('Oxidation',mod_join_combined$Modifications),3],
+                                  by = mod_join_combined[grep('Oxidation',mod_join_combined$Modifications),2],
+                                  FUN = sum)
+
+  #Remove rows with the oxidation columns
+  mod_join_combined2 <- mod_join_combined
+  mod_join_combined2 <- mod_join_combined2[!(mod_join_combined2$Modifications %in% c('2 Oxidation (M)',
+                                                                                     '3 Oxidation (M)',
+                                                                                     '4 Oxidation (M)',
+                                                                                     '5 Oxidation (M)')),]
+
+  #Change the values of the original oxidation to the sum of all the combined oxidations
+
+  mod_join_combined2$Freq[mod_join_combined2$Modifications == 'Oxidation (M)'] <- NA
+
+  combined_oxidations$Modifications <- 'Oxidation (M)'
+  combined_oxidations <- combined_oxidations[,c(3,1,2)]
+
+  modification_final <- full_join(mod_join_combined2, combined_oxidations, by = c("variable", 'Modifications'))
+
+  modification_final$Freq <- coalesce(modification_final$Freq.x, modification_final$Freq.y)
+
+  modification_final$Freq.x <- NULL
+  modification_final$Freq.y <- NULL  #Probably there is an easier way to combine all the oxidations.
+
   ###############For Intensity plot
 
 
-  modifications_unique <- unique(mod_join$Modifications)#This are the names
+  modifications_unique <- unique(modification_final$Modifications)#This are the names
 
   mod_intensities <- modification_table %>%
     select(-contains('Experiment'))
@@ -114,7 +154,7 @@ PlotPTM <- function(modificationSpecificPeptides,
     }
 
 
-    a <- ggplot(mod_join, aes(x = Modifications, y = Freq, fill = Modifications))+
+    a <- ggplot(modification_final, aes(x = Modifications, y = Freq, fill = Modifications))+
             geom_bar(stat = 'identity')+
             facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
             theme_bw()+

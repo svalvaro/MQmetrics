@@ -26,6 +26,10 @@ PlotProteinCoverage <- function(peptides,
                                 segment_width = 1,
                                 palette = 'Set2'){
 
+
+
+
+
   `Start position` <-  `End position` <- variable <- value <- NULL
 
   table_peptides <- peptides %>%
@@ -68,56 +72,67 @@ PlotProteinCoverage <- function(peptides,
 
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
+  n_pages_needed <- ceiling(
+    colourCount/ 5
+  )
 
 
-  a <- ggplot(pep_melt)+
-            geom_segment(aes(x = `Start position`,
-                             xend = `End position`,
-                             y = `Start position`,
-                             yend = `End position`,
-                             colour = variable),
-                             size = segment_width)+
-            theme_bw()+
-            facet_wrap(.~ variable, ncol =1)+
-            ylab('End position')+
-            theme(legend.position = 'none')+
-            scale_color_manual(values = getPalette(colourCount))
+  for (ii in n_pages_needed) {
+
+    if(colourCount <5){
+      nrow = colourCount
+    } else{
+      nrow = 5
+    }
 
 
-
-  #Create a plot for the protein lenght vs the coverage
-
-  if(log_base == 10){
-    b <- ggplot(pep_melt )+
-              geom_segment(aes(x=`Start position`,
-                               xend=`End position`,
-                               y = log10(value),
-                               yend =log10(value),
-                               colour = variable), size = segment_width )+
-              theme_bw()+
-              ylab(expression('Log'[10]*'(Intensity)'))+
-              facet_wrap(.~ variable, ncol =1)+
-              #scale_x_continuous(limits = c(1, prot_length))+
-              theme(legend.position = 'none')+
+    a <- ggplot(pep_melt)+
+      geom_segment(aes(x = `Start position`,
+                       xend = `End position`,
+                       y = `Start position`,
+                       yend = `End position`,
+                       colour = variable),
+                       size = segment_width)+
+      theme_bw()+
+      facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+      ylab('End position')+
+      theme(legend.position = 'none')+
       scale_color_manual(values = getPalette(colourCount))
 
-  } else{
-    b <- ggplot(pep_melt )+
-              geom_segment(aes(x=`Start position`,
-                               xend=`End position`,
-                               y = log2(value),
-                               yend =log2(value),
-                               colour = variable),size = segment_width )+
-              theme_bw()+
-              ylab(expression('Log'[2]*'(Intensity)'))+
-              facet_wrap(.~ variable, ncol =1)+
-              #scale_x_continuous(limits = c(1, prot_length))+
-              theme(legend.position = 'none')+
-      scale_color_manual(values = getPalette(colourCount))
+    #Create a plot for the protein lenght vs the coverage
+
+    if(log_base == 10){
+      b <- ggplot(pep_melt )+
+        geom_segment(aes(x=`Start position`,
+                         xend=`End position`,
+                         y = log10(value),
+                         yend =log10(value),
+                         colour = variable), size = segment_width )+
+        theme_bw()+
+        ylab(expression('Log'[10]*'(Intensity)'))+
+        facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+        #scale_x_continuous(limits = c(1, prot_length))+
+        theme(legend.position = 'none')+
+        scale_color_manual(values = getPalette(colourCount))
+
+    } else{
+      b <- ggplot(pep_melt )+
+        geom_segment(aes(x=`Start position`,
+                         xend=`End position`,
+                         y = log2(value),
+                         yend =log2(value),
+                         colour = variable),size = segment_width )+
+        theme_bw()+
+        ylab(expression('Log'[2]*'(Intensity)'))+
+        facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+        #scale_x_continuous(limits = c(1, prot_length))+
+        theme(legend.position = 'none')+
+        scale_color_manual(values = getPalette(colourCount))
+    }
+
+
+
   }
-
-
-
 
 
   #Plot them together

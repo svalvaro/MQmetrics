@@ -24,6 +24,9 @@ ReportTables <- function(MQPathCombined,
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 
+  #show the contaminants numbers, reverse hits, identified by site
+  #Gravy round the results. Remove std.
+
   #Proteins Identified and NAs
   proteinGroups <- files[["proteinGroups.txt"]]
 

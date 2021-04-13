@@ -62,6 +62,17 @@ ExperimentInformation(runningTimes, parameters)
 [1] "The protein FDR was: 0.01"
 [1] "The match between runs was: False"
 [1] "The fasta file used was: "
+
+
+#add more paramaters, source directory.
+#if LFQ was used or not.
+#Show fixed and variable Modifications specified. (from xmparxl file)
+
+#FDR at the three levels psm , peptide, protein
+
+#FRom XML file
+
+#
 ```
 
 ``` r
@@ -77,10 +88,20 @@ PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 <img src="man/figures/README-PeptidesIdentified-1.png" width="100%" />
 
 ``` r
+
+#Show in the tables a a percentage.
+```
+
+``` r
 PlotMsMs(summary,long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-PlotMSMS-1.png" width="100%" />
+
+``` r
+
+#Show 40% line
+```
 
 ``` r
 PlotPeaks(summary, long_names = TRUE, sep_names = '_')
@@ -107,10 +128,20 @@ PlotProteaseSpecificity(peptides)
 <img src="man/figures/README-missed_cleavages-1.png" width="100%" /><img src="man/figures/README-missed_cleavages-2.png" width="100%" />
 
 ``` r
+
+# show in tabular format. (table.) 
+```
+
+``` r
 PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 ```
 
 <img src="man/figures/README-PlotHydrophobicity-1.png" width="100%" /><img src="man/figures/README-PlotHydrophobicity-2.png" width="100%" />
+
+``` r
+
+#make the line thicker
+```
 
 ``` r
 PlotAndromedaScore(peptides)
@@ -143,6 +174,13 @@ PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LF
 <img src="man/figures/README-PlotIntensity-1.png" width="100%" />
 
 ``` r
+
+
+
+### when too many samples more than 20, the split_violin function did not work.
+```
+
+``` r
 PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
 ```
 
@@ -167,9 +205,15 @@ PlotProteinCoverageAll(proteinGroups)
 <img src="man/figures/README-protein_coverage_all-1.png" width="100%" />
 
 ``` r
-PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
-#> [1] "The protein: Q8R0Y6 provided was not identified in any of the samples."
+
+#Put in a table at the end of tables.
 ```
+
+``` r
+PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q99714", log_base = 2, segment_width = 1)
+```
+
+<img src="man/figures/README-protein_degradation-1.png" width="100%" />
 
 ``` r
 PlotiRT(evidence)

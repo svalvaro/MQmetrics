@@ -205,8 +205,7 @@ ReportTables <- function(MQPathCombined,
                 summarise(Mean = mean(GRAVY),
                           Max = max(GRAVY),
                           Min = min(GRAVY),
-                          Median = median(GRAVY),
-                          Std = sd(GRAVY))
+                          Median = median(GRAVY))
   names(GRAVY)[1] <- 'Experiment'
 
   GRAVY

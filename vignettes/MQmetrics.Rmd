@@ -14,15 +14,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 ```{r setup}
 library(MQmetrics)
 ```
 
+
+
 ```{r, message=FALSE, warning=FALSE}
-
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example2/'
 
 files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
 
@@ -35,76 +34,101 @@ peptides <- files[["peptides.txt"]]
 msmsScans <- files[["msmsScans.txt"]]
 proteinGroups <- files[["proteinGroups.txt"]]
 modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
+runningTimes <-  files[["#runningTimes.txt"]]
 ```
-
 
 ```{r ExperimentDuration, comment= NA}
-ExperimentInformation(runningTimes, parameters) 
-```
+ExperimentInformation(MQPathCombined,runningTimes, parameters) 
 
+
+
+#if LFQ was used or not.
+#Show fixed and variable Modifications specified. (from xmparxl file)
+
+
+
+#FRom XML file
+
+#
+
+```
 
 ```{r PlotProteins}
 PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names = TRUE, sep_names = '_')
 ```
 
-
 ```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
 PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
-```
 
+#Show in the tables a a percentage.
+```
 
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
 PlotMsMs(summary,long_names = TRUE, sep_names = '_')
-```
 
+#Show 40% line
+```
 
 ```{r PlotPeaks, fig.height=5, fig.width=7.2}
 PlotPeaks(summary, long_names = TRUE, sep_names = '_')
 ```
 
-
 ```{r isotope, fig.height=5, fig.width=7.2}
 PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
 ```
-
 
 ```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
 PlotCharge(evidence)
 ```
 
-
 ```{r missed_cleavages,fig.height=10}
 PlotProteaseSpecificity(peptides)
-```
 
+# show in tabular format. (table.) 
+```
 
 ```{r PlotHydrophobicity, warning= FALSE, message= FALSE}
 PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
+
+#make the line thicker
 ```
 
+```{r AndromedaScore, message = FALSE, warning = FALSE}
+PlotAndromedaScore(peptides)
+```
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
+if(parameters$Value[27] == "True"){
+  PlotIdentificationType(peptides, 
+                         proteinGroups,
+                         palette = 'Set2',
+                         long_names = TRUE, 
+                         sep_names = '_')  
+} else{
+  cat('Match Between Runs was not used during the MaxQuant analysis.
+No Identification Type to show.')
+}
 ```
-
-
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
 PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
               log_base = 2, long_names = TRUE, sep_names = '_')
+
+
+
+### when too many samples more than 20, the split_violin function did not work.
+
+
 ```
 
 ```{r PlotPCA, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotPCA(proteinGroups, intensity_type = 'Intensity')
+PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
 ```
-
 
 ```{r DynamicRange, fig.height=5, fig.width=7.2}
 PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
 ```
-
 
 ```{r DynamicRangeAll, fig.height=10, fig.width=7.2}
 PlotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
@@ -113,43 +137,31 @@ PlotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
 ```{r protein_coverage_all}
 PlotProteinCoverageAll(proteinGroups)
 
+#Put in a table at the end of tables.
+
 ```
-
-
 
 ```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q8R0Y6", log_base = 10, segment_width = 1)
+PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q99714", log_base = 2, segment_width = 1)
 ```
-
-
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
-Path_iRT_run_with_iRT_peptides <- '/home/alvaro/Documents/MaxQuant/example3/'
-
-files_irt <- ReadDataFromDir(Path_iRT_run_with_iRT_peptides)
-
-evidence_irt <- files_irt[['evidence.txt']]
-PlotiRT(evidence_irt, show_calibrated_rt = FALSE)
+PlotiRT(evidence)
 ```
-
 
 ```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
-PlotiRTScore(evidence_irt)
+PlotiRTScore(evidence)
 ```
-
 
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
-```
 
+```
 
 ```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE}
 PlotAcquisitionCycle(msScans)
 ```
 
-
 ```{r PTM, fig.height=8, fig.width=7.2}
-PlotPTM(modificationSpecificPeptides, peptides_modified = 3)
+PlotPTM(modificationSpecificPeptides, peptides_modified = 1, plot_unmodified_peptides = FALSE, palette = 'Set2')
 ```
-
-

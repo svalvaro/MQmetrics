@@ -22,11 +22,6 @@ The goal of MQmetrics is to analyze Proteomics data from LC-MS/MS. It takes the 
 
 ## Installation
 
-<!-- You can install thess released version of MQmetrics from [CRAN](https://CRAN.R-project.org) with: -->
-
-<!-- ``` r -->
-<!-- install.packages("MQmetrics") -->
-<!-- ``` -->
 
 You can install the development version from [GitHub](https://github.com/) with:
 
@@ -36,156 +31,20 @@ devtools::install_github("BioAlvaro/MQmetrics")
 ```
 ## Example
 
-```{r setup}
+MQmetrics will easily generate a report containing all the info with one function.
+For that it is needed to provide the directory of the combined folder of MaxQuant output.
+
+```{r example, eval = FALSE}
 library(MQmetrics)
-```
 
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/combined/'
 
-
-```{r, message=FALSE, warning=FALSE}
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example2/'
-
-files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
-
-# files can be extracted like this:
-
-summary <- files[["summary.txt"]]
-evidence <- files[["evidence.txt"]]
-msScans <- files[['msScans.txt']]
-peptides <- files[["peptides.txt"]]
-msmsScans <- files[["msmsScans.txt"]]
-proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
-parameters <- files[["parameters.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
-```
-
-```{r ExperimentDuration, comment= NA}
-ExperimentInformation(MQPathCombined,runningTimes, parameters) 
-
-
-
-#if LFQ was used or not.
-#Show fixed and variable Modifications specified. (from xmparxl file)
-
-
-
-#FRom XML file
-
-#
+generateReport(MQPathCombined, long_names = TRUE, sep_names = '_')
 
 ```
 
-```{r PlotProteins}
-PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names = TRUE, sep_names = '_')
-```
+One of the most useful parameters of every function including **generateReport()** are:
+*long_names* and *sep_names*. They will allow a clear visualization of sample that have long names separated by a character. Example:
 
-```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
-PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
-
-#Show in the tables a a percentage.
-```
-
-```{r PlotMSMS, fig.height=5, fig.width=7.2}
-PlotMsMs(summary,long_names = TRUE, sep_names = '_')
-
-#Show 40% line
-```
-
-```{r PlotPeaks, fig.height=5, fig.width=7.2}
-PlotPeaks(summary, long_names = TRUE, sep_names = '_')
-```
-
-```{r isotope, fig.height=5, fig.width=7.2}
-PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
-```
-
-```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
-PlotCharge(evidence)
-```
-
-```{r missed_cleavages,fig.height=10}
-PlotProteaseSpecificity(peptides)
-
-# show in tabular format. (table.) 
-```
-
-```{r PlotHydrophobicity, warning= FALSE, message= FALSE}
-PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
-
-#make the line thicker
-```
-
-```{r AndromedaScore, message = FALSE, warning = FALSE}
-PlotAndromedaScore(peptides)
-```
-
-```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-if(parameters$Value[27] == "True"){
-  PlotIdentificationType(peptides, 
-                         proteinGroups,
-                         palette = 'Set2',
-                         long_names = TRUE, 
-                         sep_names = '_')  
-} else{
-  cat('Match Between Runs was not used during the MaxQuant analysis.
-No Identification Type to show.')
-}
-```
-
-```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
-              log_base = 2, long_names = TRUE, sep_names = '_')
-
-
-
-### when too many samples more than 20, the split_violin function did not work.
-
-
-```
-
-```{r PlotPCA, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
-```
-
-```{r DynamicRange, fig.height=5, fig.width=7.2}
-PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
-```
-
-```{r DynamicRangeAll, fig.height=10, fig.width=7.2}
-PlotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
-```
-
-```{r protein_coverage_all}
-PlotProteinCoverageAll(proteinGroups)
-
-#Put in a table at the end of tables.
-
-```
-
-```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q99714", log_base = 2, segment_width = 1)
-```
-
-```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
-PlotiRT(evidence)
-```
-
-```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
-PlotiRTScore(evidence)
-```
-
-```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
-PlotTotalIonCurrent(msmsScans, show_max_value = TRUE)
-
-```
-
-```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE}
-PlotAcquisitionCycle(msScans)
-```
-
-```{r PTM, fig.height=8, fig.width=7.2}
-PlotPTM(modificationSpecificPeptides, peptides_modified = 1, plot_unmodified_peptides = FALSE, palette = 'Set2')
-```
 
 

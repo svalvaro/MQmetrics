@@ -2,8 +2,8 @@ Package: MQmetrics
 Type: Package
 Title: Analyses LC-MS/MS data from MaxQuant output files
 Version: 0.1.0
-Author: Alvaro Sanchez Villalba <sanchezvillalba.alvaro@gmail.com>
-Maintainer: Alvaro Sanchez Villalba <sanchezvillalba.alvaro@gmail.com>
+Author: Alvaro Sanchez-Villalba <sanchezvillalba.alvaro@gmail.com>
+Maintainer: Alvaro Sanchez-Villalba <sanchezvillalba.alvaro@gmail.com>
 Description: It plots the results from Max Quant analysis.
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3

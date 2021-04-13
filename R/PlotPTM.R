@@ -67,7 +67,7 @@ PlotPTM <- function(modificationSpecificPeptides,
   #Multiply the freq by number of oxidations
   mod_join_combined$Freq[mod_join_combined$Modifications == '2 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '2 Oxidation (M)']*2
 
-  mod_join_combined$Freq[mod_join_combined$Modifications == '2 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '3 Oxidation (M)']*3
+  mod_join_combined$Freq[mod_join_combined$Modifications == '3 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '3 Oxidation (M)']*3
 
   mod_join_combined$Freq[mod_join_combined$Modifications == '4 Oxidation (M)'] <- mod_join_combined$Freq[mod_join_combined$Modifications == '4 Oxidation (M)']*4
 

@@ -25,13 +25,23 @@ ReportTables <- function(MQPathCombined,
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 
   #show the contaminants numbers, reverse hits, identified by site
-  #Gravy round the results. Remove std.
 
-  #Proteins Identified and NAs
-  proteinGroups <- files[["proteinGroups.txt"]]
+
+  #Proteins Identified and NAs #Reverse #
+
+  #Read the Protein Groups without removing the contamintants To plot it.
+  proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
+                              "\t", escape_double = FALSE,
+                              trim_ws = TRUE)
+
+
 
   if (intensity_type == 'Intensity') {
-    protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
+
+
+    protein_table <- proteinGroups %>%
+      select(contains(c('Intensity ','Reverse','Potential','Only identified by site'))) %>%
+      select(-contains('LFQ'))
     #Remove Intensity from name
     colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
 
@@ -40,8 +50,13 @@ ReportTables <- function(MQPathCombined,
   }
 
   if (intensity_type == 'LFQ'){
-    protein_table<- proteinGroups[,grep("LFQ", colnames(proteinGroups))]
+
     #Remove LFQ Intensity from name
+
+    protein_table <- proteinGroups %>%
+      select(contains(c('LFQ ','Reverse','Potential','Only identified by site')))
+
+
     colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
     title <- 'Proteins Identified based on LFQ intensity'
 
@@ -52,7 +67,9 @@ ReportTables <- function(MQPathCombined,
     if (length(protein_table) == 0) {
       print('LFQ intensities not found, changing automatically to Intensity.')
 
-      protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
+      protein_table <- proteinGroups %>%
+        select(contains(c('Intensity ','Reverse','Potential','Only identified by site'))) %>%
+        select(-contains('LFQ'))
       #Remove Intensity from name
       colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
 
@@ -63,30 +80,19 @@ ReportTables <- function(MQPathCombined,
   }
 
 
-  # Table 1 Proteins Identified
-  table_proteins <- data.frame(nrow(protein_table)-colSums(protein_table==0))
+  table_summary <- data.frame(Proteins_Identified = nrow(protein_table)-colSums(protein_table==0),
+                              Missing_values = colSums(protein_table==0),
+                              Potential_contaminants = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
+                              Reverse = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
+                              `Only identified by site` = colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0))
 
-  rownames_prot <- rownames(table_proteins)
+  table_summary <- table_summary[!(row.names(table_summary) %in% c("Reverse","Potential contaminant", "Only identified by site")),]
 
-  table_proteins <- cbind(rownames_prot,table_proteins)
-  #Order it
-  table_proteins <- table_proteins[order(rownames(table_proteins)),]
+  table_summary$Experiment <- rownames(table_summary)
 
-  #Changing names
-  colnames(table_proteins)[1] <- 'Experiment'
-  colnames(table_proteins)[2] <- 'Proteins identified'
+  rownames(table_summary) <- NULL
 
-  #NAs
-  table_proteins$'Missing values' <- nrow(protein_table) - table_proteins$`Proteins identified`
-
-
-  rownames(table_proteins) <- NULL
-
-
-  table_proteins <- table_proteins[, c('Experiment', 'Missing values', 'Proteins identified')]
-
-  #table_proteins <- kable(table_proteins) #%>%
-                      #kable_styling(position = "center")
+  table_summary <- table_summary[,c(6,1,2,3,4,5)]
 
 
 
@@ -208,11 +214,11 @@ ReportTables <- function(MQPathCombined,
                           Median = format(round(median(GRAVY),2),nsmall = 1))
   names(GRAVY)[1] <- 'Experiment'
 
-  GRAVY
+  #GRAVY
 
    out <- list()
 
-  out$proteins <- table_proteins
+  out$proteins <- table_summary
   out$intensities <- dynamic_table
   out$charge <- charge_percentage
   out$GRAVY <- GRAVY

@@ -202,10 +202,10 @@ ReportTables <- function(MQPathCombined,
 
   GRAVY <- df_expanded %>%
                 group_by(variable) %>%
-                summarise(Mean = mean(GRAVY),
-                          Max = max(GRAVY),
-                          Min = min(GRAVY),
-                          Median = median(GRAVY))
+                summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
+                          Max = format(round(max(GRAVY),2),nsmall = 1),
+                          Min = format(round(min(GRAVY),2),nsmall = 1),
+                          Median = format(round(median(GRAVY),2),nsmall = 1))
   names(GRAVY)[1] <- 'Experiment'
 
   GRAVY

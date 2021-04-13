@@ -80,11 +80,12 @@ ReportTables <- function(MQPathCombined,
   }
 
 
-  table_summary <- data.frame(Proteins_Identified = nrow(protein_table)-colSums(protein_table==0),
-                              Missing_values = colSums(protein_table==0),
-                              Potential_contaminants = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
-                              Reverse = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
-                              `Only identified by site` = colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0))
+  table_summary <- data.frame("Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
+                              "Missing values" = colSums(protein_table==0),
+                              "Potential contaminants" = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
+                              "Reverse" = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
+                              "Only identified by site"= colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0),
+                              check.names = FALSE) #To have spaces in the column names.
 
   table_summary <- table_summary[!(row.names(table_summary) %in% c("Reverse","Potential contaminant", "Only identified by site")),]
 
@@ -101,7 +102,7 @@ ReportTables <- function(MQPathCombined,
   #Table 2 Log10 intensities
 
 
-  int_info <- proteinGroups %>%  select(contains("Intensity ")) %>% select(-contains('LFQ'))
+  int_info <- protein_table %>% select(-contains(c('Reverse', 'Potential contaminant','Only identified by site' )))
 
   int_info[int_info == 0] <- NA
 
@@ -115,8 +116,6 @@ ReportTables <- function(MQPathCombined,
                                   min = format(log2(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
                                   max = format(log2(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
                                   n = apply(int_info, 2, length)-colSums(is.na(int_info))))
-
-    rownames(dynamic_table) <- gsub('Intensity', 'Log2 Intensity', rownames(dynamic_table))
   }
 
   if(log_base == 10){
@@ -127,8 +126,6 @@ ReportTables <- function(MQPathCombined,
                                   min = format(log10(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
                                   max = format(log10(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
                                   n = apply(int_info, 2, length)-colSums(is.na(int_info))))
-
-    rownames(dynamic_table) <- gsub('Intensity', 'Log10 Intensity', rownames(dynamic_table))
   }
 
 

@@ -42,8 +42,6 @@ library(MQmetrics)
 
 
 
-
-
 ```{r, message=FALSE, warning=FALSE}
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example2/'
 
@@ -63,14 +61,14 @@ runningTimes <-  files[["#runningTimes.txt"]]
 ```
 
 ```{r ExperimentDuration, comment= NA}
-ExperimentInformation(runningTimes, parameters) 
+ExperimentInformation(MQPathCombined,runningTimes, parameters) 
 
 
-#add more paramaters, source directory.
+
 #if LFQ was used or not.
 #Show fixed and variable Modifications specified. (from xmparxl file)
 
-#FDR at the three levels psm , peptide, protein
+
 
 #FRom XML file
 

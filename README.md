@@ -53,22 +53,26 @@ runningTimes <-  files[["#runningTimes.txt"]]
 ```
 
 ``` r
-ExperimentInformation(runningTimes, parameters) 
+ExperimentInformation(MQPathCombined,runningTimes, parameters) 
+[1] "The MaxQuant output directory is: /home/alvaro/Documents/MaxQuant/example2/"
 [1] "The experiment started the day: 03/02/2021 at the time: 14:14:22."
 [1] "The whole experiment lasted: 01:33 (hours:minutes)."
 [1] "The MaxQuant version used was: 1.6.12.0"
 [1] "The user was: marek.vrbacky"
 [1] "The machine name was: FGU013PC029"
+[1] "The PSM FDR was: 0.01"
 [1] "The protein FDR was: 0.01"
 [1] "The match between runs was: False"
-[1] "The fasta file used was: "
+[1] "The fasta file used was: C:\\MaxQuant_Databases\\iRT_peptides_Biognosys_irtfusion.fasta;C:\\MaxQuant_Databases\\UP000005640_9606.fasta"
+[1] "The iBAQ presence is: True"
+[1] "The PTM selected is/are: Oxidation (M);Acetyl (Protein N-term)"
 
 
-#add more paramaters, source directory.
+
 #if LFQ was used or not.
 #Show fixed and variable Modifications specified. (from xmparxl file)
 
-#FDR at the three levels psm , peptide, protein
+
 
 #FRom XML file
 

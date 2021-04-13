@@ -4,7 +4,7 @@
 \alias{ExperimentInformation}
 \title{Experiment Information}
 \usage{
-ExperimentInformation(runningTimes, parameters)
+ExperimentInformation(MQPathCombined, runningTimes, parameters)
 }
 \arguments{
 \item{runningTimes}{The runningTimes.txt table from  MaxQuant Output.}

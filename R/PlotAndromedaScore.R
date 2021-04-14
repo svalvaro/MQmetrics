@@ -1,14 +1,20 @@
 #' Andromeda score for the best associated MS/MS spectrum.
 #'
-#' @param peptides
+#' @param peptides peptides.txt table from MaxQuant ouput.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'
-#' @return
+#' @return Plots the MaxQuant Andromeda Score.
 #' @export
 #'
 #' @examples
+#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
+#' PlotAndromedaScore(peptides)
 PlotAndromedaScore <- function(peptides,
                                palette = 'Set2'){
 
+  variable <- Score <- NULL
 
   df <- peptides %>%  select(contains(c('id', 'Score', 'Experiment'), ignore.case = FALSE)) %>%
         select(-contains(c('acid','peptide','IDs')))
@@ -21,10 +27,6 @@ PlotAndromedaScore <- function(peptides,
   #Remove missing values
 
   df_out <- df_out[!is.na(df_out$value),]
-
-
-
-
 
 
   #Repeat rows n numbers of times, being n the frequency (value)

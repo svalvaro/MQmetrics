@@ -1,5 +1,6 @@
 #' Experiment Information
-#'
+#' @param MQPathCombined The directory to the "combined" folder where the
+#'  MaxQuant results are stored.
 #' @param runningTimes The runningTimes.txt table from  MaxQuant Output.
 #' @param  parameters The parameters.txt table from  MaxQuant Output.
 #' @return Returns the time in hours:minutes that lasted the whole Experiment.
@@ -10,7 +11,7 @@
 #' files <- ReadDataFromDir(MQPathCombined)
 #' runningTimes <-  files[["#runningTimes.txt"]]
 #' parameters <- files[["parameters.txt"]]
-#' ExperimentInformation(runningTimes, parameters)
+#' ExperimentInformation(MQPathCombined, runningTimes, parameters)
 #'
 ExperimentInformation <- function(MQPathCombined,
                                   runningTimes,

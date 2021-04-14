@@ -44,6 +44,8 @@
 #'
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.
 #'
+#' @param plot_unmodified_peptides If TRUE, it will show the Unmodified peptides.\code{PlotPTM()}.
+#'
 #'
 #' @return A pdf document with all the results of MQmetrics package.
 #'

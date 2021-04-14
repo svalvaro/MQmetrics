@@ -3,6 +3,8 @@
 #' @param modificationSpecificPeptides modificationSpecificPeptides table from MaxQuant ouput.
 #' @param peptides_modified Minimum number of peptides modified. Default  is 5.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param plot_unmodified_peptides If TRUE, it will show the Unmodified peptides.
+#' @param log_base The logarithmic scale for the intensity. Default is 2.
 #'
 #' @return Two plots per sample
 #' @export

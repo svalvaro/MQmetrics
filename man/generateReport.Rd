@@ -70,6 +70,8 @@ by default is 0.001.}
 dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
+
+\item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified peptides.\code{PlotPTM()}.}
 }
 \value{
 A pdf document with all the results of MQmetrics package.

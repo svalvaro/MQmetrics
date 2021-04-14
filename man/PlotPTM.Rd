@@ -17,6 +17,10 @@ PlotPTM(
 
 \item{peptides_modified}{Minimum number of peptides modified. Default  is 5.}
 
+\item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified peptides.}
+
+\item{log_base}{The logarithmic scale for the intensity. Default is 2.}
+
 \item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{

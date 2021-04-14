@@ -59,6 +59,6 @@ files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE)
 PlotIntensity(files[["proteinGroups.txt"]], long_names = TRUE, sep_names = '_')
 ```
 
-<img src="man/figures/README-example long names-1.png" width="100%" />
+<img src="man/figures/README-example_long_names-1.png" width="100%" />
 
 Check the vignettes for more information.

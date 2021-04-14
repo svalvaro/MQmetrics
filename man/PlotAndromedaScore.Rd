@@ -7,11 +7,19 @@
 PlotAndromedaScore(peptides, palette = "Set2")
 }
 \arguments{
-\item{peptides}{}
+\item{peptides}{peptides.txt table from MaxQuant ouput.}
+
+\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 }
 \value{
-
+Plots the MaxQuant Andromeda Score.
 }
 \description{
 Andromeda score for the best associated MS/MS spectrum.
+}
+\examples{
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+PlotAndromedaScore(peptides)
 }

@@ -44,14 +44,14 @@ MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 The main function of the package is **generateReport()**. It will generate a PDF report containing several visualizations and tables from different MaxQuant output tables.
 As input it is only necessary to provide the Path to the *Combined* folder of MaxQuant output.
 
-```{r generate reprort,  eval = FALSE}
+```{r generate_reprort,  eval = FALSE}
 generateReport(MQPathCombined, long_names = TRUE, sep_names = '_')
 ```
 
 Two useful parameters of every function including **generateReport()** are:
 *long_names* and *sep_names*. They will allow a clear visualization of those samples that have long names separated by a character. In this example, the Experiment names are one full string separated by underscores (_): *PLK010_QC02_210121_HeLa_125ng_150meth*. 
 
-```{r example long names, message=FALSE, warning=FALSE}
+```{r example_long_names, message=FALSE, warning=FALSE}
 # ReadDataFromDir reads all the files needed from the MaxQuant output and remove
 # Potential contaminants, reverse, and proteins identified by site only.
 files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE) 

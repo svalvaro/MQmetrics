@@ -2,6 +2,7 @@
 #'
 #' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
+#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #'  Default is Intensity.
 #'
 #' @return A PCA plot of the Intesities of all the samples.

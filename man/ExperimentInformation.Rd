@@ -7,6 +7,9 @@
 ExperimentInformation(MQPathCombined, runningTimes, parameters)
 }
 \arguments{
+\item{MQPathCombined}{The directory to the "combined" folder where the
+MaxQuant results are stored.}
+
 \item{runningTimes}{The runningTimes.txt table from  MaxQuant Output.}
 
 \item{parameters}{The parameters.txt table from  MaxQuant Output.}
@@ -22,6 +25,6 @@ MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
 files <- ReadDataFromDir(MQPathCombined)
 runningTimes <-  files[["#runningTimes.txt"]]
 parameters <- files[["parameters.txt"]]
-ExperimentInformation(runningTimes, parameters)
+ExperimentInformation(MQPathCombined, runningTimes, parameters)
 
 }

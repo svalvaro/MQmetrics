@@ -28,6 +28,7 @@
 #' @importFrom rlang abort
 #' @importFrom ggforce facet_wrap_paginate
 #' @importFrom RColorBrewer brewer.pal
+#' @importFrom grDevices colorRampPalette
 #'
 #'
 #' @examples

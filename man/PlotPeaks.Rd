@@ -33,9 +33,7 @@ Plots the total number of peaks detected in the full scans and the
 Total number of peaks detected and sequenced
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-summary <- files[['summary.txt']]
+data("MQmetrics_example_data")
 PlotPeaks(summary)
 
 }

@@ -13,10 +13,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
-#' proteinGroups <- files[['proteinGroups.txt']]
+#' data("MQmetrics_example_data")
 #' PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
 #'
 PlotProteinCoverage <- function(peptides,

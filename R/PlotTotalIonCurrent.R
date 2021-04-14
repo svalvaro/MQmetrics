@@ -8,9 +8,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' msmsScans <- files[['msmsScans.txt']]
+#' data("MQmetrics_example_data")
 #' PlotTotalIonCurrent(msmsScans)
 #'
 #'

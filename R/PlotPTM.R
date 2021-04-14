@@ -10,9 +10,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
+#' data("MQmetrics_example_data")
 #' PlotPTM(modificationSpecificPeptides)
 #'
 PlotPTM <- function(modificationSpecificPeptides,

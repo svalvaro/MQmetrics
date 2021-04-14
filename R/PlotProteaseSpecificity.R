@@ -9,9 +9,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
+#' data("MQmetrics_example_data")
 #' PlotProteaseSpecificity(peptides)
 #'
 PlotProteaseSpecificity <- function(peptides,

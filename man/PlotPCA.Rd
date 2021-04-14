@@ -21,9 +21,7 @@ A PCA plot of the Intesities of all the samples.
 Principal Component Analysis of the Intensity values.
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
+data("MQmetrics_example_data")
 PlotPCA(proteinGroups)
 
 }

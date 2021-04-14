@@ -21,10 +21,7 @@ Returns the time in hours:minutes that lasted the whole Experiment.
 Experiment Information
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-runningTimes <-  files[["#runningTimes.txt"]]
-parameters <- files[["parameters.txt"]]
+data("example_data")
 ExperimentInformation(MQPathCombined, runningTimes, parameters)
 
 }

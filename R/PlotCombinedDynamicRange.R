@@ -26,7 +26,11 @@ PlotCombinedDynamicRange <- function(proteinGroups,
   rank <-  proteinGroups %>%  select(c(Intensity))
   rank <- rank[order(rank$Intensity, decreasing=TRUE), ]
   rank$Intensity <- log10(rank$Intensity)
-  rank <- rank[- grep("-Inf", rank$Intensity),]
+
+  if (length(grep("-Inf", rank$Intensity)) > 0 ) {
+    rank <- rank[- grep("-Inf", rank$Intensity),]
+  }
+
 
   vector1 <- seq(1:nrow(rank))
   #Plot error bar to include the 90% of the proteins, 5% on left side, 5% on the right one

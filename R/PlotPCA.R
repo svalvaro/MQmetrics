@@ -43,10 +43,14 @@ PlotPCA <- function(proteinGroups,
 
   }
 
-  if (length(intensities)<2) {
+  if (length(intensities)<2 ) {
     cat('Only one sample was analyzed, PCA can not be applied')
 
-  } else{
+  } else if(nrow(proteinGroups)<2){
+    cat(paste0('PCA can not be performed with only ', nrow(proteinGroups), ' proteins.'))
+  }
+
+  else{
 
     intensities_t <- t(intensities)
     #Remove columns with 0 in all the column

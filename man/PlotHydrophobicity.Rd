@@ -29,9 +29,7 @@ Returns a histogram per sample, showing the frequency of the peptide's
 Peptide hydrophobicity by GRAVY score
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-peptides <- files[['peptides.txt']]
+data("MQmetrics_example_data")
 PlotHydrophobicity(peptides)
 
 }

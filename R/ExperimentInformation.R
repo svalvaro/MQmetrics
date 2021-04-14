@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' data("example_data")
+#' data("MQmetrics_example_data")
 #' ExperimentInformation(MQPathCombined, runningTimes, parameters)
 #'
 ExperimentInformation <- function(MQPathCombined,

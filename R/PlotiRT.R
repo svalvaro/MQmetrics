@@ -10,9 +10,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' evidence <- files[['evidence.txt']]
+#' data("MQmetrics_example_data")
 #' PlotiRT(evidence)
 #'
 PlotiRT <- function(evidence,

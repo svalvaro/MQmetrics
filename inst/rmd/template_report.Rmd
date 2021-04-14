@@ -26,7 +26,7 @@ params:
 ## global options
 knitr::opts_chunk$set(echo=FALSE,
                       warning=FALSE,
-                      error=FALSE,
+                      error=TRUE,
                       message=FALSE, 
                       fig.height = 12,
                       fig.width = 10)

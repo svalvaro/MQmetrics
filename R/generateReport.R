@@ -53,7 +53,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+#' data("MQmetrics_example_data")
 #' generateReport(MQPathCombined)
 #'
 #'

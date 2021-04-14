@@ -21,7 +21,7 @@ Returns the time in hours:minutes that lasted the whole Experiment.
 Experiment Information
 }
 \examples{
-data("example_data")
+data("MQmetrics_example_data")
 ExperimentInformation(MQPathCombined, runningTimes, parameters)
 
 }

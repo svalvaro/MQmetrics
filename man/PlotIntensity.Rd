@@ -41,9 +41,7 @@ A violin plot and boxplot of the intensities in each sample.
 Intensity / LFQ intensity per sample.
 }
 \examples{
-MQPathCombined <-'/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
+data("MQmetrics_example_data")
 PlotIntensity(proteinGroups)
 
 

@@ -17,9 +17,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <-'/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' proteinGroups <- files[['proteinGroups.txt']]
+#' data("MQmetrics_example_data")
 #' PlotIntensity(proteinGroups)
 #'
 #'

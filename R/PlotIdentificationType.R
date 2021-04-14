@@ -14,14 +14,9 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
-#' proteinGroups <- files[['proteinGroups.txt']]
+#' data("MQmetrics_example_data")
 #' PlotIdentificationType(peptides,proteinGroups)
 #'
-#' # If there are long names separated by underscore:
-#' PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
 #'
 PlotIdentificationType <- function(peptides,
                                    proteinGroups,

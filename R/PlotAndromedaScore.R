@@ -7,9 +7,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
+#' data("MQmetrics_example_data")
 #' PlotAndromedaScore(peptides)
 PlotAndromedaScore <- function(peptides,
                                palette = 'Set2'){

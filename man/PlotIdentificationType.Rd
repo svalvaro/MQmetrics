@@ -33,13 +33,8 @@ Plots the compares of the protein and peptide  identification of each sample.
 Protein and Peptide Identification type.
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-peptides <- files[['peptides.txt']]
-proteinGroups <- files[['proteinGroups.txt']]
+data("MQmetrics_example_data")
 PlotIdentificationType(peptides,proteinGroups)
 
-# If there are long names separated by underscore:
-PlotIdentificationType(peptides,proteinGroups, long_names = TRUE, sep_names = '_')
 
 }

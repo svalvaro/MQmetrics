@@ -26,9 +26,7 @@ Returns the dynamic range for all samples combined.
 Dynamic range of all the samples combined
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[["proteinGroups.txt"]]
+data("MQmetrics_example_data")
 PlotCombinedDynamicRange(proteinGroups)
 
 

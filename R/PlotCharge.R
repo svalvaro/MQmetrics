@@ -8,12 +8,8 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' evidence <- files[['evidence.txt']]
+#' data("MQmetrics_example_data")
 #' PlotCharge(evidence)
-#'
-#'
 PlotCharge <- function(evidence,
                        palette = 'Set2'){
   Experiment <- Charge <-  value <- variable <- NULL

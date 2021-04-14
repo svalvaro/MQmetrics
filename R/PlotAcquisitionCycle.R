@@ -8,9 +8,7 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
-#' files <- ReadDataFromDir(MQPathCombined)
-#' msScans <- files[['msScans.txt']]
+#' data("MQmetrics_example_data")
 #' PlotAcquisitionCycle(msScans)
 #'
 PlotAcquisitionCycle <- function(msScans,

@@ -80,7 +80,7 @@ A pdf document with all the results of MQmetrics package.
 Generates a report including all the plots of MQmetrics.
 }
 \examples{
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example4/'
+data("MQmetrics_example_data")
 generateReport(MQPathCombined)
 
 

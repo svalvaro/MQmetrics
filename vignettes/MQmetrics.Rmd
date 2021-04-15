@@ -1,5 +1,6 @@
 ---
 title: "MQmetrics"
+author: 'Alvaro Sanchez-Villalba'
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{MQmetrics}
@@ -14,16 +15,86 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(MQmetrics)
+
+\pagebreak
+
+# Overview
+
+The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the quality and reproducibility of your proteomics mass spectrometry analysis from MaxQuant. It requires several files generated from MaxQuant, and produces a pdf report. 
+It includes several visualization tools to check numerous parameters regarding the quality of the runs.
+It also includes two function to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked in the samples.
+
+# Workflow
+
+## Data Input
+
+You can install the development version from [GitHub](https://github.com/BioAlvaro/) with:
+
+``` {r install, eval = FALSE}
+# install.packages("devtools")
+
+devtools::install_github("BioAlvaro/MQmetrics")
+```
+
+# Data Input
+
+After your MaxQuant run has finished, a folder named **combined** has been created. This folder should have at least two other folders within: 
+
+     ../combined/txt/ Containing all the tables.txt
+     ../combined/proc/ Containing #runningTimes.txt
+
+You just need the path to the **combined** folder and you will be able to start using MQmetrics.
+
+```{r MQPathCombined}
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 ```
 
 
+## Generate a report
+
+First you need to load the library.
+
+```{r report, message=FALSE}
+library(MQmetrics)
+```
+
+Then you just need to use the **generateReport()** function. This function has parameters to control each of the function that it aggregates. You can read more about those parameters by using:
+
+```{r report_question_mark, eval=FALSE}
+?generateReport
+```
+
+Though, the most important parameters are the following:
+
+```{r parameters, eval=FALSE}
+generateReport(MQPathCombined = , # directory to the combined folder
+               output_dir = , # directory to store the resulting pdf
+               long_names = , # If your samples have long names set it to TRUE
+               sep_names = , # Indicate the separator of those long names
+               UniprotID = , # Introduce the UniprotID of a protein of interest
+               intensity_type = ,) # Intensity or LFQ
+
+# The only mandatory parameter is MQPathCombined, the rest are optional.
+```
+
+
+Is as simple as this to use MQmetrics:
+```{r example,eval=FALSE}
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+generateReport(MMQPathCombined)
+```
+
+## Visualization plots
+
+If you are only interested in a few plots from the **generateReport()** function, you can do it.
+You only need to have access to each file independently.
+
+### Load the data
 
 ```{r, message=FALSE, warning=FALSE}
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 
-files <- ReadDataFromDir(MQPathCombined) #This function will read the tables needed for creating the outputs.
+files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE) #This function will read the tables needed for creating the outputs.
 
 # files can be extracted like this:
 
@@ -38,12 +109,16 @@ parameters <- files[["parameters.txt"]]
 runningTimes <-  files[["#runningTimes.txt"]]
 ```
 
+
+### Experiment Information
+
 ```{r ExperimentDuration, comment= NA}
 ExperimentInformation(MQPathCombined,runningTimes, parameters) 
 ```
+### Plots 
 
 ```{r PlotProteins}
-PlotProteinsIdentified(proteinGroups, intensity_type = 'Intensity', long_names = TRUE, sep_names = '_')
+PlotProteinsIdentified(proteinGroups,  long_names = TRUE, sep_names = '_')
 ```
 
 ```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}

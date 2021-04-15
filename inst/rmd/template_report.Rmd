@@ -248,6 +248,4 @@ kable(a[[3]], caption = 'Charge Information')
 kable(a[[4]], caption = 'Peptide hydrophobicity (GRAVY)')
 kable(a[[5]], caption = 'Missed Enzymatic Cleavages')
 
-
-
 ```

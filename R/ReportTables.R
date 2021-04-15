@@ -204,6 +204,10 @@ ReportTables <- function(MQPathCombined,
 
   missed_summary <- pivot_wider(missed_summary, names_from =  `Missed cleavages`, values_from = freq)
 
+  missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
+  colnames(missed_summary)[colnames(missed_summary)=='variable'] <- 'Experiment'
+
+
 
 
   out <- list()

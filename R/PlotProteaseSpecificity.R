@@ -18,11 +18,10 @@ PlotProteaseSpecificity <- function(peptides,
 
   `Missed cleavages` <- value <- variable <- Length  <- NULL
 
-  peptides2 <- peptides %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
+  peptides <- peptides %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
 
-  pep_melt <-  melt(peptides2, id.vars =c("Missed cleavages", 'Length'), measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
+  pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'), measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
   pep_melt1<- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
-
 
   #Create plot2 for length peptides
   pep_melt2 <-   pep_melt
@@ -33,7 +32,7 @@ PlotProteaseSpecificity <- function(peptides,
 
 
 
-  n_samples <- length(peptides2)-2
+  n_samples <- length(peptides)-2
 
   n_pages_needed <- ceiling(
     n_samples/ 5

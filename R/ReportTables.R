@@ -24,17 +24,10 @@ ReportTables <- function(MQPathCombined,
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 
-  #show the contaminants numbers, reverse hits, identified by site
-
-
-  #Proteins Identified and NAs #Reverse #
-
-  #Read the Protein Groups without removing the contamintants To plot it.
+    #Read the Protein Groups without removing the contamintants To plot it.
   proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
                               "\t", escape_double = FALSE,
                               trim_ws = TRUE)
-
-
 
   if (intensity_type == 'Intensity') {
 
@@ -59,8 +52,6 @@ ReportTables <- function(MQPathCombined,
 
     colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
     title <- 'Proteins Identified based on LFQ intensity'
-
-
 
     #Error if LFQ Intensity not found.
 
@@ -96,9 +87,6 @@ ReportTables <- function(MQPathCombined,
   table_summary <- table_summary[,c(6,1,2,3,4,5)]
 
 
-
-
-
   #Table 2 Log10 intensities
 
 
@@ -106,7 +94,7 @@ ReportTables <- function(MQPathCombined,
 
   int_info[int_info == 0] <- NA
 
-  #log10 intensities
+  #log intensities
 
   if(log_base == 2){
     dynamic_table <- do.call(data.frame,
@@ -134,11 +122,6 @@ ReportTables <- function(MQPathCombined,
   rownames(dynamic_table) <- NULL
 
   dynamic_table <- dynamic_table[,c(7,1,2,3,4,5,6)]
-  #expression('Information of the log'[10]*'(Intensity)'))
-  #dynamic_table <- kable(dynamic_table) #%>%
-                        #kable_styling(position = "center")
-
-
 
   #Table 3 Charge
 
@@ -155,16 +138,12 @@ ReportTables <- function(MQPathCombined,
 
   names(charge_percentage)[1] <- 'Experiment'
 
-  #charge_percentage <- kable(charge_percentage)
-
 
 
   #Table 4, GRAVY with median and retention times
   peptides <- files[['peptides.txt']]
 
   df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
-
-
 
   df$GRAVY <-  (df$`A Count` * 1.8 +
                   df$`R Count` * -4.5 +
@@ -187,7 +166,6 @@ ReportTables <- function(MQPathCombined,
                   df$`Y Count` * -1.3 +
                   df$`V Count` * 4.2)/df$Length
 
-
   df <- df %>% select(contains(c('GRAVY', 'Experiment')))
 
   df_out <- melt(df, id.vars = 'GRAVY')
@@ -196,7 +174,6 @@ ReportTables <- function(MQPathCombined,
 
   #Remove value 0,
 
-  #df_out<-df_out[!is.na(df_out$value),]
 
   df_out[is.na(df_out$value),] <- 0
 
@@ -211,19 +188,31 @@ ReportTables <- function(MQPathCombined,
                           Median = format(round(median(GRAVY),2),nsmall = 1))
   names(GRAVY)[1] <- 'Experiment'
 
-  #GRAVY
 
-   out <- list()
+
+  # Table 5
+
+  peptides <- files[["peptides.txt"]] %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
+
+  pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'), measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
+  pep_melt <- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
+
+
+  missed_summary <- pep_melt %>%
+    group_by(variable, `Missed cleavages`) %>%
+    summarise(freq = sum(value))
+
+  missed_summary <- pivot_wider(missed_summary, names_from =  `Missed cleavages`, values_from = freq)
+
+
+
+  out <- list()
 
   out$proteins <- table_summary
   out$intensities <- dynamic_table
   out$charge <- charge_percentage
   out$GRAVY <- GRAVY
-
-
-
+  out$cleavages <- missed_summary
 
   return(out)
-
-
 }

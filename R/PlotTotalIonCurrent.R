@@ -23,6 +23,25 @@ PlotTotalIonCurrent <- function(msmsScans,
 
   df <- msmsScans %>% select(contains(c('Experiment','Retention time','Total ion current')))
 
+  # Deal with duplicates in the retention time by group
+  #
+  # duplicated_rt <- df %>%
+  #                     group_by(Experiment) %>%
+  #                     summarise(freq = which(duplicated(`Retention time`)))
+  #                     #which(duplicated(`Retention time`))
+  #
+  # df_unique <- df
+  # df_unique$`Retention time`[duplicated_rt$freq]  = df_unique$`Retention time`[duplicated_rt$freq] + 0.0005
+  #
+  # #checking for unique values in rt
+  # duplicated_rt <- df_unique %>%
+  #                     group_by(Experiment) %>%
+  #                     summarise(freq = which(duplicated(`Retention time`)))
+  #
+  # df_unique$`Retention time`[duplicated_rt$freq]  = df_unique$`Retention time`[duplicated_rt$freq] + 0.0005
+
+
+
   n_samples <- length(unique(df$Experiment))
 
   n_pages_needed <- ceiling(
@@ -35,6 +54,18 @@ PlotTotalIonCurrent <- function(msmsScans,
 
 
   # Implement savitzkyGolay
+
+
+  # df_wider <- pivot_wider(df, names_from = Experiment, values_from = `Total ion current`)
+  #
+  #
+  #
+  #
+  # df_wider_sg <-  df_wider
+  #
+  # df_wider_sg[,-1][df_wider_sg[,-1] == 'NULL'] = 0
+  #
+  # df_wider_sg[-1] <- lapply(df_wider_sg[-1], savitzkyGolay, p = 3, w = 11, m = 0)
 
   # df <- df[order(df$`Total ion current`),]
   #

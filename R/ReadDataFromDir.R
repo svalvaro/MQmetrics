@@ -9,11 +9,6 @@
 #'
 #'
 #' @examples
-#'
-#' data("MQmetrics_example_data")
-#'
-#' files <- ReadDataFromDir(MQPathCombined)
-#'
 ReadDataFromDir <- function(MQPathCombined,
                             remove_contaminants = TRUE){
 

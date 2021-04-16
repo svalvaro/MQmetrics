@@ -17,10 +17,3 @@ The files from the MaxQuant with the contaminants and Reverse hits removed.
 \description{
 Read MaxQuant Tables From Directory
 }
-\examples{
-
-data("MQmetrics_example_data")
-
-files <- ReadDataFromDir(MQPathCombined)
-
-}

@@ -53,10 +53,8 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' generateReport(MQPathCombined)
-#'
-#'
 generateReport = function(MQPathCombined,
                           output_dir = getwd(),
                           log_base = 2,

@@ -32,7 +32,9 @@ Plots the MS/MS submitted and Identified in each sample.
 Comparison of the MS/MS submitted and identified in each sample.
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+files <- ReadDataFromDir(MQPathCombined)
+summary <- files[['summary.txt']]
 PlotMsMs(summary)
 
 }

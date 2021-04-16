@@ -7,7 +7,10 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
+#' parameters <- files[["parameters.txt"]]
+#' runningTimes <-  files[["#runningTimes.txt"]]
 #' ExperimentInformation(MQPathCombined, runningTimes, parameters)
 #'
 ExperimentInformation <- function(MQPathCombined,

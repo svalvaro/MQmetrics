@@ -14,7 +14,9 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
+#' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinsIdentified(proteinGroups)
 #'
 PlotProteinsIdentified <- function(proteinGroups,

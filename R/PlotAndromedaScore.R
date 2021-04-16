@@ -7,7 +7,9 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
 #' PlotAndromedaScore(peptides)
 PlotAndromedaScore <- function(peptides,
                                palette = 'Set2'){

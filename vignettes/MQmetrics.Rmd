@@ -92,9 +92,17 @@ You only need to have access to each file independently.
 ### Load the data
 
 ```{r, message=FALSE, warning=FALSE}
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 
-files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE) #This function will read the tables needed for creating the outputs.
+# To create the vignettes and examples I use data that is in the package itself:
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+
+# But in a real world scenario, your data will be in a folder in your computer:
+
+# MQPathCombined <- '/home/user/MaxQuant_outputs/example1/combined'
+
+
+# ReadDataFromDir will read the tables needed for creating the outputs.
+files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE) 
 
 # files can be extracted like this:
 

@@ -12,7 +12,9 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
+#' summary <- files[['summary.txt']]
 #' PlotIsotopePattern(summary)
 #'
 PlotIsotopePattern <- function(summary,

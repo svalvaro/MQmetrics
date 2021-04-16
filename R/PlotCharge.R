@@ -8,7 +8,9 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
+#' evidence <- files[['evidence.txt']]
 #' PlotCharge(evidence)
 PlotCharge <- function(evidence,
                        palette = 'Set2'){

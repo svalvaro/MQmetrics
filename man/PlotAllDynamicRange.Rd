@@ -22,7 +22,9 @@ Returns one plot for each sample, being the dynamic range.
 Plots the dynamic range for all samples
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[['proteinGroups.txt']]
 PlotAllDynamicRange(proteinGroups)
 
 }

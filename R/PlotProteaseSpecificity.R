@@ -9,7 +9,9 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
+#' peptides <- files[['peptides.txt']]
 #' PlotProteaseSpecificity(peptides)
 #'
 PlotProteaseSpecificity <- function(peptides,

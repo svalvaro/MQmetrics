@@ -18,6 +18,8 @@ Plots the MaxQuant Andromeda Score.
 Andromeda score for the best associated MS/MS spectrum.
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
 PlotAndromedaScore(peptides)
 }

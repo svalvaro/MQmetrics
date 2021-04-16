@@ -33,7 +33,10 @@ Plots the compares of the protein and peptide  identification of each sample.
 Protein and Peptide Identification type.
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+proteinGroups <- files[['proteinGroups.txt']]
 PlotIdentificationType(peptides,proteinGroups)
 
 

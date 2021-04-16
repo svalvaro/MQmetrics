@@ -9,6 +9,8 @@
 #'
 #'
 #' @examples
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' files <- ReadDataFromDir(MQPathCombined)
 ReadDataFromDir <- function(MQPathCombined,
                             remove_contaminants = TRUE){
 

@@ -35,7 +35,10 @@ Two plots for each sample, the end position vs the start position of
 Protein coverage and degradation.
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+files <- ReadDataFromDir(MQPathCombined)
+peptides <- files[['peptides.txt']]
+proteinGroups <- files[['proteinGroups.txt']]
 PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
 
 }

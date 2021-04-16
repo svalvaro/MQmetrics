@@ -16,7 +16,9 @@ A plot showing the protein coverage in all samples.
 Protein Coverage of all samples.
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+files <- ReadDataFromDir(MQPathCombined)
+proteinGroups <- files[['proteinGroups.txt']]
 PlotProteinCoverageAll(proteinGroups)
 
 }

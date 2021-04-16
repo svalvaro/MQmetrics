@@ -13,14 +13,13 @@
 #' @export
 #'
 #' @examples
-#' data("MQmetrics_example_data")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' ReportTables(MQPathCombined)
-#'
 ReportTables <- function(MQPathCombined,
                          log_base = 2,
                          intensity_type = 'Intensity'){
 
-  sd <- median <- Experiment <- Charge <- variable <- NULL
+  sd <- median <- Experiment <- Charge <- variable <- `Missed cleavages` <- value <- `freq` <- NULL
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 

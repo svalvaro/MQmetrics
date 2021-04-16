@@ -80,8 +80,6 @@ A pdf document with all the results of MQmetrics package.
 Generates a report including all the plots of MQmetrics.
 }
 \examples{
-data("MQmetrics_example_data")
+MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 generateReport(MQPathCombined)
-
-
 }

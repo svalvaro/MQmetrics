@@ -81,7 +81,7 @@ generateReport(MQPathCombined = , # directory to the combined folder
 Is as simple as this to use MQmetrics:
 ```{r example,eval=FALSE}
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
-generateReport(MMQPathCombined)
+generateReport(MQPathCombined)
 ```
 
 ## Visualization plots

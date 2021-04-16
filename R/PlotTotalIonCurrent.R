@@ -20,7 +20,10 @@ PlotTotalIonCurrent <- function(msmsScans,
 
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
-  n_samples <- length(unique(msmsScans$Experiment))
+
+  df <- msmsScans %>% select(contains(c('Experiment','Retention time','Total ion current')))
+
+  n_samples <- length(unique(df$Experiment))
 
   n_pages_needed <- ceiling(
     n_samples / 5
@@ -31,6 +34,30 @@ PlotTotalIonCurrent <- function(msmsScans,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
 
+  # Implement savitzkyGolay
+
+  # df <- df[order(df$`Total ion current`),]
+  #
+  #
+  # vector_sg <- df$`Total ion current`
+  #
+  # vector_sg2 <- prospectr::savitzkyGolay(
+  #   X = vector_sg,
+  #   m =1,
+  #   p = 2,
+  #   w = 3
+  # )
+  #
+  # df$`Total ion current` <- vector_sg2
+  #
+  # length(vector_sg2)
+  #
+  # plot(x = 1:length(vector_sg),
+  #      vector_sg, type = 'l')
+  #
+  # plot(x = 1:length(vector_sg2),
+  #      vector_sg2, type = 'l')
+
   for(ii in seq_len(n_pages_needed)){
     if(n_samples < 5){
       nrow = n_samples
@@ -38,8 +65,7 @@ PlotTotalIonCurrent <- function(msmsScans,
       nrow = 5
     }
 
-
-    p <- msmsScans %>%   ggplot(aes(`Retention time`,`Total ion current`))+
+    p <- df %>%   ggplot(aes(`Retention time`,`Total ion current`))+
       geom_line(aes(colour=Experiment))+
       facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii, scales = 'fixed')+
       ggtitle('Total Ion Current')+

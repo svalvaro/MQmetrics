@@ -4,6 +4,7 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 params:
   input_dir: ''
+  remove_contaminants: ''
   log_base: ''
   long_names: ''
   sep_names: ''
@@ -36,7 +37,8 @@ knitr::opts_chunk$set(echo=FALSE,
 ```{r library}
 library(MQmetrics)
 MQPathCombined <- params$input_dir
-files <- ReadDataFromDir(MQPathCombined) 
+files <- ReadDataFromDir(MQPathCombined, remove_contaminants = params$remove_contaminants) 
+
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]
 msScans <- files[['msScans.txt']]
@@ -204,12 +206,14 @@ PlotProteinCoverage(peptides,
 \newpage
 ```{r irt_peps1}
 PlotiRT(evidence, 
-        show_calibrated_rt = params$show_calibrated_rt)
+        show_calibrated_rt = params$show_calibrated_rt,
+        tolerance =  params$tolerance)
 ```
 \newpage
 
 ```{r irt_peps2}
-PlotiRTScore(evidence)
+PlotiRTScore(evidence,
+             tolerance =  params$tolerance)
 ```
 
 

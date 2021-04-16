@@ -7,6 +7,7 @@
 generateReport(
   MQPathCombined,
   output_dir = getwd(),
+  remove_contaminants = TRUE,
   log_base = 2,
   long_names = FALSE,
   sep_names = NULL,

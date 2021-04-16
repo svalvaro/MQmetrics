@@ -57,6 +57,7 @@
 #' generateReport(MQPathCombined)
 generateReport = function(MQPathCombined,
                           output_dir = getwd(),
+                          remove_contaminants = TRUE,
                           log_base = 2,
                           long_names = FALSE,
                           sep_names = NULL,
@@ -85,6 +86,7 @@ generateReport = function(MQPathCombined,
 
   rmarkdown::render(input = input,
                     params = list(input_dir = MQPathCombined,
+                                  remove_contaminants = remove_contaminants,
                                   log_base = log_base,
                                   long_names = long_names,
                                   sep_names = sep_names,

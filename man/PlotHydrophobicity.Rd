@@ -7,6 +7,7 @@
 PlotHydrophobicity(
   peptides,
   show_median = TRUE,
+  size_median = 1.5,
   binwidth = 0.2,
   palette = "Set2"
 )

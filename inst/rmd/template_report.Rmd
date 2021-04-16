@@ -18,6 +18,7 @@ params:
   show_max_value: ''
   peptides_modified: ''
   show_median: ''
+  size_median: ''
   binwidth: ''
   plot_unmodified_peptides: ''
 ---
@@ -126,6 +127,7 @@ PlotProteaseSpecificity(peptides,
 PlotHydrophobicity(peptides,
           palette = params$palette,
           show_median =  params$show_median,
+          size_median = params$size_median,
           binwidth = params$binwidth)
 ```
 
@@ -138,7 +140,7 @@ PlotAndromedaScore(peptides,
 
 \newpage
 ```{r IdentificationType}
-if(parameters$Value[27] == "True"){
+if( parameters$Value[parameters$Parameter == 'Match between runs'] == "True"){
   PlotIdentificationType(peptides, 
                          proteinGroups,
                          palette = params$palette,

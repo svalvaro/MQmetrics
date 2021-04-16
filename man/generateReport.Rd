@@ -21,6 +21,7 @@ generateReport(
   show_max_value = TRUE,
   peptides_modified = 1,
   show_median = TRUE,
+  size_median = 1.5,
   binwidth = 0.1,
   plot_unmodified_peptides = FALSE
 )

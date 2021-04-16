@@ -155,14 +155,11 @@ PlotCharge(evidence)
 
 ```{r missed_cleavages,fig.height=10}
 PlotProteaseSpecificity(peptides)
-
-# show in tabular format. (table.) 
 ```
 
 ```{r PlotHydrophobicity, warning= FALSE, message= FALSE}
 PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
 
-#make the line thicker
 ```
 
 ```{r AndromedaScore, message = FALSE, warning = FALSE}

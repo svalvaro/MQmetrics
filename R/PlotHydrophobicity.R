@@ -19,6 +19,7 @@
 #'
 PlotHydrophobicity <- function(peptides,
                       show_median = TRUE,
+                      size_median = 1.5,
                       binwidth = 0.2,
                       palette = 'Set2'){
 
@@ -105,7 +106,7 @@ PlotHydrophobicity <- function(peptides,
 
       print(p + geom_vline(data = median_groups,
                      aes(xintercept = `median(GRAVY)`,group = variable),
-                     color = 'red',  linetype = 'dashed'))
+                     color = 'red',  linetype = 'dashed', size = size_median))
 
     } else{
 

@@ -15,7 +15,6 @@
 #' PlotProteaseSpecificity(peptides)
 #'
 PlotProteaseSpecificity <- function(peptides,
-                                    position_dodge_width = 1,
                                     palette = 'Set2'){
 
   `Missed cleavages` <- value <- variable <- Length  <- NULL
@@ -24,6 +23,8 @@ PlotProteaseSpecificity <- function(peptides,
 
   pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'), measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
   pep_melt1<- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
+
+  pep_melt1$variable <- gsub('Experiment', '', pep_melt1$variable)
 
   #Create plot2 for length peptides
   pep_melt2 <-   pep_melt
@@ -54,7 +55,7 @@ PlotProteaseSpecificity <- function(peptides,
 
     #create plot1 for missed cleavages
     plot_cleavages <- ggplot(pep_melt1, aes(x = `Missed cleavages`  , y = value, fill = variable))+
-      geom_bar(stat = 'identity', color = 'black', position = position_dodge(width = position_dodge_width),
+      geom_bar(stat = 'identity', color = 'black',
                show.legend = FALSE)+
       ggtitle(label = 'Missed enzymatic cleavages')+
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
@@ -66,7 +67,7 @@ PlotProteaseSpecificity <- function(peptides,
 
 
     plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
-      geom_bar(stat = 'identity', color = 'black', position = position_dodge(width = position_dodge_width),
+      geom_bar(stat = 'identity', color = 'black',
                show.legend = FALSE)+
       ggtitle(label = 'Peptide Length')+
       xlab(label = 'Length')+

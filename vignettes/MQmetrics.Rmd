@@ -123,93 +123,139 @@ runningTimes <-  files[["#runningTimes.txt"]]
 ```{r ExperimentDuration, comment= NA}
 ExperimentInformation(MQPathCombined,runningTimes, parameters) 
 ```
-### Plots 
+### Visualizations.
 
+The function **PlotProteinsIdentified()**, will take as input the proteinGroups.txt table and show the number of proteins and NAs in each sample. It can differentiate two types of intensities: 'Intensity' or 'LFQ'.
 ```{r PlotProteins}
-PlotProteinsIdentified(proteinGroups,  long_names = TRUE, sep_names = '_')
+PlotProteinsIdentified(proteinGroups = proteinGroups,
+                       long_names = TRUE,
+                       sep_names = '_',
+                       intensity_type = 'LFQ',
+                       palette = 'Set2')
 ```
+The function **PlotPeptidesIdentified()**,  will take as input the summary table and show the number of peptides sequences identified in each sample.
 
 ```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
-PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
-
-#Show in the tables a a percentage.
+PlotPeptidesIdentified(summary = summary, 
+                       long_names = TRUE,
+                       sep_names = '_', 
+                       palette = 'Set3')
 ```
-
+The function **PlotMsMs()**,  will take as input the summary.txt table and show the number of MS/MS Submitted and identified in each sample.
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
-PlotMsMs(summary,long_names = TRUE, sep_names = '_')
+PlotMsMs(summary = summary,
+         long_names = TRUE, 
+         sep_names = '_',
+         position_dodge_width = 1,
+         palette = 'Set2')
 #Show 40% line
 ```
+The function **PlotPeaks()**, will take as input the summary.txt table and show the number peaks detected and sequenced in each sample.
 
 ```{r PlotPeaks, fig.height=5, fig.width=7.2}
-PlotPeaks(summary, long_names = TRUE, sep_names = '_')
+PlotPeaks(summary = summary,
+          long_names = TRUE,
+          sep_names = '_',
+          palette = 'Set2')
 ```
 
+
+The function **PlotIsotopePattern()**,will take as input the summary.txt table and show the number isotope patterns detected and sequenced in each sample.
 ```{r isotope, fig.height=5, fig.width=7.2}
-PlotIsotopePattern(summary,long_names = TRUE, sep_names = '_')
+PlotIsotopePattern(summary = summary,
+                  long_names = TRUE,
+                  sep_names = '_',
+                  palette = 'Set2')
 ```
+
+The function **PlotCharge()**, will take as input the evidence.txt table and show the charge-state of the precursor ion in each sample.
 
 ```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
-PlotCharge(evidence)
+PlotCharge(evidence = evidence, 
+           palette = 'Set2')
 ```
+The function **PlotProteaseSpecificity()**, will take as input the summary.txt table and show the number peaks detected and sequenced in each sample.
 
 ```{r missed_cleavages,fig.height=10}
-PlotProteaseSpecificity(peptides)
+PlotProteaseSpecificity(peptides = peptides, 
+                        palette = 'Set2')
 ```
+
+The function **PlotHydrophobicity()**, takes as input the peptides.txt table and returns the distribution of GRAVY score.
 
 ```{r PlotHydrophobicity, warning= FALSE, message= FALSE}
-PlotHydrophobicity(peptides, palette = 'Set2', show_median =  TRUE, binwidth = 0.1)
+PlotHydrophobicity(peptides = peptides,
+                   show_median =  TRUE,
+                   binwidth = 0.1, 
+                   size_median = 1.5, 
+                   palette = 'Set2')
 
 ```
+The function **PlotAndromedaScore()**, takes as input the peptides.txt table and returns the distribution of MaxQuant's Andromeda Score.
 
 ```{r AndromedaScore, message = FALSE, warning = FALSE}
-PlotAndromedaScore(peptides)
+PlotAndromedaScore(peptides = peptides,
+                   palette = 'Set2')
 ```
+
+The function **PlotIdentificationType()**, takes as input the peptides.txt and proteinGroups.txt tables and returns the number of peptides and proteins identified by Matching Between Runs or by MS/MS.
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-if(parameters$Value[27] == "True"){
-  PlotIdentificationType(peptides, 
-                         proteinGroups,
-                         palette = 'Set2',
-                         long_names = TRUE, 
-                         sep_names = '_')  
-} else{
-  cat('Match Between Runs was not used during the MaxQuant analysis.
-No Identification Type to show.')
-}
+PlotIdentificationType(peptides, 
+                       proteinGroups,
+                       long_names = TRUE, 
+                       sep_names = '_', 
+                       palette = 'Set2')  
+
 ```
+The function **PlotIntensity()**, takes as input the  proteinGroups.txt table and returns a violin plot for those intensities. If the 'LFQ' intensities are in the proteinGroups.txt table, it will by default split the violion into "LFQ' and 'Intensity'. The parameter split_violin_intensity, can be set to FALSE and then select wether you would like to visualize the 'Intensity' or 'LFQ' intensity individually.
+If split_violin_intensity is set TRUE, but no LFQ intensities are not present, it will automatically show the normal Intensities.
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups, split_violin_intensity = TRUE, intensity_type = 'LFQ', 
-              log_base = 2, long_names = TRUE, sep_names = '_')
-
-
-
-### when too many samples more than 20, the split_violin function did not work.
-
+PlotIntensity(proteinGroups = proteinGroups, 
+              split_violin_intensity = TRUE, 
+              intensity_type = 'LFQ', 
+              log_base = 2, 
+              long_names = TRUE, 
+              sep_names = '_', 
+              palette = 'Set2')
 
 ```
 
+The function **PlotPCA()** takes as input the proteinGroups.txt table and creates a Principal Componente Analysis plot of each Experiment.
 ```{r PlotPCA, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotPCA(proteinGroups, intensity_type = 'Intensity', palette = 'Set2')
+PlotPCA(proteinGroups = proteinGroups,
+        intensity_type = 'LFQ',
+        palette = 'Set2')
 ```
 
+The function **PlotCombinedDynamicRange()** takes as input the proteinGroups.txt table and returns the dynamic range of all experiments combined. If the parameter show_shade is used, a square will appear showing the percent_proteins selected and the orders of abundance.
 ```{r DynamicRange, fig.height=5, fig.width=7.2}
-PlotCombinedDynamicRange(proteinGroups, show_shade = TRUE, percent_proteins = 0.79)
+PlotCombinedDynamicRange(proteinGroups = proteinGroups,
+                         show_shade = TRUE,
+                         percent_proteins = 0.90)
 ```
+
+
+The function **PlotAllDynamicRange()** takes as input the proteinGroups.txt table and returns the dynamic range of all experiments separated. If the parameter show_shade is used, a square will appear showing the percent_proteins selected and the orders of abundance.
 
 ```{r DynamicRangeAll, fig.height=10, fig.width=7.2}
-PlotAllDynamicRange(proteinGroups,show_shade = TRUE, percent_proteins = 0.90)
+PlotAllDynamicRange(proteinGroups = proteinGroups,
+                    show_shade = TRUE, 
+                    percent_proteins = 0.90)
 ```
 
+The function **PlotProteinCoverageAll()** takes as input the proteinGroups.txt table and returns a plot that shows the number of proteins identified in the samples.
+
 ```{r protein_coverage_all}
-PlotProteinCoverageAll(proteinGroups)
+PlotProteinCoverageAll(proteinGroups = proteinGroups)
 
 #Put in a table at the end of tables.
 
 ```
-
+The function **PlotProteinCoverage()** takes as input the peptides.txt and proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the coverage of that protein in each of the samples.
 ```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q99714", log_base = 2, segment_width = 1)
+PlotProteinCoverage(peptides,proteinGroups, UniprotID = "P49327", log_base = 2, segment_width = 3)
 ```
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}

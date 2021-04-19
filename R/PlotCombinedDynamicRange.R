@@ -33,17 +33,11 @@ PlotCombinedDynamicRange <- function(proteinGroups,
   vector1 <- seq(1:nrow(rank))
   #Plot error bar to include the 90% of the proteins, 5% on left side, 5% on the right one
 
-
-
-
-
-
-
   a <- ggplot(rank, aes(x=vector1,y = Intensity))+
           geom_point(colour='darkgrey', alpha=0.75, shape=21)+
           theme_bw()+
           ggtitle('Dynamic range of protein abundance all samples')+
-          ylab(expression('log'[10]*'(Intensity)'))+
+          ylab(expression('Log'[10]*'(Intensity)'))+
           xlab('Protein Abundance Rank')
 
   if (show_shade == TRUE){

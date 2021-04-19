@@ -2,6 +2,7 @@
 #'
 #' @param peptides peptides.txt table from MaxQuant ouput.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Plots the MaxQuant Andromeda Score.
 #' @export

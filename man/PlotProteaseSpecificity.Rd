@@ -11,7 +11,7 @@ PlotProteaseSpecificity(peptides, palette = "Set2", plots_per_page = 5)
 
 \item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
 
-\item{position_dodge_width}{position of the columns within each others.}
+\item{plots_per_page}{Establish the maximum number of plots per page.}
 }
 \value{
 Two plots per sample: Peptide length distribution and the number of

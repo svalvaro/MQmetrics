@@ -1,8 +1,8 @@
 #' Protease Specificity
 #'
 #' @param peptides peptides.txt table from MaxQuant ouput.
-#' @param  position_dodge_width position of the columns within each others.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample: Peptide length distribution and the number of
 #'  missed enzymatic cleavages.

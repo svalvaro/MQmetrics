@@ -6,6 +6,7 @@
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #' @param size_median The width of the median line in the plots.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Returns a histogram per sample, showing the frequency of the peptide's
 #'  hydrophobicity GRAVY value.

@@ -6,6 +6,7 @@
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #' @param segment_width Width of the segments to improve visualization. Default is 1.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots for each sample, the end position vs the start position of
 #'  each peptide of the given protein found. And the Intensity of a given peptide

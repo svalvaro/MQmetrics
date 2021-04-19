@@ -24,6 +24,8 @@ dashed line.By default is TRUE.}
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+
+\item{plots_per_page}{Establish the maximum number of plots per page.}
 }
 \value{
 Returns a histogram per sample, showing the frequency of the peptide's

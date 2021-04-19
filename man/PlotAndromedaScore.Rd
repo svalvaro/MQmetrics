@@ -10,6 +10,8 @@ PlotAndromedaScore(peptides, palette = "Set2", plots_per_page = 5)
 \item{peptides}{peptides.txt table from MaxQuant ouput.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+
+\item{plots_per_page}{Establish the maximum number of plots per page.}
 }
 \value{
 Plots the MaxQuant Andromeda Score.

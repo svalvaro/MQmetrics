@@ -5,6 +5,7 @@
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
 #' @param plot_unmodified_peptides If TRUE, it will show the Unmodified peptides.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample
 #' @export

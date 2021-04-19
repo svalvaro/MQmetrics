@@ -2,6 +2,7 @@
 #'
 #' @param msScans The msScans.txt file from the MaxQuant ouptut.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample, one with the cycle tyme vs retention time,
 #'  and MS/MS count vs retention time.

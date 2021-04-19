@@ -50,6 +50,8 @@
 #'
 #' @param plot_unmodified_peptides If TRUE, it will show the Unmodified peptides.\code{PlotPTM()}.
 #'
+#' @param plots_per_page Establish the maximum number of plots per page.
+#'
 #'
 #' @return A pdf document with all the results of MQmetrics package.
 #'

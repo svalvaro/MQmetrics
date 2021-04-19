@@ -3,6 +3,7 @@
 #' @param msmsScans The msmsScans.txt table from  MaxQuant Output.
 #' @param show_max_value If TRUE, it will show the max TIC value of each sample.
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Returns a plot the Total Ion Current in each sample. The maximum value is also plotted.
 #' @export

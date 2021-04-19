@@ -137,6 +137,7 @@ PlotPeptidesIdentified(summary, long_names = TRUE, sep_names = '_')
 
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
 PlotMsMs(summary,long_names = TRUE, sep_names = '_')
+
 #Show 40% line
 ```
 

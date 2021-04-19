@@ -1,8 +1,8 @@
 Parameter	Value
-Version	1.6.12.0
-User name	marek.vrbacky
+Version	1.6.17.0
+User name	thomas.stehrer
 Machine name	FGU045PC004
-Date of writing	03/07/2021 15:08:58
+Date of writing	04/16/2021 20:21:02
 Include contaminants	True
 PSM FDR	0.01
 PSM FDR Crosslink	0.01
@@ -23,7 +23,7 @@ Peptides used for protein quantification	Razor
 Discard unmodified counterpart peptides	True
 Label min. ratio count	2
 Use delta score	False
-iBAQ	True
+iBAQ	False
 iBAQ log fit	False
 Match between runs	True
 Matching time window [min]	0.7
@@ -31,12 +31,11 @@ Match ion mobility window [indices]	0.05
 Alignment time window [min]	20
 Alignment ion mobility window [indices]	1
 Find dependent peptides	False
-Fasta file	C:\MaxQuant_Databases\UP000005640_9606.fasta
+Fasta file	C:\MaxQuant_Databases\iRT_peptides_Biognosys_irtfusion.fasta;C:\MaxQuant_Databases\UP000005640_9606.fasta
 Decoy mode	revert
 Include contaminants	True
 Advanced ratios	True
 Fixed andromeda index folder	
-Temporary folder	
 Combined folder location	
 Second peptides	True
 Stabilize large LFQ ratios	True
@@ -52,7 +51,7 @@ Write allPeptides table	True
 Write mzRange table	True
 Write DIA fragments table	True
 Write pasefMsmsScans table	True
-Write accumulatedPasefMsmsScans table	True
+Write accumulatedPasefMsmsScans table	False
 Max. peptide mass [Da]	4600
 Min. peptide length for unspecific search	8
 Max. peptide length for unspecific search	25

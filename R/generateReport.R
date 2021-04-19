@@ -115,23 +115,4 @@ generateReport = function(MQPathCombined,
                     clean = TRUE)
 
 
-  # #Determine the template for the report table,
-  #
-  # if(report_tables == TRUE){
-  #
-  #   input2 = system.file("rmd/tables_template.Rmd", package = "MQmetrics")
-  #
-  #   rmarkdown::render(input = input2,
-  #                     params = list(input_dir = MQPathCombined,
-  #                                   log_base = log_base,
-  #                                   intensity_type = intensity_type),
-  #                     output_file = "MQmetrics_report_tables.pdf",
-  #                     output_dir = output_dir,
-  #                     clean = TRUE)
-  #
-  # }
-
-  # #Run the render
-  # outputFileName  = do.call('render',args=args)
-  # invisible(outputFileName)
 }

@@ -15,7 +15,8 @@
 #' PlotProteaseSpecificity(peptides)
 #'
 PlotProteaseSpecificity <- function(peptides,
-                                    palette = 'Set2'){
+                                    palette = 'Set2',
+                                    plots_per_page = 5){
 
   `Missed cleavages` <- value <- variable <- Length  <- NULL
 
@@ -38,7 +39,7 @@ PlotProteaseSpecificity <- function(peptides,
   n_samples <- length(peptides)-2
 
   n_pages_needed <- ceiling(
-    n_samples/ 5
+    n_samples/ plots_per_page
   )
 
   colourCount = n_samples
@@ -47,10 +48,10 @@ PlotProteaseSpecificity <- function(peptides,
 
   for (ii in seq_len(n_pages_needed)) {
 
-    if(n_samples <5){
+    if(n_samples < plots_per_page){
       nrow = n_samples
     } else{
-      nrow = 5
+      nrow = plots_per_page
     }
 
     #create plot1 for missed cleavages

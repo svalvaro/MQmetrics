@@ -4,7 +4,7 @@
 \alias{PlotAndromedaScore}
 \title{Andromeda score for the best associated MS/MS spectrum.}
 \usage{
-PlotAndromedaScore(peptides, palette = "Set2")
+PlotAndromedaScore(peptides, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
 \item{peptides}{peptides.txt table from MaxQuant ouput.}

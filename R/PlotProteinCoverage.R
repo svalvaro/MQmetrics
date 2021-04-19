@@ -24,7 +24,8 @@ PlotProteinCoverage <- function(peptides,
                                 UniprotID = NULL,
                                 log_base = 2,
                                 segment_width = 1,
-                                palette = 'Set2'){
+                                palette = 'Set2',
+                                plots_per_page = 5){
 
   `Start position` <-  `End position` <- variable <- value <- NULL
 
@@ -68,16 +69,16 @@ PlotProteinCoverage <- function(peptides,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
   n_pages_needed <- ceiling(
-    colourCount/ 5
+    colourCount/ plots_per_page
   )
 
 
   for (ii in seq_len(n_pages_needed)) {
 
-    if(colourCount <5){
+    if(colourCount <plots_per_page){
       nrow = colourCount
     } else{
-      nrow = 5
+      nrow = plots_per_page
     }
 
 

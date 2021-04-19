@@ -4,7 +4,7 @@
 \alias{PlotCharge}
 \title{The charge-state of the precursor ion.}
 \usage{
-PlotCharge(evidence, palette = "Set2")
+PlotCharge(evidence, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
 \item{evidence}{The evidence.txt file from the MaxQuant ouptut.}

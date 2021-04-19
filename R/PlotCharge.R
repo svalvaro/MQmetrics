@@ -13,7 +13,8 @@
 #' evidence <- files[['evidence.txt']]
 #' PlotCharge(evidence)
 PlotCharge <- function(evidence,
-                       palette = 'Set2'){
+                       palette = 'Set2',
+                       plots_per_page = 5){
   Experiment <- Charge <-  value <- variable <- NULL
 
   ev <- evidence %>%
@@ -26,7 +27,7 @@ PlotCharge <- function(evidence,
 
 
   n_pages_needed <- ceiling(
-    length(unique(ev_agrup$Experiment))/ 5
+    length(unique(ev_agrup$Experiment))/ plots_per_page
   )
 
 
@@ -38,10 +39,10 @@ PlotCharge <- function(evidence,
 
  for (ii in seq_len(n_pages_needed)) {
 
-   if(colourCount <5){
+   if(colourCount < plots_per_page){
      nrow = colourCount
    } else{
-     nrow = 5
+     nrow = plots_per_page
    }
 
 

@@ -24,7 +24,8 @@ generateReport(
   show_median = TRUE,
   size_median = 1.5,
   binwidth = 0.1,
-  plot_unmodified_peptides = FALSE
+  plot_unmodified_peptides = FALSE,
+  plots_per_page = 5
 )
 }
 \arguments{

@@ -80,7 +80,8 @@ generateReport = function(MQPathCombined,
                           show_median = TRUE,
                           size_median = 1.5,
                           binwidth = 0.1,
-                          plot_unmodified_peptides = FALSE){
+                          plot_unmodified_peptides = FALSE,
+                          plots_per_page = 5){
 
 
 
@@ -109,7 +110,8 @@ generateReport = function(MQPathCombined,
                                   show_median = show_median,
                                   size_median = size_median,
                                   binwidth = binwidth,
-                                  plot_unmodified_peptides = plot_unmodified_peptides),
+                                  plot_unmodified_peptides = plot_unmodified_peptides,
+                                  plots_per_page = plots_per_page),
                     output_file = "MQmetrics_report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)

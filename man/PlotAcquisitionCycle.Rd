@@ -4,7 +4,7 @@
 \alias{PlotAcquisitionCycle}
 \title{Acquisition Cycle and MS/MS}
 \usage{
-PlotAcquisitionCycle(msScans, palette = "Set2")
+PlotAcquisitionCycle(msScans, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
 \item{msScans}{The msScans.txt file from the MaxQuant ouptut.}

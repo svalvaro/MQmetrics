@@ -14,7 +14,8 @@
 #' PlotAcquisitionCycle(msScans)
 #'
 PlotAcquisitionCycle <- function(msScans,
-                                 palette = 'Set2'){
+                                 palette = 'Set2',
+                                 plots_per_page = 5){
   `Retention time` <- `Cycle time` <- `Experiment` <- `MS/MS count` <- NULL
 
 
@@ -24,7 +25,7 @@ PlotAcquisitionCycle <- function(msScans,
   n_samples <- length(unique(data_table$Experiment))
 
   n_pages_needed <- ceiling(
-    n_samples/ 5
+    n_samples/ plots_per_page
   )
 
   colourCount = n_samples
@@ -32,10 +33,10 @@ PlotAcquisitionCycle <- function(msScans,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
   for (ii in seq_len(n_pages_needed)) {
-    if(n_samples <5){
+    if(n_samples < plots_per_page){
       nrow = n_samples
     } else{
-      nrow = 5
+      nrow = plots_per_page
     }
 
     a <- ggplot(data_table, aes(x= `Retention time`, y = `Cycle time`, colour = Experiment))+

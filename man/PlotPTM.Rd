@@ -9,7 +9,8 @@ PlotPTM(
   peptides_modified = 1,
   plot_unmodified_peptides = FALSE,
   log_base = 2,
-  palette = "Set2"
+  palette = "Set2",
+  plots_per_page = 5
 )
 }
 \arguments{

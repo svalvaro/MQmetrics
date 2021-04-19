@@ -10,7 +10,8 @@ PlotProteinCoverage(
   UniprotID = NULL,
   log_base = 2,
   segment_width = 1,
-  palette = "Set2"
+  palette = "Set2",
+  plots_per_page = 5
 )
 }
 \arguments{

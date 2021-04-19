@@ -4,7 +4,7 @@
 \alias{PlotProteaseSpecificity}
 \title{Protease Specificity}
 \usage{
-PlotProteaseSpecificity(peptides, palette = "Set2")
+PlotProteaseSpecificity(peptides, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
 \item{peptides}{peptides.txt table from MaxQuant ouput.}

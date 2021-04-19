@@ -22,7 +22,8 @@ PlotHydrophobicity <- function(peptides,
                       show_median = TRUE,
                       size_median = 1.5,
                       binwidth = 0.2,
-                      palette = 'Set2'){
+                      palette = 'Set2',
+                      plots_per_page = 5){
 
   variable <- GRAVY <- `median(GRAVY)` <- NULL
 
@@ -73,17 +74,17 @@ PlotHydrophobicity <- function(peptides,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
   n_pages_needed <- ceiling(
-    (colourCount)/ 5
+    (colourCount)/ plots_per_page
   )
 
 
   for (ii in seq_len(n_pages_needed)) {
 
-    if ((length(df)-1)<5) {
+    if ((length(df)-1)< plots_per_page) {
       nrow = length(df)-1
 
     } else{
-      nrow = 5
+      nrow = plots_per_page
     }
 
     p <- df_expanded %>%

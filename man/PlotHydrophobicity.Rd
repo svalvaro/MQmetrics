@@ -18,6 +18,8 @@ PlotHydrophobicity(
 \item{show_median}{If true it will show the median of each group, as a red
 dashed line.By default is TRUE.}
 
+\item{size_median}{The width of the median line in the plots.}
+
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}

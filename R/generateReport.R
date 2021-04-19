@@ -6,6 +6,8 @@
 #' @param output_dir The directory where the results will be stored. By default
 #'  is the working directory.
 #'
+#' @param remove_contaminants Whether or not to remove contaminants, reverse and identified by one one peptide.
+#'
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #'
 #' @param long_names If TRUE, samples having long names will be considered, and
@@ -42,6 +44,8 @@
 #' @param show_median If true it will show the median of each group, as a red
 #'  dashed line.By default is TRUE. \code{PlotHydrophobicity()}.
 #'
+#' @param size_median The width of the median line in the plots.
+#'
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.
 #'
 #' @param plot_unmodified_peptides If TRUE, it will show the Unmodified peptides.\code{PlotPTM()}.
@@ -53,8 +57,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' generateReport(MQPathCombined)
+#' }
 generateReport = function(MQPathCombined,
                           output_dir = getwd(),
                           remove_contaminants = TRUE,

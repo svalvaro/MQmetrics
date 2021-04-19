@@ -34,6 +34,8 @@ MaxQuant results are stored.}
 \item{output_dir}{The directory where the results will be stored. By default
 is the working directory.}
 
+\item{remove_contaminants}{Whether or not to remove contaminants, reverse and identified by one one peptide.}
+
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 
 \item{long_names}{If TRUE, samples having long names will be considered, and
@@ -71,6 +73,8 @@ by default is 0.001.}
 \item{show_median}{If true it will show the median of each group, as a red
 dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 
+\item{size_median}{The width of the median line in the plots.}
+
 \item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
 
 \item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified peptides.\code{PlotPTM()}.}
@@ -82,6 +86,8 @@ A pdf document with all the results of MQmetrics package.
 Generates a report including all the plots of MQmetrics.
 }
 \examples{
+\dontrun{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 generateReport(MQPathCombined)
+}
 }

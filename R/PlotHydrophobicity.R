@@ -5,6 +5,7 @@
 #'  dashed line.By default is TRUE.
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2
 #' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param size_median The width of the median line in the plots.
 #'
 #' @return Returns a histogram per sample, showing the frequency of the peptide's
 #'  hydrophobicity GRAVY value.
@@ -114,8 +115,6 @@ PlotHydrophobicity <- function(peptides,
     }
 
   }
-
-
 
 }
 

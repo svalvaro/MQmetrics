@@ -22,6 +22,7 @@ params:
   size_median: ''
   binwidth: ''
   plot_unmodified_peptides: ''
+  plots_per_page: ''
 ---
 
 ```{r setup, include=FALSE}
@@ -114,13 +115,15 @@ PlotIsotopePattern(summary,
 \newpage
 ```{r Charge}
 PlotCharge(evidence, 
-           palette = params$palette)
+           palette = params$palette,
+           plots_per_page = params$plots_per_page)
 ```
 
 \newpage
 ```{r missed_cleavages}
 PlotProteaseSpecificity(peptides, 
-                        palette = params$palette)
+                        palette = params$palette,
+                        plots_per_page = params$plots_per_page)
 ```
 
 
@@ -130,13 +133,15 @@ PlotHydrophobicity(peptides,
           palette = params$palette,
           show_median =  params$show_median,
           size_median = params$size_median,
-          binwidth = params$binwidth)
+          binwidth = params$binwidth,
+          plots_per_page = params$plots_per_page)
 ```
 
 \newpage
 ```{r PlotAndromedaScore}
 PlotAndromedaScore(peptides, 
-                   palette = params$palette)
+                   palette = params$palette,
+                   plots_per_page = params$plots_per_page)
 ```
 
 
@@ -197,7 +202,8 @@ PlotProteinCoverage(peptides,
                     UniprotID = params$UniprotID, 
                     log_base = params$log_base,
                     segment_width = params$segment_width,
-                    palette = params$palette)
+                    palette = params$palette,
+                    plots_per_page = params$plots_per_page)
 }
 ```
 
@@ -222,14 +228,16 @@ PlotiRTScore(evidence,
 ```{r TotalIonCurrent}
 PlotTotalIonCurrent(msmsScans,
                     show_max_value = params$show_max_value,
-                    palette = params$palette)
+                    palette = params$palette,
+                    plots_per_page = params$plots_per_page)
 ```
 
 
 \newpage
 ```{r PlotAcquisition}
 PlotAcquisitionCycle(msScans, 
-                     palette = params$palette)
+                     palette = params$palette,
+                     plots_per_page = params$plots_per_page)
 ```
 
 \newpage
@@ -238,7 +246,8 @@ PlotPTM(modificationSpecificPeptides,
         peptides_modified = params$peptides_modified,
         log_base = params$log_base,
         plot_unmodified_peptides = params$plot_unmodified_peptides,
-        palette = params$palette)
+        palette = params$palette,
+        plots_per_page = params$plots_per_page)
 ```
 
 \newpage

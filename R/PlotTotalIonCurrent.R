@@ -16,7 +16,9 @@
 #'
 PlotTotalIonCurrent <- function(msmsScans,
                                 show_max_value = TRUE,
-                                palette = 'Set2'){
+                                palette = 'Set2',
+                                plots_per_page = 5
+                                ){
 
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
@@ -45,7 +47,7 @@ PlotTotalIonCurrent <- function(msmsScans,
   n_samples <- length(unique(df$Experiment))
 
   n_pages_needed <- ceiling(
-    n_samples / 5
+    n_samples / plots_per_page
   )
 
   colourCount = n_samples
@@ -90,10 +92,10 @@ PlotTotalIonCurrent <- function(msmsScans,
   #      vector_sg2, type = 'l')
 
   for(ii in seq_len(n_pages_needed)){
-    if(n_samples < 5){
+    if(n_samples < plots_per_page){
       nrow = n_samples
     } else{
-      nrow = 5
+      nrow = plots_per_page
     }
 
     p <- df %>%   ggplot(aes(`Retention time`,`Total ion current`))+

@@ -4,7 +4,12 @@
 \alias{PlotTotalIonCurrent}
 \title{Total Ion Current}
 \usage{
-PlotTotalIonCurrent(msmsScans, show_max_value = TRUE, palette = "Set2")
+PlotTotalIonCurrent(
+  msmsScans,
+  show_max_value = TRUE,
+  palette = "Set2",
+  plots_per_page = 5
+)
 }
 \arguments{
 \item{msmsScans}{The msmsScans.txt table from  MaxQuant Output.}

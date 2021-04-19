@@ -190,35 +190,39 @@ PlotIsotopePattern(summary = summary,
 
 The function **PlotCharge()**, will take as input the evidence.txt table and show the charge-state of the precursor ion in each sample.
 
-```{r Charg, warning=FALSE, message=FALSE, fig.height=6, fig.width=7.2}
+```{r Charg, warning=FALSE, message=FALSE, fig.height=10, fig.width=7.2}
 PlotCharge(evidence = evidence, 
-           palette = 'Set2')
+           palette = 'Set2',
+           plots_per_page = 6)
 ```
 
 The function **PlotProteaseSpecificity()**, will take as input the summary.txt table and show the number peaks detected and sequenced in each sample.
 
-```{r missed_cleavages,fig.height=10}
+```{r missed_cleavages,fig.height=10, fig.width=7.2}
 PlotProteaseSpecificity(peptides = peptides, 
-                        palette = 'Set2')
+                        palette = 'Set2',
+                        plots_per_page = 6)
 ```
 
 
 The function **PlotHydrophobicity()**, takes as input the peptides.txt table and returns the distribution of GRAVY score.
 
-```{r PlotHydrophobicity, warning= FALSE, message= FALSE}
+```{r PlotHydrophobicity, warning= FALSE, message= FALSE,fig.height=10, fig.width=7.2}
 PlotHydrophobicity(peptides = peptides,
                    show_median =  TRUE,
                    binwidth = 0.1, 
                    size_median = 1.5, 
-                   palette = 'Set2')
+                   palette = 'Set2',
+                   plots_per_page = 6)
 
 ```
 
 The function **PlotAndromedaScore()**, takes as input the peptides.txt table and returns the distribution of MaxQuant's Andromeda Score.
 
-```{r AndromedaScore, message = FALSE, warning = FALSE}
+```{r AndromedaScore, message = FALSE, warning = FALSE,fig.height=10, fig.width=7.2}
 PlotAndromedaScore(peptides = peptides,
-                   palette = 'Set2')
+                   palette = 'Set2',
+                  plots_per_page = 6)
 ```
 
 
@@ -276,7 +280,7 @@ PlotAllDynamicRange(proteinGroups = proteinGroups,
 
 The function **PlotProteinCoverageAll()** takes as input the proteinGroups.txt table and returns a plot that shows the number of proteins identified in the samples.
 
-```{r protein_coverage_all}
+```{r protein_coverage_all, fig.height=7.2, fig.width=7.2}
 PlotProteinCoverageAll(proteinGroups = proteinGroups)
 
 #Put in a table at the end of tables.
@@ -284,19 +288,20 @@ PlotProteinCoverageAll(proteinGroups = proteinGroups)
 ```
 
 The function **PlotProteinCoverage()** takes as input the peptides.txt and proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the coverage of that protein in each of the samples.
-```{r protein_degradation}
+```{r protein_degradation,fig.height=10, fig.width=7.2}
 PlotProteinCoverage(peptides = peptides,
                     proteinGroups = proteinGroups,
                     UniprotID = "P55072",
                     log_base = 2,
                     segment_width = 1,
-                    palette = 'Set2')
+                    palette = 'Set2',
+                    plots_per_page = 6)
 ```
 
 
 The function **PlotiRT()** takes as input the evidence.txt table and returns, if found the iRT peptides from Biognosys. Their retention time and energy.
 
-```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
+```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
 PlotiRT(evidence = evidence, 
         show_calibrated_rt = FALSE,
         tolerance = 0.001)
@@ -305,7 +310,7 @@ PlotiRT(evidence = evidence,
 The function **PlotiRTScore()** takes as input the evidence.txt table and returns, if found, a linear regression of the retention times of the iRT peptides of Biognosys.
 
 
-```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}
+```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
 PlotiRTScore(evidence = evidence, 
              tolerance = 0.001)
 ```
@@ -315,15 +320,17 @@ The function **PlotTotalIonCurrent()** takes as input the msmsScans.txt, and ret
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
 PlotTotalIonCurrent(msmsScans = msmsScans,
                     show_max_value = TRUE,
-                    palette = 'Set2')
+                    palette = 'Set2',
+                    plots_per_page = 6)
 ```
 
 
 The function **PlotAcquisitionCycle** takes as input the msScans.txt table and returns the cycle time and MS/MS count vs the retention time of each sample.
 
-```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE}
+```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE,fig.height=10, fig.width=7.2}
 PlotAcquisitionCycle(msScans = msScans, 
-                     palette = 'Set2')
+                     palette = 'Set2',
+                     plots_per_page = 6)
 ```
 
 
@@ -333,7 +340,8 @@ The function **PlotPTM()**, takes as input the modificationSpecificPeptides.txt 
 PlotPTM(modificationSpecificPeptides = modificationSpecificPeptides,
         peptides_modified = 1,
         plot_unmodified_peptides = FALSE,
-        palette = 'Set2')
+        palette = 'Set2',
+        plots_per_page = 6)
 ```
 
 
@@ -352,6 +360,13 @@ ReportTables(MQPathCombined = MQPathCombined,
              log_base = 2,
              intensity_type = 'LFQ')
 
+```
+
+
+### Session Info
+
+```{r add_session_info}
+sessionInfo()
 ```
 
 

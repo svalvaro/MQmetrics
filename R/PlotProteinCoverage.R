@@ -26,10 +26,6 @@ PlotProteinCoverage <- function(peptides,
                                 segment_width = 1,
                                 palette = 'Set2'){
 
-
-
-
-
   `Start position` <-  `End position` <- variable <- value <- NULL
 
   table_peptides <- peptides %>%
@@ -54,7 +50,6 @@ PlotProteinCoverage <- function(peptides,
    prot_len <- prot_info$`Sequence length`[1]
 
 
-
   #table_peptides <- table_peptides[1,]
 
   pep_melt <- melt(table_peptides, id.vars = c('Start position', 'End position', 'Proteins', 'Gene names'))
@@ -77,7 +72,7 @@ PlotProteinCoverage <- function(peptides,
   )
 
 
-  for (ii in n_pages_needed) {
+  for (ii in seq_len(n_pages_needed)) {
 
     if(colourCount <5){
       nrow = colourCount
@@ -131,18 +126,17 @@ PlotProteinCoverage <- function(peptides,
     }
 
 
+    #Plot them together
+    c <- plot_grid(a,b)
+    #Make a title
+    title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ', UniprotID, ' (',prot_len,' amino acids)',
+                                         ', Gene: ', pep_melt$`Gene names`[1],
+                                         '\n is: ', prot_cov, '%'))
+
+    print(plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1)))
 
   }
 
-
-  #Plot them together
-   c <- plot_grid(a,b)
-   #Make a title
-   title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ', UniprotID, ' (',prot_len,' amino acids)',
-                                        ', Gene: ', pep_melt$`Gene names`[1],
-                                        '\n is: ', prot_cov, '%'))
-
-   plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
 
 
 }

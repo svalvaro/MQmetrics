@@ -255,7 +255,7 @@ PlotProteinCoverageAll(proteinGroups = proteinGroups)
 ```
 The function **PlotProteinCoverage()** takes as input the peptides.txt and proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the coverage of that protein in each of the samples.
 ```{r protein_degradation}
-PlotProteinCoverage(peptides,proteinGroups, UniprotID = "P49327", log_base = 2, segment_width = 3)
+PlotProteinCoverage(peptides,proteinGroups, UniprotID = "Q7Z6Z7", log_base = 2, segment_width = 1)
 ```
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=8, fig.width=9.2}

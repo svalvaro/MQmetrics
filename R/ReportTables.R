@@ -220,6 +220,37 @@ ReportTables <- function(MQPathCombined,
 
 
 
+
+
+  #Table 6 Completeness or PlotCoverageAll
+
+
+  df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the Contaminants, Reverse, etc removed.
+            select(contains(c('Protein IDs', 'peptides '))) %>%
+            select(-contains(c('unique', 'Majority')))
+
+
+  # Make a binary long data.frame (1 = valid value, 0 = missing value)
+  # It shows the present of the protein or not.
+
+  df_bin <- df
+
+  df_bin[,-1][df_bin[,-1]>1] <- 1
+
+
+  # Calculate the number of times that each protein has appear in each experiment
+
+  df_bin$samples <- rowSums(df_bin[,-1])
+
+
+
+  df_bin_stat <- df_bin %>%
+    group_by(samples) %>%
+    summarise(Freq = n())
+
+
+
+
   out <- list()
 
   out$proteins <- table_summary
@@ -227,6 +258,7 @@ ReportTables <- function(MQPathCombined,
   out$charge <- charge_percentage
   out$GRAVY <- GRAVY
   out$cleavages <- missed_summary
+  out$overlap <- df_bin_stat
 
   return(out)
 }

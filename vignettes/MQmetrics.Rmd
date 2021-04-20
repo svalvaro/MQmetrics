@@ -281,10 +281,7 @@ PlotAllDynamicRange(proteinGroups = proteinGroups,
 The function **PlotProteinCoverageAll()** takes as input the proteinGroups.txt table and returns a plot that shows the number of proteins identified in the samples.
 
 ```{r protein_coverage_all, fig.height=7.2, fig.width=7.2}
-PlotProteinCoverageAll(proteinGroups = proteinGroups)
-
-#Put in a table at the end of tables.
-
+PlotProteinOverlap(proteinGroups = proteinGroups)
 ```
 
 The function **PlotProteinCoverage()** takes as input the peptides.txt and proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the coverage of that protein in each of the samples.

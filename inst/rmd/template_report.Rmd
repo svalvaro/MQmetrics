@@ -71,7 +71,7 @@ PlotProteinsIdentified(proteinGroups,
 
 \newpage
 ```{r protein_coverage_all}
-PlotProteinCoverageAll(proteinGroups)
+PlotProteinOverlap(proteinGroups)
 
 ```
 
@@ -262,5 +262,7 @@ kable(a[[2]], caption =  paste0('Information of: Log', params$log_base,' ', para
 kable(a[[3]], caption = 'Charge Information')
 kable(a[[4]], caption = 'Peptide hydrophobicity (GRAVY)')
 kable(a[[5]], caption = 'Missed Enzymatic Cleavages')
+kable(a[[6]], caption = 'Protein Identification Overlap Between Samples')
+
 
 ```

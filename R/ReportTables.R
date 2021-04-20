@@ -19,7 +19,7 @@ ReportTables <- function(MQPathCombined,
                          log_base = 2,
                          intensity_type = 'Intensity'){
 
-  sd <- median <- Experiment <- Charge <- variable <- `Missed cleavages` <- value <- `freq` <- NULL
+  sd <- median <- Experiment <- Charge <- variable <- `Missed cleavages` <- value <- `freq` <- samples <- NULL
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 

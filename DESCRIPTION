@@ -2,7 +2,15 @@ Package: MQmetrics
 Type: Package
 Title: Analyses LC-MS/MS data from MaxQuant output files
 Version: 0.1.0
-Author: Alvaro Sanchez-Villalba <sanchezvillalba.alvaro@gmail.com>
+Authors@R: c(person(given = "Alvaro", family = "Sanchez-Villalba",
+                    email = "sanchezvillalba.alvaro@gmail.com",
+                    role = c("aut", "cre")),
+             person(given = "Marek", family = "Vrbacky",
+                    email = "marek.vrbacky@fgu.cas.cz",
+                    role = "aut"),
+             person(given = "Thomas", family = "Stehrer",
+                    email = "thomas.stehrer@fgu.cas.cz",
+                    role = "aut"))
 Maintainer: Alvaro Sanchez-Villalba <sanchezvillalba.alvaro@gmail.com>
 Description: It plots the results from Max Quant analysis.
     Use four spaces when indenting paragraphs within the Description.

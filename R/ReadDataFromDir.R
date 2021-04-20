@@ -24,7 +24,7 @@ ReadDataFromDir <- function(MQPathCombined,
   #Open the peptides.txt table
 
   peptides_table <- read_delim(file.path(MQPathCombined,"txt/peptides.txt"),
-                               "\t", escape_double = FALSE,na = c("NA", "NaN", "", " "),trim_ws = TRUE)
+                               "\t", escape_double = FALSE,na = c("NA", "NaN", "", " "),trim_ws = TRUE, guess_max = 10**6)
 
   if(remove_contaminants==TRUE){
 
@@ -33,7 +33,7 @@ ReadDataFromDir <- function(MQPathCombined,
 
   #Open the evidence table
   evidence_table <- read_delim(file.path(MQPathCombined,"txt/evidence.txt"),
-                               "\t", escape_double = FALSE,na = c("NA", "NaN", "", " "),trim_ws = TRUE)
+                               "\t", escape_double = FALSE,na = c("NA", "NaN", "", " "),trim_ws = TRUE, guess_max = 10**6)
 
   if(remove_contaminants==TRUE){
 
@@ -51,7 +51,7 @@ ReadDataFromDir <- function(MQPathCombined,
 
   msscans_table <- read_delim(file.path(MQPathCombined,"txt/msmsScans.txt"),
                               "\t", escape_double = FALSE, na = c("NA", "NaN", "", " "),
-                              trim_ws = TRUE)
+                              trim_ws = TRUE, guess_max = 10**6)
 
   if(remove_contaminants==TRUE){
   msscans_table <- msscans_table[is.na(msscans_table$Reverse),]
@@ -60,7 +60,7 @@ ReadDataFromDir <- function(MQPathCombined,
 
   prot_groups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
                             "\t", escape_double = FALSE,
-                            trim_ws = TRUE)
+                            trim_ws = TRUE, guess_max = 10**5)
 
   if(remove_contaminants==TRUE){
   prot_groups <- prot_groups[is.na(prot_groups$`Potential contaminant`) & is.na(prot_groups$Reverse)  & is.na(prot_groups$`Only identified by site`),]
@@ -72,7 +72,7 @@ ReadDataFromDir <- function(MQPathCombined,
 
   modification_table <- read_delim(file.path(MQPathCombined,"txt/modificationSpecificPeptides.txt"),
                               "\t", escape_double = FALSE, na = c("NA", "NaN", "", " "),
-                              trim_ws = TRUE)
+                              trim_ws = TRUE, guess_max = 10**6)
   if(remove_contaminants==TRUE){
 
     modification_table <- modification_table[is.na(modification_table$`Potential contaminant`) & is.na(modification_table$Reverse),]

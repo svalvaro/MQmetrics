@@ -358,7 +358,7 @@ MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 
 ReportTables(MQPathCombined = MQPathCombined,
              log_base = 2,
-             intensity_type = 'LFQ')
+             intensity_type = 'Intensity')
 
 ```
 

@@ -26,7 +26,7 @@ ReportTables <- function(MQPathCombined,
     #Read the Protein Groups without removing the contamintants To plot it.
   proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
                               "\t", escape_double = FALSE,
-                              trim_ws = TRUE)
+                              trim_ws = TRUE, guess_max = 100000)
 
   if (intensity_type == 'Intensity') {
 
@@ -68,12 +68,14 @@ ReportTables <- function(MQPathCombined,
     }
 
   }
-
+  #proteinGroups <- read.delim("~/Documents/MaxQuant/data_pacakge/combined_original/txt/proteinGroups.txt")
+  #length(which(protein_table$Reverse == '+'))
 
   table_summary <- data.frame("Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
                               "Missing values" = colSums(protein_table==0),
                               "Potential contaminants" = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
                               "Reverse" = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
+                              #"Reverse" = length(which(protein_table$Reverse == '+')),
                               "Only identified by site"= colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0),
                               check.names = FALSE) #To have spaces in the column names.
 

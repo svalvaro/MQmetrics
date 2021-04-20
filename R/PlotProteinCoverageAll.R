@@ -38,8 +38,9 @@ PlotProteinCoverageAll <- function(proteinGroups){
                     summarise(value = n())
 
   ggplot(df_bin_stat, aes(x = 'all', y = value, fill = as.character(samples)))+
-    geom_col(col = 'white')+
-    scale_fill_grey(start = 0.8, end = 0.2)+
+    geom_col(col = 'white', width =  0.3)+
+    #scale_fill_grey(start = 0.8, end = 0.2)+
+    scale_fill_brewer(palette = 1)+
     theme_bw()+
     ggtitle('Protein Coverage of all samples')+
     labs(fill = 'samples',

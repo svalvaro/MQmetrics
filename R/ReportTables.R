@@ -87,6 +87,15 @@ ReportTables <- function(MQPathCombined,
 
   table_summary <- table_summary[,c(6,1,2,3,4,5)]
 
+  combined_row <- c('Combined Samples',
+                    nrow(proteinGroups), #total proteins
+                    NA,  # NA combined,
+                    length(which(proteinGroups$`Potential contaminant` == '+')),
+                    length(which(proteinGroups$Reverse == '+')),
+                    length(which(proteinGroups$`Only identified by site` == '+')))
+
+  table_summary <- rbind( combined_row, table_summary)
+
 
   #Table 2 Log10 intensities
 

@@ -11,9 +11,9 @@
 #' files <- ReadDataFromDir(MQPathCombined)
 #' parameters <- files[["parameters.txt"]]
 #' runningTimes <-  files[["#runningTimes.txt"]]
-#' ExperimentInformation(MQPathCombined, runningTimes, parameters)
+#' MaxQuantAnalysisInfo(MQPathCombined, runningTimes, parameters)
 #'
-ExperimentInformation <- function(MQPathCombined,
+MaxQuantAnalysisInfo <- function(MQPathCombined,
                                   runningTimes,
                                   parameters){
   #Runningtimes

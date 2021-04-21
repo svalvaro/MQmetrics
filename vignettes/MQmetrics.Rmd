@@ -1,6 +1,7 @@
 ---
 title: "MQmetrics"
-author: 'Alvaro Sanchez-Villalba'
+author: "Alvaro Sanchez-Villalba"
+date: "r doc_date()"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{MQmetrics}
@@ -20,7 +21,7 @@ knitr::opts_chunk$set(
 
 # Overview
 
-The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the quality and reproducibility of your proteomics mass spectrometry analysis from MaxQuant. It requires several files generated from MaxQuant, and produces a pdf report. 
+The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the quality and reproducibility of your proteomics mass spectrometry analysis from MaxQuant. Input data are extracted from Several [MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, and produces a pdf report. 
 It includes several visualization tools to check numerous parameters regarding the quality of the runs.
 It also includes two function to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked in the samples.
 
@@ -79,7 +80,13 @@ generateReport(MQPathCombined = , # directory to the combined folder
 
 Is as simple as this to use MQmetrics:
 ```{r example,eval=FALSE}
+# If you're using a Unix-like OS use forward slashes.
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+
+# If you're using Windows use backslashes:
+MQPathCombined <- "D:\Documents\MaxQuant_results\example5\combined\ "
+
+#Use the generateReport function.
 generateReport(MQPathCombined)
 ```
 
@@ -121,15 +128,12 @@ runningTimes <-  files[["#runningTimes.txt"]]
 ```
 
 
-
-
-
-
-### Experiment Information
+### MaxQuant Analysis Parameters
 
 ```{r ExperimentDuration, comment= NA}
-ExperimentInformation(MQPathCombined,runningTimes, parameters) 
+MaxQuantAnalysisInfo(MQPathCombined,runningTimes, parameters) 
 ```
+
 ### Visualizations.
 
 The function **PlotProteinsIdentified()**, will take as input the proteinGroups.txt table and show the number of proteins and NAs in each sample. It can differentiate two types of intensities: 'Intensity' or 'LFQ'.

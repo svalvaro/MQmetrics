@@ -54,7 +54,7 @@ parameters <- files[["parameters.txt"]]
 
 
 ```{r ExperimentDuration}
-ExperimentInformation(MQPathCombined,
+MaxQuantAnalysisInfo(MQPathCombined,
                       runningTimes, 
                       parameters) 
 ```

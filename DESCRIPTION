@@ -11,9 +11,14 @@ Authors@R: c(person(given = "Alvaro", family = "Sanchez-Villalba",
              person(given = "Thomas", family = "Stehrer",
                     email = "thomas.stehrer@fgu.cas.cz",
                     role = "aut"))
-Maintainer: Alvaro Sanchez-Villalba <sanchezvillalba.alvaro@gmail.com>
-Description: It plots the results from Max Quant analysis.
-    Use four spaces when indenting paragraphs within the Description.
+Description: The package MQmetrics (MaxQuant metrics) provides a workflow to analyze
+        the quality and reproducibility of your proteomics mass spectrometry analysis from MaxQuant.
+        Input data are extracted from several MaxQuant output tables, and produces a pdf report. 
+        It includes several visualization tools to check numerous parameters regarding the quality of the runs.
+        It also includes two functions to visualize the iRT peptides from Biognosys
+        in case they were spiked in the samples.
+biocViews: ImmunoOncology, Infrastructure, Proteomics, MassSpectrometry,
+    QualityControl, DataImport       
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

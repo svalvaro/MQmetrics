@@ -43,7 +43,7 @@ PlotAllDynamicRange <- function(proteinGroups,
     rows_grid <- 4
   }
 
-  for(i in 1:ncol(rank_groups)){
+  for(i in seq_len(ncol(rank_groups))){
 
     temp <- data.frame(rank_groups[,i])
 
@@ -109,7 +109,7 @@ PlotAllDynamicRange <- function(proteinGroups,
 
   }
 
-  marrangeGrob(grobs=pl, ncol=columns_grid, nrow = rows_grid, top = NULL)
+  gridExtra::marrangeGrob(grobs=pl, ncol=columns_grid, nrow = rows_grid, top = NULL)
 
 }
 

@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 
 # Overview
 
-The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the quality and reproducibility of your proteomics mass spectrometry analysis from MaxQuant. Input data are extracted from Several [MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, and produces a pdf report. 
+The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the quality and reproducibility of your proteomics mass spectrometry analysis from MaxQuant. Input data are extracted from several [MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, and produces a pdf report. 
 It includes several visualization tools to check numerous parameters regarding the quality of the runs.
-It also includes two function to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked in the samples.
+It also includes two functions to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked in the samples.
 
 # Workflow
 

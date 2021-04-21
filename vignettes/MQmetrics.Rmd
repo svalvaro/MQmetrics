@@ -290,7 +290,7 @@ PlotProteinCoverage(peptides = peptides,
 ```
 
 
-The function **PlotiRT()** takes as input the evidence.txt table and returns, if found the iRT peptides from Biognosys. Their retention time and energy.
+The function **PlotiRT()** takes as input the evidence.txt table and returns, if found the iRT peptides from Biognosys. Their retention time and intensity.
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
 PlotiRT(evidence = evidence, 

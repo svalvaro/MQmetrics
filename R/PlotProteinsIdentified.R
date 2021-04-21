@@ -42,8 +42,6 @@ PlotProteinsIdentified <- function(proteinGroups,
     colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
     title <- 'Proteins Identified based on LFQ intensity'
 
-
-
     #Error if LFQ Intensity not found.
 
     if (length(protein_table) == 0) {
@@ -54,11 +52,8 @@ PlotProteinsIdentified <- function(proteinGroups,
       colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
 
       title <- 'Proteins Identified based on Intensity'
-
     }
-
   }
-
 
   #Proteins Identified
   table_prot <- data.frame(nrow(protein_table)-colSums(protein_table==0))
@@ -85,9 +80,6 @@ PlotProteinsIdentified <- function(proteinGroups,
   #melted
   table_melt <- melt(table_proteins, id.vars = 'Experiment')
 
-
-
-
   a <- ggplot(table_melt, aes(x=Experiment, y=value, fill=variable))+
             ggtitle(title)+
             geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
@@ -95,7 +87,6 @@ PlotProteinsIdentified <- function(proteinGroups,
             theme_bw()+
             scale_fill_brewer(palette = palette)+
             theme(legend.position = 'bottom')
-
 
   if(long_names==TRUE){
     a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))

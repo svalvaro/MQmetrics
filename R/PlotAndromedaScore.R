@@ -43,7 +43,6 @@ PlotAndromedaScore <- function(peptides,
     (colourCount)/ plots_per_page
   )
 
-
   for (ii in seq_len(n_pages_needed)) {
 
     if (colourCount < plots_per_page) {
@@ -52,7 +51,6 @@ PlotAndromedaScore <- function(peptides,
     } else{
       nrow = plots_per_page
     }
-
 
     p <- df_expanded %>%
       group_by(variable) %>%
@@ -66,10 +64,5 @@ PlotAndromedaScore <- function(peptides,
             theme(legend.position = 'none')
 
     print(p)
-
-
-
   }
-
-
 }

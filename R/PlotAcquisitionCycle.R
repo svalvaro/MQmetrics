@@ -54,7 +54,6 @@ PlotAcquisitionCycle <- function(msScans,
       theme_bw()+
       scale_color_manual(values = getPalette(colourCount))
 
-
     #Plot them together
     c <- plot_grid(a,b)
     #Make a title
@@ -65,5 +64,4 @@ PlotAcquisitionCycle <- function(msScans,
     print(d)
 
   }
-
-  }
+}

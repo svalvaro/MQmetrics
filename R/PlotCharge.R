@@ -23,20 +23,15 @@ PlotCharge <- function(evidence,
 
   ev_agrup <- dcast(ev, Experiment~ Charge, fill = 0)
 
-
   ev_agrup_m <- melt(ev_agrup, id.vars = "Experiment")
-
 
   n_pages_needed <- ceiling(
     length(unique(ev_agrup$Experiment))/ plots_per_page
   )
 
-
   colourCount = length(unique(ev$Experiment))
 
   getPalette = colorRampPalette(brewer.pal(8, palette))
-
-
 
  for (ii in seq_len(n_pages_needed)) {
 
@@ -45,7 +40,6 @@ PlotCharge <- function(evidence,
    } else{
      nrow = plots_per_page
    }
-
 
   p <- ggplot(ev_agrup_m, aes(x = variable, y = value, fill = Experiment)) +
            geom_bar(stat='identity', color = 'black')+
@@ -60,7 +54,4 @@ PlotCharge <- function(evidence,
   print(p)
 
  }
-
-
-
 }

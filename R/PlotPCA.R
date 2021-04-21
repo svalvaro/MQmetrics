@@ -38,9 +38,7 @@ PlotPCA <- function(proteinGroups,
       intensities <-  proteinGroups %>%  select(contains('Intensity ')& -contains('LFQ'))
       colnames(intensities) <- gsub(pattern = 'Intensity', '', colnames(intensities))
       title <- 'PCA of intensity'
-
     }
-
   }
 
   if (length(intensities)<2 ) {
@@ -76,11 +74,6 @@ PlotPCA <- function(proteinGroups,
       theme(legend.position = 'bottom')+
       guides(color=guide_legend(ncol=2))+
       scale_color_manual(values = getPalette(colourCount))
-
-
   }
-
-
-
 }
 

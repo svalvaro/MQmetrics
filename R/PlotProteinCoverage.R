@@ -56,13 +56,11 @@ PlotProteinCoverage <- function(peptides,
 
   pep_melt <- melt(table_peptides, id.vars = c('Start position', 'End position', 'Proteins', 'Gene names'))
 
-
   # If intensity is 0, remove it.
 
   pep_melt <- pep_melt[!pep_melt$value==0,]
 
   pep_melt$variable <- gsub('Intensity', '', pep_melt$variable)
-
 
 
   colourCount = length(unique(pep_melt$variable))
@@ -73,7 +71,6 @@ PlotProteinCoverage <- function(peptides,
     colourCount/ plots_per_page
   )
 
-
   for (ii in seq_len(n_pages_needed)) {
 
     if(colourCount <plots_per_page){
@@ -81,7 +78,6 @@ PlotProteinCoverage <- function(peptides,
     } else{
       nrow = plots_per_page
     }
-
 
     a <- ggplot(pep_melt)+
       geom_segment(aes(x = `Start position`,
@@ -127,7 +123,6 @@ PlotProteinCoverage <- function(peptides,
         scale_color_manual(values = getPalette(colourCount))
     }
 
-
     #Plot them together
     c <- plot_grid(a,b)
     #Make a title
@@ -138,8 +133,5 @@ PlotProteinCoverage <- function(peptides,
     print(plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1)))
 
   }
-
-
-
 }
 }

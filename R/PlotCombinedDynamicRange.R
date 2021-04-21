@@ -51,7 +51,6 @@ PlotCombinedDynamicRange <- function(proteinGroups,
 
     orders_abundance <- paste(round(upper_y-bottom_y,digits = 1), 'orders of abundance')
 
-
     a + annotate('rect',
                  xmin = limits_row,
                  xmax = nrow(rank)-limits_row,
@@ -70,7 +69,6 @@ PlotCombinedDynamicRange <- function(proteinGroups,
   } else{
     a
   }
-
 }
 
 

@@ -18,7 +18,6 @@ PlotProteinOverlap <- function(proteinGroups){
   df <- proteinGroups %>% select(contains(c('Protein IDs', 'peptides '))) %>%
                           select(-contains(c('unique', 'Majority')))
 
-
   # Make a binary long data.frame (1 = valid value, 0 = missing value)
   # It shows the present of the protein or not.
 
@@ -30,8 +29,6 @@ PlotProteinOverlap <- function(proteinGroups){
   # Calculate the number of times that each protein has appear in each experiment
 
   df_bin$samples <- rowSums(df_bin[,-1])
-
-
 
   df_bin_stat <- df_bin %>%
                     group_by(samples) %>%

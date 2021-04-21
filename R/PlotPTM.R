@@ -30,7 +30,6 @@ PlotPTM <- function(modificationSpecificPeptides,
                                           'Intensity ', 'Experiment '))) %>%
                           select(-contains(c('calibrated', 'Unique (Proteins)')))
 
-
   mod_melted <- modification_table %>%
                     select(-contains('Intensity'))
 
@@ -44,7 +43,6 @@ PlotPTM <- function(modificationSpecificPeptides,
   mod_frequencies <- mod_melted %>%
                         group_by(Modifications, variable) %>%
                         summarise(Freq= sum(value))
-
 
   mod_join <- mod_frequencies %>% separate_rows(Modifications, sep = ';') %>%
             group_by(Modifications, variable) %>% summarise(Freq = sum(Freq))
@@ -62,7 +60,6 @@ PlotPTM <- function(modificationSpecificPeptides,
   } else{
     mod_join <- mod_join
   }
-
 
   #Combine multiple oxidation into the same group
 
@@ -90,7 +87,7 @@ PlotPTM <- function(modificationSpecificPeptides,
                                                                                      '4 Oxidation (M)',
                                                                                      '5 Oxidation (M)')),]
 
-  #Change the values of the original oxidation to the sum of all the combined oxidations
+    #Change the values of the original oxidation to the sum of all the combined oxidations
 
   mod_join_combined2$Freq[mod_join_combined2$Modifications == 'Oxidation (M)'] <- NA
 
@@ -105,7 +102,6 @@ PlotPTM <- function(modificationSpecificPeptides,
   modification_final$Freq.y <- NULL  #Probably there is an easier way to combine all the oxidations.
 
   ###############For Intensity plot
-
 
   modifications_unique <- unique(modification_final$Modifications)#This are the names
 
@@ -144,7 +140,6 @@ PlotPTM <- function(modificationSpecificPeptides,
     n_samples/ plots_per_page
   )
 
-
   colourCount = n_samples
 
   getPalette = colorRampPalette(brewer.pal(8, palette))
@@ -156,7 +151,6 @@ PlotPTM <- function(modificationSpecificPeptides,
     } else{
       nrow = plots_per_page
     }
-
 
     a <- ggplot(modification_final, aes(x = Modifications, y = Freq, fill = Modifications))+
             geom_bar(stat = 'identity')+
@@ -170,7 +164,6 @@ PlotPTM <- function(modificationSpecificPeptides,
                   axis.ticks.x = element_blank())+
                   guides(fill = guide_legend(ncol=3))+
                   scale_fill_brewer(palette = palette)
-
 
 
     b <- ggplot(mod_intensities2, aes(x = Modifications, y = value, color = Modifications))+
@@ -187,7 +180,6 @@ PlotPTM <- function(modificationSpecificPeptides,
               scale_colour_brewer(palette = palette)
 
 
-
     c <- plot_grid( a+ theme(legend.position = 'none'),
                     b+theme(legend.position = 'none'),
                     ncol = 2, rel_heights=c(0.1, 1))
@@ -200,7 +192,5 @@ PlotPTM <- function(modificationSpecificPeptides,
     d <- plot_grid(prow, legend, ncol = 1, rel_heights=c(9, 1))
 
     print(d)
-
   }
-
 }

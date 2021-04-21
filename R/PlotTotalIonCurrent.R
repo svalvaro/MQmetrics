@@ -23,27 +23,7 @@ PlotTotalIonCurrent <- function(msmsScans,
 
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
-
   df <- msmsScans %>% select(contains(c('Experiment','Retention time','Total ion current')))
-
-  # Deal with duplicates in the retention time by group
-  #
-  # duplicated_rt <- df %>%
-  #                     group_by(Experiment) %>%
-  #                     summarise(freq = which(duplicated(`Retention time`)))
-  #                     #which(duplicated(`Retention time`))
-  #
-  # df_unique <- df
-  # df_unique$`Retention time`[duplicated_rt$freq]  = df_unique$`Retention time`[duplicated_rt$freq] + 0.0005
-  #
-  # #checking for unique values in rt
-  # duplicated_rt <- df_unique %>%
-  #                     group_by(Experiment) %>%
-  #                     summarise(freq = which(duplicated(`Retention time`)))
-  #
-  # df_unique$`Retention time`[duplicated_rt$freq]  = df_unique$`Retention time`[duplicated_rt$freq] + 0.0005
-
-
 
   n_samples <- length(unique(df$Experiment))
 
@@ -56,7 +36,7 @@ PlotTotalIonCurrent <- function(msmsScans,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
 
-  # Implement savitzkyGolay
+  # Implement savitzkyGolay future release
 
 
   # df_wider <- pivot_wider(df, names_from = Experiment, values_from = `Total ion current`)
@@ -107,16 +87,12 @@ PlotTotalIonCurrent <- function(msmsScans,
       theme(legend.position = 'none')+
       scale_colour_manual(values = getPalette(colourCount))
 
-
     if (show_max_value==TRUE) {
       print(p + geom_label(data = . %>% group_by(Experiment) %>% filter(`Total ion current`== max(`Total ion current`)),
                      aes(label= format(`Total ion current`, digits = 2, scientific = TRUE)), hjust=0.5))
     }else{
       print(p)
     }
-
   }
-
-
 }
 

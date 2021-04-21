@@ -66,10 +66,6 @@ PlotHydrophobicity <- function(peptides,
   #Repeat rows n numbers of times, being n the frequency (value)
   df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
 
-
-
-
-
   colourCount = length(df)-1
 
   getPalette = colorRampPalette(brewer.pal(8, palette))
@@ -77,7 +73,6 @@ PlotHydrophobicity <- function(peptides,
   n_pages_needed <- ceiling(
     (colourCount)/ plots_per_page
   )
-
 
   for (ii in seq_len(n_pages_needed)) {
 
@@ -100,7 +95,6 @@ PlotHydrophobicity <- function(peptides,
       ylab('Peptide Frequency')+
       xlab('GRAVY score')
 
-
     if (show_median ==TRUE) {
 
       median_groups <-  df_expanded %>%
@@ -112,12 +106,9 @@ PlotHydrophobicity <- function(peptides,
                      color = 'red',  linetype = 'dashed', size = size_median))
 
     } else{
-
       print(p)
     }
-
   }
-
 }
 
 

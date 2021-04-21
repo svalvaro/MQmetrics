@@ -34,8 +34,6 @@ PlotProteaseSpecificity <- function(peptides,
 
   pep_melt2$variable <- gsub('Experiment', '', pep_melt2$variable)
 
-
-
   n_samples <- length(peptides)-2
 
   n_pages_needed <- ceiling(
@@ -64,9 +62,6 @@ PlotProteaseSpecificity <- function(peptides,
       xlab(label = 'Missed Cleavages')+
       scale_fill_manual(values = getPalette(colourCount))
 
-
-
-
     plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
       geom_bar(stat = 'identity', color = 'black',
                show.legend = FALSE)+
@@ -78,8 +73,6 @@ PlotProteaseSpecificity <- function(peptides,
       scale_fill_manual(values = getPalette(colourCount))
 
 
-
-
     #Plot them together
     c <- plot_grid(plot_length, plot_cleavages)
     #Make a title
@@ -88,11 +81,5 @@ PlotProteaseSpecificity <- function(peptides,
     print(plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1.5)))
 
   }
-
-
-
-
-
-
 }
 

@@ -85,13 +85,8 @@ generateReport = function(MQPathCombined,
                           plot_unmodified_peptides = FALSE,
                           plots_per_page = 5){
 
-
-
-
   #Determine the template
   input = system.file("rmd/template_report.Rmd", package="MQmetrics")
-
-
 
   rmarkdown::render(input = input,
                     params = list(input_dir = MQPathCombined,
@@ -117,6 +112,5 @@ generateReport = function(MQPathCombined,
                     output_file = "MQmetrics_report.pdf",
                     output_dir = output_dir,
                     clean = TRUE)
-
 
 }

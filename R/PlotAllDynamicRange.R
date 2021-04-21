@@ -56,7 +56,8 @@ PlotAllDynamicRange <- function(proteinGroups,
 
     temp <- temp[!grepl('^-Inf$', temp)]
 
-    vec_temp <- seq(1:length(temp))
+
+    vec_temp <- seq_len(length(temp))
 
     temp_data <- data.frame(vec_temp, temp)
 

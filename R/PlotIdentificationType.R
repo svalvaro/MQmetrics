@@ -59,8 +59,6 @@ PlotIdentificationType <- function(peptides,
   } else{
     a
   }
-
-
    #Protein Identification Type
 
   prot_ide_type <- proteinGroups %>% select(contains('Identification type'))
@@ -97,9 +95,6 @@ PlotIdentificationType <- function(peptides,
     b, a,
     ncol = 1
   )
-
-
-
 }
 
 

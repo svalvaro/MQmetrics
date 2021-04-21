@@ -34,13 +34,9 @@ PlotiRT <- function(evidence,
                            'iRT Kit_b',  'iRT Kit_e', 'iRT Kit_c', 'iRT Kit_f',
                             'iRT Kit_g', 'iRT Kit_h', 'iRT Kit_l')
 
-
-
   irt_names_table <- data.frame(Sequence, names_Sequence)
   #Check for the iRT peptides by sequence
   indexes_prot <-  which(evidence$Sequence %in% Sequence)
-
-
 
   #if no iRT peptide found return error.
   if (length(indexes_prot)==0) {
@@ -76,7 +72,6 @@ PlotiRT <- function(evidence,
                                  filter(Intensity
                                         == max(Intensity))
 
-
   b <- ggplot(iRT_table_prot_maxvalues,aes(y = Intensity,
                                             colour = names_Sequence))+
                                             # colour = as.character(`m/z`)))+
@@ -104,6 +99,5 @@ PlotiRT <- function(evidence,
   }else{
     b
   }
-
 }
 }

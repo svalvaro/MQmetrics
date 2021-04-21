@@ -22,8 +22,6 @@ PlotAllDynamicRange <- function(proteinGroups,
                                 show_shade = TRUE,
                                 percent_proteins = 0.90){
 
-
-
   rank_groups <-  proteinGroups %>%  select(contains("Intensity ")) %>% select(-starts_with('LFQ'))
 
   rank_groups <- log10(rank_groups)
@@ -45,8 +43,6 @@ PlotAllDynamicRange <- function(proteinGroups,
     rows_grid <- 4
   }
 
-
-
   for(i in 1:ncol(rank_groups)){
 
     temp <- data.frame(rank_groups[,i])
@@ -63,9 +59,6 @@ PlotAllDynamicRange <- function(proteinGroups,
     vec_temp <- seq(1:length(temp))
 
     temp_data <- data.frame(vec_temp, temp)
-
-
-
 
     temp_plot <- ggplot(temp_data, aes(x=vec_temp,y = temp))+
                       geom_point(colour='darkgrey', alpha=0.75, shape=21)+
@@ -87,7 +80,6 @@ PlotAllDynamicRange <- function(proteinGroups,
 
       orders_abundance_temp <- paste(round(upper_y-bottom_y,digits = 1), 'orders  of abundance')
 
-
         temp_plot <- temp_plot+
                           annotate('rect',
                                    xmin = limits_row,
@@ -106,11 +98,7 @@ PlotAllDynamicRange <- function(proteinGroups,
 
     }
 
-
-
     pl[[i]] <- temp_plot
-
-
 
     rm(temp)
     rm(vec_temp)
@@ -121,11 +109,7 @@ PlotAllDynamicRange <- function(proteinGroups,
 
   }
 
-
-
   marrangeGrob(grobs=pl, ncol=columns_grid, nrow = rows_grid, top = NULL)
-
-
 
 }
 

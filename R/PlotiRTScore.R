@@ -38,10 +38,6 @@ PlotiRTScore <- function(evidence,
 
   irt_names_table <- data.frame(Sequence, names_Sequence)
 
-
-
-
-
   #obtain the indeces with the iRT peptides sequences in the evidence table.
 
   indexes_prot <-  which(evidence$Sequence %in% Sequence)
@@ -52,9 +48,6 @@ PlotiRTScore <- function(evidence,
     print('No iRT peptides found in the MaxQuant output.')
 
   } else{
-
-
-
 
     #obtain rows only with irt by sequence
     iRT_table_prot <- evidence[indexes_prot,]
@@ -102,7 +95,6 @@ PlotiRTScore <- function(evidence,
       as.character(as.expression(eq));
     }
 
-
   #plot it.
     ggscatter(iRT_table_prot_maxvalues, x = "iRT.score", y = "Retention time",
               add = 'reg.line')+
@@ -114,7 +106,6 @@ PlotiRTScore <- function(evidence,
       geom_point(aes(fill = names_Sequence),shape = 21, colour ='black', size =3)+
       ggtitle(label = 'Retention time of the Biognosys iRT peptides.')+
       theme(legend.position =  'bottom')
-
 
   }
 

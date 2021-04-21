@@ -35,7 +35,6 @@ b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variabl
       scale_fill_brewer(palette = palette)+
       theme(legend.position = 'bottom')
 
-
 if (long_names == TRUE) {
   b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
 }  else{

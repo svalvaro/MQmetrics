@@ -25,14 +25,9 @@ PlotMsMs <- function(summary,
 
   Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- value <- variable <- NULL
 
-
   a <- summary %>% select(c(Experiment, `MS/MS Submitted`, `MS/MS Identified`))
 
-
-
   a_melt <- melt(a, id.vars = 'Experiment' )
-
-
 
  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
         geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
@@ -41,18 +36,10 @@ PlotMsMs <- function(summary,
         scale_fill_brewer(palette = palette)+
         theme(legend.position = 'bottom')
 
-
-
-
-
 if (long_names == TRUE) {
   b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
 
 } else{
   b
 }
-
-
-
-
 }

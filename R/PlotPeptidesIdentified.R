@@ -29,7 +29,6 @@ PlotPeptidesIdentified <- function(summary,
 
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
-
   b <- ggplot(summary, aes(x=Experiment , y = `Peptide Sequences Identified`,
                             fill = Experiment))+
           geom_bar(stat = 'identity', color='black')+

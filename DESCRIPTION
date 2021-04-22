@@ -1,7 +1,7 @@
 Package: MQmetrics
 Type: Package
 Title: Analyses LC-MS/MS data from MaxQuant output files
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: c(person(given = "Alvaro", family = "Sanchez-Villalba",
                     email = "sanchezvillalba.alvaro@gmail.com",
                     role = c("aut", "cre")),

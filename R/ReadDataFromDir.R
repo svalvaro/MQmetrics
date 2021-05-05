@@ -85,7 +85,7 @@ ReadDataFromDir <- function(MQPathCombined,
 
 
   #Check if the running times is present, if so, add it to alltables
-  if ('#runningTimes.txt' %in% list.files(paste0(MQPathCombined, 'proc/'))) {
+  if ('#runningTimes.txt' %in% list.files(file.path(MQPathCombined, 'proc/'))) {
 
 
 

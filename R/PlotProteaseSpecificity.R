@@ -58,6 +58,7 @@ PlotProteaseSpecificity <- function(peptides,
                show.legend = FALSE)+
       ggtitle(label = 'Missed enzymatic cleavages')+
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+      ylab('Peptide Frequency')+
       theme_bw()+
       xlab(label = 'Missed Cleavages')+
       scale_fill_manual(values = getPalette(colourCount))
@@ -67,6 +68,7 @@ PlotProteaseSpecificity <- function(peptides,
                show.legend = FALSE)+
       ggtitle(label = 'Peptide Length')+
       xlab(label = 'Length')+
+      ylab('Peptide Frequency')+
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
       theme_bw()+
       xlab(label = 'Peptide length')+

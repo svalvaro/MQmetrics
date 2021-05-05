@@ -47,6 +47,7 @@ PlotCharge <- function(evidence,
            facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii)+
            ggtitle(label = 'The charge-state of the precursor ion.')+
            theme(legend.position = 'none')+
+           ylab('Ion Frequency')+
            xlab(label = 'Charge')+
            theme_bw()+
            theme(legend.position='none')

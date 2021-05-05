@@ -84,6 +84,7 @@ PlotProteinsIdentified <- function(proteinGroups,
             ggtitle(title)+
             geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
             theme(axis.title.y = element_text(margin = margin(r = 20)))+
+            ylab('Number of Proteins')+
             theme_bw()+
             scale_fill_brewer(palette = palette)+
             theme(legend.position = 'bottom')

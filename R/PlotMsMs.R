@@ -32,6 +32,7 @@ PlotMsMs <- function(summary,
  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
         geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
         theme_bw()+
+        ylab('MS/MS Frequency')+
         ggtitle('MS/MS Submitted and Identified')+
         scale_fill_brewer(palette = palette)+
         theme(legend.position = 'bottom')

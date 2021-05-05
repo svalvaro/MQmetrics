@@ -37,6 +37,7 @@ PlotProteinOverlap <- function(proteinGroups){
   ggplot(df_bin_stat, aes(x = 'all', y = value, fill = as.character(samples)))+
     geom_col(col = 'white', width =  0.3)+
     scale_fill_brewer(palette = 1)+
+    ylab('Number of Proteins')+
     theme_bw()+
     ggtitle('Protein Overlap Between samples')+
     labs(fill = 'samples',

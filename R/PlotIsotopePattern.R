@@ -31,6 +31,7 @@ PlotIsotopePattern <- function(summary,
 b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
       geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
       theme_bw()+
+      ylab('Frequency Isotope Patterns')+
       ggtitle('Isotope Patterns detected and sequenced')+
       scale_fill_brewer(palette = palette)+
       theme(legend.position = 'bottom')

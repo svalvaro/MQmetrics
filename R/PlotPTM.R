@@ -157,7 +157,7 @@ PlotPTM <- function(modificationSpecificPeptides,
             facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
             theme_bw()+
             ggtitle('Frequency of modified peptides')+
-            ylab('Frequency')+
+            ylab('Peptide Frequency')+
             theme(legend.position = 'bottom',
                   axis.title.x = element_blank(),
                   axis.text.x = element_blank(),

@@ -47,6 +47,8 @@ PlotIdentificationType <- function(peptides,
   a <- ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
           geom_col()+
           ggtitle('Peptide Identification type')+
+          ylab('Peptide Frequency')+
+          xlab('Experiment')+
           geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
           theme(axis.title.y = element_text(margin = margin(r = 20)))+
           theme_bw()+
@@ -79,6 +81,8 @@ PlotIdentificationType <- function(peptides,
     geom_col()+
     ggtitle('Protein Identification type')+
     geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+    ylab('Protein Frequency')+
+    xlab('Experiment')+
     theme(axis.title.y = element_text(margin = margin(r = 20)))+
     theme_bw()+
     scale_fill_brewer(palette = palette)+

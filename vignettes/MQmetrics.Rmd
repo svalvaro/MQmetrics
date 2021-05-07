@@ -29,7 +29,7 @@ It also includes two functions to visualize the [iRT peptides from Biognosys](ht
 
 ## Install the package
 
-You can install the development version from [GitHub](https://github.com/BioAlvaro/) with:
+You can install the development version from [GitHub](https://github.com/svalvaro/) with:
 
 ``` {r install, eval = FALSE}
 # install.packages("devtools")

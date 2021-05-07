@@ -15,7 +15,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("BioAlvaro/MQmetrics")
+devtools::install_github("svalvaro/MQmetrics")
 ```
 
 ## Example

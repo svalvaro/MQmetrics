@@ -1,7 +1,6 @@
 ---
 title: "MQmetrics"
 author: "Alvaro Sanchez-Villalba"
-date: "r doc_date()"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{MQmetrics}

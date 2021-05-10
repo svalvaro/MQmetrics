@@ -2,11 +2,13 @@
 
 
 #' Plots the dynamic range for all samples
-#'
-#' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
-#' @param show_shade Creates a shade showing where the \code{percent_proteins} are.
+#'#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
+#' @param show_shade Creates a shade showing where the \code{percent_proteins}
+#' are.
 #'  Default is TRUE.
-#' @param percent_proteins Determines the percentage for the show_shade parameter.
+#' @param percent_proteins Determines the percentage for the show_shade
+#' parameter.
 #'  Default is 0.90 (90\% of the proteins).
 #'
 #' @return Returns one plot for each sample, being the dynamic range.
@@ -25,7 +27,8 @@ PlotAllDynamicRange <- function(MQCombined,
 
 
 
-    rank_groups <-  proteinGroups %>%  select(contains("Intensity ")) %>% select(-starts_with('LFQ'))
+    rank_groups <-  proteinGroups %>%  select(contains("Intensity ")) %>%
+        select(-starts_with('LFQ'))
 
     rank_groups <- log10(rank_groups)
 
@@ -82,7 +85,8 @@ PlotAllDynamicRange <- function(MQCombined,
 
             bottom_y = temp_data$temp[nrow(temp_data)-limits_row]
 
-            orders_abundance_temp <- paste(round(upper_y-bottom_y,digits = 1), 'orders  of abundance')
+            orders_abundance_temp <- paste(round(upper_y-bottom_y,digits = 1),
+                                           'orders  of abundance')
 
             temp_plot <- temp_plot+
                 annotate('rect',
@@ -98,7 +102,8 @@ PlotAllDynamicRange <- function(MQCombined,
                 annotate('text',
                          x = nrow(temp_data)/2,
                          y = upper_y,
-                         label = paste0(percent_proteins*100, ' % of proteins represented.'))
+                         label = paste0(percent_proteins*100,
+                                        ' % of proteins represented.'))
 
         }
 
@@ -113,7 +118,8 @@ PlotAllDynamicRange <- function(MQCombined,
 
     }
 
-    gridExtra::marrangeGrob(grobs=pl, ncol=columns_grid, nrow = rows_grid, top = NULL)
+    gridExtra::marrangeGrob(grobs=pl,
+                            ncol=columns_grid, nrow = rows_grid, top = NULL)
 
 }
 

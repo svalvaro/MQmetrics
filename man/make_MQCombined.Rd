@@ -22,5 +22,5 @@ Read MaxQuant Tables From Directory
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- make_MQCombined(MQPathCombined)
+MQCombined <- make_MQCombined(MQPathCombined)
 }

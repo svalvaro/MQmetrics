@@ -1,8 +1,6 @@
 #' Experiment Information
-#' @param MQPathCombined The directory to the "combined" folder where the
-#'  MaxQuant results are stored.
-#' @param runningTimes The runningTimes.txt table from  MaxQuant Output.
-#' @param  parameters The parameters.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @return Returns the time in hours:minutes that lasted the whole Experiment.
 #' @export
 #'

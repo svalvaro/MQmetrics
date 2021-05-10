@@ -7,12 +7,8 @@
 MaxQuantAnalysisInfo(MQCombined)
 }
 \arguments{
-\item{MQPathCombined}{The directory to the "combined" folder where the
-MaxQuant results are stored.}
-
-\item{runningTimes}{The runningTimes.txt table from  MaxQuant Output.}
-
-\item{parameters}{The parameters.txt table from  MaxQuant Output.}
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
 }
 \value{
 Returns the time in hours:minutes that lasted the whole Experiment.

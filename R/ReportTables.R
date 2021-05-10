@@ -1,6 +1,7 @@
 #' Report Tables with summary data
 #'
-#' @param MQPathCombined The directory to the "combined" folder where the MaxQuant results are stored.
+#' @param MQPathCombined The directory to the "combined" folder where the
+#'  MaxQuant results are stored.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
 #'
@@ -19,279 +20,327 @@ ReportTables <- function(MQPathCombined,
                          log_base = 2,
                          intensity_type = 'Intensity'){
 
-  sd <- median <- Experiment <- Charge <- variable <- `Missed cleavages` <- value <- `freq` <- samples <- NULL
+    sd <- median <- Experiment <- Charge <- variable <- NULL
+    `Missed cleavages` <- value <- `freq` <- samples <- NULL
 
-  files <- MQmetrics::make_MQCombined(MQPathCombined)
+    files <- MQmetrics::make_MQCombined(MQPathCombined)
 
-  #Read the Protein Groups without removing the contamintants To plot it.
-  proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
-                              "\t",
-                              escape_double = FALSE,
-                              trim_ws = TRUE,
-                              guess_max = 100000)
+    #Read the Protein Groups without removing the contamintants To plot it.
+    proteinGroups <- read_delim(file.path(MQPathCombined,
+                                          "txt/proteinGroups.txt"),
+                                "\t",
+                                escape_double = FALSE,
+                                trim_ws = TRUE,
+                                guess_max = 100000)
 
-  if (intensity_type == 'Intensity') {
-
-
-    protein_table <- proteinGroups %>%
-      select(contains(c('Intensity ',
-                        'Reverse',
-                        'Potential',
-                        'Only identified by site')
-                      )
-             ) %>%
-      select(-contains('LFQ'))
-
-    #Remove Intensity from name
-    colnames(protein_table) <- gsub("Intensity.",
-                                    "",
-                                    colnames(protein_table)
-                                    )
-
-    title <- 'Proteins Identified based on Intensity'
-
-  }
-
-  if (intensity_type == 'LFQ'){
-
-    #Remove LFQ Intensity from name
-
-    protein_table <- proteinGroups %>%
-      select(contains(c('LFQ ',
-                        'Reverse',
-                        'Potential',
-                        'Only identified by site')
-                      )
-             )
+    if (intensity_type == 'Intensity') {
 
 
-    colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
-    title <- 'Proteins Identified based on LFQ intensity'
+        protein_table <- proteinGroups %>%
+            select(contains(c('Intensity ',
+                              'Reverse',
+                              'Potential',
+                              'Only identified by site')
+            )
+            ) %>%
+            select(-contains('LFQ'))
 
-    #Error if LFQ Intensity not found.
+        #Remove Intensity from name
+        colnames(protein_table) <- gsub("Intensity.",
+                                        "",
+                                        colnames(protein_table)
+        )
 
-    if (length(protein_table) == 0) {
-      print('LFQ intensities not found, changing automatically to Intensity.')
-
-      protein_table <- proteinGroups %>%
-        select(contains(c('Intensity ',
-                          'Reverse',
-                          'Potential',
-                          'Only identified by site'))) %>%
-        select(-contains('LFQ'))
-      #Remove Intensity from name
-      colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
-
-      title <- 'Proteins Identified based on Intensity'
+        title <- 'Proteins Identified based on Intensity'
 
     }
 
-  }
-  #proteinGroups <- read.delim("~/Documents/MaxQuant/data_pacakge/combined_original/txt/proteinGroups.txt")
-  #length(which(protein_table$Reverse == '+'))
+    if (intensity_type == 'LFQ'){
 
-  table_summary <- data.frame("Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
-                              "Missing values" = colSums(protein_table==0),
-                              "Potential contaminants" = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
-                              "Reverse" = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
-                              #"Reverse" = length(which(protein_table$Reverse == '+')),
-                              "Only identified by site"= colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0),
-                              check.names = FALSE) #To have spaces in the column names.
+        #Remove LFQ Intensity from name
 
-  table_summary <- table_summary[!(row.names(table_summary) %in% c("Reverse","Potential contaminant", "Only identified by site")),]
+        protein_table <- proteinGroups %>%
+            select(contains(c('LFQ ',
+                              'Reverse',
+                              'Potential',
+                              'Only identified by site')
+            )
+            )
+
+
+        colnames(protein_table) <- gsub("LFQ intensity.", "",
+                                        colnames(protein_table))
+
+        title <- 'Proteins Identified based on LFQ intensity'
+
+        #Error if LFQ Intensity not found.
+
+        if (length(protein_table) == 0) {
+            print('LFQ intensities not found,
+                  changing automatically to Intensity.')
+
+            protein_table <- proteinGroups %>%
+                select(contains(c('Intensity ',
+                                  'Reverse',
+                                  'Potential',
+                                  'Only identified by site'))) %>%
+                select(-contains('LFQ'))
+            #Remove Intensity from name
+            colnames(protein_table) <- gsub("Intensity.", "",
+                                            colnames(protein_table))
+
+            title <- 'Proteins Identified based on Intensity'
+
+        }
+
+    }
+    # proteinGroups <- read.delim("~/Documents/MaxQuant/
+    # data_pacakge/combined_original/txt/proteinGroups.txt")
+    #length(which(protein_table$Reverse == '+'))
+
+    table_summary <- data.frame("Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
+                                "Missing values" = colSums(protein_table==0),
+                                "Potential contaminants" = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
+                                "Reverse" = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
+                                #"Reverse" = length(which(protein_table$Reverse == '+')),
+                                "Only identified by site"= colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0),
+                                check.names = FALSE) #To have spaces .
+
+    table_summary <- table_summary[!(row.names(table_summary) %in% c("Reverse","Potential contaminant", "Only identified by site")),]
+
+    table_summary$Experiment <- rownames(table_summary)
+
+    rownames(table_summary) <- NULL
+
+    table_summary <- table_summary[,c(6,1,2,3,4,5)]
+
+    combined_row <- c('Combined Samples',
+                      nrow(proteinGroups), #total proteins
+                      NA,  # NA combined,
+                      length(which(proteinGroups$`Potential contaminant` == '+')),
+                      length(which(proteinGroups$Reverse == '+')),
+                      length(which(proteinGroups$`Only identified by site` == '+')
+                      )
+    )
+
+    table_summary <- rbind( combined_row, table_summary)
+
+
+    #Table 2 Log10 intensities
+
+
+    int_info <- protein_table %>% select(-contains(c('Reverse',
+                                                     'Potential contaminant',
+                                                     'Only identified by site'))
+    )
+
+    int_info[int_info == 0] <- NA
+
+    #log intensities
+
+    if(log_base == 2){
+        dynamic_table <- do.call(data.frame,
+                                 list(mean = format(log2(apply(int_info,
+                                                               2,
+                                                               mean,
+                                                               na.rm=TRUE)),
+                                                    digits = 4),
+
+                                      sd = format(log2(apply(int_info,
+                                                             2,
+                                                             sd,
+                                                             na.rm=TRUE)),
+                                                  digits = 4),
+
+                                      median = format(log2(apply(int_info,
+                                                                 2,
+                                                                 median,
+                                                                 na.rm=TRUE)),
+                                                      digits =4),
+                                      min = format(log2(apply(int_info,
+                                                              2,
+                                                              min,
+                                                              na.rm=TRUE)),
+                                                   digits = 4),
+                                      max = format(log2(apply(int_info,
+                                                              2,
+                                                              max,na.rm=TRUE)),
+                                                   digits = 4),
+                                      n = apply(int_info, 2, length)-colSums(is.na(int_info))))
+    }
+
+    if(log_base == 10){
+        dynamic_table <- do.call(data.frame,
+                                 list(mean = format(log10(apply(int_info,
+                                                                2,
+                                                                mean,
+                                                                na.rm=TRUE)),
+                                                    digits = 4),
+                                      sd = format(log10(apply(int_info, 2,
+                                                              sd,
+                                                              na.rm=TRUE)),
+                                                  digits = 4),
+                                      median = format(log10(apply(int_info, 2,
+                                                                  median,
+                                                                  na.rm=TRUE)),
+                                                      digits =4),
+                                      min = format(log10(apply(int_info, 2,
+                                                               min,na.rm=TRUE)),
+                                                   digits = 4),
+                                      max = format(log10(apply(int_info, 2, max,
+                                                               na.rm=TRUE)),
+                                                   digits = 4),
+                                      n = apply(int_info,
+                                                2,
+                                                length)-colSums(is.na(int_info))
+                                 )
+        )
+    }
+
+
+    dynamic_table$Experiment  <- rownames(dynamic_table)
+
+    rownames(dynamic_table) <- NULL
+
+    dynamic_table <- dynamic_table[,c(7,1,2,3,4,5,6)]
+
+    #Table 3 Charge
+
+    evidence <- files[["evidence.txt"]]
 
-  table_summary$Experiment <- rownames(table_summary)
+    charge_table <- evidence %>%
+        select(c(Experiment,Charge ))
 
-  rownames(table_summary) <- NULL
+    charge_table <- dcast(charge_table,
+                          Experiment~ Charge,
+                          fill = 0)
 
-  table_summary <- table_summary[,c(6,1,2,3,4,5)]
+    charge_percentage <- charge_table[,-1]/rowSums(charge_table[,-1])*100
 
-  combined_row <- c('Combined Samples',
-                    nrow(proteinGroups), #total proteins
-                    NA,  # NA combined,
-                    length(which(proteinGroups$`Potential contaminant` == '+')),
-                    length(which(proteinGroups$Reverse == '+')),
-                    length(which(proteinGroups$`Only identified by site` == '+')
-                           )
-                    )
+    charge_percentage <- cbind(charge_table$Experiment,
+                               format(round(charge_percentage,1),
+                                      nsmall =1))
 
-  table_summary <- rbind( combined_row, table_summary)
+    names(charge_percentage)[1] <- 'Experiment'
 
 
-  #Table 2 Log10 intensities
 
+    #Table 4, GRAVY with median and retention times
+    peptides <- files[['peptides.txt']]
 
-  int_info <- protein_table %>% select(-contains(c('Reverse',
-                                                   'Potential contaminant',
-                                                   'Only identified by site')))
+    df <- peptides %>%  select(contains(c('Length',
+                                          "Count",
+                                          "Sequence",
+                                          "Experiment")
+    )
+    )
 
-  int_info[int_info == 0] <- NA
+    df$GRAVY <-  (df$`A Count` * 1.8 +
+                      df$`R Count` * -4.5 +
+                      df$`N Count` * -3.5 +
+                      df$`D Count` * -3.5 +
+                      df$`C Count` * 2.5 +
+                      df$`Q Count` * -3.5 +
+                      df$`E Count` * -3.5 +
+                      df$`G Count` * -0.4 +
+                      df$`H Count` * -3.2 +
+                      df$`I Count` * 4.5 +
+                      df$`L Count` * 3.8 +
+                      df$`K Count` * -3.9 +
+                      df$`M Count` * 1.9 +
+                      df$`F Count` * 2.8 +
+                      df$`P Count` * -1.6 +
+                      df$`S Count` * -0.8 +
+                      df$`T Count` * -0.7 +
+                      df$`W Count` * -0.9 +
+                      df$`Y Count` * -1.3 +
+                      df$`V Count` * 4.2)/df$Length
 
-  #log intensities
+    df <- df %>% select(contains(c('GRAVY', 'Experiment')))
 
-  if(log_base == 2){
-    dynamic_table <- do.call(data.frame,
-                             list(mean = format(log2(apply(int_info, 2, mean,na.rm=TRUE)), digits = 4),
-                                  sd = format(log2(apply(int_info, 2, sd,na.rm=TRUE)), digits = 4),
-                                  median = format(log2(apply(int_info, 2, median,na.rm=TRUE)), digits =4),
-                                  min = format(log2(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
-                                  max = format(log2(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
-                                  n = apply(int_info, 2, length)-colSums(is.na(int_info))))
-  }
+    df_out <- melt(df, id.vars = 'GRAVY')
 
-  if(log_base == 10){
-    dynamic_table <- do.call(data.frame,
-                             list(mean = format(log10(apply(int_info, 2, mean,na.rm=TRUE)), digits = 4),
-                                  sd = format(log10(apply(int_info, 2, sd,na.rm=TRUE)), digits = 4),
-                                  median = format(log10(apply(int_info, 2, median,na.rm=TRUE)), digits =4),
-                                  min = format(log10(apply(int_info, 2, min,na.rm=TRUE)), digits = 4),
-                                  max = format(log10(apply(int_info, 2, max,na.rm=TRUE)), digits = 4),
-                                  n = apply(int_info, 2, length)-colSums(is.na(int_info))))
-  }
+    df_out$variable <- gsub('Experiment ', '', df_out$variable)
 
+    #Remove value 0,
 
-  dynamic_table$Experiment  <- rownames(dynamic_table)
 
-  rownames(dynamic_table) <- NULL
+    df_out[is.na(df_out$value),] <- 0
 
-  dynamic_table <- dynamic_table[,c(7,1,2,3,4,5,6)]
+    #Repeat rows n numbers of times, being n the frequency (value)
+    df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
 
-  #Table 3 Charge
+    GRAVY <- df_expanded %>%
+        group_by(variable) %>%
+        summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
+                  Max = format(round(max(GRAVY),2),nsmall = 1),
+                  Min = format(round(min(GRAVY),2),nsmall = 1),
+                  Median = format(round(median(GRAVY),2),nsmall = 1))
+    names(GRAVY)[1] <- 'Experiment'
 
-  evidence <- files[["evidence.txt"]]
 
-  charge_table <- evidence %>%
-    select(c(Experiment,Charge ))
 
-  charge_table <- dcast(charge_table,
-                        Experiment~ Charge,
-                        fill = 0)
+    # Table 5
 
-  charge_percentage <- charge_table[,-1]/rowSums(charge_table[,-1])*100
+    peptides <- files[["peptides.txt"]] %>%
+        select(contains(c('Missed cleavages','Experiment','Length')))
 
-  charge_percentage <- cbind(charge_table$Experiment,
-                             format(round(charge_percentage,1),
-                                    nsmall =1))
+    pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'),
+                      measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
+    pep_melt <- aggregate(value ~ variable + `Missed cleavages`,
+                          data=pep_melt,
+                          sum)
 
-  names(charge_percentage)[1] <- 'Experiment'
 
+    missed_summary <- pep_melt %>%
+        group_by(variable, `Missed cleavages`) %>%
+        summarise(freq = sum(value))
 
+    missed_summary <- pivot_wider(missed_summary,
+                                  names_from =  `Missed cleavages`,
+                                  values_from = freq)
 
-  #Table 4, GRAVY with median and retention times
-  peptides <- files[['peptides.txt']]
+    missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
 
-  df <- peptides %>%  select(contains(c('Length',
-                                        "Count",
-                                        "Sequence",
-                                        "Experiment")
-                                      )
-                             )
+    colnames(missed_summary)[colnames(missed_summary)=='variable'] <- 'Experiment'
 
-  df$GRAVY <-  (df$`A Count` * 1.8 +
-                  df$`R Count` * -4.5 +
-                  df$`N Count` * -3.5 +
-                  df$`D Count` * -3.5 +
-                  df$`C Count` * 2.5 +
-                  df$`Q Count` * -3.5 +
-                  df$`E Count` * -3.5 +
-                  df$`G Count` * -0.4 +
-                  df$`H Count` * -3.2 +
-                  df$`I Count` * 4.5 +
-                  df$`L Count` * 3.8 +
-                  df$`K Count` * -3.9 +
-                  df$`M Count` * 1.9 +
-                  df$`F Count` * 2.8 +
-                  df$`P Count` * -1.6 +
-                  df$`S Count` * -0.8 +
-                  df$`T Count` * -0.7 +
-                  df$`W Count` * -0.9 +
-                  df$`Y Count` * -1.3 +
-                  df$`V Count` * 4.2)/df$Length
 
-  df <- df %>% select(contains(c('GRAVY', 'Experiment')))
 
-  df_out <- melt(df, id.vars = 'GRAVY')
+    #Table 6 Completeness or PlotCoverageAll
 
-  df_out$variable <- gsub('Experiment ', '', df_out$variable)
 
-  #Remove value 0,
+    df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the
+        # Contaminants, Reverse, etc removed.
+        select(contains(c('Protein IDs', 'peptides '))) %>%
+        select(-contains(c('unique', 'Majority')))
 
 
-  df_out[is.na(df_out$value),] <- 0
+    # Make a binary long data.frame (1 = valid value, 0 = missing value)
+    # It shows the present of the protein or not.
 
-  #Repeat rows n numbers of times, being n the frequency (value)
-  df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
+    df_bin <- df
 
-  GRAVY <- df_expanded %>%
-    group_by(variable) %>%
-    summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
-              Max = format(round(max(GRAVY),2),nsmall = 1),
-              Min = format(round(min(GRAVY),2),nsmall = 1),
-              Median = format(round(median(GRAVY),2),nsmall = 1))
-  names(GRAVY)[1] <- 'Experiment'
+    df_bin[,-1][df_bin[,-1]>1] <- 1
 
 
+    # Calculate the number of times that
+    # each protein has appear in each experiment
 
-  # Table 5
+    df_bin$samples <- rowSums(df_bin[,-1])
 
-  peptides <- files[["peptides.txt"]] %>%  select(contains(c('Missed cleavages',
-                                                             'Experiment',
-                                                             'Length')))
+    df_bin_stat <- df_bin %>%
+        group_by(samples) %>%
+        summarise(Freq = n())
 
-  pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'),
-                    measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
-  pep_melt <- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
 
+    out <- list()
 
-  missed_summary <- pep_melt %>%
-    group_by(variable, `Missed cleavages`) %>%
-    summarise(freq = sum(value))
+    out$proteins <- table_summary
+    out$intensities <- dynamic_table
+    out$charge <- charge_percentage
+    out$GRAVY <- GRAVY
+    out$cleavages <- missed_summary
+    out$overlap <- df_bin_stat
 
-  missed_summary <- pivot_wider(missed_summary,
-                                names_from =  `Missed cleavages`,
-                                values_from = freq)
-
-  missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
-
-  colnames(missed_summary)[colnames(missed_summary)=='variable'] <- 'Experiment'
-
-
-
-  #Table 6 Completeness or PlotCoverageAll
-
-
-  df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the
-                                          # Contaminants, Reverse, etc removed.
-    select(contains(c('Protein IDs', 'peptides '))) %>%
-    select(-contains(c('unique', 'Majority')))
-
-
-  # Make a binary long data.frame (1 = valid value, 0 = missing value)
-  # It shows the present of the protein or not.
-
-  df_bin <- df
-
-  df_bin[,-1][df_bin[,-1]>1] <- 1
-
-
-  # Calculate the number of times that
-  # each protein has appear in each experiment
-
-  df_bin$samples <- rowSums(df_bin[,-1])
-
-  df_bin_stat <- df_bin %>%
-    group_by(samples) %>%
-    summarise(Freq = n())
-
-
-  out <- list()
-
-  out$proteins <- table_summary
-  out$intensities <- dynamic_table
-  out$charge <- charge_percentage
-  out$GRAVY <- GRAVY
-  out$cleavages <- missed_summary
-  out$overlap <- df_bin_stat
-
-  return(out)
+    return(out)
 }

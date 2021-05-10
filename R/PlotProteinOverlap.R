@@ -1,6 +1,7 @@
 #' Protein Overlap Between Samples
 #'
-#' @param proteinGroups proteinGroups.txt table from MaxQuant output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #'
 #' @return A plot showing the protein coverage in all samples.
 #' @export

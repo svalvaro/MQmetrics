@@ -12,14 +12,15 @@ PlotTotalIonCurrent(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{show_max_value}{If TRUE, it will show the max TIC value of each sample.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
-
-\item{msmsScans}{The msmsScans.txt table from  MaxQuant Output.}
 }
 \value{
 Returns a plot the Total Ion Current in each sample.

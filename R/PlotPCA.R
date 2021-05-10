@@ -1,6 +1,7 @@
 #' Principal Component Analysis of the Intensity values.
 #'
-#' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.
@@ -23,7 +24,8 @@ PlotPCA <- function(MQCombined,
     PC1 <- PC2 <- Modifications <- variable <- value <- Freq <- NULL
 
     if (intensity_type == 'Intensity') {
-        intensities <-  proteinGroups %>%  select(contains('Intensity ')& -contains('LFQ'))
+        intensities <-  proteinGroups %>%
+            select(contains('Intensity ')& -contains('LFQ'))
         title <- 'PCA of intensity'
         colnames(intensities) <- gsub(pattern = 'Intensity',
                                       '',
@@ -39,7 +41,8 @@ PlotPCA <- function(MQCombined,
         #Error if LFQ Intensity not found.
 
         if (length(intensities) == 1) {
-            print('LFQ intensities not found, changing automatically to Intensity.')
+            print('LFQ intensities not found,
+                  changing automatically to Intensity.')
 
             intensities <-  proteinGroups %>%
                 select(contains('Intensity ') & -contains('LFQ'))

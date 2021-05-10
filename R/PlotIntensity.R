@@ -1,6 +1,7 @@
 #' Intensity / LFQ intensity per sample.
 #'
-#' @param proteinGroups  The proteinGroups.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param split_violin_intensity If TRUE, both the LFQ and the Intensity will be
 #'  shown in the same plot. If FALSE, it can be specified in the intensity_type
 #'  which intensity to visualize.
@@ -45,7 +46,8 @@ PlotIntensity <- function(MQCombined,
     interleave <- function(...) UseMethod("interleave")
 
     interleave.unit <- function(...) {
-        do.call("unit.c", do.call("interleave.default", lapply(list(...), as.list)))
+        do.call("unit.c", do.call("interleave.default", lapply(list(...),
+                                                               as.list)))
     }
 
     interleave.default <- function(...) {
@@ -112,15 +114,16 @@ PlotIntensity <- function(MQCombined,
                                            "x"] <- round(newdata[1, "x"])
 
                                    if (length(draw_quantiles) > 0 & !scales::zero_range(range(data$y))) {
-                                       stopifnot(all(draw_quantiles >= 0), all(draw_quantiles <=
-                                                                                   1))
+                                       stopifnot(all(draw_quantiles >= 0),
+                                                 all(draw_quantiles <=1))
                                        quantiles <- create_quantile_segment_frame(data, draw_quantiles)
                                        aesthetics <- data[rep(1,
                                                               nrow(quantiles)),
                                                           setdiff(names(data),
                                                                   c("x", "y")),
                                                           drop = FALSE]
-                                       aesthetics$alpha <- rep(1, nrow(quantiles))
+                                       aesthetics$alpha <- rep(1,
+                                                               nrow(quantiles))
                                        both <- cbind(quantiles, aesthetics)
                                        quantile_grob <- GeomPath$draw_panel(both, ...)
                                        ggname("geom_split_violin",
@@ -129,7 +132,8 @@ PlotIntensity <- function(MQCombined,
                                    }
                                    else {
                                        ggname("geom_split_violin",
-                                              GeomPolygon$draw_panel(newdata, ...))
+                                              GeomPolygon$draw_panel(newdata,
+                                                                     ...))
                                    }
                                })
 
@@ -144,11 +148,13 @@ PlotIntensity <- function(MQCombined,
                                   na.rm = FALSE,
                                   show.legend = NA,
                                   inherit.aes = TRUE) {
-        layer(data = data, mapping = mapping, stat = stat, geom = GeomSplitViolin,
+        layer(data = data, mapping = mapping, stat = stat,
+              geom = GeomSplitViolin,
               position = position, show.legend = show.legend,
               inherit.aes = inherit.aes,
               params = list(trim = trim, scale = scale,
-                            draw_quantiles = draw_quantiles, na.rm = na.rm, ...))
+                            draw_quantiles = draw_quantiles, na.rm = na.rm,
+                            ...))
     }
 
     intensities <- proteinGroups %>%  select(id, contains('Intensity '))
@@ -167,7 +173,8 @@ PlotIntensity <- function(MQCombined,
             # Print a warning that split violin will not be created and
             # the intensities will be plotted.
 
-            print('LFQ intensities not found, split_violin_plot can not be created')
+            print('LFQ intensities not found,
+                  split_violin_plot can not be created')
             print('Changing intensity automatically to Intensity')
 
             intensities <-  intensities %>%  select(-contains('LFQ'))

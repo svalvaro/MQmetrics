@@ -7,7 +7,8 @@
 ReportTables(MQPathCombined, log_base = 2, intensity_type = "Intensity")
 }
 \arguments{
-\item{MQPathCombined}{The directory to the "combined" folder where the MaxQuant results are stored.}
+\item{MQPathCombined}{The directory to the "combined" folder where the
+MaxQuant results are stored.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 

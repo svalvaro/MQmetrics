@@ -7,13 +7,14 @@
 PlotCombinedDynamicRange(MQCombined, show_shade = TRUE, percent_proteins = 0.9)
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{show_shade}{Creates a shade showing where the \code{percent_proteins}
 are. Default is TRUE.}
 
 \item{percent_proteins}{Determines the percentage for the show_shade
 parameter. Default is 0.90 (90\% of the proteins).}
-
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 Returns the dynamic range for all samples combined.
@@ -23,7 +24,6 @@ Dynamic range of all the samples combined
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
-PlotCombinedDynamicRange(proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotCombinedDynamicRange(MQCombined)
 }

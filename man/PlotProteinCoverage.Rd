@@ -14,6 +14,9 @@ PlotProteinCoverage(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{UniprotID}{Uniprot ID of the protein of interest.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
@@ -25,10 +28,6 @@ Default is 1.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
-
-\item{peptides}{peptides.txt table from MaxQuant ouput.}
-
-\item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}
 }
 \value{
 Two plots for each sample, the end position vs the start position of
@@ -41,8 +40,7 @@ Protein coverage and degradation.
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
-peptides <- files[['peptides.txt']]
-proteinGroups <- files[['proteinGroups.txt']]
-PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotProteinCoverage(MQCombined, UniprotID = 'Q8R0Y6')
 
 }

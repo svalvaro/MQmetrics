@@ -13,6 +13,9 @@ PlotProteinsIdentified(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.
 Only useful if split_violin_intensity = FALSE.  Default is Intensity.}
 
@@ -24,8 +27,6 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
-
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 A plot showing the number of proteins identified per sample and the
@@ -36,8 +37,7 @@ Proteins Identified per sample.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
-PlotProteinsIdentified(proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotProteinsIdentified(MQCombined)
 
 }

@@ -1,6 +1,7 @@
 #' Total number of peaks detected and sequenced
 #'
-#' @param  summary The summary.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param long_names If TRUE, samples having long names will be considered, and
 #'  the name will be split by sep_names. By default = FALSE.
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples

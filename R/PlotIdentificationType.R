@@ -1,7 +1,7 @@
 #' Protein and Peptide Identification type.
 #'
-#' @param peptides  The peptides.txt table from  MaxQuant Output.
-#' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param long_names If TRUE, samples having long names will be considered, and
 #'  the name will be split by sep_names. By default = FALSE.
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
@@ -27,85 +27,85 @@ PlotIdentificationType <- function(MQCombined,
                                    sep_names = NULL,
                                    palette = 'Set2'){
 
-  peptides <- MQCombined$peptides.txt
-  proteinGroups <- MQCombined$proteinGroups.txt
+    peptides <- MQCombined$peptides.txt
+    proteinGroups <- MQCombined$proteinGroups.txt
 
-  value <- variable <- NULL
+    value <- variable <- NULL
 
-  #Peptide Identification type
-  ide_type <- peptides %>% select(contains('Identification type'))
+    #Peptide Identification type
+    ide_type <- peptides %>% select(contains('Identification type'))
 
-  #NAs <- vapply(ide_type, function(x) sum(is.na(x)))
-  By_MS_MS  <- str_count(ide_type, 'By MS/MS')
-  By_matching <- str_count(ide_type, 'By matching')
+    #NAs <- vapply(ide_type, function(x) sum(is.na(x)))
+    By_MS_MS  <- str_count(ide_type, 'By MS/MS')
+    By_matching <- str_count(ide_type, 'By matching')
 
-  #ide_data <- data.frame(By_MS_MS, By_matching,NAs)
-  ide_data <- data.frame( By_matching,By_MS_MS)
-  rownames(ide_data) <- colnames(ide_type)
-  ide_data$sample <- rownames(ide_data)
-  ide_data_melted <- melt(ide_data)
+    #ide_data <- data.frame(By_MS_MS, By_matching,NAs)
+    ide_data <- data.frame( By_matching,By_MS_MS)
+    rownames(ide_data) <- colnames(ide_type)
+    ide_data$sample <- rownames(ide_data)
+    ide_data_melted <- melt(ide_data)
 
-  ide_data_melted$sample <- gsub("Identification type",
-                                 "",
-                                 paste(ide_data_melted$sample))
+    ide_data_melted$sample <- gsub("Identification type",
+                                   "",
+                                   paste(ide_data_melted$sample))
 
-  a <- ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
-    geom_col()+
-    ggtitle('Peptide Identification type')+
-    ylab('Peptide Frequency')+
-    xlab('Experiment')+
-    geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
-    theme(axis.title.y = element_text(margin = margin(r = 20)))+
-    theme_bw()+
-    scale_fill_brewer(palette = palette)+
-    theme(legend.position = 'bottom')
+    a <- ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
+        geom_col()+
+        ggtitle('Peptide Identification type')+
+        ylab('Peptide Frequency')+
+        xlab('Experiment')+
+        geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+        theme(axis.title.y = element_text(margin = margin(r = 20)))+
+        theme_bw()+
+        scale_fill_brewer(palette = palette)+
+        theme(legend.position = 'bottom')
 
-  if (long_names == TRUE) {
-    a <- a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+    if (long_names == TRUE) {
+        a <- a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
 
-  } else{
-    a
-  }
-  #Protein Identification Type
+    } else{
+        a
+    }
+    #Protein Identification Type
 
-  prot_ide_type <- proteinGroups %>% select(contains('Identification type'))
+    prot_ide_type <- proteinGroups %>% select(contains('Identification type'))
 
-  #NAs <- vapply(ide_type, function(x) sum(is.na(x)))
-  by_MS_MS  <- str_count(prot_ide_type, 'By MS/MS')
-  by_matching <- str_count(prot_ide_type, 'By matching')
+    #NAs <- vapply(ide_type, function(x) sum(is.na(x)))
+    by_MS_MS  <- str_count(prot_ide_type, 'By MS/MS')
+    by_matching <- str_count(prot_ide_type, 'By matching')
 
-  #ide_data <- data.frame(By_MS_MS, By_matching,NAs)
-  prot_data <- data.frame( by_matching,by_MS_MS)
-  rownames(prot_data) <- colnames(prot_ide_type)
-  prot_data$sample <- rownames(prot_data)
-  prot_data_melted <- melt(prot_data)
+    #ide_data <- data.frame(By_MS_MS, By_matching,NAs)
+    prot_data <- data.frame( by_matching,by_MS_MS)
+    rownames(prot_data) <- colnames(prot_ide_type)
+    prot_data$sample <- rownames(prot_data)
+    prot_data_melted <- melt(prot_data)
 
-  prot_data_melted$sample <- gsub("Identification type",
-                                  "",
-                                  paste(prot_data_melted$sample))
+    prot_data_melted$sample <- gsub("Identification type",
+                                    "",
+                                    paste(prot_data_melted$sample))
 
-  b <- ggplot(prot_data_melted, aes(x=sample, y=value, fill=variable))+
-    geom_col()+
-    ggtitle('Protein Identification type')+
-    geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
-    ylab('Protein Frequency')+
-    xlab('Experiment')+
-    theme(axis.title.y = element_text(margin = margin(r = 20)))+
-    theme_bw()+
-    scale_fill_brewer(palette = palette)+
-    theme(legend.position = 'bottom')
+    b <- ggplot(prot_data_melted, aes(x=sample, y=value, fill=variable))+
+        geom_col()+
+        ggtitle('Protein Identification type')+
+        geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+        ylab('Protein Frequency')+
+        xlab('Experiment')+
+        theme(axis.title.y = element_text(margin = margin(r = 20)))+
+        theme_bw()+
+        scale_fill_brewer(palette = palette)+
+        theme(legend.position = 'bottom')
 
-  if (long_names == TRUE) {
-    b <- b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+    if (long_names == TRUE) {
+        b <- b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
 
-  } else{
-    b
-  }
+    } else{
+        b
+    }
 
-  plot_grid(
-    b, a,
-    ncol = 1
-  )
+    plot_grid(
+        b, a,
+        ncol = 1
+    )
 }
 
 

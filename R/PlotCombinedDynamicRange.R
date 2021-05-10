@@ -1,6 +1,7 @@
 #' Dynamic range of all the samples combined
 #'
-#' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param show_shade Creates a shade showing where the \code{percent_proteins}
 #' are. Default is TRUE.
 #' @param percent_proteins Determines the percentage for the show_shade

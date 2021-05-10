@@ -12,6 +12,9 @@ PlotIdentificationType(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{long_names}{If TRUE, samples having long names will be considered, and
 the name will be split by sep_names. By default = FALSE.}
 
@@ -20,10 +23,6 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default
 is 'Set2'.}
-
-\item{peptides}{The peptides.txt table from  MaxQuant Output.}
-
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 Plots the compares of the protein and peptide  identification
@@ -36,9 +35,8 @@ Protein and Peptide Identification type.
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 files <- ReadDataFromDir(MQPathCombined)
-peptides <- files[['peptides.txt']]
-proteinGroups <- files[['proteinGroups.txt']]
-PlotIdentificationType(peptides,proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotIdentificationType(MQCombined)
 
 
 }

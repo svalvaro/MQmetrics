@@ -1,6 +1,7 @@
 #' Total Ion Current
 #'
-#' @param msmsScans The msmsScans.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param show_max_value If TRUE, it will show the max TIC value of each sample.
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.

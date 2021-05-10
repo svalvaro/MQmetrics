@@ -1,6 +1,7 @@
 #' Acquisition Cycle and MS/MS
 #'
-#' @param msScans The msScans.txt file from the MaxQuant ouptut.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.

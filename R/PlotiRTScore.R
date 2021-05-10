@@ -1,6 +1,7 @@
 #' Score vs retention time of the iRT peptides
 #'
-#' @param evidence evidence.txt file from the MaxQuant output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param tolerance Error maximum to find the iRT peptides by m/z value.
 #'  by default is 0.001.
 #'

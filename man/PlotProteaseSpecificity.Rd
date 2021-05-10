@@ -7,12 +7,13 @@
 PlotProteaseSpecificity(MQCombined, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
-
-\item{peptides}{peptides.txt table from MaxQuant ouput.}
 }
 \value{
 Two plots per sample: Peptide length distribution and the number of
@@ -23,8 +24,7 @@ Protease Specificity
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-peptides <- files[['peptides.txt']]
-PlotProteaseSpecificity(peptides)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotProteaseSpecificity(MQCombined)
 
 }

@@ -7,13 +7,14 @@
 PlotPCA(MQCombined, intensity_type = "Intensity", palette = "Set2")
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.
  Default is Intensity.}
-
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 A PCA plot of the Intesities of all the samples.
@@ -23,8 +24,7 @@ Principal Component Analysis of the Intensity values.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
-PlotPCA(proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotPCA(MQCombined)
 
 }

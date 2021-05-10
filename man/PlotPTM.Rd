@@ -14,6 +14,9 @@ PlotPTM(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{peptides_modified}{Minimum number of peptides modified. Default  is 5.}
 
 \item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified
@@ -25,9 +28,6 @@ peptides.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
-
-\item{modificationSpecificPeptides}{modificationSpecificPeptides table from
-MaxQuant ouput.}
 }
 \value{
 Two plots per sample
@@ -37,8 +37,7 @@ Post Translational Modifications
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-modificationSpecificPeptides <- files[['modificationSpecificPeptides.txt']]
-PlotPTM(modificationSpecificPeptides)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotPTM(MQCombined)
 
 }

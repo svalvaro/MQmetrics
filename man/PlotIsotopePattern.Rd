@@ -13,6 +13,9 @@ PlotIsotopePattern(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{long_names}{If TRUE, samples having long names will be considered, and
 the name will be split by sep_names. By default = FALSE.}
 
@@ -23,8 +26,6 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
-
-\item{summary}{The summary.txt table from  MaxQuant Output.}
 }
 \value{
 Returns a plot Isotope Pattern and Isotope Pattern Sequenced.
@@ -34,8 +35,7 @@ Plot Isotope Pattern and Isotope Pattern Sequenced
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-summary <- files[['summary.txt']]
-PlotIsotopePattern(summary)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotIsotopePattern(MQCombined)
 
 }

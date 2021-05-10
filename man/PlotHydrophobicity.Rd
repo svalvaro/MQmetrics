@@ -14,6 +14,9 @@ PlotHydrophobicity(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{show_median}{If true it will show the median of each group, as a red
 dashed line.By default is TRUE.}
 
@@ -25,8 +28,6 @@ dashed line.By default is TRUE.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
-
-\item{peptides}{The peptides file from the MaxQuant ouptut.}
 }
 \value{
 Returns a histogram per sample, showing the frequency of the
@@ -37,8 +38,7 @@ Peptide hydrophobicity by GRAVY score
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-peptides <- files[['peptides.txt']]
-PlotHydrophobicity(peptides)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotHydrophobicity(MQCombined)
 
 }

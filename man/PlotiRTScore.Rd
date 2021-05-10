@@ -7,10 +7,11 @@
 PlotiRTScore(MQCombined, tolerance = 0.001)
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
-
-\item{evidence}{evidence.txt file from the MaxQuant output.}
 }
 \value{
 A plot for each sample showing a linear regression of the
@@ -22,8 +23,7 @@ Score vs retention time of the iRT peptides
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-evidence <- files[['evidence.txt']]
-PlotiRT(evidence)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotiRT(MQCombined)
 
 }

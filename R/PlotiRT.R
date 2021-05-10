@@ -1,6 +1,7 @@
 #' Max intensities of the iRT peptides in each sample.
 #'
-#' @param evidence evidence.txt table from the MaxQuant ouptut.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param show_calibrated_rt If TRUE, it will also show the calibrated retention
 #'  time of each iRT peptide. By default = FALSE.
 #' @param tolerance Error maximum to find the iRT peptides by m/z value.

@@ -34,8 +34,7 @@ Comparison of the MS/MS submitted and identified in each sample.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-summary <- files[['summary.txt']]
-PlotMsMs(summary)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotMsMs(MQCombined)
 
 }

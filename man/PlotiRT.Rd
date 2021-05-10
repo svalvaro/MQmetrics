@@ -7,13 +7,14 @@
 PlotiRT(MQCombined, show_calibrated_rt = FALSE, tolerance = 0.001)
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{show_calibrated_rt}{If TRUE, it will also show the calibrated retention
 time of each iRT peptide. By default = FALSE.}
 
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
-
-\item{evidence}{evidence.txt table from the MaxQuant ouptut.}
 }
 \value{
 A plot showing the iRT peptide in each sample vs the Retention time.
@@ -23,8 +24,7 @@ Max intensities of the iRT peptides in each sample.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-evidence <- files[['evidence.txt']]
-PlotiRT(evidence)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotiRT(MQCombined)
 
 }

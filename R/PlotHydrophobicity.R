@@ -1,6 +1,7 @@
 #' Peptide hydrophobicity by GRAVY score
 #'
-#' @param peptides The peptides file from the MaxQuant ouptut.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param show_median If true it will show the median of each group, as a red
 #'  dashed line.By default is TRUE.
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2
@@ -89,16 +90,16 @@ PlotHydrophobicity <- function(MQCombined,
         }
 
         p <- df_expanded %>%
-                group_by(variable) %>%
-                ggplot(aes(x = GRAVY, fill = variable, group = variable))+
-                geom_histogram(color = 'black', binwidth = binwidth )+
-                facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
-                theme_bw()+
-                theme(legend.position = 'none')+
-                scale_fill_manual(values = getPalette(colourCount))+
-                ggtitle('Peptide hydropathy distribution')+
-                ylab('Peptide Frequency')+
-                xlab('GRAVY score')
+            group_by(variable) %>%
+            ggplot(aes(x = GRAVY, fill = variable, group = variable))+
+            geom_histogram(color = 'black', binwidth = binwidth )+
+            facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+            theme_bw()+
+            theme(legend.position = 'none')+
+            scale_fill_manual(values = getPalette(colourCount))+
+            ggtitle('Peptide hydropathy distribution')+
+            ylab('Peptide Frequency')+
+            xlab('GRAVY score')
 
         if (show_median ==TRUE) {
 

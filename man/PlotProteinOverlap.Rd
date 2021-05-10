@@ -7,7 +7,8 @@
 PlotProteinOverlap(MQCombined)
 }
 \arguments{
-\item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
 }
 \value{
 A plot showing the protein coverage in all samples.
@@ -17,8 +18,7 @@ Protein Overlap Between Samples
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
-PlotProteinOverlap(proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotProteinOverlap(MQCombined)
 
 }

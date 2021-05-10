@@ -1,6 +1,7 @@
 #' The charge-state of the precursor ion.
 #'
-#' @param evidence The evidence.txt file from the MaxQuant ouptut.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
@@ -44,7 +45,9 @@ PlotCharge <- function(MQCombined,
             nrow = plots_per_page
         }
 
-        p <- ggplot(ev_agrup_m, aes(x = variable, y = value, fill = Experiment)) +
+        p <- ggplot(ev_agrup_m, aes(x = variable,
+                                    y = value,
+                                    fill = Experiment)) +
             geom_bar(stat='identity', color = 'black')+
             scale_fill_manual(values = getPalette(colourCount))+
             facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii)+

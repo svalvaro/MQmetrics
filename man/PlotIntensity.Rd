@@ -15,6 +15,9 @@ PlotIntensity(
 )
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{split_violin_intensity}{If TRUE, both the LFQ and the Intensity will be
 shown in the same plot. If FALSE, it can be specified in the intensity_type
 which intensity to visualize.}
@@ -32,8 +35,6 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default
 is 'Set2'.}
-
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 A violin plot and boxplot of the intensities in each sample.
@@ -43,9 +44,8 @@ Intensity / LFQ intensity per sample.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
-PlotIntensity(proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotIntensity(MQCombined)
 
 
 }

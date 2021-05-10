@@ -1,7 +1,7 @@
 #' Protein coverage and degradation.
 #'
-#' @param peptides peptides.txt table from MaxQuant ouput.
-#' @param proteinGroups proteinGroups.txt table from MaxQuant output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param UniprotID Uniprot ID of the protein of interest.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #' @param segment_width Width of the segments to improve visualization.

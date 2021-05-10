@@ -1,7 +1,7 @@
 #' Post Translational Modifications
 #'
-#' @param modificationSpecificPeptides modificationSpecificPeptides table from
-#' MaxQuant ouput.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param peptides_modified Minimum number of peptides modified. Default  is 5.
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.

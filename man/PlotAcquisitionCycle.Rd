@@ -7,12 +7,13 @@
 PlotAcquisitionCycle(MQCombined, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
-
-\item{msScans}{The msScans.txt file from the MaxQuant ouptut.}
 }
 \value{
 Two plots per sample, one with the cycle tyme vs retention time,
@@ -23,8 +24,7 @@ Acquisition Cycle and MS/MS
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-msScans <- files[['msScans.txt']]
-PlotAcquisitionCycle(msScans)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotAcquisitionCycle(MQCombined)
 
 }

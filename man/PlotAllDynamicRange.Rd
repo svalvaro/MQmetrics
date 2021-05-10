@@ -2,29 +2,32 @@
 % Please edit documentation in R/PlotAllDynamicRange.R
 \name{PlotAllDynamicRange}
 \alias{PlotAllDynamicRange}
-\title{Plots the dynamic range for all samples}
+\title{Plots the dynamic range for all samples
+#' @param MQCombined Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
 \usage{
 PlotAllDynamicRange(MQCombined, show_shade = TRUE, percent_proteins = 0.9)
 }
 \arguments{
-\item{show_shade}{Creates a shade showing where the \code{percent_proteins} are.
-Default is TRUE.}
+\item{show_shade}{Creates a shade showing where the \code{percent_proteins}
+are.
+ Default is TRUE.}
 
-\item{percent_proteins}{Determines the percentage for the show_shade parameter.
-Default is 0.90 (90\% of the proteins).}
-
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
+\item{percent_proteins}{Determines the percentage for the show_shade
+parameter.
+ Default is 0.90 (90\% of the proteins).}
 }
 \value{
 Returns one plot for each sample, being the dynamic range.
 }
 \description{
 Plots the dynamic range for all samples
+#' @param MQCombined Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-proteinGroups <- files[['proteinGroups.txt']]
-PlotAllDynamicRange(proteinGroups)
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotAllDynamicRange(MQCombined)
 
 }

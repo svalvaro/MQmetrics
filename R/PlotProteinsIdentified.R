@@ -1,6 +1,7 @@
 #' Proteins Identified per sample.
 #'
-#' @param proteinGroups  The proteinGroups.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
 #'  Only useful if split_violin_intensity = FALSE.  Default is Intensity.
 #' @param long_names If TRUE, samples having long names will be considered, and
@@ -27,84 +28,87 @@ PlotProteinsIdentified <- function(MQCombined,
 
     proteinGroups <- MQCombined$proteinGroups.txt
 
-  Experiment <- value <- variable <- NULL
+    Experiment <- value <- variable <- NULL
 
-  if (intensity_type == 'Intensity') {
-    protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
-    #Remove Intensity from name
-    colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
+    if (intensity_type == 'Intensity') {
+        protein_table <- proteinGroups[,grep("Intensity ",
+                                             colnames(proteinGroups))]
+        #Remove Intensity from name
+        colnames(protein_table) <- gsub("Intensity.", "",
+                                        colnames(protein_table))
 
-    title <- 'Proteins Identified based on Intensity'
+        title <- 'Proteins Identified based on Intensity'
 
-  }
-
-  if (intensity_type == 'LFQ'){
-    protein_table<- proteinGroups[,grep("LFQ", colnames(proteinGroups))]
-    #Remove LFQ Intensity from name
-    colnames(protein_table) <- gsub("LFQ intensity.",
-                                    "",
-                                    colnames(protein_table))
-    title <- 'Proteins Identified based on LFQ intensity'
-
-    #Error if LFQ Intensity not found.
-
-    if (length(protein_table) == 0) {
-      print('LFQ intensities not found, changing automatically to Intensity.')
-
-      protein_table <- proteinGroups[,grep("Intensity ",
-                                           colnames(proteinGroups))]
-      #Remove Intensity from name
-      colnames(protein_table) <- gsub("Intensity.",
-                                      "",
-                                      colnames(protein_table))
-
-      title <- 'Proteins Identified based on Intensity'
     }
-  }
 
-  #Proteins Identified
-  table_prot <- data.frame(nrow(protein_table)-colSums(protein_table==0))
+    if (intensity_type == 'LFQ'){
+        protein_table<- proteinGroups[,grep("LFQ", colnames(proteinGroups))]
+        #Remove LFQ Intensity from name
+        colnames(protein_table) <- gsub("LFQ intensity.",
+                                        "",
+                                        colnames(protein_table))
+        title <- 'Proteins Identified based on LFQ intensity'
 
-  rownames_prot <- rownames(table_prot)
+        #Error if LFQ Intensity not found.
 
-  table_proteins <- cbind(rownames_prot,table_prot)
-  #Order it
-  table_proteins <- table_proteins[order(rownames(table_proteins)),]
+        if (length(protein_table) == 0) {
+            print('LFQ intensities not found,
+                  changing automatically to Intensity.')
 
-  #Changing names
-  colnames(table_proteins)[1] <- 'Experiment'
-  colnames(table_proteins)[2] <- 'Proteins identified'
+            protein_table <- proteinGroups[,grep("Intensity ",
+                                                 colnames(proteinGroups))]
+            #Remove Intensity from name
+            colnames(protein_table) <- gsub("Intensity.",
+                                            "",
+                                            colnames(protein_table))
 
-  #NAs
-  table_proteins$'Missing values' <- nrow(protein_table) - table_proteins$`Proteins identified`
+            title <- 'Proteins Identified based on Intensity'
+        }
+    }
+
+    #Proteins Identified
+    table_prot <- data.frame(nrow(protein_table)-colSums(protein_table==0))
+
+    rownames_prot <- rownames(table_prot)
+
+    table_proteins <- cbind(rownames_prot,table_prot)
+    #Order it
+    table_proteins <- table_proteins[order(rownames(table_proteins)),]
+
+    #Changing names
+    colnames(table_proteins)[1] <- 'Experiment'
+    colnames(table_proteins)[2] <- 'Proteins identified'
+
+    #NAs
+    table_proteins$'Missing values' <- nrow(protein_table) - table_proteins$`Proteins identified`
 
 
-  rownames(table_proteins) <- NULL
+    rownames(table_proteins) <- NULL
 
 
-  table_proteins <- table_proteins[, c('Experiment',
-                                       'Missing values',
-                                       'Proteins identified')]
+    table_proteins <- table_proteins[, c('Experiment',
+                                         'Missing values',
+                                         'Proteins identified')]
 
-  #melted
-  table_melt <- melt(table_proteins, id.vars = 'Experiment')
+    #melted
+    table_melt <- melt(table_proteins, id.vars = 'Experiment')
 
-  a <- ggplot(table_melt, aes(x=Experiment, y=value, fill=variable))+
-    ggtitle(title)+
-    geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
-    theme(axis.title.y = element_text(margin = margin(r = 20)))+
-    ylab('Number of Proteins')+
-    theme_bw()+
-    scale_fill_brewer(palette = palette)+
-    theme(legend.position = 'bottom')
+    a <- ggplot(table_melt, aes(x=Experiment, y=value, fill=variable))+
+        ggtitle(title)+
+        geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+        theme(axis.title.y = element_text(margin = margin(r = 20)))+
+        ylab('Number of Proteins')+
+        theme_bw()+
+        scale_fill_brewer(palette = palette)+
+        theme(legend.position = 'bottom')
 
-  if(long_names==TRUE){
-    a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
-                                                                     ' ',
-                                                                     x),
-                                                                3))
-  } else{
-    a
-  }
+    if(long_names==TRUE){
+        a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
+                                                                         ' ',
+                                                                         x),
+                                                                    3))
+    } else{
+        a
+    }
 
 }

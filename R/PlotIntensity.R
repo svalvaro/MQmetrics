@@ -60,7 +60,7 @@ PlotIntensity <- function(proteinGroups,
     # Interleave vectors
     n <- lengths
     p <- length(vectors)
-    interleave <- rep(1:n, each = p) + seq(0, p - 1) * n
+    interleave <- rep(seq_len(n), each = p) + seq(0, p - 1) * n
     unlist(vectors, recursive = FALSE)[interleave]
   }
 

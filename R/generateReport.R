@@ -41,7 +41,7 @@
 #' retention time of each iRT peptide. By default = FALSE. \code{PlotiRT()}.
 #'
 #' @param tolerance Error maximum to find the iRT peptides by m/z value.
-#'  by default is 0.001.
+#'  By default is 0.001.
 #' @param show_max_value If TRUE, it will show the max TIC value of each sample.
 #'  \code{PlotTotalIonCurrent()}.
 #'
@@ -72,28 +72,28 @@
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' generateReport(MQPathCombined)
 #' }
-generateReport = function(
-    MQPathCombined,
-    output_dir = getwd(),
-    remove_contaminants = TRUE,
-    log_base = 2,
-    long_names = FALSE,
-    sep_names = NULL,
-    intensity_type = 'Intensity',
-    palette = 'Set2',
-    UniprotID = NULL,
-    segment_width = 1,
-    show_shade = TRUE,
-    percent_proteins = 0.90,
-    show_calibrated_rt = FALSE,
-    tolerance = 0.001,
-    show_max_value = TRUE,
-    peptides_modified = 1,
-    show_median = TRUE,
-    size_median = 1.5,
-    binwidth = 0.1,
-    plot_unmodified_peptides = FALSE,
-    plots_per_page = 5){
+#'
+generateReport = function(MQPathCombined,
+                        output_dir = getwd(),
+                        remove_contaminants = TRUE,
+                        log_base = 2,
+                        long_names = FALSE,
+                        sep_names = NULL,
+                        intensity_type = 'Intensity',
+                        palette = 'Set2',
+                        UniprotID = NULL,
+                        segment_width = 1,
+                        show_shade = TRUE,
+                        percent_proteins = 0.90,
+                        show_calibrated_rt = FALSE,
+                        tolerance = 0.001,
+                        show_max_value = TRUE,
+                        peptides_modified = 1,
+                        show_median = TRUE,
+                        size_median = 1.5,
+                        binwidth = 0.1,
+                        plot_unmodified_peptides = FALSE,
+                        plots_per_page = 5){
 
     #Determine the template
     input = system.file("rmd/template_report.Rmd", package="MQmetrics")

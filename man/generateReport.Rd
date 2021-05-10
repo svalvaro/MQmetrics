@@ -70,7 +70,7 @@ parameter. Default is 0.90 (90\% of the proteins).
 retention time of each iRT peptide. By default = FALSE. \code{PlotiRT()}.}
 
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
-by default is 0.001.}
+By default is 0.001.}
 
 \item{show_max_value}{If TRUE, it will show the max TIC value of each sample.
 \code{PlotTotalIonCurrent()}.}
@@ -102,4 +102,5 @@ Generates a report including all the plots of MQmetrics.
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 generateReport(MQPathCombined)
 }
+
 }

@@ -195,7 +195,8 @@ PlotIntensity <- function(MQCombined,
             )
 
             intensities_measure <- colnames(intensities)
-            intensities_measure <- intensities_measure[!intensities_measure %in% "id"]
+            intensities_measure <- intensities_measure[
+                                                !intensities_measure %in% "id"]
 
             if (log_base == 2) {
                 melted_intensities <- melt(log2(intensities),
@@ -272,7 +273,8 @@ PlotIntensity <- function(MQCombined,
                 a
             }
         }
-        # if split_violin_plot == FALSE, Intensity or LFQ intensity will be plotted.
+        # if split_violin_plot == FALSE, Intensity or LFQ intensity will be
+        # plotted.
     } else if (split_violin_intensity == FALSE) {
         if (intensity_type == "Intensity") {
             intensities <- intensities %>% select(-contains("LFQ"))
@@ -286,7 +288,7 @@ PlotIntensity <- function(MQCombined,
 
         if (intensity_type == "LFQ") {
             intensities <- intensities %>% select(id, contains("LFQ intensity ")
-                                                  )
+                                                )
             title <- "LFQ intensity"
             colnames(intensities)[-1] <- gsub(
                 "LFQ intensity",
@@ -309,7 +311,8 @@ PlotIntensity <- function(MQCombined,
         }
 
         intensities_measure <- colnames(intensities)
-        intensities_measure <- intensities_measure[!intensities_measure %in% "id"]
+        intensities_measure <- intensities_measure[
+                                            !intensities_measure %in% "id"]
 
         if (log_base == 2) {
             melted_intensities <- melt(log2(intensities),

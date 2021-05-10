@@ -70,7 +70,8 @@ PlotiRT <- function(MQCombined,
         iRT_table_prot <- evidence[indexes_prot, ]
 
         # remove rows with NA in intensity
-        iRT_table_prot <- iRT_table_prot[complete.cases(iRT_table_prot$Intensity), ]
+        iRT_table_prot <- iRT_table_prot[complete.cases(
+            iRT_table_prot$Intensity), ]
 
         # make table smaller
         iRT_table_prot <- iRT_table_prot %>% select(c(
@@ -86,9 +87,6 @@ PlotiRT <- function(MQCombined,
         # tolerance
         in_range <- unlist(sapply(iRT_table_prot$`m/z`,
                         function(x) x[any(abs(x - iRT.mZ) < tolerance)]))
-        # in_range <- unlist(vapply(iRT_table_prot$`m/z`, function(x)
-        # x[any(abs(x- iRT.mZ) < tolerance)],))
-
 
 
         # Obtain the indexes and final table

@@ -40,7 +40,8 @@ PlotProteinCoverage <- function(MQCombined,
     #select(-'Intensity')
 
     #Select rows for the protein selected
-    table_peptides <- table_peptides[grepl(UniprotID, table_peptides$Proteins ),]
+    table_peptides <- table_peptides[grepl(UniprotID,
+                                        table_peptides$Proteins ),]
 
     if(nrow(table_peptides) == 0){
         print(paste0('The protein: ',

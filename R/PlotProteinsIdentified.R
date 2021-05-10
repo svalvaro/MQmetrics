@@ -87,7 +87,8 @@ PlotProteinsIdentified <- function(MQCombined,
     colnames(table_proteins)[2] <- "Proteins identified"
 
     # NAs
-    table_proteins$"Missing values" <- nrow(protein_table) - table_proteins$`Proteins identified`
+    table_proteins$"Missing values" <- nrow(protein_table) -
+                                        table_proteins$`Proteins identified`
 
 
     rownames(table_proteins) <- NULL

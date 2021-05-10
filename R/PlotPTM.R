@@ -71,13 +71,25 @@ PlotPTM <- function(MQCombined,
     mod_join_combined <- mod_join
 
     # Multiply the freq by number of oxidations
-    mod_join_combined$Freq[mod_join_combined$Modifications == "2 Oxidation (M)"] <- mod_join_combined$Freq[mod_join_combined$Modifications == "2 Oxidation (M)"] * 2
+    mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "2 Oxidation (M)"] <-
+        mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "2 Oxidation (M)"] * 2
 
-    mod_join_combined$Freq[mod_join_combined$Modifications == "3 Oxidation (M)"] <- mod_join_combined$Freq[mod_join_combined$Modifications == "3 Oxidation (M)"] * 3
+    mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "3 Oxidation (M)"] <-
+        mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "3 Oxidation (M)"] * 3
 
-    mod_join_combined$Freq[mod_join_combined$Modifications == "4 Oxidation (M)"] <- mod_join_combined$Freq[mod_join_combined$Modifications == "4 Oxidation (M)"] * 4
+    mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "4 Oxidation (M)"] <-
+        mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "4 Oxidation (M)"] * 4
 
-    mod_join_combined$Freq[mod_join_combined$Modifications == "5 Oxidation (M)"] <- mod_join_combined$Freq[mod_join_combined$Modifications == "5 Oxidation (M)"] * 5
+    mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "5 Oxidation (M)"] <-
+        mod_join_combined$Freq[mod_join_combined$Modifications ==
+                                "5 Oxidation (M)"] * 5
 
 
 
@@ -89,16 +101,17 @@ PlotPTM <- function(MQCombined,
 
     # Remove rows with the oxidation columns
     mod_join_combined2 <- mod_join_combined
-    mod_join_combined2 <- mod_join_combined2[!(mod_join_combined2$Modifications %in% c(
-        "2 Oxidation (M)",
-        "3 Oxidation (M)",
-        "4 Oxidation (M)",
-        "5 Oxidation (M)"
-    )), ]
+    mod_join_combined2 <- mod_join_combined2[!(mod_join_combined2$Modifications
+                                                %in% c("2 Oxidation (M)",
+                                                        "3 Oxidation (M)",
+                                                        "4 Oxidation (M)",
+                                                        "5 Oxidation (M)")), ]
 
-    # Change the values of the original oxidation to the sum of all the combined oxidations
+    # Change the values of the original oxidation to the sum of all the combined
+    # oxidations
 
-    mod_join_combined2$Freq[mod_join_combined2$Modifications == "Oxidation (M)"] <- NA
+    mod_join_combined2$Freq[
+        mod_join_combined2$Modifications == "Oxidation (M)"] <- NA
 
     combined_oxidations$Modifications <- "Oxidation (M)"
     combined_oxidations <- combined_oxidations[, c(3, 1, 2)]

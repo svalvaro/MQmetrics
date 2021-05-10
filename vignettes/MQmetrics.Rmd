@@ -27,8 +27,9 @@ MaxQuant. Input data are extracted from several
 and produces a pdf report. 
 It includes several visualization tools to check numerous parameters regarding
 the quality of the runs.
-It also includes two functions to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked 
-in the samples.
+It also includes two functions to visualize the 
+[iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) 
+in case they were spiked in the samples.
 
 # Workflow
 
@@ -209,7 +210,7 @@ PlotProteaseSpecificity(MQCombined,
 The function **PlotHydrophobicity()**, takes as input the peptides.txt table
 and returns the distribution of GRAVY score.
 
-```{r PlotHydrophobicity, warning= FALSE, message= FALSE,fig.height=10, fig.width=7.2}
+```{r PlotHydrophobicity, warning= F, message= F,fig.height=10, fig.width=7.2}
 PlotHydrophobicity(MQCombined,
                    show_median =  TRUE,
                    binwidth = 0.1, 
@@ -222,7 +223,7 @@ PlotHydrophobicity(MQCombined,
 The function **PlotAndromedaScore()**, takes as input the peptides.txt table
 and returns the distribution of MaxQuant's Andromeda Score.
 
-```{r AndromedaScore, message = FALSE, warning = FALSE,fig.height=10, fig.width=7.2}
+```{r AndromedaScore, message = F, warning = FALSE,fig.height=10, fig.width=7.2}
 PlotAndromedaScore(MQCombined,
                    palette = 'Set2',
                    plots_per_page = 6)
@@ -232,7 +233,7 @@ The function **PlotIdentificationType()**, takes as input the peptides.txt and
 proteinGroups.txt tables and returns the number of peptides and proteins 
 identified by Matching Between Runs or by MS/MS.
 
-```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
+```{r IdentificationType,message = F, warning = F, fig.height=5, fig.width=7.2}
 PlotIdentificationType(MQCombined,
                        long_names = TRUE, 
                        sep_names = '_', 
@@ -351,7 +352,7 @@ PlotTotalIonCurrent(MQCombined,
 The function **PlotAcquisitionCycle** takes as input the msScans.txt table
 and returns the cycle time and MS/MS count vs the retention time of each sample.
 
-```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE,fig.height=10, fig.width=7.2}
+```{r Pn, fig.height= 10, warning=F, message=F,fig.height=10, fig.width=7.2}
 PlotAcquisitionCycle(MQCombined, 
                      palette = 'Set2',
                      plots_per_page = 6)

@@ -98,13 +98,18 @@ ReportTables <- function(MQPathCombined,
     # data_pacakge/combined_original/txt/proteinGroups.txt")
     #length(which(protein_table$Reverse == '+'))
 
-    table_summary <- data.frame("Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
-                                "Missing values" = colSums(protein_table==0),
-                                "Potential contaminants" = colSums(protein_table[grep('+', protein_table$`Potential contaminant`),] >0),
-                                "Reverse" = colSums(protein_table[grep('+', protein_table$Reverse),] >0),
-                                #"Reverse" = length(which(protein_table$Reverse == '+')),
-                                "Only identified by site"= colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0),
-                                check.names = FALSE) #To have spaces .
+    table_summary <- data.frame(
+        "Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
+        "Missing values" = colSums(protein_table==0),
+        "Potential contaminants" = colSums(protein_table[grep('+',
+                                    protein_table$`Potential contaminant`),]>0),
+        "Reverse" = colSums(protein_table[grep('+',
+                                            protein_table$Reverse),] >0),
+        #"Reverse" = length(which(protein_table$Reverse == '+')),
+        "Only identified by site"= colSums(
+            protein_table[grep('+',
+                                protein_table$`Only identified by site`),] >0),
+        check.names = FALSE) #To have spaces .
 
     table_summary <- table_summary[!(row.names(table_summary) %in%
                                     c("Reverse",
@@ -170,7 +175,8 @@ ReportTables <- function(MQPathCombined,
                                                 2,
                                                 max,na.rm=TRUE)),
                                         digits = 4),
-                            n = apply(int_info, 2, length)-colSums(is.na(int_info))))
+                            n = apply(int_info, 2, length)-
+                                colSums(is.na(int_info))))
     }
 
     if(log_base == 10){
@@ -310,7 +316,8 @@ ReportTables <- function(MQPathCombined,
 
     missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
 
-    colnames(missed_summary)[colnames(missed_summary)=='variable'] <- 'Experiment'
+    colnames(missed_summary)[colnames(
+        missed_summary)=='variable'] <- 'Experiment'
 
 
 

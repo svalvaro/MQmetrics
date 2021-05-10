@@ -56,8 +56,8 @@ parameters <- files[["parameters.txt"]]
 
 ```{r ExperimentDuration}
 MaxQuantAnalysisInfo(MQPathCombined,
-                      runningTimes, 
-                      parameters) 
+                     runningTimes, 
+                     parameters) 
 ```
 
 \newpage
@@ -131,11 +131,11 @@ PlotProteaseSpecificity(peptides,
 \newpage
 ```{r PlotHydrophobicity}
 PlotHydrophobicity(peptides,
-          palette = params$palette,
-          show_median =  params$show_median,
-          size_median = params$size_median,
-          binwidth = params$binwidth,
-          plots_per_page = params$plots_per_page)
+                   palette = params$palette,
+                   show_median =  params$show_median,
+                   size_median = params$size_median,
+                   binwidth = params$binwidth,
+                   plots_per_page = params$plots_per_page)
 ```
 
 \newpage
@@ -149,13 +149,13 @@ PlotAndromedaScore(peptides,
 \newpage
 ```{r IdentificationType}
 if( parameters$Value[parameters$Parameter == 'Match between runs'] == "True"){
-  PlotIdentificationType(peptides, 
-                         proteinGroups,
-                         palette = params$palette,
-                         long_names = params$long_names, 
-                         sep_names = params$sep_names)  
+    PlotIdentificationType(peptides, 
+                           proteinGroups,
+                           palette = params$palette,
+                           long_names = params$long_names, 
+                           sep_names = params$sep_names)  
 } else{
-  cat('Match Between Runs was not used during the MaxQuant analysis.
+    cat('Match Between Runs was not used during the MaxQuant analysis.
 No Identification Type to show.')
 }
 ```
@@ -196,15 +196,15 @@ PlotAllDynamicRange(proteinGroups,
 
 ```{r ProteinCoverage}
 if(is.null(params$UniprotID)){
-  print('No UniprotID provided.')
+    print('No UniprotID provided.')
 } else{
-PlotProteinCoverage(peptides, 
-                    proteinGroups, 
-                    UniprotID = params$UniprotID, 
-                    log_base = params$log_base,
-                    segment_width = params$segment_width,
-                    palette = params$palette,
-                    plots_per_page = params$plots_per_page)
+    PlotProteinCoverage(peptides, 
+                        proteinGroups, 
+                        UniprotID = params$UniprotID, 
+                        log_base = params$log_base,
+                        segment_width = params$segment_width,
+                        palette = params$palette,
+                        plots_per_page = params$plots_per_page)
 }
 ```
 
@@ -254,8 +254,8 @@ PlotPTM(modificationSpecificPeptides,
 \newpage
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 a <- ReportTables(MQPathCombined =  params$input_dir,
-             log_base = params$log_base,
-             intensity_type = params$intensity_type)
+                  log_base = params$log_base,
+                  intensity_type = params$intensity_type)
 
 
 kable(a[[1]], caption = 'Protein Information')

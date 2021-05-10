@@ -17,54 +17,54 @@ PlotAndromedaScore <- function(peptides,
                                palette = 'Set2',
                                plots_per_page = 5){
 
-  variable <- Score <- NULL
+    variable <- Score <- NULL
 
-  df <- peptides %>%  select(contains(c('id', 'Score', 'Experiment'),
-                                      ignore.case = FALSE)) %>%
-    select(-contains(c('acid','peptide','IDs')))
-
-
-  df_out <- melt(df, id.vars = c('id', 'Score'))
-
-  df_out$variable <- gsub('Experiment', '', df_out$variable)
-
-  #Remove missing values
-
-  df_out <- df_out[!is.na(df_out$value),]
+    df <- peptides %>%  select(contains(c('id', 'Score', 'Experiment'),
+                                        ignore.case = FALSE)) %>%
+        select(-contains(c('acid','peptide','IDs')))
 
 
-  #Repeat rows n numbers of times, being n the frequency (value)
-  df_expanded<- df_out[rep(rownames(df_out), df_out$value),]
+    df_out <- melt(df, id.vars = c('id', 'Score'))
+
+    df_out$variable <- gsub('Experiment', '', df_out$variable)
+
+    #Remove missing values
+
+    df_out <- df_out[!is.na(df_out$value),]
 
 
-  colourCount = length(df)-2
+    #Repeat rows n numbers of times, being n the frequency (value)
+    df_expanded<- df_out[rep(rownames(df_out), df_out$value),]
 
-  getPalette = colorRampPalette(brewer.pal(8, palette))
 
-  n_pages_needed <- ceiling(
-    (colourCount)/ plots_per_page
-  )
+    colourCount = length(df)-2
 
-  for (ii in seq_len(n_pages_needed)) {
+    getPalette = colorRampPalette(brewer.pal(8, palette))
 
-    if (colourCount < plots_per_page) {
-      nrow = colourCount
+    n_pages_needed <- ceiling(
+        (colourCount)/ plots_per_page
+    )
 
-    } else{
-      nrow = plots_per_page
+    for (ii in seq_len(n_pages_needed)) {
+
+        if (colourCount < plots_per_page) {
+            nrow = colourCount
+
+        } else{
+            nrow = plots_per_page
+        }
+
+        p <- df_expanded %>%
+            group_by(variable) %>%
+            ggplot(aes(x = Score, fill = variable))+
+            geom_histogram(color = 'black', binwidth = 5 )+
+            facet_wrap_paginate(. ~ variable, ncol = 1, nrow = nrow, page = ii )+
+            theme_bw()+
+            ylab('Peptide Frequency')+
+            ggtitle(label = 'Andromeda score')+
+            scale_fill_manual(values = getPalette(colourCount))+
+            theme(legend.position = 'none')
+
+        print(p)
     }
-
-    p <- df_expanded %>%
-      group_by(variable) %>%
-      ggplot(aes(x = Score, fill = variable))+
-      geom_histogram(color = 'black', binwidth = 5 )+
-      facet_wrap_paginate(. ~ variable, ncol = 1, nrow = nrow, page = ii )+
-      theme_bw()+
-      ylab('Peptide Frequency')+
-      ggtitle(label = 'Andromeda score')+
-      scale_fill_manual(values = getPalette(colourCount))+
-      theme(legend.position = 'none')
-
-    print(p)
-  }
 }

@@ -3,75 +3,75 @@ title: "MQmetrics"
 author: "Alvaro Sanchez-Villalba"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{MQmetrics}
+%\VignetteIndexEntry{MQmetrics}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
----
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
+  ---
+  
+  ```{r, include = FALSE}
+  knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
-)
-```
-
-
-
-
-# Overview
-
-The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the 
-quality and reproducibility of your proteomics mass spectrometry analysis from 
-MaxQuant. Input data are extracted from several 
-[MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, 
-and produces a pdf report. 
-It includes several visualization tools to check numerous parameters regarding
-the quality of the runs.
-It also includes two functions to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked 
-in the samples.
-
-# Workflow
-
-## Install the package
-
-You can install the development version from 
-[GitHub](https://github.com/svalvaro/) with:
-
-``` {r install, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("svalvaro/MQmetrics")
-```
-
-# Data Input
-
-After your MaxQuant run has finished, a folder named **combined** has been 
-created. This folder should have at least two other folders within: 
-
-     ../combined/txt/ Containing all the tables.txt
-     ../combined/proc/ Containing #runningTimes.txt
-
-You just need the path to the **combined** folder and you will be able to 
-start using MQmetrics.
-
-```{r MQPathCombined}
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
-```
-
-
-## Generate a report
-
-First you need to load the library.
-
-```{r report, message=FALSE}
-library(MQmetrics)
-```
-
-Then you just need to use the **generateReport()** function. This function 
-has parameters to control each of the function that it aggregates. You can 
-read more about those parameters by using:
-
-```{r report_question_mark, eval=FALSE}
-?generateReport
+  )
+  ```
+  
+  
+  
+  
+  # Overview
+  
+  The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the 
+  quality and reproducibility of your proteomics mass spectrometry analysis from 
+  MaxQuant. Input data are extracted from several 
+  [MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, 
+  and produces a pdf report. 
+  It includes several visualization tools to check numerous parameters regarding
+  the quality of the runs.
+  It also includes two functions to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked 
+  in the samples.
+  
+  # Workflow
+  
+  ## Install the package
+  
+  You can install the development version from 
+  [GitHub](https://github.com/svalvaro/) with:
+  
+  ``` {r install, eval = FALSE}
+  # install.packages("devtools")
+  devtools::install_github("svalvaro/MQmetrics")
+  ```
+  
+  # Data Input
+  
+  After your MaxQuant run has finished, a folder named **combined** has been 
+  created. This folder should have at least two other folders within: 
+  
+  ../combined/txt/ Containing all the tables.txt
+  ../combined/proc/ Containing #runningTimes.txt
+  
+  You just need the path to the **combined** folder and you will be able to 
+  start using MQmetrics.
+  
+  ```{r MQPathCombined}
+  MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+  ```
+  
+  
+  ## Generate a report
+  
+  First you need to load the library.
+  
+  ```{r report, message=FALSE}
+  library(MQmetrics)
+  ```
+  
+  Then you just need to use the **generateReport()** function. This function 
+  has parameters to control each of the function that it aggregates. You can 
+  read more about those parameters by using:
+  
+  ```{r report_question_mark, eval=FALSE}
+  ?generateReport
 ```
 
 Though, the most important parameters are the following:
@@ -197,9 +197,9 @@ The function **PlotIsotopePattern()**,will take as input the summary.txt table
 and show the number isotope patterns detected and sequenced in each sample.
 ```{r isotope, fig.height=5, fig.width=7.2}
 PlotIsotopePattern(summary = summary,
-                  long_names = TRUE,
-                  sep_names = '_',
-                  palette = 'Set2')
+                   long_names = TRUE,
+                   sep_names = '_',
+                   palette = 'Set2')
 ```
 
 The function **PlotCharge()**, will take as input the evidence.txt table and
@@ -239,7 +239,7 @@ and returns the distribution of MaxQuant's Andromeda Score.
 ```{r AndromedaScore, message = FALSE, warning = FALSE,fig.height=10, fig.width=7.2}
 PlotAndromedaScore(peptides = peptides,
                    palette = 'Set2',
-                  plots_per_page = 6)
+                   plots_per_page = 6)
 ```
 
 The function **PlotIdentificationType()**, takes as input the peptides.txt and

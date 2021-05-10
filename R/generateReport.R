@@ -94,32 +94,32 @@ generateReport = function(MQPathCombined,
                           plot_unmodified_peptides = FALSE,
                           plots_per_page = 5){
 
-  #Determine the template
-  input = system.file("rmd/template_report.Rmd", package="MQmetrics")
+    #Determine the template
+    input = system.file("rmd/template_report.Rmd", package="MQmetrics")
 
-  rmarkdown::render(input = input,
-                    params = list(input_dir = MQPathCombined,
-                                  remove_contaminants = remove_contaminants,
-                                  log_base = log_base,
-                                  long_names = long_names,
-                                  sep_names = sep_names,
-                                  intensity_type = intensity_type,
-                                  palette = palette,
-                                  UniprotID = UniprotID,
-                                  segment_width = segment_width,
-                                  show_shade = show_shade,
-                                  percent_proteins = percent_proteins,
-                                  show_calibrated_rt = show_calibrated_rt,
-                                  tolerance = tolerance,
-                                  show_max_value = show_max_value,
-                                  peptides_modified = peptides_modified,
-                                  show_median = show_median,
-                                  size_median = size_median,
-                                  binwidth = binwidth,
-                                  plot_unmodified_peptides = plot_unmodified_peptides,
-                                  plots_per_page = plots_per_page),
-                    output_file = "MQmetrics_report.pdf",
-                    output_dir = output_dir,
-                    clean = TRUE)
+    rmarkdown::render(input = input,
+                      params = list(input_dir = MQPathCombined,
+                                    remove_contaminants = remove_contaminants,
+                                    log_base = log_base,
+                                    long_names = long_names,
+                                    sep_names = sep_names,
+                                    intensity_type = intensity_type,
+                                    palette = palette,
+                                    UniprotID = UniprotID,
+                                    segment_width = segment_width,
+                                    show_shade = show_shade,
+                                    percent_proteins = percent_proteins,
+                                    show_calibrated_rt = show_calibrated_rt,
+                                    tolerance = tolerance,
+                                    show_max_value = show_max_value,
+                                    peptides_modified = peptides_modified,
+                                    show_median = show_median,
+                                    size_median = size_median,
+                                    binwidth = binwidth,
+                                    plot_unmodified_peptides = plot_unmodified_peptides,
+                                    plots_per_page = plots_per_page),
+                      output_file = "MQmetrics_report.pdf",
+                      output_dir = output_dir,
+                      clean = TRUE)
 
 }

@@ -23,29 +23,29 @@ PlotPeptidesIdentified <- function(summary,
                                    sep_names = NULL,
                                    palette = 'Set2'){
 
-  `Peptide Sequences Identified` <- Experiment<- NULL
+    `Peptide Sequences Identified` <- Experiment<- NULL
 
 
-  colourCount = nrow(summary)
+    colourCount = nrow(summary)
 
-  getPalette = colorRampPalette(brewer.pal(8, palette))
+    getPalette = colorRampPalette(brewer.pal(8, palette))
 
-  b <- ggplot(summary, aes(x=Experiment , y = `Peptide Sequences Identified`,
-                           fill = Experiment))+
-    geom_bar(stat = 'identity', color='black')+
-    scale_fill_manual(values =  getPalette(colourCount))+
-    theme_bw(base_size = 12)+
-    ggtitle('Peptides Sequences Identified')+
-    theme(legend.position = 'none')
+    b <- ggplot(summary, aes(x=Experiment , y = `Peptide Sequences Identified`,
+                             fill = Experiment))+
+        geom_bar(stat = 'identity', color='black')+
+        scale_fill_manual(values =  getPalette(colourCount))+
+        theme_bw(base_size = 12)+
+        ggtitle('Peptides Sequences Identified')+
+        theme(legend.position = 'none')
 
-  if (long_names == TRUE) {
-    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
-                                                                     ' ',
-                                                                     x),
-                                                                3))
+    if (long_names == TRUE) {
+        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
+                                                                         ' ',
+                                                                         x),
+                                                                    3))
 
-  } else{
-    b
-  }
+    } else{
+        b
+    }
 
 }

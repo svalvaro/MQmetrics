@@ -89,13 +89,13 @@ PlotProteinsIdentified <- function(proteinGroups,
   table_melt <- melt(table_proteins, id.vars = 'Experiment')
 
   a <- ggplot(table_melt, aes(x=Experiment, y=value, fill=variable))+
-            ggtitle(title)+
-            geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
-            theme(axis.title.y = element_text(margin = margin(r = 20)))+
-            ylab('Number of Proteins')+
-            theme_bw()+
-            scale_fill_brewer(palette = palette)+
-            theme(legend.position = 'bottom')
+    ggtitle(title)+
+    geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+    theme(axis.title.y = element_text(margin = margin(r = 20)))+
+    ylab('Number of Proteins')+
+    theme_bw()+
+    scale_fill_brewer(palette = palette)+
+    theme(legend.position = 'bottom')
 
   if(long_names==TRUE){
     a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,

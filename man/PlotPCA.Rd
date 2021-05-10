@@ -11,8 +11,9 @@ PlotPCA(proteinGroups, intensity_type = "Intensity", palette = "Set2")
 
 \item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.
-Default is Intensity.}
+\item{palette}{The palette from the Package RColorBrewer. By default is
+'Set2'.
+ Default is Intensity.}
 }
 \value{
 A PCA plot of the Intesities of all the samples.

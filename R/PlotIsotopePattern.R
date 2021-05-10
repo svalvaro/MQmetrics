@@ -6,7 +6,8 @@
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
 #'  names will be split. By default is NULL.
 #' @param position_dodge_width Position of the columns within each others.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #'
 #' @return Returns a plot Isotope Pattern and Isotope Pattern Sequenced.
 #' @export
@@ -23,13 +24,22 @@ PlotIsotopePattern <- function(summary,
                                position_dodge_width=1,
                                palette = 'Set2'){
 
-  Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <- value <- variable <- NULL
+  Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <-  NULL
+  value <- variable <- NULL
 
-  a <- summary %>% select(c(Experiment, `Isotope Patterns`, `Isotope Patterns Sequenced`))
+  a <- summary %>% select(c(Experiment,
+                            `Isotope Patterns`,
+                            `Isotope Patterns Sequenced`))
+
   a_melt <- melt(a, id.vars = 'Experiment' )
 
-  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
-    geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
+  b <- ggplot(a_melt, aes(x=Experiment,
+                          y = value,
+                          group = variable,
+                          fill= variable))+
+    geom_bar(stat = 'identity',
+             colour='black',
+             position = position_dodge(width = position_dodge_width))+
     theme_bw()+
     ylab('Frequency Isotope Patterns')+
     ggtitle('Isotope Patterns detected and sequenced')+
@@ -37,7 +47,10 @@ PlotIsotopePattern <- function(summary,
     theme(legend.position = 'bottom')
 
   if (long_names == TRUE) {
-    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
+                                                                     ' ',
+                                                                     x),
+                                                                3))
   }  else{
     b
   }

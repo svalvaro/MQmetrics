@@ -23,7 +23,8 @@ names will be split. By default is NULL.}
 
 \item{position_dodge_width}{Position of the columns within each others.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+\item{palette}{The palette from the Package RColorBrewer. By default is
+'Set2'.}
 }
 \value{
 Plots the MS/MS submitted and Identified in each sample.

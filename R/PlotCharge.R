@@ -1,7 +1,8 @@
 #' The charge-state of the precursor ion.
 #'
 #' @param evidence The evidence.txt file from the MaxQuant ouptut.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #'

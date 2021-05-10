@@ -9,7 +9,8 @@ PlotCharge(evidence, palette = "Set2", plots_per_page = 5)
 \arguments{
 \item{evidence}{The evidence.txt file from the MaxQuant ouptut.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+\item{palette}{The palette from the Package RColorBrewer. By default is
+'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
 }

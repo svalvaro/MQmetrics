@@ -1,7 +1,8 @@
 #' Acquisition Cycle and MS/MS
 #'
 #' @param msScans The msScans.txt file from the MaxQuant ouptut.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample, one with the cycle tyme vs retention time,
@@ -40,14 +41,18 @@ PlotAcquisitionCycle <- function(msScans,
       nrow = plots_per_page
     }
 
-    a <- ggplot(data_table, aes(x= `Retention time`, y = `Cycle time`, colour = Experiment))+
+    a <- ggplot(data_table, aes(x= `Retention time`,
+                                y = `Cycle time`,
+                                colour = Experiment))+
       geom_point(alpha = 0.5, show.legend = FALSE)+
       facet_wrap_paginate(.~ Experiment, ncol = 1, nrow = nrow, page = ii)+
       ggtitle('Cycle time')+
       theme_bw()+
       scale_color_manual(values = getPalette(colourCount))
 
-    b <- ggplot(data_table, aes(x= `Retention time`, y = `MS/MS count`,colour = Experiment))+
+    b <- ggplot(data_table, aes(x= `Retention time`,
+                                y = `MS/MS count`,
+                                colour = Experiment))+
       geom_point(alpha = 0.5, show.legend = FALSE)+
       facet_wrap_paginate(.~ Experiment, ncol = 1, nrow = nrow, page = ii)+
       ggtitle('MS/MS count')+

@@ -38,7 +38,8 @@ knitr::opts_chunk$set(echo=FALSE,
 ```{r library}
 library(MQmetrics)
 MQPathCombined <- params$input_dir
-files <- ReadDataFromDir(MQPathCombined, remove_contaminants = params$remove_contaminants) 
+files <- ReadDataFromDir(MQPathCombined,
+                         remove_contaminants = params$remove_contaminants) 
 
 summary <- files[["summary.txt"]]
 evidence <- files[["evidence.txt"]]

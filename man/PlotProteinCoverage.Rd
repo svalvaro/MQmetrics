@@ -23,16 +23,18 @@ PlotProteinCoverage(
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 
-\item{segment_width}{Width of the segments to improve visualization. Default is 1.}
+\item{segment_width}{Width of the segments to improve visualization.
+Default is 1.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+\item{palette}{The palette from the Package RColorBrewer. By default is
+'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
 }
 \value{
 Two plots for each sample, the end position vs the start position of
- each peptide of the given protein found. And the Intensity of a given peptide
- and its length.
+ each peptide of the given protein found. And the Intensity of a given
+ peptide and its length.
 }
 \description{
 Protein coverage and degradation.

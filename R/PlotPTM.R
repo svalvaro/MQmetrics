@@ -1,9 +1,12 @@
 #' Post Translational Modifications
 #'
-#' @param modificationSpecificPeptides modificationSpecificPeptides table from MaxQuant ouput.
+#' @param modificationSpecificPeptides modificationSpecificPeptides table from
+#' MaxQuant ouput.
 #' @param peptides_modified Minimum number of peptides modified. Default  is 5.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
-#' @param plot_unmodified_peptides If TRUE, it will show the Unmodified peptides.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
+#' @param plot_unmodified_peptides If TRUE, it will show the Unmodified
+#' peptides.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
@@ -94,16 +97,18 @@ PlotPTM <- function(modificationSpecificPeptides,
   combined_oxidations$Modifications <- 'Oxidation (M)'
   combined_oxidations <- combined_oxidations[,c(3,1,2)]
 
-  modification_final <- full_join(mod_join_combined2, combined_oxidations, by = c("variable", 'Modifications'))
+  modification_final <- full_join(mod_join_combined2,
+                                  combined_oxidations,
+                                  by = c("variable", 'Modifications'))
 
   modification_final$Freq <- coalesce(modification_final$Freq.x, modification_final$Freq.y)
 
   modification_final$Freq.x <- NULL
-  modification_final$Freq.y <- NULL  #Probably there is an easier way to combine all the oxidations.
+  modification_final$Freq.y <- NULL
 
   ###############For Intensity plot
 
-  modifications_unique <- unique(modification_final$Modifications)#This are the names
+  modifications_unique <- unique(modification_final$Modifications)# names
 
   mod_intensities <- modification_table %>%
     select(-contains('Experiment'))
@@ -152,7 +157,9 @@ PlotPTM <- function(modificationSpecificPeptides,
       nrow = plots_per_page
     }
 
-    a <- ggplot(modification_final, aes(x = Modifications, y = Freq, fill = Modifications))+
+    a <- ggplot(modification_final, aes(x = Modifications,
+                                        y = Freq,
+                                        fill = Modifications))+
       geom_bar(stat = 'identity')+
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
       theme_bw()+
@@ -166,7 +173,9 @@ PlotPTM <- function(modificationSpecificPeptides,
       scale_fill_brewer(palette = palette)
 
 
-    b <- ggplot(mod_intensities2, aes(x = Modifications, y = value, color = Modifications))+
+    b <- ggplot(mod_intensities2, aes(x = Modifications,
+                                      y = value,
+                                      color = Modifications))+
       geom_violin(fill = 'gray80', size = 1, alpha = .5)+
       geom_boxplot(width=0.2)+
       facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+

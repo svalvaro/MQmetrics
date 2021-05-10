@@ -16,12 +16,14 @@ PlotTotalIonCurrent(
 
 \item{show_max_value}{If TRUE, it will show the max TIC value of each sample.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+\item{palette}{The palette from the Package RColorBrewer. By default is
+'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
 }
 \value{
-Returns a plot the Total Ion Current in each sample. The maximum value is also plotted.
+Returns a plot the Total Ion Current in each sample.
+The maximum value is also plotted.
 }
 \description{
 Total Ion Current

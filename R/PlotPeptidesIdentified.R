@@ -5,7 +5,8 @@
 #'  the name will be split by sep_names. By default = FALSE.
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
 #'  names will be split. By default is NULL.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default
+#' is 'Set2'.
 #'
 #' @return Plots the total number of unique peptide amino acid sequences
 #' identified from the recorded tandem mass spectra.
@@ -38,7 +39,10 @@ PlotPeptidesIdentified <- function(summary,
     theme(legend.position = 'none')
 
   if (long_names == TRUE) {
-    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
+                                                                     ' ',
+                                                                     x),
+                                                                3))
 
   } else{
     b

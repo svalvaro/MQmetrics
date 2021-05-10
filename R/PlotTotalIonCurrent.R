@@ -2,10 +2,12 @@
 #'
 #' @param msmsScans The msmsScans.txt table from  MaxQuant Output.
 #' @param show_max_value If TRUE, it will show the max TIC value of each sample.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
-#' @return Returns a plot the Total Ion Current in each sample. The maximum value is also plotted.
+#' @return Returns a plot the Total Ion Current in each sample.
+#' The maximum value is also plotted.
 #' @export
 #'
 #' @examples
@@ -23,7 +25,9 @@ PlotTotalIonCurrent <- function(msmsScans,
 
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
-  df <- msmsScans %>% select(contains(c('Experiment','Retention time','Total ion current')))
+  df <- msmsScans %>% select(contains(c('Experiment',
+                                        'Retention time',
+                                        'Total ion current')))
 
   n_samples <- length(unique(df$Experiment))
 
@@ -39,7 +43,8 @@ PlotTotalIonCurrent <- function(msmsScans,
   # Implement savitzkyGolay future release
 
 
-  # df_wider <- pivot_wider(df, names_from = Experiment, values_from = `Total ion current`)
+  # df_wider <- pivot_wider(df, names_from = Experiment,
+  # values_from = `Total ion current`)
   #
   #
   #
@@ -48,7 +53,8 @@ PlotTotalIonCurrent <- function(msmsScans,
   #
   # df_wider_sg[,-1][df_wider_sg[,-1] == 'NULL'] = 0
   #
-  # df_wider_sg[-1] <- lapply(df_wider_sg[-1], savitzkyGolay, p = 3, w = 11, m = 0)
+  # df_wider_sg[-1] <- lapply(df_wider_sg[-1], savitzkyGolay, p = 3, w = 11,
+  # m = 0)
 
   # df <- df[order(df$`Total ion current`),]
   #
@@ -81,7 +87,11 @@ PlotTotalIonCurrent <- function(msmsScans,
 
     p <- df %>%   ggplot(aes(`Retention time`,`Total ion current`))+
       geom_line(aes(colour=Experiment))+
-      facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii, scales = 'fixed')+
+      facet_wrap_paginate(.~ Experiment,
+                          ncol =1,
+                          nrow = nrow,
+                          page = ii,
+                          scales = 'fixed')+
       ggtitle('Total Ion Current')+
       theme_bw()+
       theme(legend.position = 'none')+

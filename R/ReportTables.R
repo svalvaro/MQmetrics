@@ -25,17 +25,28 @@ ReportTables <- function(MQPathCombined,
 
   #Read the Protein Groups without removing the contamintants To plot it.
   proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
-                              "\t", escape_double = FALSE,
-                              trim_ws = TRUE, guess_max = 100000)
+                              "\t",
+                              escape_double = FALSE,
+                              trim_ws = TRUE,
+                              guess_max = 100000)
 
   if (intensity_type == 'Intensity') {
 
 
     protein_table <- proteinGroups %>%
-      select(contains(c('Intensity ','Reverse','Potential','Only identified by site'))) %>%
+      select(contains(c('Intensity ',
+                        'Reverse',
+                        'Potential',
+                        'Only identified by site')
+                      )
+             ) %>%
       select(-contains('LFQ'))
+
     #Remove Intensity from name
-    colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
+    colnames(protein_table) <- gsub("Intensity.",
+                                    "",
+                                    colnames(protein_table)
+                                    )
 
     title <- 'Proteins Identified based on Intensity'
 
@@ -46,7 +57,12 @@ ReportTables <- function(MQPathCombined,
     #Remove LFQ Intensity from name
 
     protein_table <- proteinGroups %>%
-      select(contains(c('LFQ ','Reverse','Potential','Only identified by site')))
+      select(contains(c('LFQ ',
+                        'Reverse',
+                        'Potential',
+                        'Only identified by site')
+                      )
+             )
 
 
     colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
@@ -58,7 +74,10 @@ ReportTables <- function(MQPathCombined,
       print('LFQ intensities not found, changing automatically to Intensity.')
 
       protein_table <- proteinGroups %>%
-        select(contains(c('Intensity ','Reverse','Potential','Only identified by site'))) %>%
+        select(contains(c('Intensity ',
+                          'Reverse',
+                          'Potential',
+                          'Only identified by site'))) %>%
         select(-contains('LFQ'))
       #Remove Intensity from name
       colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
@@ -92,7 +111,9 @@ ReportTables <- function(MQPathCombined,
                     NA,  # NA combined,
                     length(which(proteinGroups$`Potential contaminant` == '+')),
                     length(which(proteinGroups$Reverse == '+')),
-                    length(which(proteinGroups$`Only identified by site` == '+')))
+                    length(which(proteinGroups$`Only identified by site` == '+')
+                           )
+                    )
 
   table_summary <- rbind( combined_row, table_summary)
 
@@ -100,7 +121,9 @@ ReportTables <- function(MQPathCombined,
   #Table 2 Log10 intensities
 
 
-  int_info <- protein_table %>% select(-contains(c('Reverse', 'Potential contaminant','Only identified by site' )))
+  int_info <- protein_table %>% select(-contains(c('Reverse',
+                                                   'Potential contaminant',
+                                                   'Only identified by site')))
 
   int_info[int_info == 0] <- NA
 
@@ -140,11 +163,15 @@ ReportTables <- function(MQPathCombined,
   charge_table <- evidence %>%
     select(c(Experiment,Charge ))
 
-  charge_table <- dcast(charge_table, Experiment~ Charge, fill = 0)
+  charge_table <- dcast(charge_table,
+                        Experiment~ Charge,
+                        fill = 0)
 
   charge_percentage <- charge_table[,-1]/rowSums(charge_table[,-1])*100
 
-  charge_percentage <- cbind(charge_table$Experiment, format(round(charge_percentage,1), nsmall =1))
+  charge_percentage <- cbind(charge_table$Experiment,
+                             format(round(charge_percentage,1),
+                                    nsmall =1))
 
   names(charge_percentage)[1] <- 'Experiment'
 
@@ -153,7 +180,12 @@ ReportTables <- function(MQPathCombined,
   #Table 4, GRAVY with median and retention times
   peptides <- files[['peptides.txt']]
 
-  df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
+  df <- peptides %>%  select(contains(c('Length',
+                                        "Count",
+                                        "Sequence",
+                                        "Experiment")
+                                      )
+                             )
 
   df$GRAVY <-  (df$`A Count` * 1.8 +
                   df$`R Count` * -4.5 +
@@ -202,9 +234,12 @@ ReportTables <- function(MQPathCombined,
 
   # Table 5
 
-  peptides <- files[["peptides.txt"]] %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
+  peptides <- files[["peptides.txt"]] %>%  select(contains(c('Missed cleavages',
+                                                             'Experiment',
+                                                             'Length')))
 
-  pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'), measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
+  pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'),
+                    measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
   pep_melt <- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
 
 
@@ -212,20 +247,21 @@ ReportTables <- function(MQPathCombined,
     group_by(variable, `Missed cleavages`) %>%
     summarise(freq = sum(value))
 
-  missed_summary <- pivot_wider(missed_summary, names_from =  `Missed cleavages`, values_from = freq)
+  missed_summary <- pivot_wider(missed_summary,
+                                names_from =  `Missed cleavages`,
+                                values_from = freq)
 
   missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
+
   colnames(missed_summary)[colnames(missed_summary)=='variable'] <- 'Experiment'
-
-
-
 
 
 
   #Table 6 Completeness or PlotCoverageAll
 
 
-  df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the Contaminants, Reverse, etc removed.
+  df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the
+                                          # Contaminants, Reverse, etc removed.
     select(contains(c('Protein IDs', 'peptides '))) %>%
     select(-contains(c('unique', 'Majority')))
 
@@ -238,17 +274,14 @@ ReportTables <- function(MQPathCombined,
   df_bin[,-1][df_bin[,-1]>1] <- 1
 
 
-  # Calculate the number of times that each protein has appear in each experiment
+  # Calculate the number of times that
+  # each protein has appear in each experiment
 
   df_bin$samples <- rowSums(df_bin[,-1])
-
-
 
   df_bin_stat <- df_bin %>%
     group_by(samples) %>%
     summarise(Freq = n())
-
-
 
 
   out <- list()

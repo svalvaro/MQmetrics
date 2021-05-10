@@ -4,7 +4,8 @@
 #' @param tolerance Error maximum to find the iRT peptides by m/z value.
 #'  by default is 0.001.
 #'
-#' @return A plot for each sample showing a linear regression of the iRT peptides'
+#' @return A plot for each sample showing a linear regression of the
+#' iRT peptides'
 #'  retention time vs the score.
 #' @export
 #'
@@ -25,13 +26,28 @@ PlotiRTScore <- function(evidence,
   iRT.score <- c(-24.92, 19.79, 70.52, 87.23, 0, 28.71, 12.39, 33.38, 42.26,
                  54.62, 100)
 
-  names(iRT.mZ) <- names(iRT.score) <- Sequence <- c("LGGNEQVTR", "YILAGVENSK", "GTFIIDPGGVIR", "GTFIIDPAAVIR",
-                                                     "GAGSSEPVTGLDAK", "TPVISGGPYEYR", "VEATFGVDESNAK",
-                                                     "TPVITGAPYEYR", "DGLDAASYYAPVR", "ADVTPADFSEWSK",
+  names(iRT.mZ) <- names(iRT.score) <- Sequence <- c("LGGNEQVTR",
+                                                     "YILAGVENSK",
+                                                     "GTFIIDPGGVIR",
+                                                     "GTFIIDPAAVIR",
+                                                     "GAGSSEPVTGLDAK",
+                                                     "TPVISGGPYEYR",
+                                                     "VEATFGVDESNAK",
+                                                     "TPVITGAPYEYR",
+                                                     "DGLDAASYYAPVR",
+                                                     "ADVTPADFSEWSK",
                                                      "LFLQFGAQGSPFLK")
-  names_Sequence <- names(Sequence) <- c('iRT Kit_a', 'iRT Kit_d', 'iRT Kit_i', 'iRT Kit_k',
-                                         'iRT Kit_b',  'iRT Kit_e', 'iRT Kit_c', 'iRT Kit_f',
-                                         'iRT Kit_g', 'iRT Kit_h', 'iRT Kit_l')
+  names_Sequence <- names(Sequence) <- c('iRT Kit_a',
+                                         'iRT Kit_d',
+                                         'iRT Kit_i',
+                                         'iRT Kit_k',
+                                         'iRT Kit_b',
+                                         'iRT Kit_e',
+                                         'iRT Kit_c',
+                                         'iRT Kit_f',
+                                         'iRT Kit_g',
+                                         'iRT Kit_h',
+                                         'iRT Kit_l')
 
 
   iRT_score <- data.frame(iRT.score, Sequence)
@@ -56,11 +72,16 @@ PlotiRTScore <- function(evidence,
     iRT_table_prot <- iRT_table_prot[complete.cases(iRT_table_prot$Intensity),]
 
     #make table smaller
-    iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,`Retention time`,
+    iRT_table_prot <- iRT_table_prot %>% select(c(Experiment,`m/z`,
+                                                  `Retention time`,
                                                   Sequence, Intensity))
 
     #from the irt obtained, filter them by the theoretical m/z with tolerance
-    in_range <- unlist(vapply(iRT_table_prot$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
+    #in_range <- unlist(vapply(iRT_table_prot$`m/z`,
+    #                         function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
+
+    in_range <- unlist(sapply(iRT_table_prot$`m/z`,
+                              function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
 
     #Obtain the indexes and final table
     indexes <- which(iRT_table_prot$`m/z` %in% in_range)
@@ -71,10 +92,14 @@ PlotiRTScore <- function(evidence,
     #iRT_table_prot_final$score <- NA
 
     #Add a new column score
-    iRT_table_prot_final <- merge(iRT_table_prot_final, iRT_score, by = "Sequence")
+    iRT_table_prot_final <- merge(iRT_table_prot_final,
+                                  iRT_score,
+                                  by = "Sequence")
 
     #Add a new column names
-    iRT_table_prot_final <- merge(iRT_table_prot_final, irt_names_table, by = "Sequence")
+    iRT_table_prot_final <- merge(iRT_table_prot_final,
+                                  irt_names_table,
+                                  by = "Sequence")
 
     #obtain the maximum intensity values for each experiment, and sequence.
     iRT_table_prot_maxvalues <- iRT_table_prot_final %>%
@@ -103,7 +128,9 @@ PlotiRTScore <- function(evidence,
       stat_cor(label.x = 3, label.y = 120) +
       stat_regline_equation(label.x = 3, label.y = 110)+
       facet_wrap(~Experiment)+
-      geom_point(aes(fill = names_Sequence),shape = 21, colour ='black', size =3)+
+      geom_point(aes(fill = names_Sequence),
+                 shape = 21,
+                 colour ='black', size =3)+
       ggtitle(label = 'Retention time of the Biognosys iRT peptides.')+
       theme(legend.position =  'bottom')
 

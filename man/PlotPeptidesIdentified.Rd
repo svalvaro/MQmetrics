@@ -20,7 +20,8 @@ the name will be split by sep_names. By default = FALSE.}
 \item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
 names will be split. By default is NULL.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+\item{palette}{The palette from the Package RColorBrewer. By default
+is 'Set2'.}
 }
 \value{
 Plots the total number of unique peptide amino acid sequences

@@ -1,7 +1,8 @@
 #' Protease Specificity
 #'
 #' @param peptides peptides.txt table from MaxQuant ouput.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample: Peptide length distribution and the number of
@@ -20,10 +21,20 @@ PlotProteaseSpecificity <- function(peptides,
 
   `Missed cleavages` <- value <- variable <- Length  <- NULL
 
-  peptides <- peptides %>%  select(contains(c('Missed cleavages', 'Experiment', 'Length')))
+  peptides <- peptides %>%  select(contains(c('Missed cleavages',
+                                              'Experiment',
+                                              'Length')))
 
-  pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'), measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
-  pep_melt1<- aggregate(value ~ variable + `Missed cleavages`, data=pep_melt, sum)
+  pep_melt <-  melt(peptides,
+                    id.vars =c("Missed cleavages", 'Length'),
+                    measure.vars = colnames(peptides %>%
+                                              select(contains(c('Experiment'))
+                                                     )
+                                            )
+                    )
+
+  pep_melt1<- aggregate(value ~ variable + `Missed cleavages`,
+                        data=pep_melt, sum)
 
   pep_melt1$variable <- gsub('Experiment', '', pep_melt1$variable)
 
@@ -53,7 +64,9 @@ PlotProteaseSpecificity <- function(peptides,
     }
 
     #create plot1 for missed cleavages
-    plot_cleavages <- ggplot(pep_melt1, aes(x = `Missed cleavages`  , y = value, fill = variable))+
+    plot_cleavages <- ggplot(pep_melt1, aes(x = `Missed cleavages`,
+                                            y = value,
+                                            fill = variable))+
       geom_bar(stat = 'identity', color = 'black',
                show.legend = FALSE)+
       ggtitle(label = 'Missed enzymatic cleavages')+
@@ -63,7 +76,9 @@ PlotProteaseSpecificity <- function(peptides,
       xlab(label = 'Missed Cleavages')+
       scale_fill_manual(values = getPalette(colourCount))
 
-    plot_length <- ggplot(pep_melt2, aes(x = Length, y = value, fill = variable ))     +
+    plot_length <- ggplot(pep_melt2, aes(x = Length,
+                                         y = value,
+                                         fill = variable ))+
       geom_bar(stat = 'identity', color = 'black',
                show.legend = FALSE)+
       ggtitle(label = 'Peptide Length')+

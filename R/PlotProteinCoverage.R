@@ -4,13 +4,15 @@
 #' @param proteinGroups proteinGroups.txt table from MaxQuant output.
 #' @param UniprotID Uniprot ID of the protein of interest.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
-#' @param segment_width Width of the segments to improve visualization. Default is 1.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param segment_width Width of the segments to improve visualization.
+#' Default is 1.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots for each sample, the end position vs the start position of
-#'  each peptide of the given protein found. And the Intensity of a given peptide
-#'  and its length.
+#'  each peptide of the given protein found. And the Intensity of a given
+#'  peptide and its length.
 #' @export
 #'
 #' @examples
@@ -41,7 +43,9 @@ PlotProteinCoverage <- function(peptides,
   table_peptides <- table_peptides[grepl(UniprotID, table_peptides$Proteins ),]
 
   if(nrow(table_peptides) == 0){
-    print(paste0('The protein: ',UniprotID ,' provided was not identified in any of the samples.'))
+    print(paste0('The protein: ',
+                 UniprotID ,
+                 ' provided was not identified in any of the samples.'))
   } else{
 
     #Total protein coverage
@@ -54,7 +58,10 @@ PlotProteinCoverage <- function(peptides,
 
     #table_peptides <- table_peptides[1,]
 
-    pep_melt <- melt(table_peptides, id.vars = c('Start position', 'End position', 'Proteins', 'Gene names'))
+    pep_melt <- melt(table_peptides, id.vars = c('Start position',
+                                                 'End position',
+                                                 'Proteins',
+                                                 'Gene names'))
 
     # If intensity is 0, remove it.
 

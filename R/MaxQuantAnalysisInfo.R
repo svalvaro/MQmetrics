@@ -46,7 +46,9 @@ MaxQuantAnalysisInfo <- function(MQPathCombined,
   PTM <- parameters$Value[parameters$Parameter == 'Modifications included in protein quantification']
 
   print(paste0('The MaxQuant output directory is: ', MQPathCombined))
-  print(paste0('The experiment started the day: ', start_date, ' at the time: ', start_time, '.'))
+  print(paste0('The experiment started the day: ',
+               start_date, ' at the time: ',
+               start_time, '.'))
   print(paste0('The whole experiment lasted: ', time, ' (hours:minutes).'))
   print(paste0('The MaxQuant version used was: ', MaxQuant_version))
   print(paste0('The user was: ', user_name))

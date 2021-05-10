@@ -6,10 +6,12 @@
 #'  the name will be split by sep_names. By default = FALSE.
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
 #'  names will be split. By default is NULL.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default
+#' is 'Set2'.
 #'
-#' @return Plots the compares of the protein and peptide  identification of each sample.
-#'  It will only work if in MaxQuant the Match Between Run was selected.
+#' @return Plots the compares of the protein and peptide  identification
+#' of each sample. It will only work if in MaxQuant the Match
+#' Between Run was selected.
 #'
 #' @export
 #'
@@ -42,7 +44,9 @@ PlotIdentificationType <- function(peptides,
   ide_data$sample <- rownames(ide_data)
   ide_data_melted <- melt(ide_data)
 
-  ide_data_melted$sample <- gsub("Identification type", "", paste(ide_data_melted$sample))
+  ide_data_melted$sample <- gsub("Identification type",
+                                 "",
+                                 paste(ide_data_melted$sample))
 
   a <- ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
     geom_col()+
@@ -75,7 +79,9 @@ PlotIdentificationType <- function(peptides,
   prot_data$sample <- rownames(prot_data)
   prot_data_melted <- melt(prot_data)
 
-  prot_data_melted$sample <- gsub("Identification type", "", paste(prot_data_melted$sample))
+  prot_data_melted$sample <- gsub("Identification type",
+                                  "",
+                                  paste(prot_data_melted$sample))
 
   b <- ggplot(prot_data_melted, aes(x=sample, y=value, fill=variable))+
     geom_col()+

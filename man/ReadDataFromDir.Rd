@@ -7,12 +7,15 @@
 ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE)
 }
 \arguments{
-\item{MQPathCombined}{The directory to the "combined" folder where the MaxQuant results are stored.}
+\item{MQPathCombined}{The directory to the "combined" folder where the
+MaxQuant results are stored.}
 
-\item{remove_contaminants}{Whether or not to remove contaminants, reverse and identified by one one peptide.}
+\item{remove_contaminants}{Whether or not to remove contaminants,
+reverse and identified by one one peptide.}
 }
 \value{
-The files from the MaxQuant with the contaminants and Reverse hits removed.
+The files from the MaxQuant with the contaminants and Reverse
+hits removed.
 }
 \description{
 Read MaxQuant Tables From Directory

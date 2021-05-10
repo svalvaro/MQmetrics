@@ -1,10 +1,10 @@
 #' Dynamic range of all the samples combined
 #'
 #' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
-#' @param show_shade Creates a shade showing where the \code{percent_proteins} are.
-#'  Default is TRUE.
-#' @param percent_proteins Determines the percentage for the show_shade parameter.
-#'  Default is 0.90 (90\% of the proteins).
+#' @param show_shade Creates a shade showing where the \code{percent_proteins}
+#' are. Default is TRUE.
+#' @param percent_proteins Determines the percentage for the show_shade
+#' parameter. Default is 0.90 (90\% of the proteins).
 #'
 #' @return Returns the dynamic range for all samples combined.
 #'
@@ -30,7 +30,8 @@ PlotCombinedDynamicRange <- function(proteinGroups,
   }
 
   vector1 <- seq_len(nrow(rank))
-  #Plot error bar to include the 90% of the proteins, 5% on left side, 5% on the right one
+  # Plot error bar to include the 90% of the proteins, 5% on left side,
+  # 5% on the right one
 
   a <- ggplot(rank, aes(x=vector1,y = Intensity))+
     geom_point(colour='darkgrey', alpha=0.75, shape=21)+
@@ -48,7 +49,8 @@ PlotCombinedDynamicRange <- function(proteinGroups,
     upper_y <- rank$Intensity[limits_row]
     bottom_y <- rank$Intensity[nrow(rank)-limits_row]
 
-    orders_abundance <- paste(round(upper_y-bottom_y,digits = 1), 'orders of abundance')
+    orders_abundance <- paste(round(upper_y-bottom_y,digits = 1),
+                              'orders of abundance')
 
     a + annotate('rect',
                  xmin = limits_row,
@@ -63,7 +65,8 @@ PlotCombinedDynamicRange <- function(proteinGroups,
       annotate('text',
                x = nrow(rank)/2,
                y = upper_y,
-               label = paste0(percent_proteins*100, ' % of proteins represented.'))
+               label = paste0(percent_proteins*100,
+                              ' % of proteins represented.'))
 
   } else{
     a

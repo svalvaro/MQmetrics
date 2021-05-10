@@ -4,12 +4,13 @@
 #' @param show_median If true it will show the median of each group, as a red
 #'  dashed line.By default is TRUE.
 #' @param binwidth Selects the binwidth of the histogram. By default = 0.2
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #' @param size_median The width of the median line in the plots.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
-#' @return Returns a histogram per sample, showing the frequency of the peptide's
-#'  hydrophobicity GRAVY value.
+#' @return Returns a histogram per sample, showing the frequency of the
+#'  peptide's hydrophobicity GRAVY value.
 #'
 #' @export
 #'
@@ -28,7 +29,10 @@ PlotHydrophobicity <- function(peptides,
 
   variable <- GRAVY <- `median(GRAVY)` <- NULL
 
-  df <- peptides %>%  select(contains(c('Length',"Count","Sequence","Experiment")))
+  df <- peptides %>%  select(contains(c('Length',
+                                        "Count",
+                                        "Sequence",
+                                        "Experiment")))
 
   df$GRAVY <-  (df$`A Count` * 1.8 +
                   df$`R Count` * -4.5 +
@@ -103,7 +107,9 @@ PlotHydrophobicity <- function(peptides,
 
       print(p + geom_vline(data = median_groups,
                            aes(xintercept = `median(GRAVY)`,group = variable),
-                           color = 'red',  linetype = 'dashed', size = size_median))
+                           color = 'red',
+                           linetype = 'dashed',
+                           size = size_median))
 
     } else{
       print(p)

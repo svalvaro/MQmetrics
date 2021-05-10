@@ -6,7 +6,8 @@
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
 #'  names will be split. By default is NULL.
 #' @param position_dodge_width Position of the columns within each others.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #'
 #' @return Plots the total number of peaks detected in the full scans and the
 #'  total number of peaks sequenced by tandem MS.

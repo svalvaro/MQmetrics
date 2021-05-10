@@ -2,7 +2,8 @@
 #'
 #' @param proteinGroups The proteinGroups.txt table from  MaxQuant Output.
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #'  Default is Intensity.
 #'
 #' @return A PCA plot of the Intesities of all the samples.
@@ -23,20 +24,27 @@ PlotPCA <- function(proteinGroups,
   if (intensity_type == 'Intensity') {
     intensities <-  proteinGroups %>%  select(contains('Intensity ')& -contains('LFQ'))
     title <- 'PCA of intensity'
-    colnames(intensities) <- gsub(pattern = 'Intensity', '', colnames(intensities))
+    colnames(intensities) <- gsub(pattern = 'Intensity',
+                                  '',
+                                  colnames(intensities))
   }
 
   if (intensity_type == 'LFQ'){
     intensities <-  proteinGroups %>%  select(contains('LFQ intensity '))
     title <- 'PCA of LFQ intensities'
-    colnames(intensities) <- gsub(pattern = 'LFQ intensity', '', colnames(intensities))
+    colnames(intensities) <- gsub(pattern = 'LFQ intensity',
+                                  '',
+                                  colnames(intensities))
     #Error if LFQ Intensity not found.
 
     if (length(intensities) == 1) {
       print('LFQ intensities not found, changing automatically to Intensity.')
 
-      intensities <-  proteinGroups %>%  select(contains('Intensity ')& -contains('LFQ'))
-      colnames(intensities) <- gsub(pattern = 'Intensity', '', colnames(intensities))
+      intensities <-  proteinGroups %>%
+        select(contains('Intensity ') & -contains('LFQ'))
+      colnames(intensities) <- gsub(pattern = 'Intensity',
+                                    '',
+                                    colnames(intensities))
       title <- 'PCA of intensity'
     }
   }
@@ -45,7 +53,9 @@ PlotPCA <- function(proteinGroups,
     cat('Only one sample was analyzed, PCA can not be applied')
 
   } else if(nrow(proteinGroups)<2){
-    cat(paste0('PCA can not be performed with only ', nrow(proteinGroups), ' proteins.'))
+    cat(paste0('PCA can not be performed with only ',
+               nrow(proteinGroups),
+               ' proteins.'))
   }
 
   else{

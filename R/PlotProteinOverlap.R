@@ -26,7 +26,8 @@ PlotProteinOverlap <- function(proteinGroups){
   df_bin[,-1][df_bin[,-1]>1] <- 1
 
 
-  # Calculate the number of times that each protein has appear in each experiment
+  # Calculate the number of times that each protein has appear in each
+  # experiment
 
   df_bin$samples <- rowSums(df_bin[,-1])
 

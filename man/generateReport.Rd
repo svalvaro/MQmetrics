@@ -35,7 +35,8 @@ MaxQuant results are stored.}
 \item{output_dir}{The directory where the results will be stored. By default
 is the working directory.}
 
-\item{remove_contaminants}{Whether or not to remove contaminants, reverse and identified by one one peptide.}
+\item{remove_contaminants}{Whether or not to remove contaminants,
+reverse and identified by one one peptide.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 
@@ -48,37 +49,45 @@ names will be split. By default is NULL.}
 \item{intensity_type}{The type of intensity of interest. Values: 'Intensity'
 or 'LFQ'. Default = 'Intensity'.}
 
-\item{palette}{The palette from the Package RColorBrewer. By default is 'Set2'.}
+\item{palette}{The palette from the Package RColorBrewer.
+By default is 'Set2'.}
 
-\item{UniprotID}{Uniprot ID of the protein of interest. \code{PlotProteinCoverage()}.}
+\item{UniprotID}{Uniprot ID of the protein of interest.
+\code{PlotProteinCoverage()}.}
 
-\item{segment_width}{Width of the segments to improve visualization. Default is 1.
-(PlotProteinCoverage).}
+\item{segment_width}{Width of the segments to improve visualization.
+Default is 1. (PlotProteinCoverage).}
 
-\item{show_shade}{Creates a shade showing where the \code{percent_proteins} are.
-Default is TRUE. \code{PlotAllDynamicRange(), PlotCombinedDynamicRange()}.}
+\item{show_shade}{Creates a shade showing where the \code{percent_proteins}
+are. Default is TRUE. \code{PlotAllDynamicRange(),
+PlotCombinedDynamicRange()}.}
 
-\item{percent_proteins}{Determines the percentage for the show_shade parameter.
-Default is 0.90 (90\% of the proteins). \code{PlotAllDynamicRange(), PlotCombinedDynamicRange()}.}
+\item{percent_proteins}{Determines the percentage for the show_shade
+parameter. Default is 0.90 (90\% of the proteins).
+\code{PlotAllDynamicRange(),  PlotCombinedDynamicRange()}.}
 
-\item{show_calibrated_rt}{If TRUE, it will also show the calibrated retention
-time of each iRT peptide. By default = FALSE. \code{PlotiRT()}.}
+\item{show_calibrated_rt}{If TRUE, it will also show the calibrated
+retention time of each iRT peptide. By default = FALSE. \code{PlotiRT()}.}
 
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
 
-\item{show_max_value}{If TRUE, it will show the max TIC value of each sample. \code{PlotTotalIonCurrent()}.}
+\item{show_max_value}{If TRUE, it will show the max TIC value of each sample.
+\code{PlotTotalIonCurrent()}.}
 
-\item{peptides_modified}{Minimum number of peptides modified. Default  is 5. \code{PlotPTM()}.}
+\item{peptides_modified}{Minimum number of peptides modified. Default  is 5.
+\code{PlotPTM()}.}
 
 \item{show_median}{If true it will show the median of each group, as a red
 dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 
 \item{size_median}{The width of the median line in the plots.}
 
-\item{binwidth}{Selects the binwidth of the histogram. By default = 0.2. \code{PlotHydrophobicity()}.}
+\item{binwidth}{Selects the binwidth of the histogram. By default = 0.2.
+\code{PlotHydrophobicity()}.}
 
-\item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified peptides.\code{PlotPTM()}.}
+\item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified
+peptides. \code{PlotPTM()}.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
 }

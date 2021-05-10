@@ -13,7 +13,8 @@ PlotiRTScore(evidence, tolerance = 0.001)
 by default is 0.001.}
 }
 \value{
-A plot for each sample showing a linear regression of the iRT peptides'
+A plot for each sample showing a linear regression of the
+iRT peptides'
  retention time vs the score.
 }
 \description{

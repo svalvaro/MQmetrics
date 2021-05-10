@@ -7,7 +7,8 @@
 #'  the name will be split by sep_names. By default = FALSE.
 #' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
 #'  names will be split. By default is NULL.
-#' @param palette The palette from the Package RColorBrewer. By default is 'Set2'.
+#' @param palette The palette from the Package RColorBrewer. By default is
+#' 'Set2'.
 #'
 #' @return A plot showing the number of proteins identified per sample and the
 #'  number of missing values.
@@ -39,7 +40,9 @@ PlotProteinsIdentified <- function(proteinGroups,
   if (intensity_type == 'LFQ'){
     protein_table<- proteinGroups[,grep("LFQ", colnames(proteinGroups))]
     #Remove LFQ Intensity from name
-    colnames(protein_table) <- gsub("LFQ intensity.", "", colnames(protein_table))
+    colnames(protein_table) <- gsub("LFQ intensity.",
+                                    "",
+                                    colnames(protein_table))
     title <- 'Proteins Identified based on LFQ intensity'
 
     #Error if LFQ Intensity not found.
@@ -47,9 +50,12 @@ PlotProteinsIdentified <- function(proteinGroups,
     if (length(protein_table) == 0) {
       print('LFQ intensities not found, changing automatically to Intensity.')
 
-      protein_table <- proteinGroups[,grep("Intensity ", colnames(proteinGroups))]
+      protein_table <- proteinGroups[,grep("Intensity ",
+                                           colnames(proteinGroups))]
       #Remove Intensity from name
-      colnames(protein_table) <- gsub("Intensity.", "", colnames(protein_table))
+      colnames(protein_table) <- gsub("Intensity.",
+                                      "",
+                                      colnames(protein_table))
 
       title <- 'Proteins Identified based on Intensity'
     }
@@ -75,7 +81,9 @@ PlotProteinsIdentified <- function(proteinGroups,
   rownames(table_proteins) <- NULL
 
 
-  table_proteins <- table_proteins[, c('Experiment', 'Missing values', 'Proteins identified')]
+  table_proteins <- table_proteins[, c('Experiment',
+                                       'Missing values',
+                                       'Proteins identified')]
 
   #melted
   table_melt <- melt(table_proteins, id.vars = 'Experiment')
@@ -90,7 +98,10 @@ PlotProteinsIdentified <- function(proteinGroups,
             theme(legend.position = 'bottom')
 
   if(long_names==TRUE){
-    a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+    a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
+                                                                     ' ',
+                                                                     x),
+                                                                3))
   } else{
     a
   }

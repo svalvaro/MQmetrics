@@ -60,7 +60,7 @@ PlotiRTScore <- function(evidence,
                                                   Sequence, Intensity))
 
     #from the irt obtained, filter them by the theoretical m/z with tolerance
-    in_range <- unlist(sapply(iRT_table_prot$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
+    in_range <- unlist(vapply(iRT_table_prot$`m/z`, function(x) x[any(abs(x- iRT.mZ) < tolerance)]))
 
     #Obtain the indexes and final table
     indexes <- which(iRT_table_prot$`m/z` %in% in_range)

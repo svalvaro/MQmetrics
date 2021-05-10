@@ -32,7 +32,7 @@ PlotIdentificationType <- function(peptides,
   #Peptide Identification type
   ide_type <- peptides %>% select(contains('Identification type'))
 
-  #NAs <- sapply(ide_type, function(x) sum(is.na(x)))
+  #NAs <- vapply(ide_type, function(x) sum(is.na(x)))
   By_MS_MS  <- str_count(ide_type, 'By MS/MS')
   By_matching <- str_count(ide_type, 'By matching')
 
@@ -65,7 +65,7 @@ PlotIdentificationType <- function(peptides,
 
   prot_ide_type <- proteinGroups %>% select(contains('Identification type'))
 
-  #NAs <- sapply(ide_type, function(x) sum(is.na(x)))
+  #NAs <- vapply(ide_type, function(x) sum(is.na(x)))
   by_MS_MS  <- str_count(prot_ide_type, 'By MS/MS')
   by_matching <- str_count(prot_ide_type, 'By matching')
 

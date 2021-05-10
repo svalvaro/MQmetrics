@@ -14,9 +14,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' summary <- files[['summary.txt']]
-#' PlotIsotopePattern(summary)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotIsotopePattern(MQCombined)
 #'
 PlotIsotopePattern <- function(MQCombined,
                                long_names = FALSE,

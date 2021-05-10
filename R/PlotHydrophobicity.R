@@ -16,9 +16,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
-#' PlotHydrophobicity(peptides)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotHydrophobicity(MQCombined)
 #'
 PlotHydrophobicity <- function(MQCombined,
                                show_median = TRUE,

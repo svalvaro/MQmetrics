@@ -10,9 +10,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
-#' PlotAndromedaScore(peptides)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotAndromedaScore(MQCombined)
 PlotAndromedaScore <- function(MQCombined,
                                palette = 'Set2',
                                plots_per_page = 5){

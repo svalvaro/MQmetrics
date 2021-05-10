@@ -16,9 +16,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' proteinGroups <- files[['proteinGroups.txt']]
-#' PlotProteinsIdentified(proteinGroups)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotProteinsIdentified(MQCombined)
 #'
 PlotProteinsIdentified <- function(MQCombined,
                                    intensity_type = 'Intensity',

@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' msScans <- files[['msScans.txt']]
-#' PlotAcquisitionCycle(msScans)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotAcquisitionCycle(MQCombined)
 #'
 PlotAcquisitionCycle <- function(MQCombined,
                                  palette = 'Set2',

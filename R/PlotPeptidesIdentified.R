@@ -14,9 +14,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' summary <- files[['summary.txt']]
-#' PlotPeptidesIdentified(summary)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotPeptidesIdentified(MQCombined)
 #'
 PlotPeptidesIdentified <- function(MQCombined,
                                    long_names = FALSE,

@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
-#' PlotProteaseSpecificity(peptides)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotProteaseSpecificity(MQCombined)
 #'
 PlotProteaseSpecificity <- function(MQCombined,
                                     palette = 'Set2',

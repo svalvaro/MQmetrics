@@ -12,9 +12,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' proteinGroups <- files[['proteinGroups.txt']]
-#' PlotCombinedDynamicRange(proteinGroups)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotCombinedDynamicRange(MQCombined)
 PlotCombinedDynamicRange <- function(MQCombined,
                                      show_shade = TRUE,
                                      percent_proteins = 0.90 ){

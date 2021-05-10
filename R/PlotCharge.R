@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' evidence <- files[['evidence.txt']]
-#' PlotCharge(evidence)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotCharge(MQCombined)
 PlotCharge <- function(MQCombined,
                        palette = 'Set2',
                        plots_per_page = 5){

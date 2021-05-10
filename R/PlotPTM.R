@@ -15,9 +15,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' modificationSpecificPeptides <- files[['modificationSpecificPeptides.txt']]
-#' PlotPTM(modificationSpecificPeptides)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotPTM(MQCombined)
 #'
 PlotPTM <- function(MQCombined,
                     peptides_modified = 1,

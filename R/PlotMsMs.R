@@ -14,9 +14,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' summary <- files[['summary.txt']]
-#' PlotMsMs(summary)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotMsMs(MQCombined)
 #'
 PlotMsMs <- function(MQCombined,
                      long_names = FALSE,

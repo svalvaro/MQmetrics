@@ -7,9 +7,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' proteinGroups <- files[['proteinGroups.txt']]
-#' PlotProteinOverlap(proteinGroups)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotProteinOverlap(MQCombined)
 #'
 PlotProteinOverlap <- function(MQCombined){
 

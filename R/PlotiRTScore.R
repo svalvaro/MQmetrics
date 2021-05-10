@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' evidence <- files[['evidence.txt']]
-#' PlotiRT(evidence)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotiRT(MQCombined)
 #'
 PlotiRTScore <- function(MQCombined,
                          tolerance= 0.001){

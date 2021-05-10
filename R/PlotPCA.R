@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' proteinGroups <- files[['proteinGroups.txt']]
-#' PlotPCA(proteinGroups)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotPCA(MQCombined)
 #'
 PlotPCA <- function(MQCombined,
                     intensity_type = 'Intensity',

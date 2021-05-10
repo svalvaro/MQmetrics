@@ -18,9 +18,8 @@
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' files <- ReadDataFromDir(MQPathCombined)
-#' peptides <- files[['peptides.txt']]
-#' proteinGroups <- files[['proteinGroups.txt']]
-#' PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotProteinCoverage(MQCombined, UniprotID = 'Q8R0Y6')
 #'
 PlotProteinCoverage <- function(MQCombined,
                                 UniprotID = NULL,

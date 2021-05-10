@@ -15,42 +15,43 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotPeaks(MQCombined)
-#'
 PlotPeaks <- function(MQCombined,
                       long_names = FALSE,
                       sep_names = NULL,
                       position_dodge_width = 1,
-                      palette = 'Set2'){
-
+                      palette = "Set2") {
     summary <- MQCombined$summary.txt
 
     Experiment <- `Peaks Sequenced` <- Peaks <- value <- variable <- NULL
 
     a <- summary %>% select(c(Experiment, Peaks, `Peaks Sequenced`))
-    a_melt <- melt(a, id.vars = "Experiment" )
+    a_melt <- melt(a, id.vars = "Experiment")
 
 
-    b <- ggplot(a_melt, aes(x=Experiment,
-                            y = value,
-                            group = variable,
-                            fill = variable))+
-        geom_bar(stat = 'identity',
-                 colour='black',
-                 position = position_dodge(width = position_dodge_width))+
-        theme_bw()+
-        ylab('Number of Peaks')+
-        ggtitle('Peaks detected and sequenced in the full scans')+
-        scale_fill_brewer(palette = palette)+
-        theme(legend.position = 'bottom')
+    b <- ggplot(a_melt, aes(
+        x = Experiment,
+        y = value,
+        group = variable,
+        fill = variable
+    )) +
+        geom_bar(
+            stat = "identity",
+            colour = "black",
+            position = position_dodge(width = position_dodge_width)
+        ) +
+        theme_bw() +
+        ylab("Number of Peaks") +
+        ggtitle("Peaks detected and sequenced in the full scans") +
+        scale_fill_brewer(palette = palette) +
+        theme(legend.position = "bottom")
 
 
-    if(long_names==TRUE){
-        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
-    } else{
+    if (long_names == TRUE) {
+        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names, " ", x), 3))
+    } else {
         b
     }
-
 }

@@ -50,7 +50,8 @@ PlotProteinCoverage <- function(MQCombined,
 
         #Total protein coverage
 
-        prot_info <- proteinGroups[grepl(UniprotID, proteinGroups$`Protein IDs` ),]
+        prot_info <- proteinGroups[grepl(UniprotID,
+                                         proteinGroups$`Protein IDs` ),]
         prot_cov <- prot_info$`Sequence coverage [%]`[1]
 
         prot_len <- prot_info$`Sequence length`[1]
@@ -94,7 +95,8 @@ PlotProteinCoverage <- function(MQCombined,
                                  colour = variable),
                              size = segment_width)+
                 theme_bw()+
-                facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+                facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
+                                    page = ii)+
                 ylab('End position')+
                 theme(legend.position = 'none')+
                 scale_color_manual(values = getPalette(colourCount))
@@ -110,7 +112,8 @@ PlotProteinCoverage <- function(MQCombined,
                                      colour = variable), size = segment_width )+
                     theme_bw()+
                     ylab(expression('Log'[10]*'(Intensity)'))+
-                    facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+                    facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
+                                        page = ii)+
                     #scale_x_continuous(limits = c(1, prot_length))+
                     theme(legend.position = 'none')+
                     scale_color_manual(values = getPalette(colourCount))
@@ -124,7 +127,8 @@ PlotProteinCoverage <- function(MQCombined,
                                      colour = variable),size = segment_width )+
                     theme_bw()+
                     ylab(expression('Log'[2]*'(Intensity)'))+
-                    facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow, page = ii)+
+                    facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
+                                        page = ii)+
                     #scale_x_continuous(limits = c(1, prot_length))+
                     theme(legend.position = 'none')+
                     scale_color_manual(values = getPalette(colourCount))
@@ -133,8 +137,11 @@ PlotProteinCoverage <- function(MQCombined,
             #Plot them together
             c <- plot_grid(a,b)
             #Make a title
-            title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ', UniprotID, ' (',prot_len,' amino acids)',
-                                                 ', Gene: ', pep_melt$`Gene names`[1],
+            title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ',
+                                                 UniprotID,
+                                                 ' (',prot_len,' amino acids)',
+                                                 ', Gene: ',
+                                                 pep_melt$`Gene names`[1],
                                                  '\n is: ', prot_cov, '%'))
 
             print(plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1)))

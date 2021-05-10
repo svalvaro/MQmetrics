@@ -14,56 +14,47 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
+#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotIsotopePattern(MQCombined)
+#'
 PlotIsotopePattern <- function(MQCombined,
                                long_names = FALSE,
                                sep_names = NULL,
-                               position_dodge_width = 1,
-                               palette = "Set2") {
-  summary <- MQCombined$summary.txt
+                               position_dodge_width=1,
+                               palette = 'Set2'){
 
-  Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <- NULL
-  value <- variable <- NULL
+    summary <- MQCombined$summary.txt
 
-  a <- summary %>% select(c(
-    Experiment,
-    `Isotope Patterns`,
-    `Isotope Patterns Sequenced`
-  ))
+    Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <-  NULL
+    value <- variable <- NULL
 
-  a_melt <- melt(a, id.vars = "Experiment")
+    a <- summary %>% select(c(Experiment,
+                              `Isotope Patterns`,
+                              `Isotope Patterns Sequenced`))
 
-  b <- ggplot(a_melt, aes(
-    x = Experiment,
-    y = value,
-    group = variable,
-    fill = variable
-  )) +
-    geom_bar(
-      stat = "identity",
-      colour = "black",
-      position = position_dodge(width = position_dodge_width)
-    ) +
-    theme_bw() +
-    ylab("Frequency Isotope Patterns") +
-    ggtitle("Isotope Patterns detected and sequenced") +
-    scale_fill_brewer(palette = palette) +
-    theme(legend.position = "bottom")
+    a_melt <- melt(a, id.vars = 'Experiment' )
 
-  if (long_names == TRUE) {
-    b + scale_x_discrete(labels = function(x) {
-      stringr::str_wrap(
-        gsub(
-          sep_names,
-          " ",
-          x
-        ),
-        3
-      )
-    })
-  } else {
-    b
-  }
+    b <- ggplot(a_melt, aes(x=Experiment,
+                            y = value,
+                            group = variable,
+                            fill= variable))+
+        geom_bar(stat = 'identity',
+                 colour='black',
+                 position = position_dodge(width = position_dodge_width))+
+        theme_bw()+
+        ylab('Frequency Isotope Patterns')+
+        ggtitle('Isotope Patterns detected and sequenced')+
+        scale_fill_brewer(palette = palette)+
+        theme(legend.position = 'bottom')
+
+    if (long_names == TRUE) {
+        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
+                                                                         ' ',
+                                                                         x),
+                                                                    3))
+    }  else{
+        b
+    }
+
 }

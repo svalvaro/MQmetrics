@@ -144,7 +144,7 @@ if(MQCombined$parameters.txt$Value[
                            sep_names = params$sep_names)  
 } else{
     cat('Match Between Runs was not used during the MaxQuant analysis.
-No Identification Type to show.')
+        No Identification Type to show.')
 }
 ```
 
@@ -241,8 +241,8 @@ PlotPTM(MQCombined,
 \newpage
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 a <- ReportTables(MQPathCombined =  params$input_dir,
-             log_base = params$log_base,
-             intensity_type = params$intensity_type)
+                  log_base = params$log_base,
+                  intensity_type = params$intensity_type)
 
 
 kable(a[[1]], caption = 'Protein Information')
@@ -254,6 +254,5 @@ kable(a[[3]], caption = 'Charge Information')
 kable(a[[4]], caption = 'Peptide hydrophobicity (GRAVY)')
 kable(a[[5]], caption = 'Missed Enzymatic Cleavages')
 kable(a[[6]], caption = 'Protein Identification Overlap Between Samples')
-
 
 ```

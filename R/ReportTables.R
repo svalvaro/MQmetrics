@@ -106,7 +106,10 @@ ReportTables <- function(MQPathCombined,
                                 "Only identified by site"= colSums(protein_table[grep('+', protein_table$`Only identified by site`),] >0),
                                 check.names = FALSE) #To have spaces .
 
-    table_summary <- table_summary[!(row.names(table_summary) %in% c("Reverse","Potential contaminant", "Only identified by site")),]
+    table_summary <- table_summary[!(row.names(table_summary) %in%
+                                         c("Reverse",
+                                           "Potential contaminant",
+                                           "Only identified by site")),]
 
     table_summary$Experiment <- rownames(table_summary)
 
@@ -117,7 +120,8 @@ ReportTables <- function(MQPathCombined,
     combined_row <- c('Combined Samples',
                       nrow(proteinGroups), #total proteins
                       NA,  # NA combined,
-                      length(which(proteinGroups$`Potential contaminant` == '+')),
+                      length(which(proteinGroups$`Potential contaminant` == '+')
+                      ),
                       length(which(proteinGroups$Reverse == '+')),
                       length(which(proteinGroups$`Only identified by site` == '+')
                       )
@@ -286,7 +290,11 @@ ReportTables <- function(MQPathCombined,
         select(contains(c('Missed cleavages','Experiment','Length')))
 
     pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'),
-                      measure.vars = colnames(peptides %>% select(contains(c('Experiment')))))
+                      measure.vars = colnames(peptides %>%
+                                                  select(contains(c('Experiment'))
+                                                  )
+                      )
+    )
     pep_melt <- aggregate(value ~ variable + `Missed cleavages`,
                           data=pep_melt,
                           sum)

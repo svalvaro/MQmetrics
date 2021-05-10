@@ -11,62 +11,66 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotPCA(MQCombined)
-#'
 PlotPCA <- function(MQCombined,
-                    intensity_type = 'Intensity',
-                    palette = 'Set2'){
-
+                    intensity_type = "Intensity",
+                    palette = "Set2") {
     proteinGroups <- MQCombined$proteinGroups.txt
 
     PC1 <- PC2 <- Modifications <- variable <- value <- Freq <- NULL
 
-    if (intensity_type == 'Intensity') {
-        intensities <-  proteinGroups %>%
-            select(contains('Intensity ')& -contains('LFQ'))
-        title <- 'PCA of intensity'
-        colnames(intensities) <- gsub(pattern = 'Intensity',
-                                      '',
-                                      colnames(intensities))
+    if (intensity_type == "Intensity") {
+        intensities <- proteinGroups %>%
+            select(contains("Intensity ") & -contains("LFQ"))
+        title <- "PCA of intensity"
+        colnames(intensities) <- gsub(
+            pattern = "Intensity",
+            "",
+            colnames(intensities)
+        )
     }
 
-    if (intensity_type == 'LFQ'){
-        intensities <-  proteinGroups %>%  select(contains('LFQ intensity '))
-        title <- 'PCA of LFQ intensities'
-        colnames(intensities) <- gsub(pattern = 'LFQ intensity',
-                                      '',
-                                      colnames(intensities))
-        #Error if LFQ Intensity not found.
+    if (intensity_type == "LFQ") {
+        intensities <- proteinGroups %>% select(contains("LFQ intensity "))
+        title <- "PCA of LFQ intensities"
+        colnames(intensities) <- gsub(
+            pattern = "LFQ intensity",
+            "",
+            colnames(intensities)
+        )
+        # Error if LFQ Intensity not found.
 
         if (length(intensities) == 1) {
-            print('LFQ intensities not found,
-                  changing automatically to Intensity.')
+            print("LFQ intensities not found,
+                  changing automatically to Intensity.")
 
-            intensities <-  proteinGroups %>%
-                select(contains('Intensity ') & -contains('LFQ'))
-            colnames(intensities) <- gsub(pattern = 'Intensity',
-                                          '',
-                                          colnames(intensities))
-            title <- 'PCA of intensity'
+            intensities <- proteinGroups %>%
+                select(contains("Intensity ") & -contains("LFQ"))
+            colnames(intensities) <- gsub(
+                pattern = "Intensity",
+                "",
+                colnames(intensities)
+            )
+            title <- "PCA of intensity"
         }
     }
 
-    if (length(intensities)<2 ) {
-        cat('Only one sample was analyzed, PCA can not be applied')
-
-    } else if(nrow(proteinGroups)<2){
-        cat(paste0('PCA can not be performed with only ',
-                   nrow(proteinGroups),
-                   ' proteins.'))
+    if (length(intensities) < 2) {
+        cat("Only one sample was analyzed, PCA can not be applied")
+    } else if (nrow(proteinGroups) < 2) {
+        cat(paste0(
+            "PCA can not be performed with only ",
+            nrow(proteinGroups),
+            " proteins."
+        ))
     }
 
-    else{
-
+    else {
         intensities_t <- t(intensities)
-        #Remove columns with 0 in all the column
-        intensities_t <- intensities_t[, colSums(intensities_t !=0)>0]
+        # Remove columns with 0 in all the column
+        intensities_t <- intensities_t[, colSums(intensities_t != 0) > 0]
 
         pca <- stats::prcomp(intensities_t, scale = TRUE)
 
@@ -76,18 +80,17 @@ PlotPCA <- function(MQCombined,
         rownames(df_out) <- NULL
 
 
-        colourCount = length(rownames(df_out))
+        colourCount <- length(rownames(df_out))
 
-        getPalette = colorRampPalette(brewer.pal(8, palette))
+        getPalette <- colorRampPalette(brewer.pal(8, palette))
 
 
-        ggplot(df_out, aes(PC1, PC2, color = sample))+
-            geom_point(size = 3)+
-            ggtitle(title)+
-            theme_bw()+
-            theme(legend.position = 'bottom')+
-            guides(color=guide_legend(ncol=2))+
+        ggplot(df_out, aes(PC1, PC2, color = sample)) +
+            geom_point(size = 3) +
+            ggtitle(title) +
+            theme_bw() +
+            theme(legend.position = "bottom") +
+            guides(color = guide_legend(ncol = 2)) +
             scale_color_manual(values = getPalette(colourCount))
     }
 }
-

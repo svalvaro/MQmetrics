@@ -11,65 +11,75 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotAcquisitionCycle(MQCombined)
-#'
-PlotAcquisitionCycle <- function(MQCombined,
-                                 palette = 'Set2',
-                                 plots_per_page = 5){
-
+PlotAcquisitionCycle <- function(
+    MQCombined,
+    palette = "Set2",
+    plots_per_page = 5) {
     msScans <- MQCombined$msScans.txt
 
     `Retention time` <- `Cycle time` <- `Experiment` <- `MS/MS count` <- NULL
 
 
-    data_table <- msScans %>%  select(contains(c('Experiment','Retention time',
-                                                 'Cycle time', 'MS/MS count' )))
+    data_table <- msScans %>% select(contains(c(
+        "Experiment", "Retention time",
+        "Cycle time", "MS/MS count"
+    )))
 
     n_samples <- length(unique(data_table$Experiment))
 
     n_pages_needed <- ceiling(
-        n_samples/ plots_per_page
+        n_samples / plots_per_page
     )
 
-    colourCount = n_samples
+    colourCount <- n_samples
 
-    getPalette = colorRampPalette(brewer.pal(8, palette))
+    getPalette <- colorRampPalette(brewer.pal(8, palette))
 
     for (ii in seq_len(n_pages_needed)) {
-        if(n_samples < plots_per_page){
-            nrow = n_samples
-        } else{
-            nrow = plots_per_page
+        if (n_samples < plots_per_page) {
+            nrow <- n_samples
+        } else {
+            nrow <- plots_per_page
         }
 
-        a <- ggplot(data_table, aes(x= `Retention time`,
-                                    y = `Cycle time`,
-                                    colour = Experiment))+
-            geom_point(alpha = 0.5, show.legend = FALSE)+
-            facet_wrap_paginate(.~ Experiment, ncol = 1, nrow = nrow, page = ii)+
-            ggtitle('Cycle time')+
-            theme_bw()+
+        a <- ggplot(data_table, aes(
+            x = `Retention time`,
+            y = `Cycle time`,
+            colour = Experiment
+        )) +
+            geom_point(alpha = 0.5, show.legend = FALSE) +
+            facet_wrap_paginate(. ~ Experiment,
+                                ncol = 1, nrow = nrow,
+                                page = ii
+            ) +
+            ggtitle("Cycle time") +
+            theme_bw() +
             scale_color_manual(values = getPalette(colourCount))
 
-        b <- ggplot(data_table, aes(x= `Retention time`,
-                                    y = `MS/MS count`,
-                                    colour = Experiment))+
-            geom_point(alpha = 0.5, show.legend = FALSE)+
-            facet_wrap_paginate(.~ Experiment, ncol = 1, nrow = nrow, page = ii)+
-            ggtitle('MS/MS count')+
-            theme_bw()+
+        b <- ggplot(data_table, aes(
+            x = `Retention time`,
+            y = `MS/MS count`,
+            colour = Experiment
+        )) +
+            geom_point(alpha = 0.5, show.legend = FALSE) +
+            facet_wrap_paginate(. ~ Experiment,
+                                ncol = 1, nrow = nrow,
+                                page = ii
+            ) +
+            ggtitle("MS/MS count") +
+            theme_bw() +
             scale_color_manual(values = getPalette(colourCount))
 
-        #Plot them together
-        c <- plot_grid(a,b)
-        #Make a title
-        title <- ggdraw()+ draw_label('Acquisition Cycle')
+        # Plot them together
+        c <- plot_grid(a, b)
+        # Make a title
+        title <- ggdraw() + draw_label("Acquisition Cycle")
 
-        d <- plot_grid(title, c, ncol = 1, rel_heights=c(0.1, 1))
+        d <- plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1))
 
         print(d)
-
     }
 }

@@ -12,23 +12,22 @@
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotTotalIonCurrent(MQCombined)
-#'
-#'
 PlotTotalIonCurrent <- function(MQCombined,
                                 show_max_value = TRUE,
-                                palette = 'Set2',
-                                plots_per_page = 5){
-
+                                palette = "Set2",
+                                plots_per_page = 5) {
     msmsScans <- MQCombined$msmsScans.txt
 
     `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
-    df <- msmsScans %>% select(contains(c('Experiment',
-                                          'Retention time',
-                                          'Total ion current')))
+    df <- msmsScans %>% select(contains(c(
+        "Experiment",
+        "Retention time",
+        "Total ion current"
+    )))
 
     n_samples <- length(unique(df$Experiment))
 
@@ -36,9 +35,9 @@ PlotTotalIonCurrent <- function(MQCombined,
         n_samples / plots_per_page
     )
 
-    colourCount = n_samples
+    colourCount <- n_samples
 
-    getPalette = colorRampPalette(brewer.pal(8, palette))
+    getPalette <- colorRampPalette(brewer.pal(8, palette))
 
 
     # Implement savitzkyGolay future release
@@ -79,31 +78,35 @@ PlotTotalIonCurrent <- function(MQCombined,
     # plot(x = 1:length(vector_sg2),
     #      vector_sg2, type = 'l')
 
-    for(ii in seq_len(n_pages_needed)){
-        if(n_samples < plots_per_page){
-            nrow = n_samples
-        } else{
-            nrow = plots_per_page
+    for (ii in seq_len(n_pages_needed)) {
+        if (n_samples < plots_per_page) {
+            nrow <- n_samples
+        } else {
+            nrow <- plots_per_page
         }
 
-        p <- df %>%   ggplot(aes(`Retention time`,`Total ion current`))+
-            geom_line(aes(colour=Experiment))+
-            facet_wrap_paginate(.~ Experiment,
-                                ncol =1,
+        p <- df %>% ggplot(aes(`Retention time`, `Total ion current`)) +
+            geom_line(aes(colour = Experiment)) +
+            facet_wrap_paginate(. ~ Experiment,
+                                ncol = 1,
                                 nrow = nrow,
                                 page = ii,
-                                scales = 'fixed')+
-            ggtitle('Total Ion Current')+
-            theme_bw()+
-            theme(legend.position = 'none')+
+                                scales = "fixed"
+            ) +
+            ggtitle("Total Ion Current") +
+            theme_bw() +
+            theme(legend.position = "none") +
             scale_colour_manual(values = getPalette(colourCount))
 
-        if (show_max_value==TRUE) {
-            print(p + geom_label(data = . %>% group_by(Experiment) %>% filter(`Total ion current`== max(`Total ion current`)),
-                                 aes(label= format(`Total ion current`, digits = 2, scientific = TRUE)), hjust=0.5))
-        }else{
+        if (show_max_value == TRUE) {
+            print(p + geom_label(
+                data = . %>% group_by(Experiment) %>%
+                    filter(`Total ion current` == max(`Total ion current`)),
+                aes(label = format(`Total ion current`,
+                                   digits = 2, scientific = TRUE)), hjust = 0.5
+            ))
+        } else {
             print(p)
         }
     }
 }
-

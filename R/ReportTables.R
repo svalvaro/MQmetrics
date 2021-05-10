@@ -21,7 +21,7 @@ ReportTables <- function(MQPathCombined,
 
   sd <- median <- Experiment <- Charge <- variable <- `Missed cleavages` <- value <- `freq` <- samples <- NULL
 
-  files <- MQmetrics::ReadDataFromDir(MQPathCombined)
+  files <- MQmetrics::make_MQCombined(MQPathCombined)
 
   #Read the Protein Groups without removing the contamintants To plot it.
   proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),

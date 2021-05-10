@@ -3,75 +3,75 @@ title: "MQmetrics"
 author: "Alvaro Sanchez-Villalba"
 output: rmarkdown::html_vignette
 vignette: >
-%\VignetteIndexEntry{MQmetrics}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-  ---
+    %\VignetteIndexEntry{MQmetrics}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
   
-  ```{r, include = FALSE}
-  knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-  )
-  ```
-  
-  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
   
   
-  # Overview
-  
-  The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the 
-  quality and reproducibility of your proteomics mass spectrometry analysis from 
-  MaxQuant. Input data are extracted from several 
-  [MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, 
-  and produces a pdf report. 
-  It includes several visualization tools to check numerous parameters regarding
-  the quality of the runs.
-  It also includes two functions to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked 
-  in the samples.
-  
-  # Workflow
-  
-  ## Install the package
-  
-  You can install the development version from 
-  [GitHub](https://github.com/svalvaro/) with:
-  
-  ``` {r install, eval = FALSE}
-  # install.packages("devtools")
-  devtools::install_github("svalvaro/MQmetrics")
-  ```
-  
-  # Data Input
-  
-  After your MaxQuant run has finished, a folder named **combined** has been 
-  created. This folder should have at least two other folders within: 
-  
-  ../combined/txt/ Containing all the tables.txt
-  ../combined/proc/ Containing #runningTimes.txt
-  
-  You just need the path to the **combined** folder and you will be able to 
-  start using MQmetrics.
-  
-  ```{r MQPathCombined}
-  MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
-  ```
   
   
-  ## Generate a report
+# Overview
+
+The package MQmetrics (MaxQuant metrics) provides a workflow to analyze the 
+quality and reproducibility of your proteomics mass spectrometry analysis from 
+MaxQuant. Input data are extracted from several 
+[MaxQuant](https://pubmed.ncbi.nlm.nih.gov/27809316/) output tables, 
+and produces a pdf report. 
+It includes several visualization tools to check numerous parameters regarding
+the quality of the runs.
+It also includes two functions to visualize the [iRT peptides from Biognosys](https://biognosys.com/product/irt-kit/) in case they were spiked 
+in the samples.
+
+# Workflow
+
+## Install the package
+
+You can install the development version from 
+[GitHub](https://github.com/svalvaro/) with:
+
+``` {r install, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("svalvaro/MQmetrics")
+```
+
+# Data Input
+
+After your MaxQuant run has finished, a folder named **combined** has been 
+created. This folder should have at least two other folders within: 
+
+../combined/txt/ Containing all the tables.txt
+../combined/proc/ Containing #runningTimes.txt
+
+You just need the path to the **combined** folder and you will be able to 
+start using MQmetrics.
+
+```{r MQPathCombined}
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+```
+
+
+## Generate a report
+
+First you need to load the library.
+
+```{r report, message=FALSE}
+library(MQmetrics)
+```
+
+Then you just need to use the **generateReport()** function. This function 
+has parameters to control each of the function that it aggregates. You can 
+read more about those parameters by using:
   
-  First you need to load the library.
-  
-  ```{r report, message=FALSE}
-  library(MQmetrics)
-  ```
-  
-  Then you just need to use the **generateReport()** function. This function 
-  has parameters to control each of the function that it aggregates. You can 
-  read more about those parameters by using:
-  
-  ```{r report_question_mark, eval=FALSE}
-  ?generateReport
+```{r report_question_mark, eval=FALSE}
+?generateReport
 ```
 
 Though, the most important parameters are the following:
@@ -125,20 +125,20 @@ MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 
 # MQPathCombined <- '/home/user/MaxQuant_outputs/example1/combined'
 
-# ReadDataFromDir will read the tables needed for creating the outputs.
-files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE) 
+# make_MQCombined will read the tables needed for creating the outputs.
+MQcombined <- make_MQCombined(MQPathCombined, remove_contaminants = TRUE) 
 
-# files can be extracted like this:
+# MQcombined can be extracted like this:
 
-summary <- files[["summary.txt"]]
-evidence <- files[["evidence.txt"]]
-msScans <- files[['msScans.txt']]
-peptides <- files[["peptides.txt"]]
-msmsScans <- files[["msmsScans.txt"]]
-proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
-parameters <- files[["parameters.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
+summary <- MQcombined[["summary.txt"]]
+evidence <- MQcombined[["evidence.txt"]]
+msScans <- MQcombined[['msScans.txt']]
+peptides <- MQcombined[["peptides.txt"]]
+msmsScans <- MQcombined[["msmsScans.txt"]]
+proteinGroups <- MQcombined[["proteinGroups.txt"]]
+modificationSpecificPeptides <- MQcombined[["modificationSpecificPeptides.txt"]]
+parameters <- MQcombined[["parameters.txt"]]
+runningTimes <-  MQcombined[["#runningTimes.txt"]]
 ```
 
 
@@ -392,7 +392,7 @@ PlotPTM(modificationSpecificPeptides = modificationSpecificPeptides,
 This package provides two extra functions to helps to analyze the proteomics 
 data from MaxQuant:
 
-The function **ReadDataFromDir()** takes as input the path to the *combined*
+The function **make_MQCombined()** takes as input the path to the *combined*
 folder resulting from MaxQuant analysis. It will read the tables needed and by
 default remove the potential contaminants, Reverse, and proteins identified
 only by site.

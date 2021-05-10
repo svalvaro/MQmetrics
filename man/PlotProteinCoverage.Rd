@@ -39,7 +39,6 @@ Protein coverage and degradation.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotProteinCoverage(MQCombined, UniprotID = 'Q8R0Y6')
 

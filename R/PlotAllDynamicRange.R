@@ -1,8 +1,6 @@
-#Plot the dynamic range of all the samples combined
-
-
 #' Plots the dynamic range for all samples
-#'#' @param MQCombined Object list containing all the files from the MaxQuant
+#'
+#' @param MQCombined Object list containing all the files from the MaxQuant
 #' output. It is the result from using \code{make_MQCombined}.
 #' @param show_shade Creates a shade showing where the \code{percent_proteins}
 #' are.

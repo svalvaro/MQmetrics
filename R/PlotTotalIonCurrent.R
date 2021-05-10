@@ -13,9 +13,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' msmsScans <- files[['msmsScans.txt']]
-#' PlotTotalIonCurrent(msmsScans)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotTotalIonCurrent(MQCombined)
 #'
 #'
 PlotTotalIonCurrent <- function(MQCombined,

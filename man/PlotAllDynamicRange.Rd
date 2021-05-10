@@ -2,13 +2,14 @@
 % Please edit documentation in R/PlotAllDynamicRange.R
 \name{PlotAllDynamicRange}
 \alias{PlotAllDynamicRange}
-\title{Plots the dynamic range for all samples
-#' @param MQCombined Object list containing all the files from the MaxQuant
-output. It is the result from using \code{make_MQCombined}.}
+\title{Plots the dynamic range for all samples}
 \usage{
 PlotAllDynamicRange(MQCombined, show_shade = TRUE, percent_proteins = 0.9)
 }
 \arguments{
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
 \item{show_shade}{Creates a shade showing where the \code{percent_proteins}
 are.
  Default is TRUE.}
@@ -22,8 +23,6 @@ Returns one plot for each sample, being the dynamic range.
 }
 \description{
 Plots the dynamic range for all samples
-#' @param MQCombined Object list containing all the files from the MaxQuant
-output. It is the result from using \code{make_MQCombined}.
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')

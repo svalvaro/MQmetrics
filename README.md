@@ -50,11 +50,12 @@ separated by underscores (\_):
 *PLK010\_QC02\_210121\_HeLa\_125ng\_150meth*.
 
 ``` r
-# ReadDataFromDir reads all the files needed from the MaxQuant output and remove
-# Potential contaminants, reverse, and proteins identified by site only.
-files <- ReadDataFromDir(MQPathCombined, remove_contaminants = TRUE) 
+# make_MQCombined reads all the files needed from the MaxQuant output and
+# remove Potential contaminants, reverse, and proteins identified by site only.
 
-PlotIntensity(files[["proteinGroups.txt"]], long_names = TRUE, sep_names = '_')
+MQCombined <- make_MQCombined(MQPathCombined, remove_contaminants = TRUE) 
+
+PlotIntensity(MQCombined, long_names = TRUE, sep_names = '_')
 ```
 
 <img src="man/figures/README-example_long_names-1.png" width="100%" />

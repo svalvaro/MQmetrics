@@ -17,7 +17,6 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotIdentificationType(MQCombined)
 #'

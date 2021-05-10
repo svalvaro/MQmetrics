@@ -23,7 +23,7 @@ ReportTables <- function(MQPathCombined,
 
   files <- MQmetrics::ReadDataFromDir(MQPathCombined)
 
-    #Read the Protein Groups without removing the contamintants To plot it.
+  #Read the Protein Groups without removing the contamintants To plot it.
   proteinGroups <- read_delim(file.path(MQPathCombined,"txt/proteinGroups.txt"),
                               "\t", escape_double = FALSE,
                               trim_ws = TRUE, guess_max = 100000)
@@ -138,7 +138,7 @@ ReportTables <- function(MQPathCombined,
   evidence <- files[["evidence.txt"]]
 
   charge_table <- evidence %>%
-                      select(c(Experiment,Charge ))
+    select(c(Experiment,Charge ))
 
   charge_table <- dcast(charge_table, Experiment~ Charge, fill = 0)
 
@@ -191,11 +191,11 @@ ReportTables <- function(MQPathCombined,
   df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
 
   GRAVY <- df_expanded %>%
-                group_by(variable) %>%
-                summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
-                          Max = format(round(max(GRAVY),2),nsmall = 1),
-                          Min = format(round(min(GRAVY),2),nsmall = 1),
-                          Median = format(round(median(GRAVY),2),nsmall = 1))
+    group_by(variable) %>%
+    summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
+              Max = format(round(max(GRAVY),2),nsmall = 1),
+              Min = format(round(min(GRAVY),2),nsmall = 1),
+              Median = format(round(median(GRAVY),2),nsmall = 1))
   names(GRAVY)[1] <- 'Experiment'
 
 
@@ -226,8 +226,8 @@ ReportTables <- function(MQPathCombined,
 
 
   df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the Contaminants, Reverse, etc removed.
-            select(contains(c('Protein IDs', 'peptides '))) %>%
-            select(-contains(c('unique', 'Majority')))
+    select(contains(c('Protein IDs', 'peptides '))) %>%
+    select(-contains(c('unique', 'Majority')))
 
 
   # Make a binary long data.frame (1 = valid value, 0 = missing value)

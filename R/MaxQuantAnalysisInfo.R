@@ -14,8 +14,8 @@
 #' MaxQuantAnalysisInfo(MQPathCombined, runningTimes, parameters)
 #'
 MaxQuantAnalysisInfo <- function(MQPathCombined,
-                                  runningTimes,
-                                  parameters){
+                                 runningTimes,
+                                 parameters){
   #Runningtimes
   time <- sum(runningTimes$`Running time [min]`)
 

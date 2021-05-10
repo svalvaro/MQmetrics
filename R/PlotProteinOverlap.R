@@ -16,7 +16,7 @@ PlotProteinOverlap <- function(proteinGroups){
   samples <- value <- NULL
 
   df <- proteinGroups %>% select(contains(c('Protein IDs', 'peptides '))) %>%
-                          select(-contains(c('unique', 'Majority')))
+    select(-contains(c('unique', 'Majority')))
 
   # Make a binary long data.frame (1 = valid value, 0 = missing value)
   # It shows the present of the protein or not.
@@ -31,8 +31,8 @@ PlotProteinOverlap <- function(proteinGroups){
   df_bin$samples <- rowSums(df_bin[,-1])
 
   df_bin_stat <- df_bin %>%
-                    group_by(samples) %>%
-                    summarise(value = n())
+    group_by(samples) %>%
+    summarise(value = n())
 
   ggplot(df_bin_stat, aes(x = 'all', y = value, fill = as.character(samples)))+
     geom_col(col = 'white', width =  0.3)+

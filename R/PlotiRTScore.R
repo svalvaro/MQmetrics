@@ -42,7 +42,7 @@ PlotiRTScore <- function(evidence,
 
   indexes_prot <-  which(evidence$Sequence %in% Sequence)
 
- #if no iRT peptide found return error.
+  #if no iRT peptide found return error.
   if (length(indexes_prot)==0) {
 
     print('No iRT peptides found in the MaxQuant output.')
@@ -82,7 +82,7 @@ PlotiRTScore <- function(evidence,
       filter(Intensity
              == max(Intensity))
 
-   #Create a function that plots the linear regression with the data
+    #Create a function that plots the linear regression with the data
     lm_eqn <- function(df){
       y = df$`Retention time`
       x = df$iRT.score
@@ -95,7 +95,7 @@ PlotiRTScore <- function(evidence,
       as.character(as.expression(eq));
     }
 
-  #plot it.
+    #plot it.
     ggscatter(iRT_table_prot_maxvalues, x = "iRT.score", y = "Retention time",
               add = 'reg.line')+
       theme_bw()+

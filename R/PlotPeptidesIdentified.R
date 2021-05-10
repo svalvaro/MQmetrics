@@ -30,12 +30,12 @@ PlotPeptidesIdentified <- function(summary,
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
   b <- ggplot(summary, aes(x=Experiment , y = `Peptide Sequences Identified`,
-                            fill = Experiment))+
-          geom_bar(stat = 'identity', color='black')+
-          scale_fill_manual(values =  getPalette(colourCount))+
-          theme_bw(base_size = 12)+
-          ggtitle('Peptides Sequences Identified')+
-          theme(legend.position = 'none')
+                           fill = Experiment))+
+    geom_bar(stat = 'identity', color='black')+
+    scale_fill_manual(values =  getPalette(colourCount))+
+    theme_bw(base_size = 12)+
+    ggtitle('Peptides Sequences Identified')+
+    theme(legend.position = 'none')
 
   if (long_names == TRUE) {
     b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))

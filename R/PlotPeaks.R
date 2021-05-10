@@ -26,14 +26,14 @@ PlotPeaks <- function(summary,
 
    Experiment <- `Peaks Sequenced` <- Peaks <- value <- variable <- NULL
 
-  a <- summary %>% select(c(Experiment, Peaks, `Peaks Sequenced`))
-  a_melt <- melt(a, id.vars = "Experiment" )
+   a <- summary %>% select(c(Experiment, Peaks, `Peaks Sequenced`))
+   a_melt <- melt(a, id.vars = "Experiment" )
 
 
-b <- ggplot(a_melt, aes(x=Experiment,
-                        y = value,
-                        group = variable,
-                        fill = variable))+
+   b <- ggplot(a_melt, aes(x=Experiment,
+                           y = value,
+                           group = variable,
+                           fill = variable))+
       geom_bar(stat = 'identity',
                colour='black',
                position = position_dodge(width = position_dodge_width))+
@@ -44,10 +44,10 @@ b <- ggplot(a_melt, aes(x=Experiment,
       theme(legend.position = 'bottom')
 
 
- if(long_names==TRUE){
-   b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
- } else{
-   b
- }
+   if(long_names==TRUE){
+      b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+   } else{
+      b
+   }
 
 }

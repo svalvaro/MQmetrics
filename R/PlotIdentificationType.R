@@ -45,15 +45,15 @@ PlotIdentificationType <- function(peptides,
   ide_data_melted$sample <- gsub("Identification type", "", paste(ide_data_melted$sample))
 
   a <- ggplot(ide_data_melted, aes(x=sample, y=value, fill=variable))+
-          geom_col()+
-          ggtitle('Peptide Identification type')+
-          ylab('Peptide Frequency')+
-          xlab('Experiment')+
-          geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
-          theme(axis.title.y = element_text(margin = margin(r = 20)))+
-          theme_bw()+
-          scale_fill_brewer(palette = palette)+
-          theme(legend.position = 'bottom')
+    geom_col()+
+    ggtitle('Peptide Identification type')+
+    ylab('Peptide Frequency')+
+    xlab('Experiment')+
+    geom_bar(stat = 'identity',position='stack',size=0.5,col="black")+
+    theme(axis.title.y = element_text(margin = margin(r = 20)))+
+    theme_bw()+
+    scale_fill_brewer(palette = palette)+
+    theme(legend.position = 'bottom')
 
   if (long_names == TRUE) {
     a <- a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
@@ -61,7 +61,7 @@ PlotIdentificationType <- function(peptides,
   } else{
     a
   }
-   #Protein Identification Type
+  #Protein Identification Type
 
   prot_ide_type <- proteinGroups %>% select(contains('Identification type'))
 

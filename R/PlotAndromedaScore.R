@@ -19,7 +19,7 @@ PlotAndromedaScore <- function(peptides,
   variable <- Score <- NULL
 
   df <- peptides %>%  select(contains(c('id', 'Score', 'Experiment'), ignore.case = FALSE)) %>%
-        select(-contains(c('acid','peptide','IDs')))
+    select(-contains(c('acid','peptide','IDs')))
 
 
   df_out <- melt(df, id.vars = c('id', 'Score'))
@@ -55,13 +55,13 @@ PlotAndromedaScore <- function(peptides,
     p <- df_expanded %>%
       group_by(variable) %>%
       ggplot(aes(x = Score, fill = variable))+
-            geom_histogram(color = 'black', binwidth = 5 )+
-            facet_wrap_paginate(. ~ variable, ncol = 1, nrow = nrow, page = ii )+
-            theme_bw()+
-            ylab('Peptide Frequency')+
-            ggtitle(label = 'Andromeda score')+
-            scale_fill_manual(values = getPalette(colourCount))+
-            theme(legend.position = 'none')
+      geom_histogram(color = 'black', binwidth = 5 )+
+      facet_wrap_paginate(. ~ variable, ncol = 1, nrow = nrow, page = ii )+
+      theme_bw()+
+      ylab('Peptide Frequency')+
+      ggtitle(label = 'Andromeda score')+
+      scale_fill_manual(values = getPalette(colourCount))+
+      theme(legend.position = 'none')
 
     print(p)
   }

@@ -37,7 +37,7 @@ ReadDataFromDir <- function(MQPathCombined,
 
   if(remove_contaminants==TRUE){
 
-  evidence_table <- evidence_table[is.na(evidence_table$`Potential contaminant`) & is.na(evidence_table$Reverse),]
+    evidence_table <- evidence_table[is.na(evidence_table$`Potential contaminant`) & is.na(evidence_table$Reverse),]
   }
 
 
@@ -54,7 +54,7 @@ ReadDataFromDir <- function(MQPathCombined,
                               trim_ws = TRUE, guess_max = 10**6)
 
   if(remove_contaminants==TRUE){
-  msscans_table <- msscans_table[is.na(msscans_table$Reverse),]
+    msscans_table <- msscans_table[is.na(msscans_table$Reverse),]
   }
   #proteinGroups.txt
 
@@ -63,7 +63,7 @@ ReadDataFromDir <- function(MQPathCombined,
                             trim_ws = TRUE, guess_max = 10**5)
 
   if(remove_contaminants==TRUE){
-  prot_groups <- prot_groups[is.na(prot_groups$`Potential contaminant`) & is.na(prot_groups$Reverse)  & is.na(prot_groups$`Only identified by site`),]
+    prot_groups <- prot_groups[is.na(prot_groups$`Potential contaminant`) & is.na(prot_groups$Reverse)  & is.na(prot_groups$`Only identified by site`),]
 
   }
 
@@ -71,8 +71,8 @@ ReadDataFromDir <- function(MQPathCombined,
   #modificationSpecificPeptides
 
   modification_table <- read_delim(file.path(MQPathCombined,"txt/modificationSpecificPeptides.txt"),
-                              "\t", escape_double = FALSE, na = c("NA", "NaN", "", " "),
-                              trim_ws = TRUE, guess_max = 10**6)
+                                   "\t", escape_double = FALSE, na = c("NA", "NaN", "", " "),
+                                   trim_ws = TRUE, guess_max = 10**6)
   if(remove_contaminants==TRUE){
 
     modification_table <- modification_table[is.na(modification_table$`Potential contaminant`) & is.na(modification_table$Reverse),]
@@ -80,8 +80,8 @@ ReadDataFromDir <- function(MQPathCombined,
 
   #parameters.txt
   parameters_table <- read_delim(file.path(MQPathCombined,"txt/parameters.txt"),
-                           "\t", escape_double = FALSE, na = "NA",
-                           trim_ws = TRUE)
+                                 "\t", escape_double = FALSE, na = "NA",
+                                 trim_ws = TRUE)
 
 
   #Check if the running times is present, if so, add it to alltables

@@ -19,7 +19,7 @@ PlotTotalIonCurrent <- function(msmsScans,
                                 show_max_value = TRUE,
                                 palette = 'Set2',
                                 plots_per_page = 5
-                                ){
+){
 
   `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 
@@ -89,7 +89,7 @@ PlotTotalIonCurrent <- function(msmsScans,
 
     if (show_max_value==TRUE) {
       print(p + geom_label(data = . %>% group_by(Experiment) %>% filter(`Total ion current`== max(`Total ion current`)),
-                     aes(label= format(`Total ion current`, digits = 2, scientific = TRUE)), hjust=0.5))
+                           aes(label= format(`Total ion current`, digits = 2, scientific = TRUE)), hjust=0.5))
     }else{
       print(p)
     }

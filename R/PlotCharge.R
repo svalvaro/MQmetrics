@@ -33,26 +33,26 @@ PlotCharge <- function(evidence,
 
   getPalette = colorRampPalette(brewer.pal(8, palette))
 
- for (ii in seq_len(n_pages_needed)) {
+  for (ii in seq_len(n_pages_needed)) {
 
-   if(colourCount < plots_per_page){
-     nrow = colourCount
-   } else{
-     nrow = plots_per_page
-   }
+    if(colourCount < plots_per_page){
+      nrow = colourCount
+    } else{
+      nrow = plots_per_page
+    }
 
-  p <- ggplot(ev_agrup_m, aes(x = variable, y = value, fill = Experiment)) +
-           geom_bar(stat='identity', color = 'black')+
-           scale_fill_manual(values = getPalette(colourCount))+
-           facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii)+
-           ggtitle(label = 'The charge-state of the precursor ion.')+
-           theme(legend.position = 'none')+
-           ylab('Ion Frequency')+
-           xlab(label = 'Charge')+
-           theme_bw()+
-           theme(legend.position='none')
+    p <- ggplot(ev_agrup_m, aes(x = variable, y = value, fill = Experiment)) +
+      geom_bar(stat='identity', color = 'black')+
+      scale_fill_manual(values = getPalette(colourCount))+
+      facet_wrap_paginate(.~ Experiment, ncol =1, nrow = nrow, page = ii)+
+      ggtitle(label = 'The charge-state of the precursor ion.')+
+      theme(legend.position = 'none')+
+      ylab('Ion Frequency')+
+      xlab(label = 'Charge')+
+      theme_bw()+
+      theme(legend.position='none')
 
-  print(p)
+    print(p)
 
- }
+  }
 }

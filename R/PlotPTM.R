@@ -26,12 +26,12 @@ PlotPTM <- function(modificationSpecificPeptides,
   Modifications <- variable <- value <- Freq <- NULL
 
   modification_table <- modificationSpecificPeptides %>%
-                          select(contains(c('Modifications', 'Proteins',
-                                          'Intensity ', 'Experiment '))) %>%
-                          select(-contains(c('calibrated', 'Unique (Proteins)')))
+    select(contains(c('Modifications', 'Proteins',
+                      'Intensity ', 'Experiment '))) %>%
+    select(-contains(c('calibrated', 'Unique (Proteins)')))
 
   mod_melted <- modification_table %>%
-                    select(-contains('Intensity'))
+    select(-contains('Intensity'))
 
   mod_melted <- melt(mod_melted, id.vars = c('Modifications','Proteins'))
 
@@ -41,11 +41,11 @@ PlotPTM <- function(modificationSpecificPeptides,
   #mod_melted <- mod_melted[(mod_melted$value > peptides_modified),]
 
   mod_frequencies <- mod_melted %>%
-                        group_by(Modifications, variable) %>%
-                        summarise(Freq= sum(value))
+    group_by(Modifications, variable) %>%
+    summarise(Freq= sum(value))
 
   mod_join <- mod_frequencies %>% separate_rows(Modifications, sep = ';') %>%
-            group_by(Modifications, variable) %>% summarise(Freq = sum(Freq))
+    group_by(Modifications, variable) %>% summarise(Freq = sum(Freq))
 
   #Remove the Experiment pattern from the variable
 
@@ -77,8 +77,8 @@ PlotPTM <- function(modificationSpecificPeptides,
 
 
   combined_oxidations <- aggregate(x = mod_join_combined[grep('Oxidation',mod_join_combined$Modifications),3],
-                                  by = mod_join_combined[grep('Oxidation',mod_join_combined$Modifications),2],
-                                  FUN = sum)
+                                   by = mod_join_combined[grep('Oxidation',mod_join_combined$Modifications),2],
+                                   FUN = sum)
 
   #Remove rows with the oxidation columns
   mod_join_combined2 <- mod_join_combined
@@ -87,7 +87,7 @@ PlotPTM <- function(modificationSpecificPeptides,
                                                                                      '4 Oxidation (M)',
                                                                                      '5 Oxidation (M)')),]
 
-    #Change the values of the original oxidation to the sum of all the combined oxidations
+  #Change the values of the original oxidation to the sum of all the combined oxidations
 
   mod_join_combined2$Freq[mod_join_combined2$Modifications == 'Oxidation (M)'] <- NA
 
@@ -153,31 +153,31 @@ PlotPTM <- function(modificationSpecificPeptides,
     }
 
     a <- ggplot(modification_final, aes(x = Modifications, y = Freq, fill = Modifications))+
-            geom_bar(stat = 'identity')+
-            facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
-            theme_bw()+
-            ggtitle('Frequency of modified peptides')+
-            ylab('Peptide Frequency')+
-            theme(legend.position = 'bottom',
-                  axis.title.x = element_blank(),
-                  axis.text.x = element_blank(),
-                  axis.ticks.x = element_blank())+
-                  guides(fill = guide_legend(ncol=3))+
-                  scale_fill_brewer(palette = palette)
+      geom_bar(stat = 'identity')+
+      facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+      theme_bw()+
+      ggtitle('Frequency of modified peptides')+
+      ylab('Peptide Frequency')+
+      theme(legend.position = 'bottom',
+            axis.title.x = element_blank(),
+            axis.text.x = element_blank(),
+            axis.ticks.x = element_blank())+
+      guides(fill = guide_legend(ncol=3))+
+      scale_fill_brewer(palette = palette)
 
 
     b <- ggplot(mod_intensities2, aes(x = Modifications, y = value, color = Modifications))+
-              geom_violin(fill = 'gray80', size = 1, alpha = .5)+
-              geom_boxplot(width=0.2)+
-              facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
-              theme_bw()+
-              ggtitle('Intensities of modified peptides')+
-              ylab(ylab)+
-              theme(legend.position = 'bottom',
-                    axis.title.x = element_blank(),
-                    axis.text.x = element_blank(),
-                    axis.ticks.x = element_blank())+
-              scale_colour_brewer(palette = palette)
+      geom_violin(fill = 'gray80', size = 1, alpha = .5)+
+      geom_boxplot(width=0.2)+
+      facet_wrap_paginate(.~ variable, ncol =1, nrow = nrow, page = ii)+
+      theme_bw()+
+      ggtitle('Intensities of modified peptides')+
+      ylab(ylab)+
+      theme(legend.position = 'bottom',
+            axis.title.x = element_blank(),
+            axis.text.x = element_blank(),
+            axis.ticks.x = element_blank())+
+      scale_colour_brewer(palette = palette)
 
 
     c <- plot_grid( a+ theme(legend.position = 'none'),

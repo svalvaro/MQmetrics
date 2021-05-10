@@ -29,18 +29,18 @@ PlotMsMs <- function(summary,
 
   a_melt <- melt(a, id.vars = 'Experiment' )
 
- b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
-        geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
-        theme_bw()+
-        ylab('MS/MS Frequency')+
-        ggtitle('MS/MS Submitted and Identified')+
-        scale_fill_brewer(palette = palette)+
-        theme(legend.position = 'bottom')
+  b <- ggplot(a_melt, aes(x=Experiment, y = value, group = variable, fill= variable))+
+    geom_bar(stat = 'identity', colour='black',position = position_dodge(width = position_dodge_width))+
+    theme_bw()+
+    ylab('MS/MS Frequency')+
+    ggtitle('MS/MS Submitted and Identified')+
+    scale_fill_brewer(palette = palette)+
+    theme(legend.position = 'bottom')
 
-if (long_names == TRUE) {
-  b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
+  if (long_names == TRUE) {
+    b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ',x), 3))
 
-} else{
-  b
-}
+  } else{
+    b
+  }
 }

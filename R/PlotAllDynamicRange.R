@@ -62,11 +62,11 @@ PlotAllDynamicRange <- function(proteinGroups,
     temp_data <- data.frame(vec_temp, temp)
 
     temp_plot <- ggplot(temp_data, aes(x=vec_temp,y = temp))+
-                      geom_point(colour='darkgrey', alpha=0.75, shape=21)+
-                      ggtitle(colnames(rank_groups)[i])+
-                      theme_bw()+
-                      ylab(expression('log'[10]*'(Intensity)'))+
-                      xlab('Protein Abundance Rank')
+      geom_point(colour='darkgrey', alpha=0.75, shape=21)+
+      ggtitle(colnames(rank_groups)[i])+
+      theme_bw()+
+      ylab(expression('log'[10]*'(Intensity)'))+
+      xlab('Protein Abundance Rank')
 
 
     if(show_shade ==TRUE){
@@ -81,21 +81,21 @@ PlotAllDynamicRange <- function(proteinGroups,
 
       orders_abundance_temp <- paste(round(upper_y-bottom_y,digits = 1), 'orders  of abundance')
 
-        temp_plot <- temp_plot+
-                          annotate('rect',
-                                   xmin = limits_row,
-                                   xmax = nrow(temp_data)-limits_row,
-                                   ymin = bottom_y ,
-                                   ymax = upper_y,
-                                   alpha=0.3)+
-                          annotate('text',
-                                   x = nrow(temp_data)/2,
-                                   y = bottom_y,
-                                   label = orders_abundance_temp)+
-                          annotate('text',
-                                   x = nrow(temp_data)/2,
-                                   y = upper_y,
-                                   label = paste0(percent_proteins*100, ' % of proteins represented.'))
+      temp_plot <- temp_plot+
+        annotate('rect',
+                 xmin = limits_row,
+                 xmax = nrow(temp_data)-limits_row,
+                 ymin = bottom_y ,
+                 ymax = upper_y,
+                 alpha=0.3)+
+        annotate('text',
+                 x = nrow(temp_data)/2,
+                 y = bottom_y,
+                 label = orders_abundance_temp)+
+        annotate('text',
+                 x = nrow(temp_data)/2,
+                 y = upper_y,
+                 label = paste0(percent_proteins*100, ' % of proteins represented.'))
 
     }
 

@@ -33,11 +33,11 @@ PlotCombinedDynamicRange <- function(proteinGroups,
   #Plot error bar to include the 90% of the proteins, 5% on left side, 5% on the right one
 
   a <- ggplot(rank, aes(x=vector1,y = Intensity))+
-          geom_point(colour='darkgrey', alpha=0.75, shape=21)+
-          theme_bw()+
-          ggtitle('Dynamic range of protein abundance all samples')+
-          ylab(expression('Log'[10]*'(Intensity)'))+
-          xlab('Protein Abundance Rank')
+    geom_point(colour='darkgrey', alpha=0.75, shape=21)+
+    theme_bw()+
+    ggtitle('Dynamic range of protein abundance all samples')+
+    ylab(expression('Log'[10]*'(Intensity)'))+
+    xlab('Protein Abundance Rank')
 
   if (show_shade == TRUE){
 
@@ -56,14 +56,14 @@ PlotCombinedDynamicRange <- function(proteinGroups,
                  ymin = bottom_y ,
                  ymax = upper_y,
                  alpha=0.3)+
-        annotate('text',
-                 x = nrow(rank)/2,
-                 y = bottom_y,
-                 label = orders_abundance)+
-        annotate('text',
-                 x = nrow(rank)/2,
-                 y = upper_y,
-                 label = paste0(percent_proteins*100, ' % of proteins represented.'))
+      annotate('text',
+               x = nrow(rank)/2,
+               y = bottom_y,
+               label = orders_abundance)+
+      annotate('text',
+               x = nrow(rank)/2,
+               y = upper_y,
+               label = paste0(percent_proteins*100, ' % of proteins represented.'))
 
   } else{
     a

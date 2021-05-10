@@ -4,7 +4,7 @@
 \alias{MaxQuantAnalysisInfo}
 \title{Experiment Information}
 \usage{
-MaxQuantAnalysisInfo(MQPathCombined, runningTimes, parameters)
+MaxQuantAnalysisInfo(MQCombined)
 }
 \arguments{
 \item{MQPathCombined}{The directory to the "combined" folder where the
@@ -22,9 +22,7 @@ Experiment Information
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-files <- ReadDataFromDir(MQPathCombined)
-parameters <- files[["parameters.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
-MaxQuantAnalysisInfo(MQPathCombined, runningTimes, parameters)
+MQCombined <- make_MQCombined(MQPathCombined)
+MaxQuantAnalysisInfo(MQCombined)
 
 }

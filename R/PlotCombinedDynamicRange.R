@@ -15,9 +15,11 @@
 #' files <- ReadDataFromDir(MQPathCombined)
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotCombinedDynamicRange(proteinGroups)
-PlotCombinedDynamicRange <- function(proteinGroups,
+PlotCombinedDynamicRange <- function(MQCombined,
                                      show_shade = TRUE,
                                      percent_proteins = 0.90 ){
+
+    proteinGroups <- MQCombined$proteinGroups.txt
 
     Intensity <- NULL
 

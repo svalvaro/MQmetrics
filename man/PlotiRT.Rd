@@ -4,16 +4,16 @@
 \alias{PlotiRT}
 \title{Max intensities of the iRT peptides in each sample.}
 \usage{
-PlotiRT(evidence, show_calibrated_rt = FALSE, tolerance = 0.001)
+PlotiRT(MQCombined, show_calibrated_rt = FALSE, tolerance = 0.001)
 }
 \arguments{
-\item{evidence}{evidence.txt table from the MaxQuant ouptut.}
-
 \item{show_calibrated_rt}{If TRUE, it will also show the calibrated retention
 time of each iRT peptide. By default = FALSE.}
 
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
+
+\item{evidence}{evidence.txt table from the MaxQuant ouptut.}
 }
 \value{
 A plot showing the iRT peptide in each sample vs the Retention time.

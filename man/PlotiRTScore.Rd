@@ -4,13 +4,13 @@
 \alias{PlotiRTScore}
 \title{Score vs retention time of the iRT peptides}
 \usage{
-PlotiRTScore(evidence, tolerance = 0.001)
+PlotiRTScore(MQCombined, tolerance = 0.001)
 }
 \arguments{
-\item{evidence}{evidence.txt file from the MaxQuant output.}
-
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
+
+\item{evidence}{evidence.txt file from the MaxQuant output.}
 }
 \value{
 A plot for each sample showing a linear regression of the

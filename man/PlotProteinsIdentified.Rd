@@ -5,7 +5,7 @@
 \title{Proteins Identified per sample.}
 \usage{
 PlotProteinsIdentified(
-  proteinGroups,
+  MQCombined,
   intensity_type = "Intensity",
   long_names = FALSE,
   sep_names = NULL,
@@ -13,8 +13,6 @@ PlotProteinsIdentified(
 )
 }
 \arguments{
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
-
 \item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.
 Only useful if split_violin_intensity = FALSE.  Default is Intensity.}
 
@@ -26,6 +24,8 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
+
+\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 A plot showing the number of proteins identified per sample and the

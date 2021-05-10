@@ -121,31 +121,17 @@ in the
 # To create the vignettes and examples I use data that is in the package itself:
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 
-# But in a real world scenario, your data will be in a folder in your computer:
-
-# MQPathCombined <- '/home/user/MaxQuant_outputs/example1/combined'
 
 # make_MQCombined will read the tables needed for creating the outputs.
-MQcombined <- make_MQCombined(MQPathCombined, remove_contaminants = TRUE) 
+MQCombined <- make_MQCombined(MQPathCombined, remove_contaminants = TRUE) 
 
-# MQcombined can be extracted like this:
-
-summary <- MQcombined[["summary.txt"]]
-evidence <- MQcombined[["evidence.txt"]]
-msScans <- MQcombined[['msScans.txt']]
-peptides <- MQcombined[["peptides.txt"]]
-msmsScans <- MQcombined[["msmsScans.txt"]]
-proteinGroups <- MQcombined[["proteinGroups.txt"]]
-modificationSpecificPeptides <- MQcombined[["modificationSpecificPeptides.txt"]]
-parameters <- MQcombined[["parameters.txt"]]
-runningTimes <-  MQcombined[["#runningTimes.txt"]]
 ```
 
 
 ### MaxQuant Analysis Parameters
 
 ```{r ExperimentDuration, comment= NA}
-MaxQuantAnalysisInfo(MQPathCombined,runningTimes, parameters) 
+MaxQuantAnalysisInfo(MQCombined) 
 ```
 
 ### Visualizations.
@@ -155,7 +141,7 @@ proteinGroups.txt table and show the number of proteins and NAs in each sample.
 It can differentiate two types of intensities: 'Intensity' or 'LFQ'.
 
 ```{r PlotProteins,fig.height=5, fig.width=7.2}
-PlotProteinsIdentified(proteinGroups = proteinGroups,
+PlotProteinsIdentified(MQCombined,
                        long_names = TRUE,
                        sep_names = '_',
                        intensity_type = 'LFQ',
@@ -166,7 +152,7 @@ The function **PlotPeptidesIdentified()**,  will take as input the summary
 table and show the number of peptides sequences identified in each sample.
 
 ```{r PeptidesIdentified, warning=FALSE , fig.height=5, fig.width=7.2}
-PlotPeptidesIdentified(summary = summary, 
+PlotPeptidesIdentified(MQCombined, 
                        long_names = TRUE,
                        sep_names = '_', 
                        palette = 'Set3')
@@ -176,7 +162,7 @@ PlotPeptidesIdentified(summary = summary,
 The function **PlotMsMs()**,  will take as input the summary.txt table and
 show the number of MS/MS Submitted and identified in each sample.
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}
-PlotMsMs(summary = summary,
+PlotMsMs(MQCombined,
          long_names = TRUE, 
          sep_names = '_',
          position_dodge_width = 1,
@@ -187,7 +173,7 @@ The function **PlotPeaks()**, will take as input the summary.txt table and
 show the number peaks detected and sequenced in each sample.
 
 ```{r PlotPeaks, fig.height=5, fig.width=7.2}
-PlotPeaks(summary = summary,
+PlotPeaks(MQCombined,
           long_names = TRUE,
           sep_names = '_',
           palette = 'Set2')
@@ -196,7 +182,7 @@ PlotPeaks(summary = summary,
 The function **PlotIsotopePattern()**,will take as input the summary.txt table
 and show the number isotope patterns detected and sequenced in each sample.
 ```{r isotope, fig.height=5, fig.width=7.2}
-PlotIsotopePattern(summary = summary,
+PlotIsotopePattern(MQCombined,
                    long_names = TRUE,
                    sep_names = '_',
                    palette = 'Set2')
@@ -206,7 +192,7 @@ The function **PlotCharge()**, will take as input the evidence.txt table and
 show the charge-state of the precursor ion in each sample.
 
 ```{r Charg, warning=FALSE, message=FALSE, fig.height=10, fig.width=7.2}
-PlotCharge(evidence = evidence, 
+PlotCharge(MQCombined, 
            palette = 'Set2',
            plots_per_page = 6)
 ```
@@ -215,7 +201,7 @@ The function **PlotProteaseSpecificity()**, will take as input the summary.txt
 table and show the number peaks detected and sequenced in each sample.
 
 ```{r missed_cleavages,fig.height=10, fig.width=7.2}
-PlotProteaseSpecificity(peptides = peptides, 
+PlotProteaseSpecificity(MQCombined, 
                         palette = 'Set2',
                         plots_per_page = 6)
 ```
@@ -224,7 +210,7 @@ The function **PlotHydrophobicity()**, takes as input the peptides.txt table
 and returns the distribution of GRAVY score.
 
 ```{r PlotHydrophobicity, warning= FALSE, message= FALSE,fig.height=10, fig.width=7.2}
-PlotHydrophobicity(peptides = peptides,
+PlotHydrophobicity(MQCombined,
                    show_median =  TRUE,
                    binwidth = 0.1, 
                    size_median = 1.5, 
@@ -237,7 +223,7 @@ The function **PlotAndromedaScore()**, takes as input the peptides.txt table
 and returns the distribution of MaxQuant's Andromeda Score.
 
 ```{r AndromedaScore, message = FALSE, warning = FALSE,fig.height=10, fig.width=7.2}
-PlotAndromedaScore(peptides = peptides,
+PlotAndromedaScore(MQCombined,
                    palette = 'Set2',
                    plots_per_page = 6)
 ```
@@ -247,8 +233,7 @@ proteinGroups.txt tables and returns the number of peptides and proteins
 identified by Matching Between Runs or by MS/MS.
 
 ```{r IdentificationType,message = FALSE, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIdentificationType(peptides, 
-                       proteinGroups,
+PlotIdentificationType(MQCombined,
                        long_names = TRUE, 
                        sep_names = '_', 
                        palette = 'Set2')  
@@ -265,7 +250,7 @@ If split_violin_intensity is set TRUE, but no LFQ intensities are not present,
 it will automatically show the normal Intensities.
 
 ```{r PlotIntensity, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotIntensity(proteinGroups = proteinGroups, 
+PlotIntensity(MQCombined, 
               split_violin_intensity = TRUE, 
               intensity_type = 'LFQ', 
               log_base = 2, 
@@ -280,7 +265,7 @@ The function **PlotPCA()** takes as input the proteinGroups.txt table and
 creates a Principal Componente Analysis plot of each Experiment.
 
 ```{r PlotPCA, warning = FALSE, fig.height=5, fig.width=7.2}
-PlotPCA(proteinGroups = proteinGroups,
+PlotPCA(MQCombined,
         intensity_type = 'LFQ',
         palette = 'Set2')
 ```
@@ -292,7 +277,7 @@ parameter show_shade is used, a square will appear showing the percent_proteins
 selected and the orders of abundance.
 
 ```{r DynamicRange, fig.height=5, fig.width=7.2}
-PlotCombinedDynamicRange(proteinGroups = proteinGroups,
+PlotCombinedDynamicRange(MQCombined,
                          show_shade = TRUE,
                          percent_proteins = 0.90)
 ```
@@ -304,7 +289,7 @@ parameter show_shade is used, a square will appear showing the percent_proteins
 selected and the orders of abundance.
 
 ```{r DynamicRangeAll, fig.height=10, fig.width=7.2}
-PlotAllDynamicRange(proteinGroups = proteinGroups,
+PlotAllDynamicRange(MQCombined,
                     show_shade = TRUE, 
                     percent_proteins = 0.90)
 ```
@@ -315,7 +300,7 @@ table and returns a plot that shows the number of proteins identified in the
 samples.
 
 ```{r protein_coverage_all, fig.height=7.2, fig.width=7.2}
-PlotProteinOverlap(proteinGroups = proteinGroups)
+PlotProteinOverlap(MQCombined)
 ```
 
 The function **PlotProteinCoverage()** takes as input the peptides.txt and
@@ -323,8 +308,7 @@ proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the
 coverage of that protein in each of the samples.
 
 ```{r protein_degradation,fig.height=10, fig.width=7.2}
-PlotProteinCoverage(peptides = peptides,
-                    proteinGroups = proteinGroups,
+PlotProteinCoverage(MQCombined,
                     UniprotID = "P55072",
                     log_base = 2,
                     segment_width = 1,
@@ -337,7 +321,7 @@ The function **PlotiRT()** takes as input the evidence.txt table and returns,
 if found the iRT peptides from Biognosys. Their retention time and intensity.
 
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
-PlotiRT(evidence = evidence, 
+PlotiRT(MQCombined, 
         show_calibrated_rt = FALSE,
         tolerance = 0.001)
 ```
@@ -347,7 +331,7 @@ returns, if found, a linear regression of the retention times of the iRT
 peptides of Biognosys.
 
 ```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
-PlotiRTScore(evidence = evidence, 
+PlotiRTScore(MQCombined, 
              tolerance = 0.001)
 ```
 
@@ -357,7 +341,7 @@ returns a plot showing the TIC values vs the retention time of each sample.
 It can show as well the maximum value of each sample.
 
 ```{r TotalIonCurrent, fig.height=10, fig.width=7.2}
-PlotTotalIonCurrent(msmsScans = msmsScans,
+PlotTotalIonCurrent(MQCombined,
                     show_max_value = TRUE,
                     palette = 'Set2',
                     plots_per_page = 6)
@@ -368,7 +352,7 @@ The function **PlotAcquisitionCycle** takes as input the msScans.txt table
 and returns the cycle time and MS/MS count vs the retention time of each sample.
 
 ```{r PlotAcquisition, fig.height= 10, warning=FALSE, message=FALSE,fig.height=10, fig.width=7.2}
-PlotAcquisitionCycle(msScans = msScans, 
+PlotAcquisitionCycle(MQCombined, 
                      palette = 'Set2',
                      plots_per_page = 6)
 ```
@@ -380,7 +364,7 @@ modified per group, and whether or not you would like to visualize the
 Unmodified peptides.
 
 ```{r PTM, fig.height=8, fig.width=7.2}
-PlotPTM(modificationSpecificPeptides = modificationSpecificPeptides,
+PlotPTM(MQCombined,
         peptides_modified = 1,
         plot_unmodified_peptides = FALSE,
         palette = 'Set2',

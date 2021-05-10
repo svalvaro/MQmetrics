@@ -15,9 +15,12 @@
 #' msScans <- files[['msScans.txt']]
 #' PlotAcquisitionCycle(msScans)
 #'
-PlotAcquisitionCycle <- function(msScans,
+PlotAcquisitionCycle <- function(MQCombined,
                                  palette = 'Set2',
                                  plots_per_page = 5){
+
+    msScans <- MQCombined$msScans.txt
+
     `Retention time` <- `Cycle time` <- `Experiment` <- `MS/MS count` <- NULL
 
 

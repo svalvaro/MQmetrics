@@ -4,7 +4,7 @@
 \alias{PlotProteinOverlap}
 \title{Protein Overlap Between Samples}
 \usage{
-PlotProteinOverlap(proteinGroups)
+PlotProteinOverlap(MQCombined)
 }
 \arguments{
 \item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}

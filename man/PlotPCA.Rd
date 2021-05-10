@@ -4,16 +4,16 @@
 \alias{PlotPCA}
 \title{Principal Component Analysis of the Intensity values.}
 \usage{
-PlotPCA(proteinGroups, intensity_type = "Intensity", palette = "Set2")
+PlotPCA(MQCombined, intensity_type = "Intensity", palette = "Set2")
 }
 \arguments{
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
-
 \item{intensity_type}{The type of intensity. Values: 'Intensity' or 'LFQ'.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.
  Default is Intensity.}
+
+\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 A PCA plot of the Intesities of all the samples.

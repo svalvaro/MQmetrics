@@ -14,9 +14,12 @@
 #' files <- ReadDataFromDir(MQPathCombined)
 #' evidence <- files[['evidence.txt']]
 #' PlotCharge(evidence)
-PlotCharge <- function(evidence,
+PlotCharge <- function(MQCombined,
                        palette = 'Set2',
                        plots_per_page = 5){
+
+    evidence <- MQCombined$evidence.txt
+
     Experiment <- Charge <-  value <- variable <- NULL
 
     ev <- evidence %>%

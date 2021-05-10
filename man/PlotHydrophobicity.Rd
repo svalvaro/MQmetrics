@@ -5,7 +5,7 @@
 \title{Peptide hydrophobicity by GRAVY score}
 \usage{
 PlotHydrophobicity(
-  peptides,
+  MQCombined,
   show_median = TRUE,
   size_median = 1.5,
   binwidth = 0.2,
@@ -14,8 +14,6 @@ PlotHydrophobicity(
 )
 }
 \arguments{
-\item{peptides}{The peptides file from the MaxQuant ouptut.}
-
 \item{show_median}{If true it will show the median of each group, as a red
 dashed line.By default is TRUE.}
 
@@ -27,6 +25,8 @@ dashed line.By default is TRUE.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{peptides}{The peptides file from the MaxQuant ouptut.}
 }
 \value{
 Returns a histogram per sample, showing the frequency of the

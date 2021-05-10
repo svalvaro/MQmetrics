@@ -17,11 +17,12 @@
 #' PlotTotalIonCurrent(msmsScans)
 #'
 #'
-PlotTotalIonCurrent <- function(msmsScans,
+PlotTotalIonCurrent <- function(MQCombined,
                                 show_max_value = TRUE,
                                 palette = 'Set2',
-                                plots_per_page = 5
-){
+                                plots_per_page = 5){
+
+    msmsScans <- MQCombined$msmsScans.txt
 
     `Retention time` <- `Total ion current` <- Experiment <- . <- NULL
 

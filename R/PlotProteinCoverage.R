@@ -22,13 +22,15 @@
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinCoverage(peptides, proteinGroups, UniprotID = 'Q8R0Y6')
 #'
-PlotProteinCoverage <- function(peptides,
-                                proteinGroups,
+PlotProteinCoverage <- function(MQCombined,
                                 UniprotID = NULL,
                                 log_base = 2,
                                 segment_width = 1,
                                 palette = 'Set2',
                                 plots_per_page = 5){
+
+    peptides <- MQCombined$peptides.txt
+    proteinGroups <- MQCombined$proteinGroups.txt
 
     `Start position` <-  `End position` <- variable <- value <- NULL
 

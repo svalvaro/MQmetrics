@@ -5,7 +5,7 @@
 \title{Post Translational Modifications}
 \usage{
 PlotPTM(
-  modificationSpecificPeptides,
+  MQCombined,
   peptides_modified = 1,
   plot_unmodified_peptides = FALSE,
   log_base = 2,
@@ -14,9 +14,6 @@ PlotPTM(
 )
 }
 \arguments{
-\item{modificationSpecificPeptides}{modificationSpecificPeptides table from
-MaxQuant ouput.}
-
 \item{peptides_modified}{Minimum number of peptides modified. Default  is 5.}
 
 \item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified
@@ -28,6 +25,9 @@ peptides.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{modificationSpecificPeptides}{modificationSpecificPeptides table from
+MaxQuant ouput.}
 }
 \value{
 Two plots per sample

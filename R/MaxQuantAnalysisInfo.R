@@ -8,14 +8,16 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' parameters <- files[["parameters.txt"]]
-#' runningTimes <-  files[["#runningTimes.txt"]]
-#' MaxQuantAnalysisInfo(MQPathCombined, runningTimes, parameters)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' MaxQuantAnalysisInfo(MQCombined)
 #'
-MaxQuantAnalysisInfo <- function(MQPathCombined,
-                                 runningTimes,
-                                 parameters){
+MaxQuantAnalysisInfo <- function(MQCombined){
+
+    MQPathCombined <- MQCombined$MQPathCombined
+    runningTimes <- MQCombined$`#runningTimes.txt`
+    parameters <- MQCombined$parameters.txt
+
+
     #Runningtimes
     time <- sum(runningTimes$`Running time [min]`)
 

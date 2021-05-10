@@ -15,9 +15,10 @@
 #' evidence <- files[['evidence.txt']]
 #' PlotiRT(evidence)
 #'
-PlotiRT <- function(evidence,
+PlotiRT <- function(MQCombined,
                     show_calibrated_rt = FALSE,
                     tolerance=0.001){
+    evidence <- MQCombined$evidence.txt
 
     Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
     `Calibrated retention time` <- value <- variable <- NULL

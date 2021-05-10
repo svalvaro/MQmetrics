@@ -1,10 +1,11 @@
-test_that('returns a list of 9 elements',{
+test_that('returns a list of 10 elements',{
 
     MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 
-    files <- MQmetrics::ReadDataFromDir(MQPathCombined)
+    MQCombined <- MQmetrics::make_MQCombined(MQPathCombined)
 
-    name_files <-c('summary.txt',
+    name_files <-c('MQPathCombined',
+                   'summary.txt',
                    'peptides.txt',
                    'evidence.txt',
                    'msmsScans.txt',
@@ -14,6 +15,6 @@ test_that('returns a list of 9 elements',{
                    'parameters.txt',
                    '#runningTimes.txt')
 
-    expect_equal(names(files),name_files)
+    expect_equal(names(MQCombined),name_files)
 
 })

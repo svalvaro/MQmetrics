@@ -5,15 +5,13 @@
 \title{Total number of peaks detected and sequenced}
 \usage{
 PlotPeptidesIdentified(
-  summary,
+  MQCombined,
   long_names = FALSE,
   sep_names = NULL,
   palette = "Set2"
 )
 }
 \arguments{
-\item{summary}{The peptides.txt table from  MaxQuant Output.}
-
 \item{long_names}{If TRUE, samples having long names will be considered, and
 the name will be split by sep_names. By default = FALSE.}
 
@@ -22,6 +20,8 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default
 is 'Set2'.}
+
+\item{summary}{The peptides.txt table from  MaxQuant Output.}
 }
 \value{
 Plots the total number of unique peptide amino acid sequences

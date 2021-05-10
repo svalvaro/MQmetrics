@@ -23,11 +23,13 @@
 #' PlotIdentificationType(peptides,proteinGroups)
 #'
 #'
-PlotIdentificationType <- function(peptides,
-                                   proteinGroups,
+PlotIdentificationType <- function(MQCombined,
                                    long_names = FALSE,
                                    sep_names = NULL,
                                    palette = 'Set2'){
+
+  peptides <- MQCombined$peptides.txt
+  proteinGroups <- MQCombined$proteinGroups.txt
 
   value <- variable <- NULL
 

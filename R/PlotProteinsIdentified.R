@@ -20,11 +20,13 @@
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinsIdentified(proteinGroups)
 #'
-PlotProteinsIdentified <- function(proteinGroups,
+PlotProteinsIdentified <- function(MQCombined,
                                    intensity_type = 'Intensity',
                                    long_names = FALSE,
                                    sep_names = NULL,
                                    palette = 'Set2'){
+
+    proteinGroups <- MQCombined$proteinGroups.txt
 
   Experiment <- value <- variable <- NULL
 

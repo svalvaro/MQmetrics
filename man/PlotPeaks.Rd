@@ -5,7 +5,7 @@
 \title{Total number of peaks detected and sequenced}
 \usage{
 PlotPeaks(
-  summary,
+  MQCombined,
   long_names = FALSE,
   sep_names = NULL,
   position_dodge_width = 1,
@@ -13,8 +13,6 @@ PlotPeaks(
 )
 }
 \arguments{
-\item{summary}{The summary.txt table from  MaxQuant Output.}
-
 \item{long_names}{If TRUE, samples having long names will be considered, and
 the name will be split by sep_names. By default = FALSE.}
 
@@ -25,6 +23,8 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
+
+\item{summary}{The summary.txt table from  MaxQuant Output.}
 }
 \value{
 Plots the total number of peaks detected in the full scans and the

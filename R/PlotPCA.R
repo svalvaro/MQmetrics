@@ -15,9 +15,11 @@
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotPCA(proteinGroups)
 #'
-PlotPCA <- function(proteinGroups,
+PlotPCA <- function(MQCombined,
                     intensity_type = 'Intensity',
                     palette = 'Set2'){
+
+    proteinGroups <- MQCombined$proteinGroups.txt
 
     PC1 <- PC2 <- Modifications <- variable <- value <- Freq <- NULL
 

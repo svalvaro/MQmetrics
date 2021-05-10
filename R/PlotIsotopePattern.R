@@ -18,11 +18,13 @@
 #' summary <- files[['summary.txt']]
 #' PlotIsotopePattern(summary)
 #'
-PlotIsotopePattern <- function(summary,
+PlotIsotopePattern <- function(MQCombined,
                                long_names = FALSE,
                                sep_names = NULL,
                                position_dodge_width=1,
                                palette = 'Set2'){
+
+    summary <- MQCombined$summary.txt
 
     Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <-  NULL
     value <- variable <- NULL

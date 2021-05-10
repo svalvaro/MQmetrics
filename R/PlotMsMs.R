@@ -18,11 +18,12 @@
 #' summary <- files[['summary.txt']]
 #' PlotMsMs(summary)
 #'
-PlotMsMs <- function(summary,
+PlotMsMs <- function(MQCombined,
                      long_names = FALSE,
                      sep_names = NULL,
                      position_dodge_width = 1,
                      palette = 'Set2'){
+    summary <- MQCombined$summary.txt
 
     Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- NULL
     value <- variable <- NULL

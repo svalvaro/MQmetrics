@@ -38,32 +38,20 @@ knitr::opts_chunk$set(echo=FALSE,
 ```{r library}
 library(MQmetrics)
 MQPathCombined <- params$input_dir
-files <- make_MQCombined(MQPathCombined,
-                         remove_contaminants = params$remove_contaminants) 
-
-summary <- files[["summary.txt"]]
-evidence <- files[["evidence.txt"]]
-msScans <- files[['msScans.txt']]
-peptides <- files[["peptides.txt"]]
-msmsScans <- files[["msmsScans.txt"]]
-proteinGroups <- files[["proteinGroups.txt"]]
-modificationSpecificPeptides <- files[["modificationSpecificPeptides.txt"]]
-runningTimes <-  files[["#runningTimes.txt"]]
-parameters <- files[["parameters.txt"]]
+MQCombined <- make_MQCombined(MQPathCombined,
+                              remove_contaminants = params$remove_contaminants) 
 ```
 
 
 
 ```{r ExperimentDuration}
-MaxQuantAnalysisInfo(MQPathCombined,
-                     runningTimes, 
-                     parameters) 
+MaxQuantAnalysisInfo(MQCombined) 
 ```
 
 \newpage
 
 ```{r PlotProteins}
-PlotProteinsIdentified(proteinGroups,
+PlotProteinsIdentified(MQCombined,
                        intensity_type =params$intensity_type,
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
@@ -72,13 +60,13 @@ PlotProteinsIdentified(proteinGroups,
 
 \newpage
 ```{r protein_coverage_all}
-PlotProteinOverlap(proteinGroups)
+PlotProteinOverlap(MQCombined)
 
 ```
 
 \newpage
 ```{r PeptidesIdentified}
-PlotPeptidesIdentified(summary, 
+PlotPeptidesIdentified(MQCombined, 
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
                        palette = params$palette)
@@ -88,7 +76,7 @@ PlotPeptidesIdentified(summary,
 
 \newpage
 ```{r PlotMSMS}
-PlotMsMs(summary,
+PlotMsMs(MQCombined,
          long_names = params$long_names, 
          sep_names = params$sep_names, 
          palette = params$palette)
@@ -97,7 +85,7 @@ PlotMsMs(summary,
 
 \newpage
 ```{r PlotPeaks}
-PlotPeaks(summary, 
+PlotPeaks(MQCombined, 
           long_names = params$long_names, 
           sep_names = params$sep_names, 
           palette = params$palette)
@@ -106,7 +94,7 @@ PlotPeaks(summary,
 
 \newpage
 ```{r isotope}
-PlotIsotopePattern(summary,
+PlotIsotopePattern(MQCombined,
                    long_names = params$long_names, 
                    sep_names = params$sep_names, 
                    palette = params$palette)
@@ -115,14 +103,14 @@ PlotIsotopePattern(summary,
 
 \newpage
 ```{r Charge}
-PlotCharge(evidence, 
+PlotCharge(MQCombined, 
            palette = params$palette,
            plots_per_page = params$plots_per_page)
 ```
 
 \newpage
 ```{r missed_cleavages}
-PlotProteaseSpecificity(peptides, 
+PlotProteaseSpecificity(MQCombined, 
                         palette = params$palette,
                         plots_per_page = params$plots_per_page)
 ```
@@ -130,7 +118,7 @@ PlotProteaseSpecificity(peptides,
 
 \newpage
 ```{r PlotHydrophobicity}
-PlotHydrophobicity(peptides,
+PlotHydrophobicity(MQCombined,
                    palette = params$palette,
                    show_median =  params$show_median,
                    size_median = params$size_median,
@@ -140,7 +128,7 @@ PlotHydrophobicity(peptides,
 
 \newpage
 ```{r PlotAndromedaScore}
-PlotAndromedaScore(peptides, 
+PlotAndromedaScore(MQCombined, 
                    palette = params$palette,
                    plots_per_page = params$plots_per_page)
 ```
@@ -148,9 +136,9 @@ PlotAndromedaScore(peptides,
 
 \newpage
 ```{r IdentificationType}
-if( parameters$Value[parameters$Parameter == 'Match between runs'] == "True"){
-    PlotIdentificationType(peptides, 
-                           proteinGroups,
+if(MQCombined$parameters.txt$Value[
+    MQCombined$parameters.txt$Parameter == 'Match between runs'] == 'True'){
+    PlotIdentificationType(MQCombined,
                            palette = params$palette,
                            long_names = params$long_names, 
                            sep_names = params$sep_names)  
@@ -164,7 +152,7 @@ No Identification Type to show.')
 
 \newpage
 ```{r PlotIntensity}
-PlotIntensity(proteinGroups, 
+PlotIntensity(MQCombined, 
               intensity_type = params$intensity_type, 
               log_base = params$log_base, 
               long_names = params$long_names, 
@@ -174,20 +162,20 @@ PlotIntensity(proteinGroups,
 \newpage
 
 ```{r PlotPCA}
-PlotPCA(proteinGroups,
+PlotPCA(MQCombined,
         intensity_type = params$intensity_type,
         palette = params$palette)
 ```
 
 \newpage
 ```{r DynamicRange}
-PlotCombinedDynamicRange(proteinGroups,
+PlotCombinedDynamicRange(MQCombined,
                          show_shade = params$show_shade, 
                          percent_proteins = params$percent_proteins) 
 ```
 \newpage
 ```{r DynamicRangeAll}
-PlotAllDynamicRange(proteinGroups,
+PlotAllDynamicRange(MQCombined,
                     show_shade = params$show_shade, 
                     percent_proteins = params$percent_proteins)
 ```
@@ -198,8 +186,7 @@ PlotAllDynamicRange(proteinGroups,
 if(is.null(params$UniprotID)){
     print('No UniprotID provided.')
 } else{
-    PlotProteinCoverage(peptides, 
-                        proteinGroups, 
+    PlotProteinCoverage(MQCombined, 
                         UniprotID = params$UniprotID, 
                         log_base = params$log_base,
                         segment_width = params$segment_width,
@@ -212,14 +199,14 @@ if(is.null(params$UniprotID)){
 
 \newpage
 ```{r irt_peps1}
-PlotiRT(evidence, 
+PlotiRT(MQCombined, 
         show_calibrated_rt = params$show_calibrated_rt,
         tolerance =  params$tolerance)
 ```
 \newpage
 
 ```{r irt_peps2}
-PlotiRTScore(evidence,
+PlotiRTScore(MQCombined,
              tolerance =  params$tolerance)
 ```
 
@@ -227,7 +214,7 @@ PlotiRTScore(evidence,
 
 \newpage
 ```{r TotalIonCurrent}
-PlotTotalIonCurrent(msmsScans,
+PlotTotalIonCurrent(MQCombined,
                     show_max_value = params$show_max_value,
                     palette = params$palette,
                     plots_per_page = params$plots_per_page)
@@ -236,14 +223,14 @@ PlotTotalIonCurrent(msmsScans,
 
 \newpage
 ```{r PlotAcquisition}
-PlotAcquisitionCycle(msScans, 
+PlotAcquisitionCycle(MQCombined, 
                      palette = params$palette,
                      plots_per_page = params$plots_per_page)
 ```
 
 \newpage
 ```{r PTM}
-PlotPTM(modificationSpecificPeptides, 
+PlotPTM(MQCombined, 
         peptides_modified = params$peptides_modified,
         log_base = params$log_base,
         plot_unmodified_peptides = params$plot_unmodified_peptides,
@@ -254,8 +241,8 @@ PlotPTM(modificationSpecificPeptides,
 \newpage
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 a <- ReportTables(MQPathCombined =  params$input_dir,
-                  log_base = params$log_base,
-                  intensity_type = params$intensity_type)
+             log_base = params$log_base,
+             intensity_type = params$intensity_type)
 
 
 kable(a[[1]], caption = 'Protein Information')

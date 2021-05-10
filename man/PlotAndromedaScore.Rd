@@ -4,15 +4,15 @@
 \alias{PlotAndromedaScore}
 \title{Andromeda score for the best associated MS/MS spectrum.}
 \usage{
-PlotAndromedaScore(peptides, palette = "Set2", plots_per_page = 5)
+PlotAndromedaScore(MQCombined, palette = "Set2", plots_per_page = 5)
 }
 \arguments{
-\item{peptides}{peptides.txt table from MaxQuant ouput.}
-
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{peptides}{peptides.txt table from MaxQuant ouput.}
 }
 \value{
 Plots the MaxQuant Andromeda Score.

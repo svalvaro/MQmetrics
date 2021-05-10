@@ -24,13 +24,15 @@
 #' PlotIntensity(proteinGroups)
 #'
 #'
-PlotIntensity <- function(proteinGroups,
+PlotIntensity <- function(MQCombined,
                           split_violin_intensity = TRUE,
                           intensity_type = 'Intensity',
                           log_base = 2,
                           long_names = FALSE,
                           sep_names = NULL,
                           palette = 'Set2'){
+
+    proteinGroups <- MQCombined$proteinGroups.txt
 
     id <- variable <- value <- x <- `violinwidth` <- xmin <- NULL
     xmax <- xminv <- xmaxv <- y <- NULL

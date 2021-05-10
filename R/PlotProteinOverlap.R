@@ -11,7 +11,9 @@
 #' proteinGroups <- files[['proteinGroups.txt']]
 #' PlotProteinOverlap(proteinGroups)
 #'
-PlotProteinOverlap <- function(proteinGroups){
+PlotProteinOverlap <- function(MQCombined){
+
+    proteinGroups <- MQCombined$proteinGroups.txt
 
     samples <- value <- NULL
 

@@ -13,9 +13,11 @@
 #' files <- ReadDataFromDir(MQPathCombined)
 #' peptides <- files[['peptides.txt']]
 #' PlotAndromedaScore(peptides)
-PlotAndromedaScore <- function(peptides,
+PlotAndromedaScore <- function(MQCombined,
                                palette = 'Set2',
                                plots_per_page = 5){
+
+    peptides <- MQCombined$peptides.txt
 
     variable <- Score <- NULL
 

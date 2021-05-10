@@ -15,9 +15,11 @@
 #' peptides <- files[['peptides.txt']]
 #' PlotProteaseSpecificity(peptides)
 #'
-PlotProteaseSpecificity <- function(peptides,
+PlotProteaseSpecificity <- function(MQCombined,
                                     palette = 'Set2',
                                     plots_per_page = 5){
+
+    peptides <- MQCombined$peptides.txt
 
     `Missed cleavages` <- value <- variable <- Length  <- NULL
 

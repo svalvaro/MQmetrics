@@ -5,21 +5,21 @@
 \title{Total Ion Current}
 \usage{
 PlotTotalIonCurrent(
-  msmsScans,
+  MQCombined,
   show_max_value = TRUE,
   palette = "Set2",
   plots_per_page = 5
 )
 }
 \arguments{
-\item{msmsScans}{The msmsScans.txt table from  MaxQuant Output.}
-
 \item{show_max_value}{If TRUE, it will show the max TIC value of each sample.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{msmsScans}{The msmsScans.txt table from  MaxQuant Output.}
 }
 \value{
 Returns a plot the Total Ion Current in each sample.

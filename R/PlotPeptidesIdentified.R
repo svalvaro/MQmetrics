@@ -18,10 +18,12 @@
 #' summary <- files[['summary.txt']]
 #' PlotPeptidesIdentified(summary)
 #'
-PlotPeptidesIdentified <- function(summary,
+PlotPeptidesIdentified <- function(MQCombined,
                                    long_names = FALSE,
                                    sep_names = NULL,
                                    palette = 'Set2'){
+
+    summary <- MQCombined$summary.txt
 
     `Peptide Sequences Identified` <- Experiment<- NULL
 

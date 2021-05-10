@@ -19,11 +19,13 @@
 #' summary <- files[['summary.txt']]
 #' PlotPeaks(summary)
 #'
-PlotPeaks <- function(summary,
+PlotPeaks <- function(MQCombined,
                       long_names = FALSE,
                       sep_names = NULL,
                       position_dodge_width = 1,
                       palette = 'Set2'){
+
+    summary <- MQCombined$summary.txt
 
     Experiment <- `Peaks Sequenced` <- Peaks <- value <- variable <- NULL
 

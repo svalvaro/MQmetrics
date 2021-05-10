@@ -5,7 +5,7 @@
 \title{Intensity / LFQ intensity per sample.}
 \usage{
 PlotIntensity(
-  proteinGroups,
+  MQCombined,
   split_violin_intensity = TRUE,
   intensity_type = "Intensity",
   log_base = 2,
@@ -15,8 +15,6 @@ PlotIntensity(
 )
 }
 \arguments{
-\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
-
 \item{split_violin_intensity}{If TRUE, both the LFQ and the Intensity will be
 shown in the same plot. If FALSE, it can be specified in the intensity_type
 which intensity to visualize.}
@@ -34,6 +32,8 @@ names will be split. By default is NULL.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default
 is 'Set2'.}
+
+\item{proteinGroups}{The proteinGroups.txt table from  MaxQuant Output.}
 }
 \value{
 A violin plot and boxplot of the intensities in each sample.

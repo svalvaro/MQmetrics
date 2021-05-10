@@ -5,8 +5,7 @@
 \title{Protein coverage and degradation.}
 \usage{
 PlotProteinCoverage(
-  peptides,
-  proteinGroups,
+  MQCombined,
   UniprotID = NULL,
   log_base = 2,
   segment_width = 1,
@@ -15,10 +14,6 @@ PlotProteinCoverage(
 )
 }
 \arguments{
-\item{peptides}{peptides.txt table from MaxQuant ouput.}
-
-\item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}
-
 \item{UniprotID}{Uniprot ID of the protein of interest.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
@@ -30,6 +25,10 @@ Default is 1.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{peptides}{peptides.txt table from MaxQuant ouput.}
+
+\item{proteinGroups}{proteinGroups.txt table from MaxQuant output.}
 }
 \value{
 Two plots for each sample, the end position vs the start position of

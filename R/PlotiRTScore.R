@@ -15,8 +15,10 @@
 #' evidence <- files[['evidence.txt']]
 #' PlotiRT(evidence)
 #'
-PlotiRTScore <- function(evidence,
+PlotiRTScore <- function(MQCombined,
                          tolerance= 0.001){
+
+    evidence <- MQCombined$evidence.txt
 
     Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
 

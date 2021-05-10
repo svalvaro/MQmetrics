@@ -22,8 +22,7 @@ iRT peptides'
 Score vs retention time of the iRT peptides
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotiRT(MQCombined)
-
 }

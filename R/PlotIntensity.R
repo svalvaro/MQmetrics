@@ -23,12 +23,12 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotIntensity(MQCombined)
 PlotIntensity <- function(MQCombined,
-                          split_violin_intensity = TRUE,
-                          intensity_type = "Intensity",
-                          log_base = 2,
-                          long_names = FALSE,
-                          sep_names = NULL,
-                          palette = "Set2") {
+                        split_violin_intensity = TRUE,
+                        intensity_type = "Intensity",
+                        log_base = 2,
+                        long_names = FALSE,
+                        sep_names = NULL,
+                        palette = "Set2") {
     proteinGroups <- MQCombined$proteinGroups.txt
 
     id <- variable <- value <- x <- `violinwidth` <- xmin <- NULL
@@ -69,8 +69,8 @@ PlotIntensity <- function(MQCombined,
     }
 
     create_quantile_segment_frame <- function(data, draw_quantiles,
-                                              split = FALSE,
-                                              grp = NULL) {
+                                            split = FALSE,
+                                            grp = NULL) {
         dens <- cumsum(data$density) / sum(data$density)
         ecdf <- stats::approxfun(dens, data$y)
         ys <- ecdf(draw_quantiles)
@@ -90,91 +90,69 @@ PlotIntensity <- function(MQCombined,
         }
     }
 
-    GeomSplitViolin <- ggproto("GeomSplitViolin", GeomViolin,
-                               draw_group = function(self,
-                                                     data,
-                                                     ...,
-                                                     draw_quantiles = NULL) {
-                                   data <- transform(data,
-                                                     xminv = x - violinwidth * (x - xmin),
-                                                     xmaxv = x + violinwidth * (xmax - x)
-                                   )
-                                   grp <- data[1, "group"]
-                                   newdata <- dplyr::arrange(
-                                       transform(data,
-                                                 x = if (grp %% 2 == 1) xminv else xmaxv
-                                       ),
-                                       if (grp %% 2 == 1) y else -y
-                                   )
-                                   newdata <- rbind(
-                                       newdata[1, ],
-                                       newdata,
-                                       newdata[nrow(newdata), ],
-                                       newdata[1, ]
-                                   )
+    GeomSplitViolin <- ggproto(
+        "GeomSplitViolin",
+        GeomViolin,
+        draw_group = function(self,
+                            data,
+                            ...,
+                            draw_quantiles = NULL) {
+            data <- transform(data,
+                            xminv = x - violinwidth * (x - xmin),
+                            xmaxv = x + violinwidth * (xmax - x))
+            grp <- data[1, "group"]
+            newdata <- dplyr::arrange(
+                transform(data,
+                        x = if (grp %% 2 == 1) xminv else xmaxv),
+                if (grp %% 2 == 1) y else -y
+                )
+            newdata <- rbind(
+                newdata[1, ],
+                newdata,
+                newdata[nrow(newdata), ],
+                newdata[1, ]
+                )
 
-                                   newdata[
-                                       c(
-                                           1,
-                                           nrow(newdata) - 1,
-                                           nrow(newdata)
-                                       ),
-                                       "x"
-                                   ] <- round(newdata[1, "x"])
+            newdata[c(1,nrow(newdata) - 1,nrow(newdata)
+                    ),"x"]<- round(newdata[1, "x"])
 
-                                   if (length(draw_quantiles) > 0 & !scales::zero_range(range(data$y))) {
-                                       stopifnot(
-                                           all(draw_quantiles >= 0),
-                                           all(draw_quantiles <= 1)
-                                       )
-                                       quantiles <- create_quantile_segment_frame(data, draw_quantiles)
-                                       aesthetics <- data[rep(
-                                           1,
-                                           nrow(quantiles)
-                                       ),
-                                       setdiff(
-                                           names(data),
-                                           c("x", "y")
-                                       ),
-                                       drop = FALSE
-                                       ]
-                                       aesthetics$alpha <- rep(
-                                           1,
-                                           nrow(quantiles)
-                                       )
-                                       both <- cbind(quantiles, aesthetics)
-                                       quantile_grob <- GeomPath$draw_panel(both, ...)
-                                       ggname(
-                                           "geom_split_violin",
-                                           grid::grobTree(
-                                               GeomPolygon$draw_panel(newdata, ...),
-                                               quantile_grob
-                                           )
-                                       )
-                                   }
-                                   else {
-                                       ggname(
-                                           "geom_split_violin",
-                                           GeomPolygon$draw_panel(
-                                               newdata,
-                                               ...
-                                           )
-                                       )
-                                   }
-                               }
-    )
+        if (length(draw_quantiles) > 0 & !scales::zero_range(range(data$y))) {
+                stopifnot(
+                    all(draw_quantiles >= 0),
+                    all(draw_quantiles <= 1)
+                    )
+            quantiles <- create_quantile_segment_frame(data, draw_quantiles)
+
+            aesthetics <- data[rep(1,nrow(quantiles)), setdiff(names(data),
+                                                            c("x", "y")),
+                                                            drop = FALSE]
+
+            aesthetics$alpha <- rep(1,nrow(quantiles))
+            both <- cbind(quantiles, aesthetics)
+            quantile_grob <- GeomPath$draw_panel(both, ...)
+            ggname("geom_split_violin", grid::grobTree(
+                        GeomPolygon$draw_panel(newdata, ...),
+                        quantile_grob)
+            )
+            }else {ggname("geom_split_violin", GeomPolygon$draw_panel(
+                    newdata,
+                    ...)
+            )
+            }
+            }
+        )
 
     geom_split_violin <- function(mapping = NULL,
-                                  data = NULL,
-                                  stat = "ydensity",
-                                  position = "identity",
-                                  ...,
-                                  draw_quantiles = NULL,
-                                  trim = TRUE,
-                                  scale = "area",
-                                  na.rm = FALSE,
-                                  show.legend = NA,
-                                  inherit.aes = TRUE) {
+                                data = NULL,
+                                stat = "ydensity",
+                                position = "identity",
+                                ...,
+                                draw_quantiles = NULL,
+                                trim = TRUE,
+                                scale = "area",
+                                na.rm = FALSE,
+                                show.legend = NA,
+                                inherit.aes = TRUE) {
         layer(
             data = data, mapping = mapping, stat = stat,
             geom = GeomSplitViolin,
@@ -191,7 +169,7 @@ PlotIntensity <- function(MQCombined,
     intensities <- proteinGroups %>% select(id, contains("Intensity "))
 
     colourCount <- length(colnames(intensities %>%
-                                       select(-contains(c("id", "LFQ")))))
+                                select(-contains(c("id", "LFQ")))))
 
     getPalette <- colorRampPalette(brewer.pal(8, palette))
 
@@ -205,7 +183,7 @@ PlotIntensity <- function(MQCombined,
             # the intensities will be plotted.
 
             print("LFQ intensities not found,
-                  split_violin_plot can not be created")
+                split_violin_plot can not be created")
             print("Changing intensity automatically to Intensity")
 
             intensities <- intensities %>% select(-contains("LFQ"))
@@ -221,23 +199,23 @@ PlotIntensity <- function(MQCombined,
 
             if (log_base == 2) {
                 melted_intensities <- melt(log2(intensities),
-                                           id.vars = "id",
-                                           measure.vars = intensities_measure
+                                        id.vars = "id",
+                                        measure.vars = intensities_measure
                 )
                 ylab <- expression("Log"[2] * "(Intensity)")
             }
 
             if (log_base == 10) {
                 melted_intensities <- melt(log10(intensities),
-                                           id.vars = "id",
-                                           measure.vars = intensities_measure
+                                        id.vars = "id",
+                                        measure.vars = intensities_measure
                 )
                 ylab <- expression("Log"[10] * "(Intensity)")
             }
             b <- ggplot(melted_intensities, aes(
-                x = variable,
-                y = value,
-                color = variable
+                    x = variable,
+                    y = value,
+                    color = variable
             )) +
                 geom_violin(fill = "gray80", size = 1, alpha = .5) +
                 geom_boxplot(width = 0.2, outlier.shape = NA) +
@@ -249,7 +227,8 @@ PlotIntensity <- function(MQCombined,
                 scale_color_manual(values = getPalette(colourCount))
 
             if (long_names == TRUE) {
-                b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names, " ", x), 3))
+                b + scale_x_discrete(labels = function(x) {
+                stringr::str_wrap(gsub(sep_names," ", x),3)})
             } else {
                 b
             }
@@ -258,10 +237,10 @@ PlotIntensity <- function(MQCombined,
             # create a table with the columns : id, sample, group, value
             df <- intensities %>%
                 pivot_longer(-id,
-                             names_to = c("intensity_type", "sample"),
-                             names_prefix = "LFQ intensity",
-                             names_sep = " ",
-                             values_to = "value"
+                            names_to = c("intensity_type", "sample"),
+                            names_prefix = "LFQ intensity",
+                            names_sep = " ",
+                            values_to = "value"
                 )
 
             df$intensity_type[df$intensity_type == ""] <- "LFQ intensity"
@@ -287,7 +266,8 @@ PlotIntensity <- function(MQCombined,
                 theme(legend.position = "bottom")
 
             if (long_names == TRUE) {
-                a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names, " ", x), 3))
+                a + scale_x_discrete(labels = function(x) {
+                stringr::str_wrap(gsub(sep_names," ", x),3)})
             } else {
                 a
             }
@@ -305,7 +285,8 @@ PlotIntensity <- function(MQCombined,
         }
 
         if (intensity_type == "LFQ") {
-            intensities <- intensities %>% select(id, contains("LFQ intensity "))
+            intensities <- intensities %>% select(id, contains("LFQ intensity ")
+                                                  )
             title <- "LFQ intensity"
             colnames(intensities)[-1] <- gsub(
                 "LFQ intensity",
@@ -317,7 +298,7 @@ PlotIntensity <- function(MQCombined,
 
             if (length(intensities) == 1) {
                 print("LFQ intensities not found,
-                      changing automatically to Intensity.")
+                    changing automatically to Intensity.")
 
                 intensities <- proteinGroups %>% select(
                     id,
@@ -332,15 +313,14 @@ PlotIntensity <- function(MQCombined,
 
         if (log_base == 2) {
             melted_intensities <- melt(log2(intensities),
-                                       id.vars = "id",
-                                       measure.vars = intensities_measure
-            )
+                                        id.vars = "id",
+                                        measure.vars = intensities_measure)
         }
 
         if (log_base == 10) {
             melted_intensities <- melt(log10(intensities),
-                                       id.vars = "id",
-                                       measure.vars = intensities_measure
+                                        id.vars = "id",
+                                        measure.vars = intensities_measure
             )
         }
 
@@ -375,14 +355,7 @@ PlotIntensity <- function(MQCombined,
 
         if (long_names == TRUE) {
             b + scale_x_discrete(labels = function(x) {
-                stringr::str_wrap(
-                    gsub(
-                        sep_names,
-                        " ", x
-                    ),
-                    3
-                )
-            })
+                stringr::str_wrap(gsub(sep_names," ", x),3)})
         } else {
             b
         }

@@ -18,9 +18,9 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotPeptidesIdentified(MQCombined)
 PlotPeptidesIdentified <- function(MQCombined,
-                                   long_names = FALSE,
-                                   sep_names = NULL,
-                                   palette = "Set2") {
+                                long_names = FALSE,
+                                sep_names = NULL,
+                                palette = "Set2") {
     summary <- MQCombined$summary.txt
 
     `Peptide Sequences Identified` <- Experiment <- NULL

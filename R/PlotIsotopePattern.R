@@ -19,10 +19,10 @@
 #' PlotIsotopePattern(MQCombined)
 #'
 PlotIsotopePattern <- function(MQCombined,
-                               long_names = FALSE,
-                               sep_names = NULL,
-                               position_dodge_width=1,
-                               palette = 'Set2'){
+                            long_names = FALSE,
+                            sep_names = NULL,
+                            position_dodge_width=1,
+                            palette = 'Set2'){
 
     summary <- MQCombined$summary.txt
 
@@ -30,8 +30,8 @@ PlotIsotopePattern <- function(MQCombined,
     value <- variable <- NULL
 
     a <- summary %>% select(c(Experiment,
-                              `Isotope Patterns`,
-                              `Isotope Patterns Sequenced`))
+                            `Isotope Patterns`,
+                            `Isotope Patterns Sequenced`))
 
     a_melt <- melt(a, id.vars = 'Experiment' )
 
@@ -40,8 +40,8 @@ PlotIsotopePattern <- function(MQCombined,
                             group = variable,
                             fill= variable))+
         geom_bar(stat = 'identity',
-                 colour='black',
-                 position = position_dodge(width = position_dodge_width))+
+                colour='black',
+                position = position_dodge(width = position_dodge_width))+
         theme_bw()+
         ylab('Frequency Isotope Patterns')+
         ggtitle('Isotope Patterns detected and sequenced')+
@@ -49,10 +49,7 @@ PlotIsotopePattern <- function(MQCombined,
         theme(legend.position = 'bottom')
 
     if (long_names == TRUE) {
-        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,
-                                                                         ' ',
-                                                                         x),
-                                                                    3))
+        b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names,' ', x),3))
     }  else{
         b
     }

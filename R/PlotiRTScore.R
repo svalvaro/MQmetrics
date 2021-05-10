@@ -15,7 +15,7 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotiRT(MQCombined)
 PlotiRTScore <- function(MQCombined,
-                         tolerance = 0.001) {
+                        tolerance = 0.001) {
     evidence <- MQCombined$evidence.txt
 
     Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
@@ -105,21 +105,20 @@ PlotiRTScore <- function(MQCombined,
 
         # Add a new column score
         iRT_table_prot_final <- merge(iRT_table_prot_final,
-                                      iRT_score,
-                                      by = "Sequence"
+                                    iRT_score,
+                                    by = "Sequence"
         )
 
         # Add a new column names
         iRT_table_prot_final <- merge(iRT_table_prot_final,
-                                      irt_names_table,
-                                      by = "Sequence"
+                                    irt_names_table,
+                                    by = "Sequence"
         )
 
         # obtain the maximum intensity values for each experiment, and sequence.
         iRT_table_prot_maxvalues <- iRT_table_prot_final %>%
             group_by(Experiment, Sequence) %>%
-            filter(Intensity
-                   == max(Intensity))
+            filter(Intensity== max(Intensity))
 
         # Create a function that plots the linear regression with the data
         lm_eqn <- function(df) {
@@ -140,8 +139,9 @@ PlotiRTScore <- function(MQCombined,
 
         # plot it.
         ggscatter(iRT_table_prot_maxvalues,
-                  x = "iRT.score", y = "Retention time",
-                  add = "reg.line"
+                x = "iRT.score",
+                y = "Retention time",
+                add = "reg.line"
         ) +
             theme_bw() +
             geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
@@ -149,8 +149,8 @@ PlotiRTScore <- function(MQCombined,
             stat_regline_equation(label.x = 3, label.y = 110) +
             facet_wrap(~Experiment) +
             geom_point(aes(fill = names_Sequence),
-                       shape = 21,
-                       colour = "black", size = 3
+                    shape = 21,
+                    colour = "black", size = 3
             ) +
             ggtitle(label = "Retention time of the Biognosys iRT peptides.") +
             theme(legend.position = "bottom")

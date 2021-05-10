@@ -36,8 +36,7 @@ Two plots per sample
 Post Translational Modifications
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotPTM(MQCombined)
-
 }

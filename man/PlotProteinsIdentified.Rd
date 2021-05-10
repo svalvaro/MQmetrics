@@ -36,8 +36,7 @@ A plot showing the number of proteins identified per sample and the
 Proteins Identified per sample.
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotProteinsIdentified(MQCombined)
-
 }

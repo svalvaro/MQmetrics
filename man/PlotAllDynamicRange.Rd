@@ -25,8 +25,7 @@ Returns one plot for each sample, being the dynamic range.
 Plots the dynamic range for all samples
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotAllDynamicRange(MQCombined)
-
 }

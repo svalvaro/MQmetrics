@@ -20,10 +20,10 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotProteinsIdentified(MQCombined)
 PlotProteinsIdentified <- function(MQCombined,
-                                   intensity_type = "Intensity",
-                                   long_names = FALSE,
-                                   sep_names = NULL,
-                                   palette = "Set2") {
+                                intensity_type = "Intensity",
+                                long_names = FALSE,
+                                sep_names = NULL,
+                                palette = "Set2") {
     proteinGroups <- MQCombined$proteinGroups.txt
 
     Experiment <- value <- variable <- NULL
@@ -56,7 +56,7 @@ PlotProteinsIdentified <- function(MQCombined,
 
         if (length(protein_table) == 0) {
             print("LFQ intensities not found,
-                  changing automatically to Intensity.")
+                changing automatically to Intensity.")
 
             protein_table <- proteinGroups[, grep(
                 "Intensity ",
@@ -94,8 +94,8 @@ PlotProteinsIdentified <- function(MQCombined,
 
 
     table_proteins <- table_proteins[, c("Experiment",
-                                         "Missing values",
-                                         "Proteins identified")]
+                                        "Missing values",
+                                        "Proteins identified")]
 
     # melted
     table_melt <- melt(table_proteins, id.vars = "Experiment")
@@ -103,9 +103,9 @@ PlotProteinsIdentified <- function(MQCombined,
     a <- ggplot(table_melt, aes(x = Experiment, y = value, fill = variable)) +
         ggtitle(title) +
         geom_bar(stat = "identity",
-                 position = "stack",
-                 size = 0.5,
-                 col = "black") +
+                position = "stack",
+                size = 0.5,
+                col = "black") +
         theme(axis.title.y = element_text(margin = margin(r = 20))) +
         ylab("Number of Proteins") +
         theme_bw() +
@@ -114,15 +114,7 @@ PlotProteinsIdentified <- function(MQCombined,
 
     if (long_names == TRUE) {
         a + scale_x_discrete(labels = function(x) {
-            stringr::str_wrap(
-                gsub(
-                    sep_names,
-                    " ",
-                    x
-                ),
-                3
-            )
-        })
+            stringr::str_wrap(gsub(sep_names," ", x),3)})
     } else {
         a
     }

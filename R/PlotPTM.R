@@ -82,14 +82,10 @@ PlotPTM <- function(MQCombined,
 
 
     combined_oxidations <- aggregate(
-        x = mod_join_combined[grep("Oxidation",
-                                   mod_join_combined$Modifications),
-                              3],
+        x = mod_join_combined[grep("Oxidation",mod_join_combined$Modifications),
+                            3],
         by = mod_join_combined[grep("Oxidation",
-                                    mod_join_combined$Modifications),
-                               2],
-        FUN = sum
-    )
+                                mod_join_combined$Modifications),2], FUN = sum)
 
     # Remove rows with the oxidation columns
     mod_join_combined2 <- mod_join_combined
@@ -136,9 +132,7 @@ PlotPTM <- function(MQCombined,
                                             modifications_unique, ]
 
 
-    mod_intensities2$variable <- gsub("Intensity",
-                                      "",
-                                      mod_intensities2$variable)
+    mod_intensities2$variable <- gsub("Intensity","",mod_intensities2$variable)
 
 
     if (log_base == 2) {
@@ -214,8 +208,8 @@ PlotPTM <- function(MQCombined,
 
 
         c <- plot_grid(a + theme(legend.position = "none"),
-                       b + theme(legend.position = "none"),
-                       ncol = 2, rel_heights = c(0.1, 1)
+                                b + theme(legend.position = "none"),
+                                ncol = 2, rel_heights = c(0.1, 1)
         )
         title <- ggdraw() + draw_label("Post-Translational Modifications")
 

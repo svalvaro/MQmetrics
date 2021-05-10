@@ -23,8 +23,7 @@ Two plots per sample: Peptide length distribution and the number of
 Protease Specificity
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotProteaseSpecificity(MQCombined)
-
 }

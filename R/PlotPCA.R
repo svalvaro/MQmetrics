@@ -44,7 +44,7 @@ PlotPCA <- function(MQCombined,
 
         if (length(intensities) == 1) {
             print("LFQ intensities not found,
-                  changing automatically to Intensity.")
+                    changing automatically to Intensity.")
 
             intensities <- proteinGroups %>%
                 select(contains("Intensity ") & -contains("LFQ"))

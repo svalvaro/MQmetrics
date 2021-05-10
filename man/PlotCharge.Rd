@@ -22,7 +22,7 @@ Plots the charge-state of the precursor ion.
 The charge-state of the precursor ion.
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotCharge(MQCombined)
 }

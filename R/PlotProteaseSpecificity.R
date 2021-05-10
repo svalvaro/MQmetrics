@@ -28,17 +28,15 @@ PlotProteaseSpecificity <- function(MQCombined,
     )))
 
     pep_melt <- melt(peptides,
-                     id.vars = c("Missed cleavages", "Length"),
-                     measure.vars = colnames(peptides %>%
-                                                 select(contains(c("Experiment")
-                                                 )
-                                                 )
-                     )
-    )
+                    id.vars = c("Missed cleavages", "Length"),
+                    measure.vars = colnames(peptides %>%
+                                        select(contains(c("Experiment"))
+                                            )
+                                    )
+                    )
 
     pep_melt1 <- aggregate(value ~ variable + `Missed cleavages`,
-                           data = pep_melt, sum
-    )
+                        data = pep_melt, sum)
 
     pep_melt1$variable <- gsub("Experiment", "", pep_melt1$variable)
 

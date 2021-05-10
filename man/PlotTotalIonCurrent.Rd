@@ -30,9 +30,7 @@ The maximum value is also plotted.
 Total Ion Current
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotTotalIonCurrent(MQCombined)
-
-
 }

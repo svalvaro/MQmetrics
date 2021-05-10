@@ -23,8 +23,7 @@ Two plots per sample, one with the cycle tyme vs retention time,
 Acquisition Cycle and MS/MS
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotAcquisitionCycle(MQCombined)
-
 }

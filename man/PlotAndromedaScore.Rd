@@ -22,7 +22,7 @@ Plots the MaxQuant Andromeda Score.
 Andromeda score for the best associated MS/MS spectrum.
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotAndromedaScore(MQCombined)
 }

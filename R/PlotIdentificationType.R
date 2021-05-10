@@ -20,9 +20,9 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotIdentificationType(MQCombined)
 PlotIdentificationType <- function(MQCombined,
-                                   long_names = FALSE,
-                                   sep_names = NULL,
-                                   palette = "Set2") {
+                                long_names = FALSE,
+                                sep_names = NULL,
+                                palette = "Set2") {
     peptides <- MQCombined$peptides.txt
     proteinGroups <- MQCombined$proteinGroups.txt
 
@@ -48,18 +48,22 @@ PlotIdentificationType <- function(MQCombined,
     )
 
     a <- ggplot(ide_data_melted, aes(x = sample, y = value, fill = variable)) +
-        geom_col() +
-        ggtitle("Peptide Identification type") +
-        ylab("Peptide Frequency") +
-        xlab("Experiment") +
-        geom_bar(stat = "identity", position = "stack", size = 0.5, col = "black") +
-        theme(axis.title.y = element_text(margin = margin(r = 20))) +
-        theme_bw() +
-        scale_fill_brewer(palette = palette) +
-        theme(legend.position = "bottom")
+            geom_col() +
+            ggtitle("Peptide Identification type") +
+            ylab("Peptide Frequency") +
+            xlab("Experiment") +
+            geom_bar(stat = "identity",
+                    position = "stack",
+                    size = 0.5,
+                    col = "black") +
+            theme(axis.title.y = element_text(margin = margin(r = 20))) +
+            theme_bw() +
+            scale_fill_brewer(palette = palette) +
+            theme(legend.position = "bottom")
 
     if (long_names == TRUE) {
-        a <- a + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names, " ", x), 3))
+        a <- a + scale_x_discrete(labels = function(x) {
+                stringr::str_wrap(gsub(sep_names," ", x),3)})
     } else {
         a
     }
@@ -86,7 +90,10 @@ PlotIdentificationType <- function(MQCombined,
     b <- ggplot(prot_data_melted, aes(x = sample, y = value, fill = variable)) +
         geom_col() +
         ggtitle("Protein Identification type") +
-        geom_bar(stat = "identity", position = "stack", size = 0.5, col = "black") +
+        geom_bar(stat = "identity",
+                position = "stack",
+                size = 0.5,
+                col = "black") +
         ylab("Protein Frequency") +
         xlab("Experiment") +
         theme(axis.title.y = element_text(margin = margin(r = 20))) +
@@ -95,7 +102,8 @@ PlotIdentificationType <- function(MQCombined,
         theme(legend.position = "bottom")
 
     if (long_names == TRUE) {
-        b <- b + scale_x_discrete(labels = function(x) stringr::str_wrap(gsub(sep_names, " ", x), 3))
+        b <- b + scale_x_discrete(labels = function(x) {
+                stringr::str_wrap(gsub(sep_names," ", x),3)})
     } else {
         b
     }

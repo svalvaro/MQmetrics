@@ -23,8 +23,7 @@ A PCA plot of the Intesities of all the samples.
 Principal Component Analysis of the Intensity values.
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotPCA(MQCombined)
-
 }

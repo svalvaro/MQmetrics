@@ -43,9 +43,7 @@ A violin plot and boxplot of the intensities in each sample.
 Intensity / LFQ intensity per sample.
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotIntensity(MQCombined)
-
-
 }

@@ -33,9 +33,7 @@ Between Run was selected.
 Protein and Peptide Identification type.
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotIdentificationType(MQCombined)
-
-
 }

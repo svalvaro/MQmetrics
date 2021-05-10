@@ -103,7 +103,7 @@ PlotTotalIonCurrent <- function(MQCombined,
                 data = . %>% group_by(Experiment) %>%
                     filter(`Total ion current` == max(`Total ion current`)),
                 aes(label = format(`Total ion current`,
-                                   digits = 2, scientific = TRUE)), hjust = 0.5
+                                    digits = 2, scientific = TRUE)), hjust = 0.5
             ))
         } else {
             print(p)

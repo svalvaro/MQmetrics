@@ -17,8 +17,7 @@ Returns the time in hours:minutes that lasted the whole Experiment.
 Experiment Information
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 MaxQuantAnalysisInfo(MQCombined)
-
 }

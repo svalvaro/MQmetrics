@@ -37,8 +37,7 @@ Returns a histogram per sample, showing the frequency of the
 Peptide hydrophobicity by GRAVY score
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotHydrophobicity(MQCombined)
-
 }

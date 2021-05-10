@@ -17,8 +17,7 @@ A plot showing the protein coverage in all samples.
 Protein Overlap Between Samples
 }
 \examples{
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 MQCombined <- make_MQCombined(MQPathCombined)
 PlotProteinOverlap(MQCombined)
-
 }

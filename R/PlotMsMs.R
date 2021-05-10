@@ -18,30 +18,30 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotMsMs(MQCombined)
 PlotMsMs <- function(MQCombined,
-                     long_names = FALSE,
-                     sep_names = NULL,
-                     position_dodge_width = 1,
-                     palette = "Set2") {
+                    long_names = FALSE,
+                    sep_names = NULL,
+                    position_dodge_width = 1,
+                    palette = "Set2") {
     summary <- MQCombined$summary.txt
 
     Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- NULL
     value <- variable <- NULL
 
     a <- summary %>% select(c(Experiment, `MS/MS Submitted`,
-                              `MS/MS Identified`))
+                            `MS/MS Identified`))
 
     a_melt <- melt(a, id.vars = "Experiment")
 
     b <- ggplot(a_melt, aes(
-        x = Experiment,
-        y = value,
-        group = variable,
-        fill = variable
+                            x = Experiment,
+                            y = value,
+                            group = variable,
+                            fill = variable
     )) +
         geom_bar(
-            stat = "identity",
-            colour = "black",
-            position = position_dodge(width = position_dodge_width)
+                stat = "identity",
+                colour = "black",
+                position = position_dodge(width = position_dodge_width)
         ) +
         theme_bw() +
         ylab("MS/MS Frequency") +
@@ -51,15 +51,7 @@ PlotMsMs <- function(MQCombined,
 
     if (long_names == TRUE) {
         b + scale_x_discrete(labels = function(x) {
-            stringr::str_wrap(
-                gsub(
-                    sep_names,
-                    " ",
-                    x
-                ),
-                3
-            )
-        })
+                stringr::str_wrap(gsub(sep_names," ",x),3)})
     } else {
         b
     }

@@ -12,7 +12,17 @@ PlotIdentificationRatio(
 )
 }
 \arguments{
-\item{intensity_type}{}
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
+\item{intensity_type}{The type of intensity of interest. Values: 'Intensity'
+or 'LFQ'. Default = 'Intensity'.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
 }
 \value{
 

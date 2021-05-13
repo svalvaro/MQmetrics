@@ -75,9 +75,9 @@ PlotPeptidesIdentified(MQCombined,
 \newpage
 ```{r ratio}
 PlotIdentificationRatio(MQCombined,
-                        intensity_type = params$intensity_type,
+                        intensity_type = params$intensity_type, 
                         long_names = params$long_names, 
-                       sep_names = params$sep_names,)
+                        sep_names = params$sep_names)
 ```
 
 

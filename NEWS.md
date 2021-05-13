@@ -11,7 +11,9 @@
 * Usage of ultiples of 4 spaces for line indents.
 * Removed *LazyData: TRUE*.
 
-#MQmetrics 0.99.4
+# MQmetrics 0.99.4 (not released  yet)
 
 * The function generateReport now takes the parameter *name_output_file* to name
 the output pdf file.
+* Added information regarding peptides, and peptides/protein ratio in report 
+tables.

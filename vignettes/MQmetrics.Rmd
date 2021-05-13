@@ -166,7 +166,10 @@ peptides/proteins found in each Experiment.
 
 ```{r ratio, warning=FALSE , fig.height=5, fig.width=7.2}
 
-PlotIdentificationRatio(MQCombined, intensity_type = 'LFQ')
+PlotProteinPeptideRatio(MQCombined,
+                        intensity_type = 'LFQ',
+                        long_names = TRUE,
+                        sep_names =  '_')
 
 ```
 

@@ -16,7 +16,10 @@
 #' @export
 #'
 #' @examples
-PlotIdentificationRatio <- function(MQCombined,
+#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' PlotProteinPeptideRatio(MQCombined)
+PlotProteinPeptideRatio <- function(MQCombined,
                                     intensity_type = 'Intensity',
                                     long_names = FALSE,
                                     sep_names = NULL){
@@ -39,7 +42,7 @@ PlotIdentificationRatio <- function(MQCombined,
         colnames(df) <- gsub("Intensity.","",colnames(df)
         )
 
-        title <- 'Proteins Identified based on Intensity'
+        title <- 'Proteins vs Peptide/Protein ratio based on Intensity'
 
     }
 
@@ -52,7 +55,7 @@ PlotIdentificationRatio <- function(MQCombined,
 
         colnames(df) <- gsub("LFQ intensity.", "", colnames(df))
 
-        title <- 'Proteins Identified based on LFQ intensity'
+        title <- 'Proteins vs Peptide/Protein ratio based on LFQ'
 
         #Error if LFQ Intensity not found.
 
@@ -68,7 +71,7 @@ PlotIdentificationRatio <- function(MQCombined,
             colnames(df) <- gsub("Intensity.", "",
                                             colnames(df))
 
-            title <- 'Proteins Identified based on Intensity'
+            title <- 'Proteins vs Peptide/Protein ratio based on Intensity'
 
         }
     }
@@ -106,23 +109,24 @@ PlotIdentificationRatio <- function(MQCombined,
      d2 <- df_melt[df_melt$variable == 'Peptides/Proteins',]
 
      p1 <- ggplot(d1,  aes(x = Experiment, y = value, group = variable))+
-         geom_point(colour = 'red')+
-         geom_line(colour = 'red')+
+         geom_point(colour = '#FC766AFF')+
+         geom_line(colour = '#FC766AFF')+
+         ggtitle(title)+
          theme_bw()+
          ylab('# Proteins Identified')+
-         theme(axis.text.y=element_text(colour="red"))+
+         theme(axis.text.y=element_text(colour="#FC766AFF"))+
          theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                  panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 
 
      p2 <- ggplot(d2,  aes(x = Experiment, y = value, group = variable))+
-         geom_point(color = 'blue')+
-         geom_line(colour = 'blue')+
+         geom_point(color = '#5B84B1FF')+
+         geom_line(colour = '#5B84B1FF')+
          theme_bw()%+replace%
          theme(panel.background = element_rect(fill = NA))+
          ylab('Ratio Peptides/Proteins Identified')+
-         theme(axis.text.y=element_text(colour="blue"))+
+         theme(axis.text.y=element_text(colour="#5B84B1FF"))+
          theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
@@ -139,39 +143,6 @@ PlotIdentificationRatio <- function(MQCombined,
 
      }
 
-
-
-
-     # # extract gtable
-     # g1 <- ggplot_gtable(ggplot_build(p1))
-     # g2 <- ggplot_gtable(ggplot_build(p2))
-     #
-     # # overlap the panel of 2nd plot on that of 1st plot
-     # pp <- c(subset(g1$layout, name == "panel", se = t:r))
-     # g <- gtable_add_grob(g1, g2$grobs[[which(g2$layout$name == "panel")]], pp$t,
-     #                      pp$l, pp$b, pp$l)
-     #
-     # # axis tweaks
-     # ia <- which(g2$layout$name == "axis-l")
-     # ga <- g2$grobs[[ia]]
-     # ax <- ga$children[[2]]
-     # ax$widths <- rev(ax$widths)
-     # ax$grobs <- rev(ax$grobs)
-     # ax$grobs[[1]]$x <- ax$grobs[[1]]$x - unit(1, "npc") + unit(0.25, "cm")
-     # g <- gtable_add_cols(g, g2$widths[g2$layout[ia, ]$l], length(g$widths) - 1)
-     # g <- gtable_add_grob(g, ax, pp$t, length(g$widths) - 1, pp$b)
-     #
-     # # y label
-     #
-     # RightAxisText <- g2$grobs[[which(g2$layout$name == "ylab-l")]]
-     # g <- gtable_add_cols(g, unit.c(unit(1, "grobwidth", RightAxisText) + unit(1, "line")), pp$r+1)
-     # g <- gtable_add_grob(g, RightAxisText, pp$t, pp$r+2)
-     #
-     #
-     #
-     #
-     # # draw it
-     # return(grid.draw(g))
 
      # Get the ggplot grobs
      g1 <- ggplotGrob(p1)
@@ -218,19 +189,11 @@ PlotIdentificationRatio <- function(MQCombined,
      index <- which(g2$layout$name == "axis-l")  # Which grob
      yaxis <- g2$grobs[[index]]                    # Extract the grob
 
-     ticks <- yaxis$children[[2]]
-     ticks$widths <- rev(ticks$widths)
-     ticks$grobs <- rev(ticks$grobs)
+
 
      plot_theme <- function(p) {
          plyr::defaults(p$theme, theme_get())
      }
-
-     # tml <- plot_theme(p1)$axis.ticks.length   # Tick mark length
-     # ticks$grobs[[1]]$x <- ticks$grobs[[1]]$x - unit(1, "npc") + tml
-
-     ticks$grobs[[2]] <- hinvert_title_grob(ticks$grobs[[2]])
-     yaxis$children[[2]] <- ticks
 
 
      # Put the y axis into g, to the right of the right-most panel
@@ -239,11 +202,8 @@ PlotIdentificationRatio <- function(MQCombined,
 
      nrows = length(unique(pp$t)) # Number of rows
      g <- gtable_add_grob(g, rep(list(yaxis), nrows),
-                          t = unique(pp$t), l = max(pp$r)+1,
-                          b = unique(pp$b), r = max(pp$r)+1,
-                          clip = "off", name = paste0("axis-r-", 1:nrows))
-
-
+                          t = unique(pp$t), l = max(pp$r)-1,
+                          b = unique(pp$b), r = max(pp$r)+0)
 
      # draw it
      return(grid.draw(g))

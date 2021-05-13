@@ -1,6 +1,6 @@
 #' Report Tables with summary data
 #'
-#' @param MQPathCombined The directory to the "combined" folder where the
+#' @param MQCombined The directory to the "combined" folder where the
 #'  MaxQuant results are stored.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #'
@@ -23,7 +23,7 @@
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' ReportTables(MQPathCombined)
-ReportTables <- function(MQPathCombined,
+ReportTables <- function(MQCombined,
                         long_names = FALSE,
                         sep_names = NULL,
                         log_base = 2,
@@ -32,7 +32,7 @@ ReportTables <- function(MQPathCombined,
     sd <- median <- Experiment <- Charge <- variable <- NULL
     `Missed cleavages` <- value <- `freq` <- samples <- NULL
 
-    files <- MQmetrics::make_MQCombined(MQPathCombined)
+
 
     #Read the Protein Groups without removing the contamintants To plot it.
     proteinGroups <- read_delim(file.path(MQPathCombined,
@@ -248,7 +248,7 @@ ReportTables <- function(MQPathCombined,
 
     #Table 3 Charge
 
-    evidence <- files[["evidence.txt"]]
+    evidence <- MQCombined$evidence.txt
 
     charge_table <- evidence %>%
         select(c(Experiment,Charge ))
@@ -268,7 +268,7 @@ ReportTables <- function(MQPathCombined,
 
 
     #Table 4, GRAVY with median and retention times
-    peptides <- files[['peptides.txt']]
+    peptides <- MQCombined$peptides.txt
 
     df <- peptides %>%  select(contains(c('Length',
                                         "Count",
@@ -324,7 +324,7 @@ ReportTables <- function(MQPathCombined,
 
     # Table 5
 
-    peptides <- files[["peptides.txt"]] %>%
+    peptides <- MQCombined$peptides.txt %>%
         select(contains(c('Missed cleavages','Experiment','Length')))
 
     pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'),
@@ -356,7 +356,7 @@ ReportTables <- function(MQPathCombined,
     #Table 6 Completeness or PlotCoverageAll
 
 
-    df <- files[['proteinGroups.txt']] %>% #This proteinGroups will have the
+    df <- MQCombined$proteinGroups.txt %>% #This proteinGroups will have the
         # Contaminants, Reverse, etc removed.
         select(contains(c('Protein IDs', 'peptides '))) %>%
         select(-contains(c('unique', 'Majority')))

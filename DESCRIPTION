@@ -46,7 +46,8 @@ Imports:
     grid,
     rlang,
     ggforce,
-    grDevices
+    grDevices,
+    gtable
 VignetteBuilder: knitr
 Suggests: 
     testthat (>= 3.0.0)

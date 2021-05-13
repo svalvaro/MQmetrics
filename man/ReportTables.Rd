@@ -5,7 +5,7 @@
 \title{Report Tables with summary data}
 \usage{
 ReportTables(
-  MQPathCombined,
+  MQCombined,
   long_names = FALSE,
   sep_names = NULL,
   log_base = 2,
@@ -13,7 +13,7 @@ ReportTables(
 )
 }
 \arguments{
-\item{MQPathCombined}{The directory to the "combined" folder where the
+\item{MQCombined}{The directory to the "combined" folder where the
 MaxQuant results are stored.}
 
 \item{long_names}{If TRUE, samples having long names will be considered, and

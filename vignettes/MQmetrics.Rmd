@@ -92,7 +92,7 @@ generateReport(MQPathCombined = , # directory to the combined folder
 Is as simple as this to use MQmetrics:
 ```{r example,eval=FALSE}
 # If you're using a Unix-like OS use forward slashes.
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/'
 
 # If you're using Windows use backslashes:
 MQPathCombined <- "D:\Documents\MaxQuant_results\example5\combined\ "
@@ -158,6 +158,21 @@ PlotPeptidesIdentified(MQCombined,
                        sep_names = '_', 
                        palette = 'Set3')
 ```
+
+
+The function **PlotIdentificationRatio()**,  will take as input the summary and
+proteinGroups tables and plot the number of protein found vs the ratio of 
+peptides/proteins found in each Experiment.
+
+```{r ratio, warning=FALSE , fig.height=5, fig.width=7.2}
+
+PlotIdentificationRatio(MQCombined, intensity_type = 'LFQ')
+
+```
+
+
+
+
 
 
 The function **PlotMsMs()**,  will take as input the summary.txt table and
@@ -388,9 +403,7 @@ important plots in this package.
 
 ```{r report_tables, message=FALSE}
 
-MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-
-ReportTables(MQPathCombined = MQPathCombined,
+ReportTables(MQCombined,
              log_base = 2,
              intensity_type = 'Intensity')
 

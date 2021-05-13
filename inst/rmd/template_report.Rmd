@@ -72,6 +72,13 @@ PlotPeptidesIdentified(MQCombined,
                        palette = params$palette)
 ```
 
+\newpage
+```{r ratio}
+PlotIdentificationRatio(MQCombined,
+                        intensity_type = params$intensity_type,
+                        long_names = params$long_names, 
+                       sep_names = params$sep_names,)
+```
 
 
 \newpage
@@ -240,7 +247,7 @@ PlotPTM(MQCombined,
 
 \newpage
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-a <- ReportTables(MQPathCombined =  params$input_dir,
+a <- ReportTables(MQCombined,
                   log_base = params$log_base,
                   intensity_type = params$intensity_type,
                   long_names = params$long_names, 

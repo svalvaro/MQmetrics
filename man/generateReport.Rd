@@ -7,6 +7,7 @@
 generateReport(
   MQPathCombined,
   output_dir = getwd(),
+  name_output_file = "MQmetrics_report.pdf",
   remove_contaminants = TRUE,
   log_base = 2,
   long_names = FALSE,
@@ -33,7 +34,9 @@ generateReport(
 MaxQuant results are stored.}
 
 \item{output_dir}{The directory where the results will be stored. By default
-is the working directory.}
+ is the working directory.
+
+ @param name_output_file The name of the report generated.}
 
 \item{remove_contaminants}{Whether or not to remove contaminants,
 reverse and identified by one one peptide.}

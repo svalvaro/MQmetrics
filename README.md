@@ -20,8 +20,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("MQmetrics")
 ```
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+Or the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -70,4 +69,6 @@ PlotIntensity(MQCombined, long_names = TRUE, sep_names = '_')
 
 <img src="man/figures/README-example_long_names-1.png" width="100%" />
 
-Check the vignettes for more information.
+Check the
+[vignettes](https://bioconductor.org/packages/devel/bioc/vignettes/MQmetrics/inst/doc/MQmetrics.html)
+for more information.

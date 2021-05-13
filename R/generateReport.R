@@ -6,6 +6,8 @@
 #' @param output_dir The directory where the results will be stored. By default
 #'  is the working directory.
 #'
+#'  @param name_output_file The name of the report generated.
+#'
 #' @param remove_contaminants Whether or not to remove contaminants,
 #' reverse and identified by one one peptide.
 #'
@@ -75,6 +77,7 @@
 #'
 generateReport = function(MQPathCombined,
                         output_dir = getwd(),
+                        name_output_file = "MQmetrics_report.pdf",
                         remove_contaminants = TRUE,
                         log_base = 2,
                         long_names = FALSE,
@@ -121,7 +124,7 @@ generateReport = function(MQPathCombined,
             binwidth = binwidth,
             plot_unmodified_peptides = plot_unmodified_peptides,
             plots_per_page = plots_per_page),
-        output_file = "MQmetrics_report.pdf",
+        output_file = name_output_file,
         output_dir = output_dir,
         clean = TRUE)
 }

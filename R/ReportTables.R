@@ -3,6 +3,13 @@
 #' @param MQPathCombined The directory to the "combined" folder where the
 #'  MaxQuant results are stored.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
+#'
+#' @param long_names If TRUE, samples having long names will be considered, and
+#'  the name will be split by sep_names. By default = FALSE.
+#'
+#' @param sep_names If long_names is TRUE, sep_names has to be selected. Samples
+#'  names will be split. By default is NULL.
+#'
 #' @param intensity_type The type of intensity. Values: 'Intensity' or 'LFQ'.
 #'
 #'
@@ -17,6 +24,8 @@
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' ReportTables(MQPathCombined)
 ReportTables <- function(MQPathCombined,
+                        long_names = FALSE,
+                        sep_names = NULL,
                         log_base = 2,
                         intensity_type = 'Intensity'){
 
@@ -64,9 +73,7 @@ ReportTables <- function(MQPathCombined,
                             'Reverse',
                             'Potential',
                             'Only identified by site')
-            )
-            )
-
+            ))
 
         colnames(protein_table) <- gsub("LFQ intensity.", "",
                                         colnames(protein_table))
@@ -92,11 +99,8 @@ ReportTables <- function(MQPathCombined,
             title <- 'Proteins Identified based on Intensity'
 
         }
+        }
 
-    }
-    # proteinGroups <- read.delim("~/Documents/MaxQuant/
-    # data_pacakge/combined_original/txt/proteinGroups.txt")
-    #length(which(protein_table$Reverse == '+'))
 
     table_summary <- data.frame(
         "Proteins Identified" = nrow(protein_table)-colSums(protein_table==0),
@@ -122,17 +126,45 @@ ReportTables <- function(MQPathCombined,
 
     table_summary <- table_summary[,c(6,1,2,3,4,5)]
 
+
+    # Add column peptides identified, and peptide/protein ratio.
+
+    summary <- read_delim(file.path(MQPathCombined,
+                                    "txt/summary.txt"),
+                                    "\t",
+                                    escape_double = FALSE,
+                                    trim_ws = TRUE,
+                                    na = c("NA", "NaN", "", " "))
+
+    df <- summary %>% select(contains(c('Experiment', 'Peptide Sequences Identified')))
+
+
+    table_summary <- merge(table_summary, df, by = 'Experiment')
+
+    table_summary$`Peptides/Proteins` <- format(round(
+        table_summary$`Peptide Sequences Identified` /
+            table_summary$`Proteins Identified`, 1), nsmall = 1)
+
+
     combined_row <- c('Combined Samples',
                     nrow(proteinGroups), #total proteins
                     NA,  # NA combined,
-                    length(which(proteinGroups$`Potential contaminant` == '+')
-                    ),
+                    length(which(proteinGroups$`Potential contaminant` == '+')),
                     length(which(proteinGroups$Reverse == '+')),
-                    length(which(proteinGroups$`Only identified by site` == '+')
+                    length(which(proteinGroups$`Only identified by site` == '+')),
+                    summary$`Peptide Sequences Identified`[nrow(summary)],
+                    format(
+                      round(summary$`Peptide Sequences Identified`[nrow(summary)]/
+                                nrow(proteinGroups), 1),nsmall = 1
                     )
-    )
+                    )
+
 
     table_summary <- rbind( combined_row, table_summary)
+
+
+
+
 
 
     #Table 2 Log10 intensities
@@ -356,6 +388,30 @@ ReportTables <- function(MQPathCombined,
     out$GRAVY <- GRAVY
     out$cleavages <- missed_summary
     out$overlap <- df_bin_stat
+
+
+
+    if (long_names == TRUE) {
+        out$proteins$Experiment <- gsub(sep_names,
+                                        ' ',
+                                        out$proteins$Experiment)
+        out$intensities$Experiment <- gsub(sep_names,
+                                           ' ',
+                                           out$intensities$Experiment)
+        out$charge$Experiment <- gsub(sep_names,
+                                      ' ',
+                                      out$charge$Experiment)
+        out$GRAVY$Experiment <- gsub(sep_names,
+                                     ' ',
+                                     out$GRAVY$Experiment)
+        out$cleavages$Experiment <- gsub(sep_names,
+                                         ' ',
+                                         out$cleavages$Experiment)
+    }
+
+
+
+
 
     return(out)
 }

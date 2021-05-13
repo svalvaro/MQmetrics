@@ -4,11 +4,23 @@
 \alias{ReportTables}
 \title{Report Tables with summary data}
 \usage{
-ReportTables(MQPathCombined, log_base = 2, intensity_type = "Intensity")
+ReportTables(
+  MQPathCombined,
+  long_names = FALSE,
+  sep_names = NULL,
+  log_base = 2,
+  intensity_type = "Intensity"
+)
 }
 \arguments{
 \item{MQPathCombined}{The directory to the "combined" folder where the
 MaxQuant results are stored.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
 

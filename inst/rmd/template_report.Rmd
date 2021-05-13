@@ -242,7 +242,9 @@ PlotPTM(MQCombined,
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 a <- ReportTables(MQPathCombined =  params$input_dir,
                   log_base = params$log_base,
-                  intensity_type = params$intensity_type)
+                  intensity_type = params$intensity_type,
+                  long_names = params$long_names, 
+                  sep_names = params$sep_names)
 
 
 kable(a[[1]], caption = 'Protein Information')

@@ -10,6 +10,16 @@ takes the output tables from MaxQuant and plots multiple parameters.
 
 ## Installation
 
+You can install MQmetrics from Biocodunctor with:
+
+``` r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+
+BiocManager::install("MQmetrics")
+```
+
 You can install the development version from
 [GitHub](https://github.com/) with:
 

@@ -5,12 +5,13 @@ Version: 0.99.3
 Authors@R: c(person(given = "Alvaro", family = "Sanchez-Villalba",
                     email = "sanchezvillalba.alvaro@gmail.com",
                     role = c("aut", "cre")),
-             person(given = "Marek", family = "Vrbacky",
-                    email = "marek.vrbacky@fgu.cas.cz",
-                    role = "aut"),
-             person(given = "Thomas", family = "Stehrer",
+             
+            person(given = "Thomas", family = "Stehrer",
                     email = "thomas.stehrer@fgu.cas.cz",
-                    role = "aut"))
+                    role = "aut")),
+            person(given = "Marek", family = "Vrbacky",
+            email = "marek.vrbacky@fgu.cas.cz",
+            role = "aut"),
 Description: The package MQmetrics (MaxQuant metrics) provides a workflow to
         analyze the quality and reproducibility of your proteomics mass
         spectrometry analysis from MaxQuant.Input data are extracted from 

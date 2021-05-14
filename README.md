@@ -20,7 +20,8 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("MQmetrics")
 ```
 
-Or the development version from [GitHub](https://github.com/) with:
+Or the development version from [GitHub](https://github.com/svalvaro/)
+with:
 
 ``` r
 # install.packages("devtools")

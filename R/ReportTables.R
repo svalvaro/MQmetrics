@@ -22,7 +22,8 @@
 #'
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' ReportTables(MQPathCombined)
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' ReportTables(MQCombined)
 ReportTables <- function(MQCombined,
                         long_names = FALSE,
                         sep_names = NULL,
@@ -33,6 +34,7 @@ ReportTables <- function(MQCombined,
     `Missed cleavages` <- value <- `freq` <- samples <- NULL
 
 
+    MQPathCombined <- MQCombined$MQPathCombined
 
     #Read the Protein Groups without removing the contamintants To plot it.
     proteinGroups <- read_delim(file.path(MQPathCombined,

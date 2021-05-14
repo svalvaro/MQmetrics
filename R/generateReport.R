@@ -6,7 +6,7 @@
 #' @param output_dir The directory where the results will be stored. By default
 #'  is the working directory.
 #'
-#'  @param name_output_file The name of the report generated.
+#' @param name_output_file The name of the report generated.
 #'
 #' @param remove_contaminants Whether or not to remove contaminants,
 #' reverse and identified by one one peptide.

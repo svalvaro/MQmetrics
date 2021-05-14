@@ -38,5 +38,6 @@ Report Tables with summary data
 }
 \examples{
 MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-ReportTables(MQPathCombined)
+MQCombined <- make_MQCombined(MQPathCombined)
+ReportTables(MQCombined)
 }

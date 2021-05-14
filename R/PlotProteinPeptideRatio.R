@@ -26,6 +26,8 @@ PlotProteinPeptideRatio <- function(MQCombined,
 
 
 
+    Experiment <- value <- variable <- r <- NULL
+
     proteinGroups <- MQCombined$proteinGroups.txt
     summary <- MQCombined$summary.txt
 

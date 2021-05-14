@@ -35,6 +35,17 @@ in case they were spiked in the samples.
 
 ## Install the package
 
+
+You can install MQmetrics from Biocodunctor with:
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+
+BiocManager::install("MQmetrics")
+```
+
 You can install the development version from 
 [GitHub](https://github.com/svalvaro/) with:
 

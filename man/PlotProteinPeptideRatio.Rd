@@ -25,7 +25,8 @@ the name will be split by sep_names. By default = FALSE.}
 names will be split. By default is NULL.}
 }
 \value{
-
+Returns one plot showing the proteins identified vs the peptide/protein
+ratio in each experiment.
 }
 \description{
 Identification Ratio Between Peptides and Proteins

@@ -24,4 +24,6 @@
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom grDevices colorRampPalette
 #' @importFrom gtable gtable_add_grob gtable_add_cols
+#' @importFrom plyr defaults
 NULL
+

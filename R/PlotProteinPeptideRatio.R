@@ -13,6 +13,9 @@
 #'  names will be split. By default is NULL.
 #'
 #' @return
+#' Returns one plot showing the proteins identified vs the peptide/protein
+#' ratio in each experiment.
+#'
 #' @export
 #'
 #' @examples
@@ -113,8 +116,8 @@ PlotProteinPeptideRatio <- function(MQCombined,
 
      p1 <- ggplot(d1,  aes(x = Experiment, y = as.numeric(value),
                            group = variable))+
-         geom_point(colour = '#FC766AFF')+
-         geom_line(colour = '#FC766AFF')+
+         geom_point(colour = '#FC766AFF', size = 2)+
+         geom_line(colour = '#FC766AFF', size = 1.5)+
          ggtitle(title)+
          theme_bw()+
          ylab('# Proteins Identified')+
@@ -128,8 +131,8 @@ PlotProteinPeptideRatio <- function(MQCombined,
 
      p2 <- ggplot(d2,  aes(x = Experiment, y = as.numeric(value),
                            group = variable))+
-         geom_point(color = '#5B84B1FF')+
-         geom_line(colour = '#5B84B1FF')+
+         geom_point(color = '#5B84B1FF',size = 2)+
+         geom_line(colour = '#5B84B1FF',size = 1.5)+
          theme_bw()%+replace%
          theme(panel.background = element_rect(fill = NA))+
          ylab('Ratio Peptides/Proteins Identified')+

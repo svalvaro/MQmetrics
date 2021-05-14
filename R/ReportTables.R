@@ -138,7 +138,8 @@ ReportTables <- function(MQCombined,
                                     trim_ws = TRUE,
                                     na = c("NA", "NaN", "", " "))
 
-    df <- summary %>% select(contains(c('Experiment', 'Peptide Sequences Identified')))
+    df <- summary %>% select(contains(c('Experiment',
+                                        'Peptide Sequences Identified')))
 
 
     table_summary <- merge(table_summary, df, by = 'Experiment')
@@ -153,10 +154,12 @@ ReportTables <- function(MQCombined,
                     NA,  # NA combined,
                     length(which(proteinGroups$`Potential contaminant` == '+')),
                     length(which(proteinGroups$Reverse == '+')),
-                    length(which(proteinGroups$`Only identified by site` == '+')),
+                    length(which(proteinGroups$`Only identified by site` == '+')
+                           ),
                     summary$`Peptide Sequences Identified`[nrow(summary)],
                     format(
-                      round(summary$`Peptide Sequences Identified`[nrow(summary)]/
+                      round(summary$`Peptide Sequences Identified`[nrow(summary)
+                                                                   ]/
                                 nrow(proteinGroups), 1),nsmall = 1
                     )
                     )

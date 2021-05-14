@@ -1,7 +1,7 @@
 Package: MQmetrics
 Type: Package
 Title: Quality Control of Protemics Data
-Version: 0.99.3
+Version: 0.99.4
 Authors@R: c(person(given = "Alvaro", family = "Sanchez-Villalba",
                     email = "sanchezvillalba.alvaro@gmail.com",
                     role = c("aut", "cre")),
@@ -36,18 +36,19 @@ Imports:
     chron,
     ggpubr,
     stats,
-    rmarkdown,
     cowplot,
     RColorBrewer,
     ggridges,
     tidyr,
-    knitr,
     scales,
     grid,
     rlang,
     ggforce,
     grDevices,
-    gtable
+    gtable,
+    plyr,
+    knitr,
+    rmarkdown
 VignetteBuilder: knitr
 Suggests: 
     testthat (>= 3.0.0)

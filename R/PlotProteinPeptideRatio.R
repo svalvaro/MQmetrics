@@ -89,7 +89,8 @@ PlotProteinPeptideRatio <- function(MQCombined,
     # Add column peptides identified, and peptide/protein ratio.
 
 
-    df2 <- summary %>% select(contains(c('Experiment', 'Peptide Sequences Identified')))
+    df2 <- summary %>% select(contains(c('Experiment',
+                                         'Peptide Sequences Identified')))
 
 
     df_merged <- merge(df, df2, by = 'Experiment')
@@ -108,27 +109,33 @@ PlotProteinPeptideRatio <- function(MQCombined,
      d1 <- df_melt[df_melt$variable == 'Proteins.Identified',]
      d2 <- df_melt[df_melt$variable == 'Peptides/Proteins',]
 
-     p1 <- ggplot(d1,  aes(x = Experiment, y = value, group = variable))+
+     p1 <- ggplot(d1,  aes(x = Experiment, y = as.numeric(value),
+                           group = variable))+
          geom_point(colour = '#FC766AFF')+
          geom_line(colour = '#FC766AFF')+
          ggtitle(title)+
          theme_bw()+
          ylab('# Proteins Identified')+
          theme(axis.text.y=element_text(colour="#FC766AFF"))+
-         theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-                 panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+         theme(panel.border = element_blank(),
+               panel.grid.major = element_blank(),
+                 panel.grid.minor = element_blank(),
+               axis.line = element_line(colour = "black"))
 
 
 
-     p2 <- ggplot(d2,  aes(x = Experiment, y = value, group = variable))+
+     p2 <- ggplot(d2,  aes(x = Experiment, y = as.numeric(value),
+                           group = variable))+
          geom_point(color = '#5B84B1FF')+
          geom_line(colour = '#5B84B1FF')+
          theme_bw()%+replace%
          theme(panel.background = element_rect(fill = NA))+
          ylab('Ratio Peptides/Proteins Identified')+
          theme(axis.text.y=element_text(colour="#5B84B1FF"))+
-         theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-               panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+         theme(panel.border = element_blank(),
+               panel.grid.major = element_blank(),
+               panel.grid.minor = element_blank(),
+               axis.line = element_line(colour = "black"))
 
 
 
@@ -197,7 +204,8 @@ PlotProteinPeptideRatio <- function(MQCombined,
 
 
      # Put the y axis into g, to the right of the right-most panel
-     # Note: Only one column, but two y axes - one for each row of the facet_wrap plot
+     # Note: Only one column, but two y axes - one for each
+     # row of the facet_wrap plot
      g <- gtable_add_cols(g, g2$widths[g2$layout[index, ]$l], pos = max(pp$r))
 
      nrows = length(unique(pp$t)) # Number of rows

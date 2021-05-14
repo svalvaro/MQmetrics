@@ -174,10 +174,6 @@ PlotProteinPeptideRatio(MQCombined,
 ```
 
 
-
-
-
-
 The function **PlotMsMs()**,  will take as input the summary.txt table and
 show the number of MS/MS Submitted and identified in each sample.
 ```{r PlotMSMS, fig.height=5, fig.width=7.2}

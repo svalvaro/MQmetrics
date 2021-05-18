@@ -51,5 +51,6 @@ Imports:
     rmarkdown
 VignetteBuilder: knitr
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    BiocStyle
 Config/testthat/edition: 3

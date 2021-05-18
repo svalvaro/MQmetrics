@@ -1,17 +1,13 @@
 #' Experiment Information
-#' @param MQPathCombined The directory to the "combined" folder where the
-#'  MaxQuant results are stored.
-#' @param runningTimes The runningTimes.txt table from  MaxQuant Output.
-#' @param  parameters The parameters.txt table from  MaxQuant Output.
+#' @param MQCombined Object list containing all the files from the MaxQuant
+#' output. It is the result from using \code{make_MQCombined}.
 #' @return Returns the time in hours:minutes that lasted the whole Experiment.
 #' @export
 #'
 #' @examples
-#' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
-#' files <- ReadDataFromDir(MQPathCombined)
-#' parameters <- files[["parameters.txt"]]
-#' runningTimes <-  files[["#runningTimes.txt"]]
-#' MaxQuantAnalysisInfo(MQPathCombined, runningTimes, parameters)
+#' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
+#' MQCombined <- make_MQCombined(MQPathCombined)
+#' MaxQuantAnalysisInfo(MQCombined)
 #'
 MaxQuantAnalysisInfo <- function(MQCombined){
     MQPathCombined <- MQCombined$MQPathCombined

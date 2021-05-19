@@ -146,7 +146,9 @@ MQCombined <- make_MQCombined(MQPathCombined, remove_contaminants = TRUE)
 MaxQuantAnalysisInfo(MQCombined) 
 ```
 
-### Visualizations.
+# Visualizations.
+
+## Proteins Identified
 
 The function `PlotProteinsIdentified()`, will take as input the 
 proteinGroups.txt table and show the number of proteins and NAs in each sample.
@@ -160,6 +162,8 @@ PlotProteinsIdentified(MQCombined,
                        palette = 'Set2')
 ```
 
+## Peptides Identified
+
 The function `PlotPeptidesIdentified()`,  will take as input the summary
 table and show the number of peptides sequences identified in each sample.
 
@@ -170,6 +174,7 @@ PlotPeptidesIdentified(MQCombined,
                        palette = 'Set3')
 ```
 
+## Proteins versus peptide/protein ratio
 
 The function `PlotIdentificationRatio()`,  will take as input the summary and
 proteinGroups tables and plot the number of protein found vs the ratio of 
@@ -184,6 +189,7 @@ PlotProteinPeptideRatio(MQCombined,
 
 ```
 
+## MS/MS submitted versus identified
 
 The function `PlotMsMs()`,  will take as input the summary.txt table and
 show the number of MS/MS Submitted and identified in each sample.
@@ -195,6 +201,8 @@ PlotMsMs(MQCombined,
        palette = 'Set2')
 ```
 
+## Peaks submitted versus identified
+
 The function `PlotPeaks()`, will take as input the summary.txt table and 
 show the number peaks detected and sequenced in each sample.
 
@@ -205,6 +213,8 @@ PlotPeaks(MQCombined,
         palette = 'Set2')
 ```
 
+## Isotope patterns detected and sequenced
+
 The function `PlotIsotopePattern()`,will take as input the summary.txt table
 and show the number isotope patterns detected and sequenced in each sample.
 ```{r isotope, fig.height=5, fig.width=7.2}
@@ -213,6 +223,9 @@ PlotIsotopePattern(MQCombined,
                  sep_names = '_',
                  palette = 'Set2')
 ```
+
+
+## Charge-state of the precursor ions
 
 The function `PlotCharge()`, will take as input the evidence.txt table and
 show the charge-state of the precursor ion in each sample.
@@ -223,6 +236,8 @@ PlotCharge(MQCombined,
          plots_per_page = 6)
 ```
 
+## Protease Specificity
+
 The function `PlotProteaseSpecificity()`, will take as input the summary.txt
 table and show the number peaks detected and sequenced in each sample.
 
@@ -231,6 +246,9 @@ PlotProteaseSpecificity(MQCombined,
                       palette = 'Set2',
                       plots_per_page = 6)
 ```
+
+
+## Peptide Hydrophobicity
 
 The function `PlotHydrophobicity()`, takes as input the peptides.txt table
 and returns the distribution of GRAVY score.
@@ -245,6 +263,8 @@ PlotHydrophobicity(MQCombined,
 
 ```
 
+## Andromeda Score
+
 The function `PlotAndromedaScore()`, takes as input the peptides.txt table
 and returns the distribution of MaxQuant's Andromeda Score.
 
@@ -253,6 +273,9 @@ PlotAndromedaScore(MQCombined,
                  palette = 'Set2',
                  plots_per_page = 6)
 ```
+
+
+## Protein and peptide identification type
 
 The function `PlotIdentificationType()`, takes as input the peptides.txt and
 proteinGroups.txt tables and returns the number of peptides and proteins 
@@ -265,6 +288,9 @@ PlotIdentificationType(MQCombined,
                      palette = 'Set2')  
 
 ```
+
+
+## Protein intensities comparison
 
 The function `PlotIntensity()`, takes as input the  proteinGroups.txt table 
 and returns a violin plot for those intensities. If the 'LFQ' intensities are
@@ -287,6 +313,8 @@ PlotIntensity(MQCombined,
 ```
 
 
+## Protein PCA
+
 The function `PlotPCA()` takes as input the proteinGroups.txt table and 
 creates a Principal Componente Analysis plot of each Experiment.
 
@@ -296,6 +324,7 @@ PlotPCA(MQCombined,
       palette = 'Set2')
 ```
 
+## Dynamic Range (Combined)
 
 The function `PlotCombinedDynamicRange()` takes as input the proteinGroups.txt
 table and returns the dynamic range of all experiments combined. If the
@@ -309,6 +338,8 @@ PlotCombinedDynamicRange(MQCombined,
 ```
 
 
+## Dynamic Range (Individual)
+
 The function `PlotAllDynamicRange()` takes as input the proteinGroups.txt
 table and returns the dynamic range of all experiments separated. If the 
 parameter show_shade is used, a square will appear showing the percent_proteins
@@ -320,6 +351,7 @@ PlotAllDynamicRange(MQCombined,
                   percent_proteins = 0.90)
 ```
 
+## Protein Overlap
 
 The function `PlotProteinOverlap()` takes as input the proteinGroups.txt
 table and returns a plot that shows the number of proteins identified in the
@@ -328,6 +360,9 @@ samples.
 ```{r protein_coverage_all, fig.height=7.2, fig.width=7.2}
 PlotProteinOverlap(MQCombined)
 ```
+
+
+## Protein Coverage
 
 The function `PlotProteinCoverage()` takes as input the peptides.txt and
 proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the
@@ -343,6 +378,8 @@ PlotProteinCoverage(MQCombined,
 ```
 
 
+## iRT peptides (1)
+
 The function `PlotiRT()` takes as input the evidence.txt table and returns,
 if found the iRT peptides from Biognosys. Their retention time and intensity.
 
@@ -351,6 +388,8 @@ PlotiRT(MQCombined,
       show_calibrated_rt = FALSE,
       tolerance = 0.001)
 ```
+
+## iRT peptides (2)
 
 The function `PlotiRTScore()` takes as input the evidence.txt table and
 returns, if found, a linear regression of the retention times of the iRT
@@ -361,6 +400,7 @@ PlotiRTScore(MQCombined,
            tolerance = 0.001)
 ```
 
+## Total Ion Current
 
 The function `PlotTotalIonCurrent()` takes as input the msmsScans.txt, and
 returns a plot showing the TIC values vs the retention time of each sample.
@@ -374,8 +414,12 @@ PlotTotalIonCurrent(MQCombined,
 ```
 
 
+## Acquisition Cycle
+
 The function `PlotAcquisitionCycle` takes as input the msScans.txt table
 and returns the cycle time and MS/MS count vs the retention time of each sample.
+**Note**: msScans.ttxt is not generated automatically by MaxQuant, the user must
+select it in MaxQuant: Global Parameters --> tables 
 
 ```{r Pn, fig.height= 10, warning=F, message=F,fig.height=10, fig.width=7.2}
 PlotAcquisitionCycle(MQCombined, 
@@ -383,9 +427,12 @@ PlotAcquisitionCycle(MQCombined,
                    plots_per_page = 6)
 ```
 
+
+## Post-translational modifications
+
 The function `PlotPTM()`, takes as input the modificationSpecificPeptides.txt
 table and returns the main modifications found at the peptide level.
-The parameters can be adjusted to select the minimun number of peptides
+The parameters can be adjusted to select the minimum number of peptides
 modified per group, and whether or not you would like to visualize the 
 Unmodified peptides.
 
@@ -398,7 +445,7 @@ PlotPTM(MQCombined,
 ```
 
 
-### Helper Functions
+# Helper Functions
 This package provides two extra functions to helps to analyze the proteomics 
 data from MaxQuant:
 
@@ -420,7 +467,7 @@ ReportTables(MQCombined,
 ```
 
 
-### Session Info
+# Session Info
 
 ```{r add_session_info}
 sessionInfo()

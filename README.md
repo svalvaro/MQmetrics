@@ -43,10 +43,10 @@ library(MQmetrics)
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 ```
 
-The main function of the package is **generateReport()**. It will
-generate a PDF report containing several visualizations and tables from
-different MaxQuant output tables. As input it is only necessary to
-provide the Path to the *Combined* folder of MaxQuant output.
+The main function of the package is `generateReport()`. It will generate
+a PDF report containing several visualizations and tables from different
+MaxQuant output tables. As input it is only necessary to provide the
+Path to the *Combined* folder of MaxQuant output.
 
 ``` r
 generateReport(MQPathCombined, long_names = TRUE, sep_names = '_')

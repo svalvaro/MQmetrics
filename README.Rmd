@@ -66,7 +66,7 @@ MaxQuant output.
 generateReport(MQPathCombined, long_names = TRUE, sep_names = '_')
 ```
 
-Two useful parameters of every function including **generateReport()** are:
+Two useful parameters of every function including `generateReport()` are:
 *long_names* and *sep_names*. They will allow a clear visualization of those 
 samples that have long names separated by a character. In this example, 
 the Experiment names are one full string separated by underscores (_):

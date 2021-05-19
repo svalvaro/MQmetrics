@@ -52,7 +52,7 @@ Path to the *Combined* folder of MaxQuant output.
 generateReport(MQPathCombined, long_names = TRUE, sep_names = '_')
 ```
 
-Two useful parameters of every function including **generateReport()**
+Two useful parameters of every function including `generateReport()`
 are: *long\_names* and *sep\_names*. They will allow a clear
 visualization of those samples that have long names separated by a
 character. In this example, the Experiment names are one full string

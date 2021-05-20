@@ -15,9 +15,9 @@ Description: The package MQmetrics (MaxQuant metrics) provides a workflow to
     analyze the quality and reproducibility of your proteomics mass spectrometry 
     analysis from MaxQuant.Input data are extracted from several MaxQuant output 
     tables and produces a pdf report. It includes several visualization tools to 
-    check numerous parameters regarding the quality of the runs. It also includes 
-    two functions to visualize the iRT peptides from Biognosys in case they were 
-    spiked in the samples.
+    check numerous parameters regarding the quality of the runs. It also 
+    includes two functions to visualize the iRT peptides from Biognosys in case 
+    they were spiked in the samples.
 biocViews: Infrastructure, Proteomics, MassSpectrometry,
     QualityControl, DataImport       
 License: GPL-3

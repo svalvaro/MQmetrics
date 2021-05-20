@@ -6,6 +6,7 @@
 #'  time of each iRT peptide. By default = FALSE.
 #' @param tolerance Error maximum to find the iRT peptides by m/z value.
 #'  by default is 0.001.
+#' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return A plot showing the iRT peptide in each sample vs the Retention time.
 #' @export
@@ -16,7 +17,8 @@
 #' PlotiRT(MQCombined)
 PlotiRT <- function(MQCombined,
                     show_calibrated_rt = FALSE,
-                    tolerance = 0.001) {
+                    tolerance = 0.001,
+                    plots_per_page = 5) {
     evidence <- MQCombined$evidence.txt
 
     Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
@@ -105,38 +107,61 @@ PlotiRT <- function(MQCombined,
             group_by(Experiment, Sequence) %>%
             filter(Intensity == max(Intensity))
 
-        b <- ggplot(iRT_table_prot_maxvalues, aes(y = Intensity,
-                                                colour = names_Sequence
-        )) +
-            # colour = as.character(`m/z`)))+
-            geom_point(aes(x = `Retention time`), size = 2) +
-            geom_segment(aes(x = `Retention time`,
-                            xend = `Retention time`,
-                            yend = 0)) +
-            facet_wrap(. ~ Experiment, ncol = 1) +
-            ggtitle("Biognosys iRT peptides in each sample.") +
-            theme_bw() +
-            labs(colour = "iRT peptides") +
-            theme(legend.position = "bottom")
 
-        if (show_calibrated_rt == TRUE) {
-            irt_melted <- melt(iRT_table_prot_maxvalues,
-                            id.vars = c(
-                            "Sequence", "Experiment", "m/z",
-                            "names_Sequence", "Intensity"
-                            )
-            )
-            ggplot(irt_melted, aes(x = value, y = Intensity,
-                                colour = names_Sequence)) +
-                geom_point(aes(shape = variable), size = 2) +
-                geom_segment(aes(x = value, xend = value, yend = 0)) +
-                facet_wrap(. ~ Experiment, ncol = 1) +
+        ## Paginate
+
+
+        # samples for paginate
+
+        n_samples <-length(unique(iRT_table_prot_maxvalues$Experiment))
+
+        n_pages_needed <- ceiling(
+            n_samples / plots_per_page
+        )
+
+        for (ii in seq_len(n_pages_needed)) {
+
+            if (n_samples < plots_per_page) {
+                nrow <- n_samples
+            } else {
+                nrow <- plots_per_page
+            }
+
+
+
+
+            p <- ggplot(iRT_table_prot_maxvalues, aes(y = Intensity,
+                                                      colour = names_Sequence))+
+                geom_point(aes(x = `Retention time`), size = 2) +
+                geom_segment(aes(x = `Retention time`,
+                                 xend = `Retention time`,
+                                 yend = 0)) +
+                facet_wrap_paginate(. ~ Experiment, ncol = 1, page = ii,
+                                    nrow = nrow) +
                 ggtitle("Biognosys iRT peptides in each sample.") +
                 theme_bw() +
                 labs(colour = "iRT peptides") +
                 theme(legend.position = "bottom")
-        } else {
-            b
-        }
+
+            if (show_calibrated_rt == TRUE) {
+                irt_melted <- melt(iRT_table_prot_maxvalues,
+                                   id.vars = c(
+                                       "Sequence", "Experiment", "m/z",
+                                       "names_Sequence", "Intensity"
+                                   )
+                )
+                p <- ggplot(irt_melted, aes(x = value, y = Intensity,
+                                       colour = names_Sequence)) +
+                        geom_point(aes(shape = variable), size = 2) +
+                        geom_segment(aes(x = value, xend = value, yend = 0)) +
+                        facet_wrap_paginate(. ~ Experiment, ncol = 1, page = ii,
+                                            nrow = nrow) +
+                        ggtitle("Biognosys iRT peptides in each sample.") +
+                        theme_bw() +
+                        labs(colour = "iRT peptides") +
+                        theme(legend.position = "bottom")
+            }
+            }
     }
+p
 }

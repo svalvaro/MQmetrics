@@ -4,7 +4,12 @@
 \alias{PlotiRT}
 \title{Max intensities of the iRT peptides in each sample.}
 \usage{
-PlotiRT(MQCombined, show_calibrated_rt = FALSE, tolerance = 0.001)
+PlotiRT(
+  MQCombined,
+  show_calibrated_rt = FALSE,
+  tolerance = 0.001,
+  plots_per_page = 5
+)
 }
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant
@@ -15,6 +20,8 @@ time of each iRT peptide. By default = FALSE.}
 
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
+
+\item{plots_per_page}{Establish the maximum number of plots per page.}
 }
 \value{
 A plot showing the iRT peptide in each sample vs the Retention time.

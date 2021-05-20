@@ -215,7 +215,8 @@ PlotiRT(MQCombined,
 
 ```{r irt_peps2}
 PlotiRTScore(MQCombined,
-             tolerance =  params$tolerance)
+             tolerance =  params$tolerance,
+             plots_per_page = params$plots_per_page)
 ```
 
 

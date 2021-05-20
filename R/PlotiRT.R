@@ -29,7 +29,6 @@ PlotiRT <- function(MQCombined,
         683.8282, 683.8541, 699.3388, 726.8361, 776.9301
     )
 
-
     names(iRT.mZ) <- Sequence <- c(
         "LGGNEQVTR",
         "YILAGVENSK",
@@ -41,9 +40,7 @@ PlotiRT <- function(MQCombined,
         "TPVITGAPYEYR",
         "DGLDAASYYAPVR",
         "ADVTPADFSEWSK",
-        "LFLQFGAQGSPFLK"
-    )
-
+        "LFLQFGAQGSPFLK")
 
     names_Sequence <- names(Sequence) <- c(
         "iRT Kit_a",
@@ -76,14 +73,12 @@ PlotiRT <- function(MQCombined,
             iRT_table_prot$Intensity), ]
 
         # make table smaller
-        iRT_table_prot <- iRT_table_prot %>% select(c(
-            Experiment,
-            `m/z`,
-            `Retention time`,
-            `Calibrated retention time`,
-            Sequence,
-            Intensity
-        ))
+        iRT_table_prot <- iRT_table_prot %>% select(c( Experiment,
+                                                   `m/z`,
+                                                    `Retention time`,
+                                                    `Calibrated retention time`,
+                                                    Sequence,
+                                                    Intensity))
 
         # from the irt obtained, filter them by the theoretical m/z with
         # tolerance
@@ -99,25 +94,19 @@ PlotiRT <- function(MQCombined,
 
         iRT_table_prot_final <- merge(iRT_table_prot_final,
                                     irt_names_table,
-                                    by = "Sequence"
-        )
+                                    by = "Sequence")
 
         # obtain the maximum intensity values for each experiment, and sequence.
         iRT_table_prot_maxvalues <- iRT_table_prot_final %>%
             group_by(Experiment, Sequence) %>%
             filter(Intensity == max(Intensity))
 
-
         ## Paginate
-
-
         # samples for paginate
 
         n_samples <-length(unique(iRT_table_prot_maxvalues$Experiment))
 
-        n_pages_needed <- ceiling(
-            n_samples / plots_per_page
-        )
+        n_pages_needed <- ceiling(n_samples / plots_per_page)
 
         for (ii in seq_len(n_pages_needed)) {
 
@@ -126,9 +115,6 @@ PlotiRT <- function(MQCombined,
             } else {
                 nrow <- plots_per_page
             }
-
-
-
 
             p <- ggplot(iRT_table_prot_maxvalues, aes(y = Intensity,
                                                       colour = names_Sequence))+
@@ -145,11 +131,12 @@ PlotiRT <- function(MQCombined,
 
             if (show_calibrated_rt == TRUE) {
                 irt_melted <- melt(iRT_table_prot_maxvalues,
-                                   id.vars = c(
-                                       "Sequence", "Experiment", "m/z",
-                                       "names_Sequence", "Intensity"
+                                   id.vars = c("Sequence",
+                                               "Experiment",
+                                               "m/z",
+                                               "names_Sequence",
+                                               "Intensity")
                                    )
-                )
                 p <- ggplot(irt_melted, aes(x = value, y = Intensity,
                                        colour = names_Sequence)) +
                         geom_point(aes(shape = variable), size = 2) +
@@ -160,8 +147,8 @@ PlotiRT <- function(MQCombined,
                         theme_bw() +
                         labs(colour = "iRT peptides") +
                         theme(legend.position = "bottom")
-            }
-            }
+                }
+        print(p)
+        }
     }
-p
 }

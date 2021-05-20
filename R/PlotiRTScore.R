@@ -4,6 +4,7 @@
 #' output. It is the result from using \code{make_MQCombined}.
 #' @param tolerance Error maximum to find the iRT peptides by m/z value.
 #'  by default is 0.001.
+#' @param plots_per_page Establish the maximum number of plots per page.#'
 #'
 #' @return A plot for each sample showing a linear regression of the
 #' iRT peptides'
@@ -15,7 +16,8 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotiRT(MQCombined)
 PlotiRTScore <- function(MQCombined,
-                        tolerance = 0.001) {
+                        tolerance = 0.001,
+                        plots_per_page = 5) {
     evidence <- MQCombined$evidence.txt
 
     Experiment <- `m/z` <- `Retention time` <- Sequence <- Intensity <- NULL
@@ -138,22 +140,41 @@ PlotiRTScore <- function(MQCombined,
             as.character(as.expression(eq))
         }
 
-        # plot it.
-        ggscatter(iRT_table_prot_maxvalues,
-                x = "iRT.score",
-                y = "Retention time",
-                add = "reg.line"
-        ) +
-            theme_bw() +
-            geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
-            stat_cor(label.x = 3, label.y = 120) +
-            stat_regline_equation(label.x = 3, label.y = 110) +
-            facet_wrap(~Experiment) +
-            geom_point(aes(fill = names_Sequence),
-                    shape = 21,
-                    colour = "black", size = 3
-            ) +
-            ggtitle(label = "Retention time of the Biognosys iRT peptides.") +
-            theme(legend.position = "bottom")
+
+        n_samples <-length(unique(iRT_table_prot_maxvalues$Experiment))
+
+        n_pages_needed <- ceiling(n_samples / plots_per_page)
+
+
+        for (ii  in seq_len(n_pages_needed)) {
+
+            if (n_samples < plots_per_page) {
+                nrow <- n_samples
+            }else{
+                nrow <- plots_per_page
+            }
+
+
+
+            # plot it.
+            p <- ggscatter(iRT_table_prot_maxvalues,
+                          x = "iRT.score",
+                          y = "Retention time",
+                          add = "reg.line") +
+                    theme_bw() +
+                    geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
+                    stat_cor(label.x = 3, label.y = 120) +
+                    stat_regline_equation(label.x = 3, label.y = 110) +
+                    facet_wrap_paginate(~Experiment, page = ii, nrow = nrow) +
+                    geom_point(aes(fill = names_Sequence),
+                               shape = 21,
+                               colour = "black", size = 3) +
+                    ggtitle(label = "Retention time of
+                            the Biognosys iRT peptides.") +
+                    theme(legend.position = "bottom")
+        }
+
+
     }
+    return(p)
 }

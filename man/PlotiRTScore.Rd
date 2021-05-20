@@ -4,7 +4,7 @@
 \alias{PlotiRTScore}
 \title{Score vs retention time of the iRT peptides}
 \usage{
-PlotiRTScore(MQCombined, tolerance = 0.001)
+PlotiRTScore(MQCombined, tolerance = 0.001, plots_per_page = 5)
 }
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant
@@ -12,6 +12,8 @@ output. It is the result from using \code{make_MQCombined}.}
 
 \item{tolerance}{Error maximum to find the iRT peptides by m/z value.
 by default is 0.001.}
+
+\item{plots_per_page}{Establish the maximum number of plots per page.#'}
 }
 \value{
 A plot for each sample showing a linear regression of the

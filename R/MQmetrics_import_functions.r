@@ -13,7 +13,6 @@
 #' @importFrom gridExtra marrangeGrob
 #' @importFrom utils head
 #' @importFrom stringr str_count str_wrap
-#' @importFrom chron times
 #' @importFrom cowplot plot_grid ggdraw draw_label
 #' @importFrom tidyr pivot_longer starts_with separate_rows pivot_wider
 #' @importFrom knitr kable

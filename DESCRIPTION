@@ -33,7 +33,6 @@ Imports:
     gridExtra,
     utils,
     stringr,
-    chron,
     ggpubr,
     stats,
     cowplot,

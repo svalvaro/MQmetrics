@@ -16,7 +16,11 @@ MaxQuantAnalysisInfo <- function(MQCombined){
     #Runningtimes
     time <- sum(runningTimes$`Running time [min]`)
 
-    time <- substr(times((time%/%60 +  time%%60 /60)/24), 1, 5)
+    days <- time%/%1440
+
+    hours <- (time%%1440)%/%60
+
+    mins <- round((time%%1440)%%60)
 
     start_date <- runningTimes$`Start date`[1]
 
@@ -50,7 +54,8 @@ MaxQuantAnalysisInfo <- function(MQCombined){
     print(paste0('The experiment started the day: ',
                 start_date, ' at the time: ',
                 start_time, '.'))
-    print(paste0('The whole experiment lasted: ', time, ' (hours:minutes).'))
+    print(paste0('The whole experiment lasted: ',days ,' days, ',
+                 hours,' hours and ', mins, ' mins.'))
     print(paste0('The MaxQuant version used was: ', MaxQuant_version))
     print(paste0('The user was: ', user_name))
     print(paste0('The machine name was: ', machine_name))

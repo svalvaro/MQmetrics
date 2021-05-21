@@ -64,8 +64,6 @@ PlotCharge <- function(MQCombined,
             theme_bw() +
             theme(legend.position = "none")
 
-        plot_list[[ii]] = p
+        print(p)
     }
-
-    return(plot_list)
 }

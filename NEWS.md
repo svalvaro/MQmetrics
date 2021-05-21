@@ -20,8 +20,11 @@ tables.
 * Added the function `PlotProteinPeptideRatio()` to visualize a comparison 
 between the proteins identified and the ratio Peptide/Proteins among
 Experiments.
+* Version released within Bioconductor as 1.00.0
+
 
 # MQmetrics 1.00.1 (Github version)
 
 * Added pagination to `PlotiRT()` and `PlotiRTScore()`.
 * Updated vignette style to Bioconductor's.
+* Improved aesthethics of `PlotProteinOverlap()`.

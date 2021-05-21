@@ -44,8 +44,7 @@ make_MQCombined <- function(MQPathCombined,
     if (remove_contaminants == TRUE) {
         peptides_table <- peptides_table[
             is.na(peptides_table$`Potential contaminant`) &
-                is.na(peptides_table$Reverse),
-        ]
+                is.na(peptides_table$Reverse),]
     }
 
     # Open the evidence table

@@ -158,17 +158,17 @@ PlotiRTScore <- function(MQCombined,
 
             # plot it.
             p <- ggscatter(iRT_table_prot_maxvalues,
-                          x = "iRT.score",
-                          y = "Retention time",
-                          add = "reg.line") +
+                        x = "iRT.score",
+                        y = "Retention time",
+                        add = "reg.line") +
                     theme_bw() +
                     geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
                     stat_cor(label.x = 3, label.y = 120) +
                     stat_regline_equation(label.x = 3, label.y = 110) +
                     facet_wrap_paginate(~Experiment, page = ii, nrow = nrow) +
                     geom_point(aes(fill = names_Sequence),
-                               shape = 21,
-                               colour = "black", size = 3) +
+                                shape = 21,
+                                colour = "black", size = 3) +
                     ggtitle(label = "Retention time of
                             the Biognosys iRT peptides.") +
                     theme(legend.position = "bottom")

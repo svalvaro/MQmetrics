@@ -34,18 +34,22 @@ MaxQuantAnalysisInfo <- function(MQCombined){
 
     Protein_FDR <- parameters$Value[parameters$Parameter == 'Protein FDR']
 
-    match_between_runs <- parameters$Value[parameters$Parameter == 'Match between runs']
+    match_between_runs <- parameters$Value[
+        parameters$Parameter == 'Match between runs']
 
     fasta_file <- parameters$Value[parameters$Parameter == 'Fasta file']
 
     iBAQ <- parameters$Value[parameters$Parameter == 'iBAQ']
 
-    PTM <- parameters$Value[parameters$Parameter == 'Modifications included in protein quantification']
+    PTM <- parameters$Value[
+        parameters$Parameter ==
+            'Modifications included in protein quantification'
+        ]
 
     print(paste0('The MaxQuant output directory is: ', MQPathCombined))
     print(paste0('The experiment started the day: ',
-                 start_date, ' at the time: ',
-                 start_time, '.'))
+                start_date, ' at the time: ',
+                start_time, '.'))
     print(paste0('The whole experiment lasted: ', time, ' (hours:minutes).'))
     print(paste0('The MaxQuant version used was: ', MaxQuant_version))
     print(paste0('The user was: ', user_name))

@@ -74,7 +74,7 @@ PlotiRT <- function(MQCombined,
 
         # make table smaller
         iRT_table_prot <- iRT_table_prot %>% select(c( Experiment,
-                                                   `m/z`,
+                                                    `m/z`,
                                                     `Retention time`,
                                                     `Calibrated retention time`,
                                                     Sequence,
@@ -117,11 +117,11 @@ PlotiRT <- function(MQCombined,
             }
 
             p <- ggplot(iRT_table_prot_maxvalues, aes(y = Intensity,
-                                                      colour = names_Sequence))+
+                                                    colour = names_Sequence))+
                 geom_point(aes(x = `Retention time`), size = 2) +
                 geom_segment(aes(x = `Retention time`,
-                                 xend = `Retention time`,
-                                 yend = 0)) +
+                                xend = `Retention time`,
+                                yend = 0)) +
                 facet_wrap_paginate(. ~ Experiment, ncol = 1, page = ii,
                                     nrow = nrow) +
                 ggtitle("Biognosys iRT peptides in each sample.") +
@@ -131,14 +131,13 @@ PlotiRT <- function(MQCombined,
 
             if (show_calibrated_rt == TRUE) {
                 irt_melted <- melt(iRT_table_prot_maxvalues,
-                                   id.vars = c("Sequence",
-                                               "Experiment",
-                                               "m/z",
-                                               "names_Sequence",
-                                               "Intensity")
-                                   )
+                                    id.vars = c("Sequence",
+                                                "Experiment",
+                                                "m/z",
+                                                "names_Sequence",
+                                                "Intensity"))
                 p <- ggplot(irt_melted, aes(x = value, y = Intensity,
-                                       colour = names_Sequence)) +
+                                        colour = names_Sequence)) +
                         geom_point(aes(shape = variable), size = 2) +
                         geom_segment(aes(x = value, xend = value, yend = 0)) +
                         facet_wrap_paginate(. ~ Experiment, ncol = 1, page = ii,

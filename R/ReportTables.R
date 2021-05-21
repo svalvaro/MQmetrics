@@ -155,13 +155,14 @@ ReportTables <- function(MQCombined,
                     length(which(proteinGroups$`Potential contaminant` == '+')),
                     length(which(proteinGroups$Reverse == '+')),
                     length(which(proteinGroups$`Only identified by site` == '+')
-                           ),
+                        ),
                     summary$`Peptide Sequences Identified`[nrow(summary)],
                     format(
-                      round(summary$`Peptide Sequences Identified`[nrow(summary)
-                                                                   ]/
-                                nrow(proteinGroups), 1),nsmall = 1
-                    )
+                        round(
+                            summary$`Peptide Sequences Identified`[
+                        nrow(summary)]/nrow(proteinGroups), 1
+                        ),
+                        nsmall = 1)
                     )
 
 
@@ -401,22 +402,18 @@ ReportTables <- function(MQCombined,
                                         ' ',
                                         out$proteins$Experiment)
         out$intensities$Experiment <- gsub(sep_names,
-                                           ' ',
-                                           out$intensities$Experiment)
+                                            ' ',
+                                            out$intensities$Experiment)
         out$charge$Experiment <- gsub(sep_names,
-                                      ' ',
-                                      out$charge$Experiment)
+                                        ' ',
+                                        out$charge$Experiment)
         out$GRAVY$Experiment <- gsub(sep_names,
-                                     ' ',
-                                     out$GRAVY$Experiment)
+                                        ' ',
+                                        out$GRAVY$Experiment)
         out$cleavages$Experiment <- gsub(sep_names,
-                                         ' ',
-                                         out$cleavages$Experiment)
+                                            ' ',
+                                            out$cleavages$Experiment)
     }
-
-
-
-
 
     return(out)
 }

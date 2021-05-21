@@ -35,7 +35,6 @@ PlotCombinedDynamicRange <- function(MQCombined,
     # 5% on the right one
 
     a <- ggplot(rank, aes(x = vector1, y = Intensity)) +
-        geom_point(colour = "darkgrey", alpha = 0.75, shape = 21) +
         theme_bw() +
         ggtitle("Dynamic range of protein abundance all samples") +
         ylab(expression("Log"[10] * "(Intensity)")) +
@@ -59,7 +58,8 @@ PlotCombinedDynamicRange <- function(MQCombined,
                     xmax = nrow(rank) - limits_row,
                     ymin = bottom_y,
                     ymax = upper_y,
-                    alpha = 0.3
+                    alpha = 0.2,
+                    fill = '#5B84B1FF'
         ) +
             annotate("text",
                     x = nrow(rank) / 2,
@@ -73,8 +73,9 @@ PlotCombinedDynamicRange <- function(MQCombined,
                     percent_proteins * 100,
                     " % of proteins represented."
                     )
-            )
+            )+
+            geom_point(colour = "#FC766AFF", alpha = 0.75, shape = 21)
     } else {
-        a
+        a +geom_point(colour = "#FC766AFF", alpha = 0.75, shape = 21)
     }
 }

@@ -111,6 +111,7 @@ PlotProteinsIdentified <- function(MQCombined,
         ylab("Number of Proteins") +
         theme_bw() +
         scale_fill_brewer(palette = palette) +
+        #scale_fill_manual(values = c('olivedrab3','pink4')) +
         theme(legend.position = "bottom")
 
     if (long_names == TRUE) {

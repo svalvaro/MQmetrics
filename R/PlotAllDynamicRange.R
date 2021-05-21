@@ -65,7 +65,6 @@ PlotAllDynamicRange <- function(MQCombined,
         temp_data <- data.frame(vec_temp, temp)
 
         temp_plot <- ggplot(temp_data, aes(x = vec_temp, y = temp)) +
-            geom_point(colour = "darkgrey", alpha = 0.75, shape = 21) +
             ggtitle(colnames(rank_groups)[i]) +
             theme_bw() +
             ylab(expression("log"[10] * "(Intensity)")) +
@@ -92,7 +91,8 @@ PlotAllDynamicRange <- function(MQCombined,
                         xmax = nrow(temp_data) - limits_row,
                         ymin = bottom_y,
                         ymax = upper_y,
-                        alpha = 0.3
+                        alpha = 0.2,
+                        fill = '#5B84B1FF'
                         ) +
                 annotate("text",
                         x = nrow(temp_data) / 2,
@@ -106,7 +106,17 @@ PlotAllDynamicRange <- function(MQCombined,
                             percent_proteins * 100,
                             " % of proteins represented."
                             )
-                )
+                        )+
+                geom_point(colour = "#FC766AFF", alpha = 0.75, shape = 21)
+
+        } else{
+            temp_plot <- ggplot(temp_data, aes(x = vec_temp, y = temp)) +
+                ggtitle(colnames(rank_groups)[i]) +
+                theme_bw() +
+                ylab(expression("log"[10] * "(Intensity)")) +
+                xlab("Protein Abundance Rank")+
+                geom_point(colour = "#FC766AFF", alpha = 0.75, shape = 21)
+
             }
 
         pl[[i]] <- temp_plot

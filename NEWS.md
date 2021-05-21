@@ -11,7 +11,7 @@
 * Usage of ultiples of 4 spaces for line indents.
 * Removed *LazyData: TRUE*.
 
-# MQmetrics 0.99.4 
+# MQmetrics 0.99.4 (Bioconductor version)
 
 * The function `generateReport()` now takes the parameter *name_output_file* 
 to name the output pdf file.
@@ -20,3 +20,8 @@ tables.
 * Added the function `PlotProteinPeptideRatio()` to visualize a comparison 
 between the proteins identified and the ratio Peptide/Proteins among
 Experiments.
+
+# MQmetrics 1.00.1 (Github version)
+
+* Added pagination to `PlotiRT()` and `PlotiRTScore()`.
+* Updated vignette style to Bioconductor's.

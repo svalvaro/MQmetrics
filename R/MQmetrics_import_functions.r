@@ -25,5 +25,6 @@
 #' @importFrom grDevices colorRampPalette
 #' @importFrom gtable gtable_add_grob gtable_add_cols
 #' @importFrom plyr defaults
+#' @importFrom ggrepel geom_text_repel
 NULL
 

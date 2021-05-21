@@ -48,7 +48,8 @@ Imports:
     gtable,
     plyr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggrepel
 VignetteBuilder: knitr
 Suggests: 
     testthat (>= 3.0.0),

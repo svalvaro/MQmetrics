@@ -85,12 +85,13 @@ PlotPCA <- function(MQCombined,
         getPalette <- colorRampPalette(brewer.pal(8, palette))
 
 
-        ggplot(df_out, aes(PC1, PC2, color = sample)) +
-            geom_point(size = 3) +
+        ggplot(df_out, aes(PC1, PC2 ,fill = sample)) +
+            geom_point(size = 4.0, color = 'black', shape = 21) +
+            geom_text_repel(aes(label = sample))+
             ggtitle(title) +
             theme_bw() +
-            theme(legend.position = "bottom") +
-            guides(color = guide_legend(ncol = 2)) +
+            theme(legend.position = "none") +
+            guides(color = guide_legend(ncol = 3)) +
             scale_color_manual(values = getPalette(colourCount))
     }
 }

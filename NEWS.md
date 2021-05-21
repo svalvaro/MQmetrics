@@ -27,4 +27,4 @@ Experiments.
 
 * Added pagination to `PlotiRT()` and `PlotiRTScore()`.
 * Updated vignette style to Bioconductor's.
-* Improved aesthethics of `PlotProteinOverlap()`.
+* Improved aesthethics of `PlotProteinOverlap()` and `PlotPCA()`.

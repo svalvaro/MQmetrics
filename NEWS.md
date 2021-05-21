@@ -23,7 +23,7 @@ Experiments.
 * Version released within Bioconductor as 1.00.0
 
 
-# MQmetrics 1.00.1 (Github & Bioconductor version)
+# MQmetrics 1.1.1 (Github & Bioconductor version)
 
 * Added pagination to `PlotiRT()` and `PlotiRTScore()`.
 * Updated vignette style to Bioconductor's.

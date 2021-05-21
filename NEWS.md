@@ -11,7 +11,7 @@
 * Usage of ultiples of 4 spaces for line indents.
 * Removed *LazyData: TRUE*.
 
-# MQmetrics 0.99.4 (Bioconductor version)
+# MQmetrics 0.99.4 
 
 * The function `generateReport()` now takes the parameter *name_output_file* 
 to name the output pdf file.
@@ -23,7 +23,7 @@ Experiments.
 * Version released within Bioconductor as 1.00.0
 
 
-# MQmetrics 1.00.1 (Github version)
+# MQmetrics 1.00.1 (Github & Bioconductor version)
 
 * Added pagination to `PlotiRT()` and `PlotiRTScore()`.
 * Updated vignette style to Bioconductor's.

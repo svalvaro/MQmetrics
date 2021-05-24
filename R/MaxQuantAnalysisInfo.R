@@ -55,7 +55,8 @@ MaxQuantAnalysisInfo <- function(MQCombined){
             'Modifications included in protein quantification'
         ]
 
-    print(paste0('The MaxQuant output directory is: ', MQPathCombined))
+    print(paste0('The MaxQuant output directory is: ',
+                 MQPathCombined))
     print(paste0('The experiment started the day: ',
                 start_date, ' at the time: ',
                 start_time, '.'))

@@ -26,6 +26,7 @@ generateReport(
   size_median = 1.5,
   binwidth = 0.1,
   plot_unmodified_peptides = FALSE,
+  aggregate_PTMs = TRUE,
   plots_per_page = 5
 )
 }
@@ -91,6 +92,9 @@ dashed line.By default is TRUE. \code{PlotHydrophobicity()}.}
 
 \item{plot_unmodified_peptides}{If TRUE, it will show the Unmodified
 peptides. \code{PlotPTM()}.}
+
+\item{aggregate_PTMs}{If TRUE, same PTM that occur multiple times in the
+same peptides,  will be aggregated together.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
 }

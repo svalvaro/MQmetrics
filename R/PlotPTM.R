@@ -8,6 +8,8 @@
 #' @param plot_unmodified_peptides If TRUE, it will show the Unmodified
 #' peptides.
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
+#' @param aggregate_PTMs If TRUE, same PTM that occur multiple times in the
+#'  same peptides,  will be aggregated together.
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample
@@ -21,8 +23,10 @@ PlotPTM <- function(MQCombined,
                     peptides_modified = 1,
                     plot_unmodified_peptides = FALSE,
                     log_base = 2,
+                    aggregate_PTMs = TRUE,
                     palette = "Set2",
                     plots_per_page = 5) {
+
     modificationSpecificPeptides <- MQCombined$modificationSpecificPeptides.txt
 
     Modifications <- variable <- value <- Freq <- NULL
@@ -34,8 +38,11 @@ PlotPTM <- function(MQCombined,
         ))) %>%
         select(-contains(c("calibrated", "Unique (Proteins)")))
 
-    mod_melted <- modification_table %>%
-        select(-contains("Intensity"))
+
+
+
+    mod_melted <- modification_table %>% select(-contains('Intensity'))
+
 
     mod_melted <- melt(mod_melted, id.vars = c("Modifications", "Proteins"))
 
@@ -48,88 +55,60 @@ PlotPTM <- function(MQCombined,
         group_by(Modifications, variable) %>%
         summarise(Freq = sum(value))
 
-    mod_join <- mod_frequencies %>%
+    df <- mod_frequencies %>%
         separate_rows(Modifications, sep = ";") %>%
         group_by(Modifications, variable) %>%
         summarise(Freq = sum(Freq))
 
     # Remove the Experiment pattern from the variable
 
-    mod_join$variable <- gsub("Experiment", "", mod_join$variable)
+    df$variable <- gsub("Experiment", "", df$variable)
 
-    mod_join <- mod_join[mod_join$Freq >= peptides_modified, ]
+    df <- df[df$Freq >= peptides_modified, ]
 
 
     if (plot_unmodified_peptides == FALSE) {
-        mod_join <- mod_join[!mod_join$Modifications == "Unmodified", ]
-    } else {
-        mod_join <- mod_join
+        df <- df[!df$Modifications == "Unmodified", ]
     }
 
-    # Combine multiple oxidation into the same group
 
-    mod_join_combined <- mod_join
 
-    # Multiply the freq by number of oxidations
-    mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "2 Oxidation (M)"] <-
-        mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "2 Oxidation (M)"] * 2
+    # Aggregate together PTMs like
+    # 2 oxidation, 3 oxidation, 2 acetylation ...
 
-    mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "3 Oxidation (M)"] <-
-        mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "3 Oxidation (M)"] * 3
+    if(aggregate_PTMs == TRUE){
 
-    mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "4 Oxidation (M)"] <-
-        mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "4 Oxidation (M)"] * 4
+        mod_join <- df
 
-    mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "5 Oxidation (M)"] <-
-        mod_join_combined$Freq[mod_join_combined$Modifications ==
-                                "5 Oxidation (M)"] * 5
+        indexes <- which( grepl('[0-9]',mod_join$Modifications))
+
+        df <- mod_join[indexes,]
+
+        mod_final <- mod_join[-c(indexes),] # removed indexes
+
+        combined <- df %>%
+            mutate(Mod2 = str_replace_all(Modifications, "[:digit:]", "") %>% str_squish(),
+                   sample_num = as.numeric(gsub("\\D", "", Modifications)),
+                   frequency2 = sample_num * Freq) %>%
+            group_by(variable,Mod2) %>%
+            summarise(Freq = sum(frequency2))
 
 
 
-    combined_oxidations <- aggregate(
-        x = mod_join_combined[grep("Oxidation",mod_join_combined$Modifications),
-                            3],
-        by = mod_join_combined[grep("Oxidation",
-                                mod_join_combined$Modifications),2], FUN = sum)
+        colnames(combined)[colnames(combined) == "Mod2"] <- 'Modifications'
 
-    # Remove rows with the oxidation columns
-    mod_join_combined2 <- mod_join_combined
-    mod_join_combined2 <- mod_join_combined2[!(mod_join_combined2$Modifications
-                                                %in% c("2 Oxidation (M)",
-                                                        "3 Oxidation (M)",
-                                                        "4 Oxidation (M)",
-                                                        "5 Oxidation (M)")), ]
+        combined_final <- rbind(mod_final, combined)
 
-    # Change the values of the original oxidation to the sum of all the combined
-    # oxidations
+        df <- combined_final %>%
+            group_by(Modifications, variable) %>%
+            summarise(Freq = sum(Freq))
 
-    mod_join_combined2$Freq[
-        mod_join_combined2$Modifications == "Oxidation (M)"] <- NA
+    }
 
-    combined_oxidations$Modifications <- "Oxidation (M)"
-    combined_oxidations <- combined_oxidations[, c(3, 1, 2)]
 
-    modification_final <- full_join(mod_join_combined2,
-                                    combined_oxidations,
-                                    by = c("variable", "Modifications")
-    )
+    # For Intensity plot
 
-    modification_final$Freq <- coalesce(modification_final$Freq.x,
-                                        modification_final$Freq.y)
-
-    modification_final$Freq.x <- NULL
-    modification_final$Freq.y <- NULL
-
-    ############### For Intensity plot
-
-    modifications_unique <- unique(modification_final$Modifications) # names
+    modifications_unique <- unique(df$Modifications) # names
 
     mod_intensities <- modification_table %>%
         select(-contains("Experiment"))
@@ -175,7 +154,7 @@ PlotPTM <- function(MQCombined,
             nrow <- plots_per_page
         }
 
-        a <- ggplot(modification_final, aes(
+        a <- ggplot(df, aes(
             x = Modifications,
             y = Freq,
             fill = Modifications
@@ -184,6 +163,7 @@ PlotPTM <- function(MQCombined,
             facet_wrap_paginate(. ~ variable, ncol = 1,
                                 nrow = nrow,
                                 page = ii) +
+
             theme_bw() +
             ggtitle("Frequency of modified peptides") +
             ylab("Peptide Frequency") +

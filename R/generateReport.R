@@ -61,6 +61,9 @@
 #' @param plot_unmodified_peptides If TRUE, it will show the Unmodified
 #' peptides. \code{PlotPTM()}.
 #'
+#' @param aggregate_PTMs If TRUE, same PTM that occur multiple times in the
+#'  same peptides,  will be aggregated together.
+#'
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #'
@@ -96,6 +99,7 @@ generateReport = function(MQPathCombined,
                         size_median = 1.5,
                         binwidth = 0.1,
                         plot_unmodified_peptides = FALSE,
+                        aggregate_PTMs = TRUE,
                         plots_per_page = 5){
 
     #Determine the template
@@ -123,6 +127,7 @@ generateReport = function(MQPathCombined,
             size_median = size_median,
             binwidth = binwidth,
             plot_unmodified_peptides = plot_unmodified_peptides,
+            aggregate_PTMs = aggregate_PTMs,
             plots_per_page = plots_per_page),
         output_file = name_output_file,
         output_dir = output_dir,

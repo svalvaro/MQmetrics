@@ -22,6 +22,7 @@ params:
   size_median: ''
   binwidth: ''
   plot_unmodified_peptides: ''
+  aggregate_PTMs: ''
   plots_per_page: ''
 ---
 
@@ -244,6 +245,7 @@ PlotPTM(MQCombined,
         log_base = params$log_base,
         plot_unmodified_peptides = params$plot_unmodified_peptides,
         palette = params$palette,
+        aggregate_PTMs = params$aggregate_PTMs,
         plots_per_page = params$plots_per_page)
 ```
 

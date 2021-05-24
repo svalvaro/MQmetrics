@@ -9,6 +9,7 @@ PlotPTM(
   peptides_modified = 1,
   plot_unmodified_peptides = FALSE,
   log_base = 2,
+  aggregate_PTMs = TRUE,
   palette = "Set2",
   plots_per_page = 5
 )
@@ -23,6 +24,9 @@ output. It is the result from using \code{make_MQCombined}.}
 peptides.}
 
 \item{log_base}{The logarithmic scale for the intensity. Default is 2.}
+
+\item{aggregate_PTMs}{If TRUE, same PTM that occur multiple times in the
+same peptides,  will be aggregated together.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}

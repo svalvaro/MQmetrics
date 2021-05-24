@@ -26,6 +26,11 @@ MaxQuantAnalysisInfo <- function(MQCombined){
 
     start_time <- runningTimes$`Start time`[1]
 
+    end_date <- runningTimes$`End date`[nrow(runningTimes)]
+
+    end_time <- runningTimes$`End time`[nrow(runningTimes)]
+
+
     #Parameters
 
     MaxQuant_version <- parameters$Value[parameters$Parameter == 'Version']
@@ -56,6 +61,7 @@ MaxQuantAnalysisInfo <- function(MQCombined){
                 start_time, '.'))
     print(paste0('The whole experiment lasted: ',days ,' days, ',
                  hours,' hours and ', mins, ' mins.'))
+    print(paste0('The Experiment finished on: ', end_date, ' at: ', end_time))
     print(paste0('The MaxQuant version used was: ', MaxQuant_version))
     print(paste0('The user was: ', user_name))
     print(paste0('The machine name was: ', machine_name))

@@ -342,8 +342,8 @@ PlotCombinedDynamicRange(MQCombined,
 
 The function `PlotAllDynamicRange()` takes as input the proteinGroups.txt
 table and returns the dynamic range of all experiments separated. If the 
-parameter show_shade is used, a square will appear showing the percent_proteins
-selected and the orders of abundance.
+parameter show_shade is used, a square will appear showing the
+*percent_proteins* selected and the orders of abundance.
 
 ```{r DynamicRangeAll, fig.height=10, fig.width=7.2}
 PlotAllDynamicRange(MQCombined,

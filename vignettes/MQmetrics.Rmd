@@ -386,7 +386,8 @@ if found the iRT peptides from Biognosys. Their retention time and intensity.
 ```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
 PlotiRT(MQCombined, 
       show_calibrated_rt = FALSE,
-      tolerance = 0.001)
+      tolerance = 0.001,
+      plots_per_page = 6)
 ```
 
 ## iRT peptides (2)
@@ -397,7 +398,8 @@ peptides of Biognosys.
 
 ```{r irt_peps2, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
 PlotiRTScore(MQCombined, 
-           tolerance = 0.001)
+           tolerance = 0.001,
+           plots_per_page = 6)
 ```
 
 ## Total Ion Current

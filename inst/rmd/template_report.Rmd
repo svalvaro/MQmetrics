@@ -44,7 +44,7 @@ MQCombined <- make_MQCombined(MQPathCombined,
 
 
 
-```{r ExperimentDuration}
+```{r ExperimentDuration, strip.white=FALSE}
 MaxQuantAnalysisInfo(MQCombined) 
 ```
 

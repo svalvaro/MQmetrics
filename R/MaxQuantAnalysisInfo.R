@@ -48,6 +48,8 @@ MaxQuantAnalysisInfo <- function(MQCombined){
 
     fasta_file <- parameters$Value[parameters$Parameter == 'Fasta file']
 
+    fasta_file <- gsub(';', '\n', fasta_file)
+
     iBAQ <- parameters$Value[parameters$Parameter == 'iBAQ']
 
     PTM <- parameters$Value[
@@ -55,21 +57,21 @@ MaxQuantAnalysisInfo <- function(MQCombined){
             'Modifications included in protein quantification'
         ]
 
-    print(paste0('The MaxQuant output directory is: ',
+    cat(paste0('The MaxQuant output directory is: \n',
                  MQPathCombined))
-    print(paste0('The experiment started the day: ',
+    cat(paste0('\nThe experiment started the day: ',
                 start_date, ' at the time: ',
                 start_time, '.'))
-    print(paste0('The whole experiment lasted: ',days ,' days, ',
+    cat(paste0('\nThe whole experiment lasted: ',days ,' days, ',
                  hours,' hours and ', mins, ' mins.'))
-    print(paste0('The Experiment finished on: ', end_date, ' at: ', end_time))
-    print(paste0('The MaxQuant version used was: ', MaxQuant_version))
-    print(paste0('The user was: ', user_name))
-    print(paste0('The machine name was: ', machine_name))
-    print(paste0('The PSM FDR was: ', PSM_FDR))
-    print(paste0('The protein FDR was: ', Protein_FDR))
-    print(paste0('The match between runs was: ', match_between_runs))
-    print(paste0('The fasta file used was: ', fasta_file))
-    print(paste0('The iBAQ presence is: ', iBAQ))
-    print(paste0('The PTM selected is/are: ', PTM))
+    cat(paste0('\nThe Experiment finished on: ', end_date, ' at: ', end_time))
+    cat(paste0('\nThe MaxQuant version used was: ', MaxQuant_version))
+    cat(paste0('\nThe user was: ', user_name))
+    cat(paste0('\nThe machine name was: ', machine_name))
+    cat(paste0('\nThe PSM FDR was: ', PSM_FDR))
+    cat(paste0('\nThe protein FDR was: ', Protein_FDR))
+    cat(paste0('\nThe match between runs was: ', match_between_runs))
+    cat(paste0('\nThe fasta file(s) used was: \n', fasta_file))
+    cat(paste0('\nThe iBAQ presence is: ', iBAQ))
+    cat(paste0('\nThe PTM selected is/are: ', PTM))
 }

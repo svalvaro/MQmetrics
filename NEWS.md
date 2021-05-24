@@ -33,5 +33,6 @@ Experiments.
 
 * Fixed units of time `MaxQuantAnalysisInfo()`  when experiment lasting
 longer than a day.
+* Added new line to `MaxQuantAnalyssInfo()` showing when the experiment ended.
 * Improved aesthethics in the plots from `PlotCombinedDynamicRange()` and 
 `PlotAllDynamicRange()`.

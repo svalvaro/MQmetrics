@@ -24,7 +24,7 @@ PlotPCA <- function(MQCombined,
     if (intensity_type == "Intensity") {
         intensities <- proteinGroups %>%
             select(contains("Intensity ") & -contains("LFQ"))
-        title <- "PCA of intensity"
+        title <- "PCA of Protein Intensity"
         colnames(intensities) <- gsub(
             pattern = "Intensity",
             "",
@@ -34,7 +34,7 @@ PlotPCA <- function(MQCombined,
 
     if (intensity_type == "LFQ") {
         intensities <- proteinGroups %>% select(contains("LFQ intensity "))
-        title <- "PCA of LFQ intensities"
+        title <- "PCA of Protein LFQ intensities"
         colnames(intensities) <- gsub(
             pattern = "LFQ intensity",
             "",
@@ -53,7 +53,7 @@ PlotPCA <- function(MQCombined,
                 "",
                 colnames(intensities)
             )
-            title <- "PCA of intensity"
+            title <- "PCA of Protein Intensity"
         }
     }
 

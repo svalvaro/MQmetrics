@@ -264,7 +264,8 @@ PlotIntensity <- function(MQCombined,
                 ylab(ylab) +
                 theme_bw() +
                 scale_fill_brewer(palette = palette) +
-                theme(legend.position = "bottom")
+                theme(legend.position = "bottom",
+                      legend.title = element_blank())
 
             if (long_names == TRUE) {
                 a + scale_x_discrete(labels = function(x) {

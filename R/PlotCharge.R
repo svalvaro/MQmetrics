@@ -37,7 +37,7 @@ PlotCharge <- function(MQCombined,
     getPalette <- colorRampPalette(brewer.pal(8, palette))
 
 
-    plot_list = list()
+    myplots = list()
 
     for (ii in seq_len(n_pages_needed)) {
         if (colourCount < plots_per_page) {
@@ -64,6 +64,7 @@ PlotCharge <- function(MQCombined,
             theme_bw() +
             theme(legend.position = "none")
 
-        print(p)
+        myplots[[ii]] <- p
     }
+    return(myplots)
 }

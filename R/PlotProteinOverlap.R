@@ -44,6 +44,7 @@ PlotProteinOverlap <- function(MQCombined) {
         scale_fill_manual(values = getPalette(nrow(df_bin_stat))) +
         ylab("Number of Proteins") +
         theme_bw() +
-        ggtitle("Protein Overlap Between samples") +
+        ggtitle("Protein Overlap") +
+        #ggtitle("Protein Overlap Between samples") +
         labs(fill = "samples",x = NULL)
 }

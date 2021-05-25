@@ -48,6 +48,8 @@ PlotAndromedaScore <- function(MQCombined,
         (colourCount) / plots_per_page
     )
 
+    myplots <- list()
+
     for (ii in seq_len(n_pages_needed)) {
         if (colourCount < plots_per_page) {
             nrow <- colourCount
@@ -69,6 +71,8 @@ PlotAndromedaScore <- function(MQCombined,
             scale_fill_manual(values = getPalette(colourCount)) +
             theme(legend.position = "none")
 
-        print(p)
+        myplots[[ii]] <- p
     }
+
+    return(myplots)
 }

@@ -146,6 +146,7 @@ PlotiRTScore <- function(MQCombined,
         n_pages_needed <- ceiling(n_samples / plots_per_page)
 
 
+        myplots <- list()
         for (ii  in seq_len(n_pages_needed)) {
 
             if (n_samples < plots_per_page) {
@@ -158,23 +159,25 @@ PlotiRTScore <- function(MQCombined,
 
             # plot it.
             p <- ggscatter(iRT_table_prot_maxvalues,
-                        x = "iRT.score",
-                        y = "Retention time",
-                        add = "reg.line") +
-                    theme_bw() +
-                    geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
-                    stat_cor(label.x = 3, label.y = 120) +
-                    stat_regline_equation(label.x = 3, label.y = 110) +
-                    facet_wrap_paginate(~Experiment, page = ii, nrow = nrow) +
-                    geom_point(aes(fill = names_Sequence),
-                                shape = 21,
-                                colour = "black", size = 3) +
-                    ggtitle(label = "Retention time of
-                            the Biognosys iRT peptides.") +
-                    theme(legend.position = "bottom")
+                    x = "iRT.score",
+                    y = "Retention time",
+                    add = "reg.line") +
+                theme_bw() +
+                geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
+                stat_cor(label.x = 3, label.y = 120) +
+                stat_regline_equation(label.x = 3, label.y = 110) +
+                facet_wrap_paginate(~Experiment, page = ii, nrow = nrow) +
+                geom_point(aes(fill = names_Sequence),
+                            shape = 21,
+                            colour = "black", size = 3) +
+                ggtitle(label = "Retention time ofthe Biognosys iRT peptides.")+
+                labs(fill = 'iRT peptides')+
+                theme(legend.position = "bottom")
+
+            myplots[[ii]] <- p
         }
 
 
     }
-    return(p)
+    return(myplots)
 }

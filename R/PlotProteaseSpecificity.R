@@ -57,6 +57,8 @@ PlotProteaseSpecificity <- function(MQCombined,
 
     getPalette <- colorRampPalette(brewer.pal(8, palette))
 
+    myplots <- list()
+
     for (ii in seq_len(n_pages_needed)) {
         if (n_samples < plots_per_page) {
             nrow <- n_samples
@@ -110,6 +112,9 @@ PlotProteaseSpecificity <- function(MQCombined,
         # Make a title
         title <- ggdraw() + draw_label("Protease Specificity", size = 15)
 
-        print(plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1.5)))
+        #print(plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1.5)))
+
+        myplots[[ii]] <- plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1.5))
     }
+    return(myplots)
 }

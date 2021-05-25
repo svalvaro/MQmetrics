@@ -108,6 +108,8 @@ PlotiRT <- function(MQCombined,
 
         n_pages_needed <- ceiling(n_samples / plots_per_page)
 
+        myplots <- list()
+
         for (ii in seq_len(n_pages_needed)) {
 
             if (n_samples < plots_per_page) {
@@ -147,7 +149,8 @@ PlotiRT <- function(MQCombined,
                         labs(colour = "iRT peptides") +
                         theme(legend.position = "bottom")
                 }
-        print(p)
+        myplots[[ii]] <- p
         }
     }
+    return(myplots)
 }

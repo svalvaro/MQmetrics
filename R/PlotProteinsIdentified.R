@@ -39,7 +39,8 @@ PlotProteinsIdentified <- function(MQCombined,
             colnames(protein_table)
         )
 
-        title <- "Proteins Identified based on Intensity"
+        #title <- "Protein Identification based on Intensity"
+        title <- "Protein Identification"
     }
 
     if (intensity_type == "LFQ") {
@@ -50,7 +51,7 @@ PlotProteinsIdentified <- function(MQCombined,
             "",
             colnames(protein_table)
         )
-        title <- "Proteins Identified based on LFQ intensity"
+        title <- "Protein Identification based on LFQ intensity"
 
         # Error if LFQ Intensity not found.
 
@@ -69,11 +70,11 @@ PlotProteinsIdentified <- function(MQCombined,
                 colnames(protein_table)
             )
 
-            title <- "Proteins Identified based on Intensity"
+            title <- "Protein Identification based on Intensity"
         }
     }
 
-    # Proteins Identified
+    # Protein Identification
     table_prot <- data.frame(nrow(protein_table) - colSums(protein_table == 0))
 
     rownames_prot <- rownames(table_prot)
@@ -112,7 +113,8 @@ PlotProteinsIdentified <- function(MQCombined,
         theme_bw() +
         scale_fill_brewer(palette = palette) +
         #scale_fill_manual(values = c('olivedrab3','pink4')) +
-        theme(legend.position = "bottom")
+        theme(legend.position = "bottom",
+              legend.title = element_blank())
 
     if (long_names == TRUE) {
         a + scale_x_discrete(labels = function(x) {

@@ -80,6 +80,8 @@ PlotHydrophobicity <- function(MQCombined,
         (colourCount) / plots_per_page
     )
 
+    myplots <- list()
+
     for (ii in seq_len(n_pages_needed)) {
         if ((length(df) - 1) < plots_per_page) {
             nrow <- length(df) - 1
@@ -107,15 +109,15 @@ PlotHydrophobicity <- function(MQCombined,
                 group_by(variable) %>%
                 summarise(median(GRAVY))
 
-            print(p + geom_vline(
+            p <- p + geom_vline(
                 data = median_groups,
                 aes(xintercept = `median(GRAVY)`, group = variable),
                 color = "red",
                 linetype = "dashed",
                 size = size_median
-            ))
-        } else {
-            print(p)
+                )
         }
+        myplots[[ii]] <- p
     }
+    return(myplots)
 }

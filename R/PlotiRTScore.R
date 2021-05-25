@@ -170,7 +170,8 @@ PlotiRTScore <- function(MQCombined,
                 geom_point(aes(fill = names_Sequence),
                             shape = 21,
                             colour = "black", size = 3) +
-                ggtitle(label = "Retention time ofthe Biognosys iRT peptides.")+
+                ggtitle(
+                    label = "Retention time of the Biognosys iRT peptides.")+
                 labs(fill = 'iRT peptides')+
                 theme(legend.position = "bottom")
 

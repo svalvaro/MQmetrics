@@ -92,6 +92,6 @@ PlotPCA <- function(MQCombined,
             theme_bw() +
             theme(legend.position = "none") +
             guides(color = guide_legend(ncol = 3)) +
-            scale_color_manual(values = getPalette(colourCount))
+            scale_fill_manual(values = getPalette(colourCount))
     }
 }

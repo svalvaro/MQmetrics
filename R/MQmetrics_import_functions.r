@@ -4,6 +4,7 @@
 #' @import rmarkdown
 #' @import ggridges
 #' @import purrr
+#' @import gghalves
 #' @importFrom stats aggregate complete.cases lm coef median
 #' @importFrom readr read_delim
 #' @importFrom magrittr %>%

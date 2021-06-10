@@ -2,15 +2,16 @@
 # MQmetrics
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-The goal of MQmetrics is to analyze Proteomics data from LC-MS/MS. It
-takes the output tables from MaxQuant and plots multiple parameters.
+MQmetrics serves as a tool to analyze the quality of the proteomics data
+coming from the LC-MS/MS. As input, it takes the directory to the files
+resulting from a MaxQuant analysis and returns a pdf with diverse
+parameters.
 
 ## Installation
 
-You can install MQmetrics from Biocodunctor with:
+You can install the stable version of MQmetrics from Biocodunctor with:
 
 ``` r
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -20,7 +21,15 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("MQmetrics")
 ```
 
-Or the development version from [GitHub](https://github.com/svalvaro/)
+I highly advice to install the development version from bioconductor
+since it contains several updates (check the news).
+
+``` r
+BiocManager::install("MQmetrics",  version = 'devel')
+```
+
+You can also install the latest version from
+[GitHub](https://github.com/svalvaro/) if you know what you are doing
 with:
 
 ``` r

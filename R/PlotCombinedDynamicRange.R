@@ -36,6 +36,7 @@ PlotCombinedDynamicRange <- function(MQCombined,
 
     a <- ggplot(rank, aes(x = vector1, y = Intensity)) +
         theme_bw() +
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
         ggtitle("Dynamic range") +
         ylab(expression("Log"[10] * "(Intensity)")) +
         xlab("Protein Abundance Rank")
@@ -58,7 +59,7 @@ PlotCombinedDynamicRange <- function(MQCombined,
                     xmax = nrow(rank) - limits_row,
                     ymin = bottom_y,
                     ymax = upper_y,
-                    alpha = 0.2,
+                    alpha = 0.3,
                     fill = '#5B84B1FF'
         ) +
             annotate("text",

@@ -11,7 +11,7 @@
 * Usage of ultiples of 4 spaces for line indents.
 * Removed *LazyData: TRUE*.
 
-# MQmetrics 0.99.4 
+# MQmetrics 0.99.4 (Bioconductor stable version 3.13)
 
 * The function `generateReport()` now takes the parameter *name_output_file* 
 to name the output pdf file.
@@ -29,7 +29,7 @@ Experiments.
 * Updated vignette style to Bioconductor's.
 * Improved aesthethics of `PlotProteinOverlap()` and `PlotPCA()`.
 
-# MQmetrics 1.1.2 (Bioconductor version)
+# MQmetrics 1.1.2 (Bioconductor Development Version)
 
 * Fixed units of time `MaxQuantAnalysisInfo()`  when experiment lasting
 longer than a day.

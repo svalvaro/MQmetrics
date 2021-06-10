@@ -6,7 +6,6 @@
 #' @param palette
 #' @param plots_per_page
 #'
-#' @importFrom ggplot2 remove_missing
 #'
 #' @return
 #' @export
@@ -21,8 +20,7 @@ PlotPTMAcrossSamples <- function(MQCombined,
 
     df <- MQCombined$modificationSpecificPeptides.txt
 
-
-    df <- df[grepl(PTM_of_interest, df$Modifications, fixed = TRUE), ]
+    df <- df[grepl(PTM_of_interest, df$Modifications, fixed = TRUE),]
 
     if(nrow(df)==0){
         message('PTM provided not found,\nDid you write it correctly?')
@@ -54,19 +52,19 @@ PlotPTMAcrossSamples <- function(MQCombined,
 
 
 
-        p <- ggplot(df_melted, aes(x = variable, y = value, fill = Modifications))+
+        ggplot(df_melted, aes(x = variable, y = value, fill = Modifications))+
             #geom_violin()#+
-            gghalves::geom_half_violin()+
-            gghalves::geom_half_point(shape = 21, fill = 'navyblue')+
-            gghalves::geom_half_boxplot(width = 0.2)+
+            gghalves::geom_half_violin(side = 'r',
+                                       position = position_nudge(x = 0.25, y = 0),
+                                       adjust = 2, trim = FALSE, alpha = 0.4)+
+            geom_jitter(width = 0.2, alpha = 0.5)+
+            geom_boxplot(width = 0.1, alpha= 0.5, position = position_nudge(x = 0.25, y = 0))+
             theme_bw()+
             ggtitle(paste0('Intensities of peptides with: ', PTM_of_interest))+
             xlab('Experiment')+
             ylab(paste0('Log',log_base,' of Intensity'))+
             theme(legend.position = 'none')
-
         return(p)
-
     }
 
 

@@ -4,7 +4,6 @@
 #' @import rmarkdown
 #' @import ggridges
 #' @import purrr
-#' @import gghalves
 #' @importFrom stats aggregate complete.cases lm coef median
 #' @importFrom readr read_delim
 #' @importFrom magrittr %>%
@@ -26,5 +25,6 @@
 #' @importFrom gtable gtable_add_grob gtable_add_cols
 #' @importFrom plyr defaults
 #' @importFrom ggrepel geom_text_repel
+#' @importFrom gghalves geom_half_violin
 NULL
 

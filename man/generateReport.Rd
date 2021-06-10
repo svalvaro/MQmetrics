@@ -27,6 +27,7 @@ generateReport(
   binwidth = 0.1,
   plot_unmodified_peptides = FALSE,
   aggregate_PTMs = TRUE,
+  PTM_of_interest = "Oxidation (M)",
   plots_per_page = 5
 )
 }

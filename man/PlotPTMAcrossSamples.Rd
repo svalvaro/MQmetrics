@@ -2,24 +2,41 @@
 % Please edit documentation in R/PlotPTMAcrossSamples.R
 \name{PlotPTMAcrossSamples}
 \alias{PlotPTMAcrossSamples}
-\title{Title}
+\title{Plot PTM across samples}
 \usage{
 PlotPTMAcrossSamples(
   MQCombined,
   PTM_of_interest = "Oxidation (M)",
   log_base = 2,
   long_names = FALSE,
-  sep_names = NULL,
-  palette = "Set2",
-  plots_per_page = 5
+  sep_names = NULL
 )
 }
 \arguments{
-\item{plots_per_page}{}
+\item{MQCombined}{Object list containing all the files from the MaxQuant
+output. It is the result from using \code{make_MQCombined}.}
+
+\item{PTM_of_interest}{Post-Translation Modification of interest. It is
+important they are defined exactly as MaxQuant does:
+Examples:
+'Oxidation (M)', 'Acetyl (Protein N-term)', 'Unmodified', etc.}
+
+\item{log_base}{The logarithmic scale for the intensity. Default is 2.}
+
+\item{long_names}{If TRUE, samples having long names will be considered, and
+the name will be split by sep_names. By default = FALSE.}
+
+\item{sep_names}{If long_names is TRUE, sep_names has to be selected. Samples
+names will be split. By default is NULL.}
 }
 \value{
-
+A plot showing the PTM of interest.
 }
 \description{
-Title
+Plot PTM across samples
+}
+\examples{
+MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
+MQCombined <- make_MQCombined(MQPathCombined)
+PlotPTMAcrossSamples(MQCombined, PTM_of_interest = 'Oxidation (M)')
 }

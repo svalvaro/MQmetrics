@@ -1,4 +1,4 @@
-#' Post Translational Modifications
+#' Post*Translational Modifications
 #'
 #' @param MQCombined Object list containing all the files from the MaxQuant
 #' output. It is the result from using \code{make_MQCombined}.

@@ -100,6 +100,7 @@ generateReport = function(MQPathCombined,
                         binwidth = 0.1,
                         plot_unmodified_peptides = FALSE,
                         aggregate_PTMs = TRUE,
+                        PTM_of_interest = 'Oxidation (M)',
                         plots_per_page = 5){
 
     #Determine the template
@@ -128,6 +129,7 @@ generateReport = function(MQPathCombined,
             binwidth = binwidth,
             plot_unmodified_peptides = plot_unmodified_peptides,
             aggregate_PTMs = aggregate_PTMs,
+            PTM_of_interest = PTM_of_interest,
             plots_per_page = plots_per_page),
         output_file = name_output_file,
         output_dir = output_dir,

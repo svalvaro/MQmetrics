@@ -446,8 +446,9 @@ PlotPTM(MQCombined,
       aggregate_PTMs = TRUE,
       plots_per_page = 6)
 ```
-## Post-translational modifications across samples
 
+
+## Post-translational modifications across samples
 
 The function `PlotPTMAcrossSamples()`, takes as input 
 the modificationSpecificPeptides.txt table and a modification of interest. It 
@@ -458,7 +459,10 @@ MaxQuant:
 
 ```{r ptm_single, fig.height=8, fig.width=7.2}
 
-PlotPTMAcrossSamples(MQCombined, PTM_of_interest = 'Oxidation (M)')
+PlotPTMAcrossSamples(MQCombined, 
+                     PTM_of_interest = 'Acetyl (Protein N-term)',
+                     long_names = TRUE,
+                     sep_names = '_')
 
 ```
 

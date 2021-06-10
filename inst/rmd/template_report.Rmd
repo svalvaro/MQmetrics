@@ -23,6 +23,7 @@ params:
   binwidth: ''
   plot_unmodified_peptides: ''
   aggregate_PTMs: ''
+  PTM_of_interest: ''
   plots_per_page: ''
 ---
 
@@ -247,6 +248,15 @@ PlotPTM(MQCombined,
         palette = params$palette,
         aggregate_PTMs = params$aggregate_PTMs,
         plots_per_page = params$plots_per_page)
+```
+
+\newpage
+```{r PTMAcrossSamples}
+PlotPTMAcrossSamples(MQCombined, 
+                    PTM_of_interest = params$PTM_of_interest,
+                    log_base = params$log_base, 
+                    long_names = params$long_names, 
+                    sep_names = params$sep_names)
 ```
 
 \newpage

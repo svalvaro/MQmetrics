@@ -23,16 +23,22 @@ Experiments.
 * Version released within Bioconductor as 1.00.0
 
 
-# MQmetrics 1.1.1 (Bioconductor version)
+# MQmetrics 1.1.1 
 
 * Added pagination to `PlotiRT()` and `PlotiRTScore()`.
 * Updated vignette style to Bioconductor's.
 * Improved aesthethics of `PlotProteinOverlap()` and `PlotPCA()`.
 
-# MQmetrics 1.1.2 (Github version)
+# MQmetrics 1.1.2 (Bioconductor version)
 
 * Fixed units of time `MaxQuantAnalysisInfo()`  when experiment lasting
 longer than a day.
 * Added new line to `MaxQuantAnalyssInfo()` showing when the experiment ended.
 * Improved aesthethics in the plots from `PlotCombinedDynamicRange()` and 
 `PlotAllDynamicRange()`.
+
+# MQmetrics 1.1.3 (Github version)
+
+* Added new function `PlotPTMAcrossSamples()`, it takes as input one PTM of 
+interest and shows its intensities across the samples. 
+This function is similar to `PlotPTM()` but in more detail.

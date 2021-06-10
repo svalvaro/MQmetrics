@@ -69,7 +69,7 @@ PlotPTMAcrossSamples <- function(MQCombined,
                                                 adjust = 2, trim = FALSE,
                                                 alpha = 0.4,
                                                 fill = '#FEE715FF')+
-                    geom_jitter(width = 0.2, alpha = 0.5, color = '#101820FF')+
+                    geom_jitter(width = 0.2, alpha = 0.1, color = '#101820FF')+
                     geom_boxplot(width = 0.07, alpha= 0.1,
                                 position = position_nudge(x = 0.29, y = 0),
                                 outlier.shape = NA,

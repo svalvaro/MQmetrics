@@ -8,6 +8,8 @@ PlotPTMAcrossSamples(
   MQCombined,
   PTM_of_interest = "Oxidation (M)",
   log_base = 2,
+  long_names = FALSE,
+  sep_names = NULL,
   palette = "Set2",
   plots_per_page = 5
 )

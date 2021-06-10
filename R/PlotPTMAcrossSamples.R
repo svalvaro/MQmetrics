@@ -12,10 +12,12 @@
 #'
 #' @examples
 PlotPTMAcrossSamples <- function(MQCombined,
-                                 PTM_of_interest = 'Oxidation (M)',
-                                 log_base = 2,
-                                 palette = 'Set2',
-                                 plots_per_page = 5){
+                                PTM_of_interest = 'Oxidation (M)',
+                                log_base = 2,
+                                long_names = FALSE,
+                                sep_names = NULL,
+                                palette = 'Set2',
+                                plots_per_page = 5){
 
 
     df <- MQCombined$modificationSpecificPeptides.txt
@@ -52,18 +54,25 @@ PlotPTMAcrossSamples <- function(MQCombined,
 
 
 
-        ggplot(df_melted, aes(x = variable, y = value, fill = Modifications))+
-            #geom_violin()#+
-            gghalves::geom_half_violin(side = 'r',
-                                       position = position_nudge(x = 0.25, y = 0),
-                                       adjust = 2, trim = FALSE, alpha = 0.4)+
-            geom_jitter(width = 0.2, alpha = 0.5)+
-            geom_boxplot(width = 0.1, alpha= 0.5, position = position_nudge(x = 0.25, y = 0))+
-            theme_bw()+
-            ggtitle(paste0('Intensities of peptides with: ', PTM_of_interest))+
-            xlab('Experiment')+
-            ylab(paste0('Log',log_base,' of Intensity'))+
-            theme(legend.position = 'none')
+         ggplot(df_melted, aes(x = variable, y = value,
+                                   fill = Modifications))+
+                gghalves::geom_half_violin(side = 'r',
+                                            position = position_nudge(x = 0.25,
+                                                                    y = 0),
+                                            adjust = 2, trim = FALSE,
+                                            alpha = 0.4,
+                                            fill = '#FEE715FF')+
+                geom_jitter(width = 0.2, alpha = 0.5, color = '#101820FF')+
+                geom_boxplot(width = 0.07, alpha= 0.1,
+                            position = position_nudge(x = 0.29, y = 0),
+                            outlier.shape = NA,
+                            fill = '#FEE715FF')+
+                theme_bw()+
+                ggtitle(paste0('Intensities of peptides with: ',
+                               PTM_of_interest))+
+                xlab('Experiment')+
+                ylab(paste0('Log',log_base,' of Intensity'))+
+                theme(legend.position = 'none')
         return(p)
     }
 

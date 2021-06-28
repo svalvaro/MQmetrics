@@ -147,6 +147,8 @@ PlotPTM <- function(MQCombined,
 
     getPalette <- colorRampPalette(brewer.pal(8, palette))
 
+    myplots <- list() # initate a list to store the plots
+
     for (ii in seq_len(n_pages_needed)) {
         if (n_samples < plots_per_page) {
             nrow <- n_samples
@@ -210,8 +212,9 @@ PlotPTM <- function(MQCombined,
 
         legend <- get_legend(a)
 
-        d <- plot_grid(prow, legend, ncol = 1, rel_heights = c(9, 1))
 
-        print(d)
+
+        myplots[[ii]] <-  plot_grid(prow, legend, ncol = 1, rel_heights = c(9, 1))
     }
+    return(myplots)
 }

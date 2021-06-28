@@ -46,7 +46,8 @@ PlotPeaks <- function(MQCombined,
         ylab("Number of Peaks") +
         ggtitle("Peaks detected and sequenced in the full scans") +
         scale_fill_brewer(palette = palette) +
-        theme(legend.position = "bottom")
+        theme(legend.position = "bottom")+
+        labs(fill = element_blank())
 
 
     if (long_names == TRUE) {

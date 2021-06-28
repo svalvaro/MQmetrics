@@ -78,6 +78,8 @@ PlotTotalIonCurrent <- function(MQCombined,
     # plot(x = 1:length(vector_sg2),
     #      vector_sg2, type = 'l')
 
+    myplots <- list()
+
     for (ii in seq_len(n_pages_needed)) {
         if (n_samples < plots_per_page) {
             nrow <- n_samples
@@ -99,14 +101,16 @@ PlotTotalIonCurrent <- function(MQCombined,
             scale_colour_manual(values = getPalette(colourCount))
 
         if (show_max_value == TRUE) {
-            print(p + geom_label(
+            p <- p + geom_label(
                 data = . %>% group_by(Experiment) %>%
                     filter(`Total ion current` == max(`Total ion current`)),
                 aes(label = format(`Total ion current`,
                                     digits = 2, scientific = TRUE)), hjust = 0.5
-            ))
-        } else {
-            print(p)
+            )
         }
+
+        myplots[[ii]] <- p
     }
+
+    return(myplots)
 }

@@ -47,7 +47,8 @@ PlotMsMs <- function(MQCombined,
         ylab("MS/MS Frequency") +
         ggtitle("MS/MS Submitted and Identified") +
         scale_fill_brewer(palette = palette) +
-        theme(legend.position = "bottom")
+        theme(legend.position = "bottom")+
+        labs(fill = element_blank())
 
     if (long_names == TRUE) {
         b + scale_x_discrete(labels = function(x) {

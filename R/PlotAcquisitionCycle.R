@@ -38,6 +38,8 @@ PlotAcquisitionCycle <- function(
 
     getPalette <- colorRampPalette(brewer.pal(8, palette))
 
+    myplots <- list()
+
     for (ii in seq_len(n_pages_needed)) {
         if (n_samples < plots_per_page) {
             nrow <- n_samples
@@ -76,10 +78,12 @@ PlotAcquisitionCycle <- function(
         # Plot them together
         c <- plot_grid(a, b)
         # Make a title
-        title <- ggdraw() + draw_label("Acquisition Cycle")
+        title <- ggdraw() + draw_label("Acquisition Cycle Parameters")
 
-        d <- plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1))
 
-        print(d)
+
+        myplots[[ii]] <- plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1))
     }
+
+    return(myplots)
 }

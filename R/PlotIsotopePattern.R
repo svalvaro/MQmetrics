@@ -46,7 +46,8 @@ PlotIsotopePattern <- function(MQCombined,
         ylab('Frequency Isotope Patterns')+
         ggtitle('Isotope Patterns detected and sequenced')+
         scale_fill_brewer(palette = palette)+
-        theme(legend.position = 'bottom')
+        theme(legend.position = 'bottom')+
+        labs(fill = element_blank())
 
     if (long_names == TRUE) {
         b + scale_x_discrete(labels = function(x) {

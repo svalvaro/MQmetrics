@@ -49,7 +49,8 @@ Imports:
     knitr,
     rmarkdown,
     ggrepel,
-    gghalves
+    gghalves,
+    tools
 VignetteBuilder: knitr
 Suggests: 
     testthat (>= 3.0.0),

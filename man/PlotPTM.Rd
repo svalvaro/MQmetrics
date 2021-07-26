@@ -10,6 +10,7 @@ PlotPTM(
   plot_unmodified_peptides = FALSE,
   log_base = 2,
   aggregate_PTMs = TRUE,
+  combine_same_residue_ptms = TRUE,
   palette = "Set2",
   plots_per_page = 5
 )
@@ -27,6 +28,10 @@ peptides.}
 
 \item{aggregate_PTMs}{If TRUE, same PTM that occur multiple times in the
 same peptides,  will be aggregated together.}
+
+\item{combine_same_residue_ptms}{Combine the PTMs that happen in the same
+residue such as Dimethyl (KR), Trimethyl (KR) into only one group:
+Methyl (KR).}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}

@@ -10,6 +10,9 @@
 #' @param log_base The logarithmic scale for the intensity. Default is 2.
 #' @param aggregate_PTMs If TRUE, same PTM that occur multiple times in the
 #'  same peptides,  will be aggregated together.
+#' @param combine_same_residue_ptms Combine the PTMs that happen in the same
+#' residue such as Dimethyl (KR), Trimethyl (KR) into only one group:
+#' Methyl (KR).
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #' @return Two plots per sample
@@ -24,6 +27,7 @@ PlotPTM <- function(MQCombined,
                     plot_unmodified_peptides = FALSE,
                     log_base = 2,
                     aggregate_PTMs = TRUE,
+                    combine_same_residue_ptms = TRUE,
                     palette = "Set2",
                     plots_per_page = 5) {
 
@@ -46,14 +50,18 @@ PlotPTM <- function(MQCombined,
 
     mod_melted <- melt(mod_melted, id.vars = c("Modifications", "Proteins"))
 
+    # table with the modification, the proteins, the experiment, and the
+    # frequency.
     mod_melted[is.na(mod_melted)] <- 0
 
-    # Min peptides modified per Protein, change it to per group.
-    # mod_melted <- mod_melted[(mod_melted$value > peptides_modified),]
+
+    # Frequency of each modification
 
     mod_frequencies <- mod_melted %>%
         group_by(Modifications, variable) %>%
         summarise(Freq = sum(value))
+
+    # Separate the peptides containing multiple modifications:
 
     df <- mod_frequencies %>%
         separate_rows(Modifications, sep = ";") %>%
@@ -64,6 +72,7 @@ PlotPTM <- function(MQCombined,
 
     df$variable <- gsub("Experiment", "", df$variable)
 
+    # Remove the peptides with less frequency than the peptides modified
     df <- df[df$Freq >= peptides_modified, ]
 
 
@@ -73,13 +82,17 @@ PlotPTM <- function(MQCombined,
 
 
 
-    # Aggregate together PTMs like
-    # 2 oxidation, 3 oxidation, 2 acetylation ...
+
 
     if(aggregate_PTMs == TRUE){
 
+
+        # Aggregate together PTMs like
+        # 2 oxidation, 3 oxidation, 2 acetylation ...
+
         mod_join <- df
 
+        # Obtain the row numbers of peptides with multiple modifications
         indexes <- which( grepl('[0-9]',mod_join$Modifications))
 
         df <- mod_join[indexes,]
@@ -87,7 +100,8 @@ PlotPTM <- function(MQCombined,
         mod_final <- mod_join[-c(indexes),] # removed indexes
 
         combined <- df %>%
-            mutate(Mod2 = str_replace_all(Modifications, "[:digit:]", "") %>% str_squish(),
+            mutate(Mod2 = str_replace_all(Modifications, "[:digit:]", "") %>%
+                       str_squish(),
                    sample_num = as.numeric(gsub("\\D", "", Modifications)),
                    frequency2 = sample_num * Freq) %>%
             group_by(variable,Mod2) %>%
@@ -103,7 +117,67 @@ PlotPTM <- function(MQCombined,
             group_by(Modifications, variable) %>%
             summarise(Freq = sum(Freq))
 
+
+
+
+
     }
+
+    if (combine_same_residue_ptms == TRUE) {
+
+        # Also needs to be aggregated PTMs like mono, di, Tri
+
+        #Find the Di- modifications
+        di_indexes <- which(grepl('^Di', df$Modifications))
+
+
+        #Find the Tri- modifications
+        tri_indexes <- which(grepl('^Tri', df$Modifications))
+
+
+        # If there are not Di- this won't be run
+        if (length(di_indexes) > 0) {
+            # Multiply the frequency of the indexes with Di  by 2
+            # we will leave it for now as 1 modification
+
+            df$Freq[di_indexes] <- df$Freq[di_indexes] * 1
+
+            # Remove Di- from the name. And make the first letter in cap
+            df$Modifications[di_indexes] <- gsub('^Di','',
+                                                 df$Modifications[di_indexes])
+            df$Modifications[di_indexes] <- tools::toTitleCase(
+                df$Modifications[di_indexes])
+
+            # Do the same for tri modifications
+        }
+
+        # If there are not Tri- this won't be run
+        if (length(tri_indexes) > 0) {
+
+
+            # Do the same for tri modifications
+
+            # Multiply the frequency of the indexes with Tri  by 3
+            # we will leave it for now as 1 modification
+            df$Freq[tri_indexes] <- df$Freq[tri_indexes] * 1
+
+
+            # Remove Tri- from the name. And make the first letter in cap
+            df$Modifications[tri_indexes] <- gsub('^Tri','',
+                                                  df$Modifications[tri_indexes])
+            df$Modifications[tri_indexes] <- tools::toTitleCase(
+                df$Modifications[tri_indexes])
+        }
+
+
+        # Finally aggregate the df table
+
+        df <- df %>%
+                group_by(Modifications, variable) %>%
+                summarise(Freq = sum(Freq))
+    }
+
+
 
 
     # For Intensity plot
@@ -214,7 +288,8 @@ PlotPTM <- function(MQCombined,
 
 
 
-        myplots[[ii]] <-  plot_grid(prow, legend, ncol = 1, rel_heights = c(9, 1))
+        myplots[[ii]] <-  plot_grid(prow, legend, ncol = 1,
+                                    rel_heights = c(9, 1))
     }
     return(myplots)
 }

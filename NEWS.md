@@ -42,3 +42,6 @@ longer than a day.
 * Added new function `PlotPTMAcrossSamples()`, it takes as input one PTM of 
 interest and shows its intensities across the samples. 
 This function is similar to `PlotPTM()` but in more detail.
+* In the function `PlotPTM()` a parameter `combine_same_residue_ptms` has been
+added. It combines multiple PTMs happening in the same residue such as:
+Dimethyl (KR), Trimethyl (KR).

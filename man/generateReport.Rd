@@ -27,6 +27,7 @@ generateReport(
   binwidth = 0.1,
   plot_unmodified_peptides = FALSE,
   aggregate_PTMs = TRUE,
+  combine_same_residue_ptms = TRUE,
   PTM_of_interest = "Oxidation (M)",
   plots_per_page = 5
 )
@@ -96,6 +97,10 @@ peptides. \code{PlotPTM()}.}
 
 \item{aggregate_PTMs}{If TRUE, same PTM that occur multiple times in the
 same peptides,  will be aggregated together.}
+
+\item{combine_same_residue_ptms}{Combine the PTMs that happen in the same
+residue such as Dimethyl (KR), Trimethyl (KR) into only one group:
+Methyl (KR).}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
 }

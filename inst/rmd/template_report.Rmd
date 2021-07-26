@@ -23,6 +23,7 @@ params:
   binwidth: ''
   plot_unmodified_peptides: ''
   aggregate_PTMs: ''
+  combine_same_residue_ptms: ''
   PTM_of_interest: ''
   plots_per_page: ''
 ---
@@ -32,7 +33,8 @@ params:
 knitr::opts_chunk$set(echo=FALSE,
                       warning=FALSE,
                       error=TRUE,
-                      message=FALSE, 
+                      message=FALSE,
+                      comment = NA,
                       fig.height = 12,
                       fig.width = 10)
 ```
@@ -247,6 +249,7 @@ PlotPTM(MQCombined,
         plot_unmodified_peptides = params$plot_unmodified_peptides,
         palette = params$palette,
         aggregate_PTMs = params$aggregate_PTMs,
+        combine_same_residue_ptms = params$combine_same_residue_ptms,
         plots_per_page = params$plots_per_page)
 ```
 

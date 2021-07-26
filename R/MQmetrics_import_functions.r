@@ -26,5 +26,6 @@
 #' @importFrom plyr defaults
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom gghalves geom_half_violin
+#' @importFrom tools toTitleCase
 NULL
 

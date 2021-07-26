@@ -64,6 +64,10 @@
 #' @param aggregate_PTMs If TRUE, same PTM that occur multiple times in the
 #'  same peptides,  will be aggregated together.
 #'
+#' @param combine_same_residue_ptms Combine the PTMs that happen in the same
+#' residue such as Dimethyl (KR), Trimethyl (KR) into only one group:
+#' Methyl (KR).
+#'
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #'
@@ -100,6 +104,7 @@ generateReport = function(MQPathCombined,
                         binwidth = 0.1,
                         plot_unmodified_peptides = FALSE,
                         aggregate_PTMs = TRUE,
+                        combine_same_residue_ptms = TRUE,
                         PTM_of_interest = 'Oxidation (M)',
                         plots_per_page = 5){
 
@@ -129,6 +134,7 @@ generateReport = function(MQPathCombined,
             binwidth = binwidth,
             plot_unmodified_peptides = plot_unmodified_peptides,
             aggregate_PTMs = aggregate_PTMs,
+            combine_same_residue_ptms = combine_same_residue_ptms,
             PTM_of_interest = PTM_of_interest,
             plots_per_page = plots_per_page),
         output_file = name_output_file,

@@ -68,6 +68,11 @@
 #' residue such as Dimethyl (KR), Trimethyl (KR) into only one group:
 #' Methyl (KR).
 #'
+#' @param PTM_of_interest Post-Translation Modification of interest. It is
+#' important they are defined exactly as MaxQuant does:
+#' Examples:
+#' 'Oxidation (M)', 'Acetyl (Protein N-term)', 'Unmodified', etc.
+#'
 #' @param plots_per_page Establish the maximum number of plots per page.
 #'
 #'

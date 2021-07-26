@@ -26,6 +26,7 @@ PlotPTMAcrossSamples <- function(MQCombined,
                                 long_names = FALSE,
                                 sep_names = NULL){
 
+    variable <- value <- Modifications <- NULL
 
     df <- MQCombined$modificationSpecificPeptides.txt
 

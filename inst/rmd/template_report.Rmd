@@ -113,35 +113,69 @@ PlotIsotopePattern(MQCombined,
 
 
 \newpage
+
+```{r n_pages, include = FALSE}
+# To avoid the report of printing [[1]] .. plot , [[2]] .., 
+# I create a variable called n_pages, that I will use to print the pages of 
+# some of the functions directly.
+
+n_pages <- length(PlotCharge(MQCombined, 
+                                        palette = params$palette,
+                                        plots_per_page = params$plots_per_page))
+
+```
+
+
+
+
 ```{r Charge}
-PlotCharge(MQCombined, 
+for (page in seq_len(n_pages)) {
+  print(
+    PlotCharge(MQCombined, 
            palette = params$palette,
-           plots_per_page = params$plots_per_page)
+           plots_per_page = params$plots_per_page)[[page]]
+    )
+}
+
+
 ```
 
 \newpage
 ```{r missed_cleavages}
-PlotProteaseSpecificity(MQCombined, 
+for(page in seq_len(n_pages)){
+  print(
+    PlotProteaseSpecificity(MQCombined, 
                         palette = params$palette,
-                        plots_per_page = params$plots_per_page)
+                        plots_per_page = params$plots_per_page)[[page]]
+    )
+}
 ```
 
 
 \newpage
 ```{r PlotHydrophobicity}
-PlotHydrophobicity(MQCombined,
-                   palette = params$palette,
-                   show_median =  params$show_median,
-                   size_median = params$size_median,
-                   binwidth = params$binwidth,
-                   plots_per_page = params$plots_per_page)
+
+for(page in seq_len(n_pages)){
+  print(
+    PlotHydrophobicity(MQCombined,
+                     palette = params$palette,
+                     show_median =  params$show_median,
+                     size_median = params$size_median,
+                     binwidth = params$binwidth,
+                     plots_per_page = params$plots_per_page)[[page]]
+    )
+}
 ```
 
 \newpage
 ```{r PlotAndromedaScore}
-PlotAndromedaScore(MQCombined, 
-                   palette = params$palette,
-                   plots_per_page = params$plots_per_page)
+for(page in seq_len(n_pages)){
+  print(
+    PlotAndromedaScore(MQCombined, 
+                       palette = params$palette,
+                       plots_per_page = params$plots_per_page)[[page]]
+    )
+}
 ```
 
 
@@ -195,14 +229,21 @@ PlotAllDynamicRange(MQCombined,
 
 ```{r ProteinCoverage}
 if(is.null(params$UniprotID)){
+  
     print('No UniprotID provided.')
+  
 } else{
-    PlotProteinCoverage(MQCombined, 
-                        UniprotID = params$UniprotID, 
-                        log_base = params$log_base,
-                        segment_width = params$segment_width,
-                        palette = params$palette,
-                        plots_per_page = params$plots_per_page)
+  
+  for(page in seq_len(n_pages)){
+    print(
+      PlotProteinCoverage(MQCombined, 
+                          UniprotID = params$UniprotID, 
+                          log_base = params$log_base,
+                          segment_width = params$segment_width,
+                          palette = params$palette,
+                          plots_per_page = params$plots_per_page)[[page]]
+      )
+    }
 }
 ```
 
@@ -210,56 +251,79 @@ if(is.null(params$UniprotID)){
 
 \newpage
 ```{r irt_peps1}
-PlotiRT(MQCombined, 
-        show_calibrated_rt = params$show_calibrated_rt,
-        tolerance =  params$tolerance,
-        plots_per_page = params$plots_per_page)
+
+for(page in seq_len(n_pages)){
+  print(
+    PlotiRT(MQCombined, 
+            show_calibrated_rt = params$show_calibrated_rt,
+            tolerance =  params$tolerance,
+            plots_per_page = params$plots_per_page)[[page]]
+        )
+}
 ```
 \newpage
 
 ```{r irt_peps2}
-PlotiRTScore(MQCombined,
-             tolerance =  params$tolerance,
-             plots_per_page = params$plots_per_page)
+for(page in seq_len(n_pages)){
+  print(
+    PlotiRTScore(MQCombined,
+                 tolerance =  params$tolerance,
+                 plots_per_page = params$plots_per_page)[[page]]
+      )
+}
 ```
 
 
 
 \newpage
 ```{r TotalIonCurrent}
-PlotTotalIonCurrent(MQCombined,
-                    show_max_value = params$show_max_value,
-                    palette = params$palette,
-                    plots_per_page = params$plots_per_page)
+for(page in seq_len(n_pages)){
+  print(
+    PlotTotalIonCurrent(MQCombined,
+                        show_max_value = params$show_max_value,
+                        palette = params$palette,
+                        plots_per_page = params$plots_per_page)[[page]]
+      )
+}
 ```
 
 
 \newpage
 ```{r PlotAcquisition}
-PlotAcquisitionCycle(MQCombined, 
-                     palette = params$palette,
-                     plots_per_page = params$plots_per_page)
+for(page in seq_len(n_pages)){
+  print(
+    PlotAcquisitionCycle(MQCombined, 
+                         palette = params$palette,
+                         plots_per_page = params$plots_per_page)[[page]]
+      )
+}
 ```
 
 \newpage
 ```{r PTM}
-PlotPTM(MQCombined, 
-        peptides_modified = params$peptides_modified,
-        log_base = params$log_base,
-        plot_unmodified_peptides = params$plot_unmodified_peptides,
-        palette = params$palette,
-        aggregate_PTMs = params$aggregate_PTMs,
-        combine_same_residue_ptms = params$combine_same_residue_ptms,
-        plots_per_page = params$plots_per_page)
+for(page in seq_len(n_pages)){
+  print(
+    PlotPTM(MQCombined, 
+            peptides_modified = params$peptides_modified,
+            log_base = params$log_base,
+            plot_unmodified_peptides = params$plot_unmodified_peptides,
+            palette = params$palette,
+            aggregate_PTMs = params$aggregate_PTMs,
+            combine_same_residue_ptms = params$combine_same_residue_ptms,
+            plots_per_page = params$plots_per_page)[[page]]
+      )
+}
 ```
 
 \newpage
 ```{r PTMAcrossSamples}
+
 PlotPTMAcrossSamples(MQCombined, 
                     PTM_of_interest = params$PTM_of_interest,
                     log_base = params$log_base, 
                     long_names = params$long_names, 
                     sep_names = params$sep_names)
+
 ```
 
 \newpage

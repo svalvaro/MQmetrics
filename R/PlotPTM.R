@@ -33,7 +33,8 @@ PlotPTM <- function(MQCombined,
 
     modificationSpecificPeptides <- MQCombined$modificationSpecificPeptides.txt
 
-    Modifications <- variable <- value <- Freq <- NULL
+    Modifications <- variable <- value <- Freq <- sample_num <- NULL
+    Mod2 <- frequency2 <- NULL
 
     modification_table <- modificationSpecificPeptides %>%
         select(contains(c(

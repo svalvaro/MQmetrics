@@ -18,7 +18,7 @@
 #' @examples
 #' MQPathCombined <- system.file('extdata/combined/', package = 'MQmetrics')
 #' MQCombined <- make_MQCombined(MQPathCombined)
-#' PlotProteinCoverage(MQCombined, UniprotID = 'Q8R0Y6')
+#' PlotProteinCoverage(MQCombined, UniprotID = 'Q15149')
 #'
 PlotProteinCoverage <- function(MQCombined,
                                 UniprotID = NULL,
@@ -80,75 +80,6 @@ PlotProteinCoverage <- function(MQCombined,
             colourCount/ plots_per_page
         )
 
-        # for (ii in seq_len(n_pages_needed)) {
-        #
-        #     if(colourCount <plots_per_page){
-        #         nrow = colourCount
-        #     } else{
-        #         nrow = plots_per_page
-        #     }
-        #
-        #     a <- ggplot(pep_melt)+
-        #         geom_segment(aes(x = `Start position`,
-        #                         xend = `End position`,
-        #                         y = `Start position`,
-        #                         yend = `End position`,
-        #                         colour = variable),
-        #                     size = segment_width)+
-        #         theme_bw()+
-        #         facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
-        #                             page = ii)+
-        #         ylab('End position')+
-        #         theme(legend.position = 'none')+
-        #         scale_color_manual(values = getPalette(colourCount))
-        #
-        #     #Create a plot for the protein lenght vs the coverage
-        #
-        #     if(log_base == 10){
-        #         b <- ggplot(pep_melt )+
-        #             geom_segment(aes(x=`Start position`,
-        #                             xend=`End position`,
-        #                             y = log10(value),
-        #                             yend =log10(value),
-        #                             colour = variable), size = segment_width )+
-        #             theme_bw()+
-        #             ylab(expression('Log'[10]*'(Intensity)'))+
-        #             facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
-        #                                 page = ii)+
-        #             #scale_x_continuous(limits = c(1, prot_length))+
-        #             theme(legend.position = 'none')+
-        #             scale_color_manual(values = getPalette(colourCount))
-        #
-        #     } else{
-        #         b <- ggplot(pep_melt )+
-        #             geom_segment(aes(x=`Start position`,
-        #                             xend=`End position`,
-        #                             y = log2(value),
-        #                             yend =log2(value),
-        #                             colour = variable),size = segment_width )+
-        #             theme_bw()+
-        #             ylab(expression('Log'[2]*'(Intensity)'))+
-        #             facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
-        #                                 page = ii)+
-        #             #scale_x_continuous(limits = c(1, prot_length))+
-        #             theme(legend.position = 'none')+
-        #             scale_color_manual(values = getPalette(colourCount))
-        #     }
-        #
-        #     #Plot them together
-        #     c <- plot_grid(a,b)
-        #     #Make a title
-        #     title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ',
-        #                                         UniprotID,
-        #                                         ' (',prot_len,' amino acids)',
-        #                                         ', Gene: ',
-        #                                         pep_melt$`Gene names`[1],
-        #                                         '\n is: ', prot_cov, '%'))
-        #
-        #     print(plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1)))
-        #     #p <- plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
-        #
-        # }
 
         myplots <- list()
 
@@ -222,7 +153,7 @@ PlotProteinCoverage <- function(MQCombined,
 
         }
 
-
+        return(myplots)
     }
-    return(myplots)
+
 }

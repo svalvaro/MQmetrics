@@ -104,7 +104,7 @@ generateReport(MQPathCombined = , # directory to the combined folder
 Is as simple as this to use MQmetrics:
 ```{r example,eval=FALSE}
 # If you're using a Unix-like OS use forward slashes.
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/'
+MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 
 # If you're using Windows use backslashes:
 MQPathCombined <- "D:\Documents\MaxQuant_results\example5\combined\ "

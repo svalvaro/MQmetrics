@@ -79,11 +79,29 @@ PlotProteinCoverage <- function(MQCombined,
 
         # Right now it does not take into account the possible overlaps.
 
-        individual_coverage <- pep_melt %>% select(contains(c('Position',
-                                                              'Length',
-                                                              'variable'))) %>%
-            group_by(variable) %>%
-            summarise(coverage = (sum(Length)/prot_len)*100)
+        # individual_coverage <- pep_melt %>% select(contains(c('Position',
+        #                                                       'Length',
+        #                                                       'variable'))) %>%
+        #     group_by(variable) %>%
+        #     summarise(coverage = (sum(Length)/prot_len)*100)
+
+        # individual_coverage <- pep_melt %>% select(contains(c('Position',
+        #                                                       'Length',
+        #                                                       'variable'))) %>%
+        #     group_by(variable) %>%
+        #     summarise(coverage = sum(`End position` - pmax(`Start position`,
+        #                                                     dplyr::lag(`End position`, default = 0)),
+        #                               .groups = 'drop' ))
+
+        # individual_coverage <- pep_melt %>% select(contains(c('Position',
+        #                                                       'Length',
+        #                                                       'variable'))) %>%
+        #     group_by(variable) %>%
+        #     summarise(coverage = sum(`End position` - pmax(`Start position`,
+        #                                                     dplyr::lag(`End position`, default = 0)),
+        #                               .groups = 'drop' ))
+
+
 
         individual_coverage$coverage <- format(round(
             individual_coverage$coverage , 1), nsmall = 1)
@@ -107,6 +125,7 @@ PlotProteinCoverage <- function(MQCombined,
                 nrow = plots_per_page
             }
 
+            ## Plot Start position vs length position
             a <- ggplot(pep_melt)+
                 geom_segment(aes(x = `Start position`,
                                 xend = `End position`,
@@ -129,50 +148,7 @@ PlotProteinCoverage <- function(MQCombined,
                 coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
 
 
-
-#
-#             ggplot(pep_melt)+
-#                 geom_segment(aes(x = `Start position`,
-#                                  xend = `End position`,
-#                                  y = `Start position`,
-#                                  yend = `End position`,
-#                                  colour = variable),
-#                              size = segment_width)+
-#
-#                 geom_text(individual_coverage,
-#                           mapping =  aes(
-#                               x = prot_len*0.1,
-#                               y = prot_len * 0.9,
-#                               label = paste0(coverage, ' % Prot. Coverage')))+
-#                 theme_bw()+
-#                 facet_wrap_paginate(.~ variable, ncol = 1, nrow = 6,
-#                                     page = 1)+
-#                 ylab('End position')+
-#                 theme(legend.position = 'none')+
-#                 scale_color_manual(values = getPalette(colourCount))+
-#                 coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
-
-
-             # ggplot(pep_melt)+
-             #    geom_segment(aes(x = `Start position`,
-             #                    xend = `End position`,
-             #                    y = `Start position`,
-             #                    yend = `End position`,
-             #                    colour = variable),
-             #                    size = segment_width)+
-             #     geom_text(individual_coverage,
-             #               mapping =  aes(
-             #                   x = (max(pep_melt$`End position`) - min(pep_melt$`Start position`)) * 0.5,
-             #                   y = max(pep_melt$`End position`) * 0.9,
-             #                   label = paste0(coverage, ' % Prot. Coverage')))+
-             #    theme_bw()+
-             #    facet_wrap_paginate(.~ variable, ncol = 1, nrow = 6,
-             #                        page = 1)+
-             #    ylab('End position')+
-             #    theme(legend.position = 'none')+
-             #    scale_color_manual(values = getPalette(colourCount))+
-             #    coord_cartesian(xlim = c(0, prot_len))
-
+            ## Create a plot for the protein length vs the intensity
 
             b <- ggplot(pep_melt )+
                 geom_segment(aes(x=`Start position`,
@@ -189,7 +165,7 @@ PlotProteinCoverage <- function(MQCombined,
 
 
 
-## Create a plot for the protein lenght vs the coverage
+
 
             if(log_base == 10){
                 b <- b +
@@ -220,3 +196,10 @@ PlotProteinCoverage <- function(MQCombined,
     }
 
 }
+
+example_data <- example_data <- data.frame(Start = c(4,5,10,25, 40, 2, 11, 27, 50),
+                                           End = c(6,9, 26, 30, 41, 14, 16, 40, 55),
+                                           Group = c('A','A','A','A','A','B','B','B','B'))
+
+
+

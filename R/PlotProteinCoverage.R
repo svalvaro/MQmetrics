@@ -117,8 +117,8 @@ PlotProteinCoverage <- function(MQCombined,
 
                 geom_text(individual_coverage,
                           mapping =  aes(
-                              x = (max(pep_melt$`End position`) - min(pep_melt$`Start position`)) * 0.5,
-                              y = max(pep_melt$`End position`) * 0.9,
+                              x = prot_len*0.2,
+                              y = prot_len* 0.9,
                               label = paste0(coverage, ' % Prot. Coverage')))+
                 theme_bw()+
                 facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
@@ -130,6 +130,27 @@ PlotProteinCoverage <- function(MQCombined,
 
 
 
+#
+#             ggplot(pep_melt)+
+#                 geom_segment(aes(x = `Start position`,
+#                                  xend = `End position`,
+#                                  y = `Start position`,
+#                                  yend = `End position`,
+#                                  colour = variable),
+#                              size = segment_width)+
+#
+#                 geom_text(individual_coverage,
+#                           mapping =  aes(
+#                               x = prot_len*0.1,
+#                               y = prot_len * 0.9,
+#                               label = paste0(coverage, ' % Prot. Coverage')))+
+#                 theme_bw()+
+#                 facet_wrap_paginate(.~ variable, ncol = 1, nrow = 6,
+#                                     page = 1)+
+#                 ylab('End position')+
+#                 theme(legend.position = 'none')+
+#                 scale_color_manual(values = getPalette(colourCount))+
+#                 coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
 
 
              # ggplot(pep_melt)+
@@ -157,14 +178,14 @@ PlotProteinCoverage <- function(MQCombined,
                 geom_segment(aes(x=`Start position`,
                                  xend=`End position`,
                                  y = log(value, base = log_base ),
-                                 yend =log(value,base = log_base ),
+                                 yend =log(value, base = log_base ),
                                  colour = variable), size = segment_width )+
                 theme_bw()+
                 facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
                                     page = ii)+
                 theme(legend.position = 'none')+
                 scale_color_manual(values = getPalette(colourCount))+
-                coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
+                coord_cartesian(xlim = c(0, prot_len))
 
 
 
@@ -189,7 +210,8 @@ PlotProteinCoverage <- function(MQCombined,
                                                 pep_melt$`Gene names`[1],
                                                 ' is: ', prot_cov, '%'))
 
-            myplots[[ii]] <- plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
+            myplots[[ii]] <- plot_grid( title, c, ncol = 1,
+                                        rel_heights=c(0.1, 1))
             #p <- plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
 
         }

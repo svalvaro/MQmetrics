@@ -29,7 +29,7 @@ Experiments.
 * Updated vignette style to Bioconductor's.
 * Improved aesthethics of `PlotProteinOverlap()` and `PlotPCA()`.
 
-# MQmetrics 1.1.2 (Bioconductor Development Version)
+# MQmetrics 1.1.2 
 
 * Fixed units of time `MaxQuantAnalysisInfo()`  when experiment lasting
 longer than a day.
@@ -37,7 +37,7 @@ longer than a day.
 * Improved aesthethics in the plots from `PlotCombinedDynamicRange()` and 
 `PlotAllDynamicRange()`.
 
-# MQmetrics 1.1.3 (Github version)
+# MQmetrics 1.1.3 (Bioconductor Development Version)
 
 * Added new function `PlotPTMAcrossSamples()`, it takes as input one PTM of 
 interest and shows its intensities across the samples. 
@@ -45,3 +45,9 @@ This function is similar to `PlotPTM()` but in more detail.
 * In the function `PlotPTM()` a parameter `combine_same_residue_ptms` has been
 added. It combines multiple PTMs happening in the same residue such as:
 Dimethyl (KR), Trimethyl (KR).
+
+
+# MQmetrics 1.1.4 (Github version)
+
+* The function `PlotProteinCoverage()` now reports the coverage individually in
+each plot rather than the total protein coverage.

@@ -117,7 +117,7 @@ PlotProteinCoverage <- function(MQCombined,
 
                 geom_text(individual_coverage,
                           mapping =  aes(
-                              x = (max(pep_melt$`End position`) - min(pep_melt$`Start position`)) * 0.15,
+                              x = (max(pep_melt$`End position`) - min(pep_melt$`Start position`)) * 0.5,
                               y = max(pep_melt$`End position`) * 0.9,
                               label = paste0(coverage, ' % Prot. Coverage')))+
                 theme_bw()+
@@ -125,12 +125,13 @@ PlotProteinCoverage <- function(MQCombined,
                                     page = ii)+
                 ylab('End position')+
                 theme(legend.position = 'none')+
-                scale_color_manual(values = getPalette(colourCount))
+                scale_color_manual(values = getPalette(colourCount))+
+                coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
 
-             #
-             #
-             #
-             #
+
+
+
+
              # ggplot(pep_melt)+
              #    geom_segment(aes(x = `Start position`,
              #                    xend = `End position`,
@@ -138,49 +139,44 @@ PlotProteinCoverage <- function(MQCombined,
              #                    yend = `End position`,
              #                    colour = variable),
              #                    size = segment_width)+
-             #    geom_text(individual_coverage,
-             #                mapping =  aes(
-             #                x = min(pep_melt$`Start position`) * 1.1,
-             #                y = max(pep_melt$`End position`) * 0.9,
-             #                label = paste0(coverage, ' % Prot. Coverage')))+
+             #     geom_text(individual_coverage,
+             #               mapping =  aes(
+             #                   x = (max(pep_melt$`End position`) - min(pep_melt$`Start position`)) * 0.5,
+             #                   y = max(pep_melt$`End position`) * 0.9,
+             #                   label = paste0(coverage, ' % Prot. Coverage')))+
              #    theme_bw()+
              #    facet_wrap_paginate(.~ variable, ncol = 1, nrow = 6,
              #                        page = 1)+
              #    ylab('End position')+
              #    theme(legend.position = 'none')+
-             #    scale_color_manual(values = getPalette(colourCount))
+             #    scale_color_manual(values = getPalette(colourCount))+
+             #    coord_cartesian(xlim = c(0, prot_len))
 
-            #Create a plot for the protein lenght vs the coverage
+
+            b <- ggplot(pep_melt )+
+                geom_segment(aes(x=`Start position`,
+                                 xend=`End position`,
+                                 y = log(value, base = log_base ),
+                                 yend =log(value,base = log_base ),
+                                 colour = variable), size = segment_width )+
+                theme_bw()+
+                facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
+                                    page = ii)+
+                theme(legend.position = 'none')+
+                scale_color_manual(values = getPalette(colourCount))+
+                coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
+
+
+
+## Create a plot for the protein lenght vs the coverage
 
             if(log_base == 10){
-                b <- ggplot(pep_melt )+
-                    geom_segment(aes(x=`Start position`,
-                                    xend=`End position`,
-                                    y = log10(value),
-                                    yend =log10(value),
-                                    colour = variable), size = segment_width )+
-                    theme_bw()+
-                    ylab(expression('Log'[10]*'(Intensity)'))+
-                    facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
-                                        page = ii)+
-                    #scale_x_continuous(limits = c(1, prot_length))+
-                    theme(legend.position = 'none')+
-                    scale_color_manual(values = getPalette(colourCount))
-
+                b <- b +
+                    ylab(expression('Log'[10]*'(Intensity)'))
             } else{
-                b <- ggplot(pep_melt )+
-                    geom_segment(aes(x=`Start position`,
-                                    xend=`End position`,
-                                    y = log2(value),
-                                    yend =log2(value),
-                                    colour = variable),size = segment_width )+
-                    theme_bw()+
-                    ylab(expression('Log'[2]*'(Intensity)'))+
-                    facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
-                                        page = ii)+
-                    #scale_x_continuous(limits = c(1, prot_length))+
-                    theme(legend.position = 'none')+
-                    scale_color_manual(values = getPalette(colourCount))
+                b <- b+
+                    ylab(expression('Log'[2]*'(Intensity)'))
+
             }
 
             #Plot them together

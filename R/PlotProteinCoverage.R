@@ -55,12 +55,7 @@ PlotProteinCoverage <- function(MQCombined,
         prot_info <- proteinGroups[grepl(UniprotID,
                                         proteinGroups$`Protein IDs` ),]
 
-
-
         prot_len <- prot_info$`Sequence length`[1] # Protein length
-
-
-
 
         pep_melt <- melt(table_peptides, id.vars = c('Start position',
                                                     'End position',
@@ -73,16 +68,7 @@ PlotProteinCoverage <- function(MQCombined,
 
         pep_melt$variable <- gsub('Intensity ', '', pep_melt$variable)
 
-
-
         # Calculate Individual's protein Coverage for each sample.
-
-        # Without counting overlaps (not correct)
-
-        # individual_coverage <- pep_melt %>%
-        #     select(contains(c('Position','Length','variable'))) %>%
-        #     group_by(variable) %>%
-        #     summarise(coverage = (sum(Length)/prot_len)*100)
 
         # Counting overlaps (good)
 
@@ -92,18 +78,15 @@ PlotProteinCoverage <- function(MQCombined,
             arrange(`End position`) %>%
             summarise(coverage = (
                 (sum(1+`End position` - pmax(
-                    `Start position`, lag(`End position`, default = 0)
+                    `Start position`, dplyr::lag(`End position`, default = 0)
                     )
                     )
                  )/prot_len)*100,
                 .groups = 'drop')
 
-
-
         # Format the individual coverage to only one decimal
         individual_coverage$coverage <- format(round(
             individual_coverage$coverage , 1), nsmall = 1)
-
 
 
         colourCount = length(unique(pep_melt$variable))
@@ -113,7 +96,6 @@ PlotProteinCoverage <- function(MQCombined,
         n_pages_needed <- ceiling(
             colourCount/ plots_per_page
         )
-
 
         myplots <- list()
 
@@ -164,9 +146,6 @@ PlotProteinCoverage <- function(MQCombined,
                 coord_cartesian(xlim = c(0, prot_len))
 
 
-
-
-
             if(log_base == 10){
                 b <- b +
                     ylab(expression('Log'[10]*'(Intensity)'))
@@ -193,5 +172,4 @@ PlotProteinCoverage <- function(MQCombined,
 
         return(myplots)
     }
-
 }

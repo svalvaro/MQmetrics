@@ -55,7 +55,7 @@ PlotProteinCoverage <- function(MQCombined,
         prot_info <- proteinGroups[grepl(UniprotID,
                                         proteinGroups$`Protein IDs` ),]
 
-        prot_cov <- prot_info$`Sequence coverage [%]`[1] # Protein Coverage
+
 
         prot_len <- prot_info$`Sequence length`[1] # Protein length
 
@@ -179,12 +179,11 @@ PlotProteinCoverage <- function(MQCombined,
             #Plot them together
             c <- plot_grid(a,b)
             #Make a title
-            title <- ggdraw()+ draw_label(paste0('The Protein Coverage of: ',
+            title <- ggdraw()+ draw_label(paste0('Protein Coverage of: ',
                                                 UniprotID,
                                                 ' (',prot_len,' amino acids)',
-                                                ',\n Gene: ',
-                                                pep_melt$`Gene names`[1],
-                                                ' is: ', prot_cov, '%'))
+                                                ', Gene: ',
+                                                pep_melt$`Gene names`[1]))
 
             myplots[[ii]] <- plot_grid( title, c, ncol = 1,
                                         rel_heights=c(0.1, 1))

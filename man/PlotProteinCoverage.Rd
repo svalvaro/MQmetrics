@@ -8,7 +8,7 @@ PlotProteinCoverage(
   MQCombined,
   UniprotID = NULL,
   log_base = 2,
-  segment_width = 1,
+  segment_width = 2,
   palette = "Set2",
   plots_per_page = 5
 )

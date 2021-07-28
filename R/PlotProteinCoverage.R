@@ -23,7 +23,7 @@
 PlotProteinCoverage <- function(MQCombined,
                                 UniprotID = NULL,
                                 log_base = 2,
-                                segment_width = 1,
+                                segment_width = 2,
                                 palette = 'Set2',
                                 plots_per_page = 5){
 
@@ -71,40 +71,40 @@ PlotProteinCoverage <- function(MQCombined,
 
         pep_melt <- pep_melt[!pep_melt$value==0,]
 
-        pep_melt$variable <- gsub('Intensity', '', pep_melt$variable)
+        pep_melt$variable <- gsub('Intensity ', '', pep_melt$variable)
 
 
 
         # Calculate Individual's protein Coverage for each sample.
 
-        # Right now it does not take into account the possible overlaps.
+        # Without counting overlaps (not correct)
 
-        # individual_coverage <- pep_melt %>% select(contains(c('Position',
-        #                                                       'Length',
-        #                                                       'variable'))) %>%
+        # individual_coverage <- pep_melt %>%
+        #     select(contains(c('Position','Length','variable'))) %>%
         #     group_by(variable) %>%
         #     summarise(coverage = (sum(Length)/prot_len)*100)
 
-        # individual_coverage <- pep_melt %>% select(contains(c('Position',
-        #                                                       'Length',
-        #                                                       'variable'))) %>%
-        #     group_by(variable) %>%
-        #     summarise(coverage = sum(`End position` - pmax(`Start position`,
-        #                                                     dplyr::lag(`End position`, default = 0)),
-        #                               .groups = 'drop' ))
+        # Counting overlaps (good)
 
-        # individual_coverage <- pep_melt %>% select(contains(c('Position',
-        #                                                       'Length',
-        #                                                       'variable'))) %>%
-        #     group_by(variable) %>%
-        #     summarise(coverage = sum(`End position` - pmax(`Start position`,
-        #                                                     dplyr::lag(`End position`, default = 0)),
-        #                               .groups = 'drop' ))
+        individual_coverage <- pep_melt %>%
+            select(contains(c('Position','variable'))) %>%
+            group_by(variable) %>%
+            arrange(`End position`) %>%
+            summarise(coverage = (
+                (sum(1+`End position` - pmax(
+                    `Start position`, lag(`End position`, default = 0)
+                    )
+                    )
+                 )/prot_len)*100,
+                .groups = 'drop')
 
 
 
+        # Format the individual coverage to only one decimal
         individual_coverage$coverage <- format(round(
             individual_coverage$coverage , 1), nsmall = 1)
+
+
 
         colourCount = length(unique(pep_melt$variable))
 
@@ -196,10 +196,3 @@ PlotProteinCoverage <- function(MQCombined,
     }
 
 }
-
-example_data <- example_data <- data.frame(Start = c(4,5,10,25, 40, 2, 11, 27, 50),
-                                           End = c(6,9, 26, 30, 41, 14, 16, 40, 55),
-                                           Group = c('A','A','A','A','A','B','B','B','B'))
-
-
-

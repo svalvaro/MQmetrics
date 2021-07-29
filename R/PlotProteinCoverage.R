@@ -30,7 +30,7 @@ PlotProteinCoverage <- function(MQCombined,
     peptides <- MQCombined$peptides.txt
     proteinGroups <- MQCombined$proteinGroups.txt
 
-    `Start position` <-  `End position` <- variable <- value <- NULL
+    `Start position` <-  `End position` <- variable <- value <- coverage <- NULL
 
     table_peptides <- peptides %>%
         select(contains(c('Intensity ', 'Start position',

@@ -27,7 +27,21 @@ PlotPeaks <- function(MQCombined,
 
     Experiment <- `Peaks Sequenced` <- Peaks <- value <- variable <- NULL
 
-    a <- summary %>% select(c(Experiment, Peaks, `Peaks Sequenced`))
+
+    MaxQuant_version <- MQCombined$parameters$Value[
+        MQCombined$parameters$Parameter == 'Version']
+
+    #Detect MaxQuant Version to read column names accordingly.
+
+    if (MaxQuant_version = '1.6.17.0') {
+
+        a <- summary %>% select(c(Experiment, Peaks, `Peaks Sequenced`))
+    } else{
+        a <- summary %>% select(c(Experiment, Peaks, `Peaks sequenced`))
+
+    }
+
+
     a_melt <- melt(a, id.vars = "Experiment")
 
 

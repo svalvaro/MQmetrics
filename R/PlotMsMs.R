@@ -27,8 +27,25 @@ PlotMsMs <- function(MQCombined,
     Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- NULL
     value <- variable <- NULL
 
-    a <- summary %>% select(c(Experiment, `MS/MS Submitted`,
-                            `MS/MS Identified`))
+
+    MaxQuant_version <- MQCombined$parameters$Value[
+        MQCombined$parameters$Parameter == 'Version']
+
+    #Detect MaxQuant Version to read column names accordingly.
+
+    if (MaxQuant_version = '1.6.17.0') {
+
+        a <- summary %>% select(c(Experiment, `MS/MS Submitted`,
+                                  `MS/MS Identified`))
+
+    } else{
+        a <- summary %>% select(c(Experiment, `MS/MS submitted`,
+                                  `MS/MS identified`))
+
+    }
+
+
+
 
     a_melt <- melt(a, id.vars = "Experiment")
 

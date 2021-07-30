@@ -30,10 +30,24 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     getPalette <- colorRampPalette(brewer.pal(8, palette))
 
-    b <- ggplot(summary, aes(
+    MaxQuant_version <- MQCombined$parameters$Value[
+        MQCombined$parameters$Parameter == 'Version']
+
+    #Detect MaxQuant Version to read column names accordingly.
+
+    if (MaxQuant_version = '1.6.17.0') {
+    p <- ggplot(summary, aes(
         x = Experiment, y = `Peptide Sequences Identified`,
-        fill = Experiment
-    )) +
+        fill = Experiment))
+
+    } else{
+        p <- ggplot(summary, aes(
+            x = Experiment, y = `Peptide sequences identified`,
+            fill = Experiment))
+    }
+
+
+    p <- p +
         geom_bar(stat = "identity", color = "black") +
         scale_fill_manual(values = getPalette(colourCount)) +
         theme_bw(base_size = 12) +
@@ -41,7 +55,7 @@ PlotPeptidesIdentified <- function(MQCombined,
         theme(legend.position = "none")
 
     if (long_names == TRUE) {
-        b + scale_x_discrete(labels = function(x) {
+       p + scale_x_discrete(labels = function(x) {
             stringr::str_wrap(
                 gsub(
                     sep_names,
@@ -52,6 +66,6 @@ PlotPeptidesIdentified <- function(MQCombined,
             )
         })
     } else {
-        b
+        p
     }
 }

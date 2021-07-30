@@ -94,6 +94,23 @@ PlotProteinPeptideRatio <- function(MQCombined,
     # Add column peptides identified, and peptide/protein ratio.
 
 
+    MaxQuant_version <- MQCombined$parameters$Value[
+        MQCombined$parameters$Parameter == 'Version']
+
+    #Detect MaxQuant Version to read column names accordingly.
+
+    if (MaxQuant_version == '1.6.17.0') {
+
+        df2 <- summary %>% select(contains(c('Experiment',
+                                             'Peptide Sequences Identified')))
+    } else{
+        df2 <- summary %>% select(contains(c('Experiment',
+                                             'Peptide sequences identified')))
+
+    }
+
+
+
     df2 <- summary %>% select(contains(c('Experiment',
                                         'Peptide Sequences Identified')))
 

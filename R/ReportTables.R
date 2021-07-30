@@ -36,6 +36,12 @@ ReportTables <- function(MQCombined,
 
     MQPathCombined <- MQCombined$MQPathCombined
 
+    MaxQuant_version <- MQCombined$parameters$Value[
+        MQCombined$parameters$Parameter == 'Version']
+
+
+
+
     #Read the Protein Groups without removing the contamintants To plot it.
     proteinGroups <- read_delim(file.path(MQPathCombined,
                                         "txt/proteinGroups.txt"),
@@ -138,8 +144,22 @@ ReportTables <- function(MQCombined,
                                     trim_ws = TRUE,
                                     na = c("NA", "NaN", "", " "))
 
-    df <- summary %>% select(contains(c('Experiment',
-                                        'Peptide Sequences Identified')))
+    #Detect MaxQuant Version to read column names accordingly.
+
+    if (MaxQuant_version == '1.6.17.0') {
+
+        df <- summary %>% select(contains(c('Experiment',
+                                            'Peptide Sequences Identified')))
+
+
+    } else{
+        df <- summary %>% select(contains(c('Experiment',
+                                            'Peptide sequences identified')))
+        colnames(df)[colnames(df) == "Peptide sequences identified"] <- "Peptide Sequences Identified"
+
+    }
+
+
 
 
     table_summary <- merge(table_summary, df, by = 'Experiment')

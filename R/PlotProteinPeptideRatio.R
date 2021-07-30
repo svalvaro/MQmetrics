@@ -106,7 +106,7 @@ PlotProteinPeptideRatio <- function(MQCombined,
     } else{
         df2 <- summary %>% select(contains(c('Experiment',
                                              'Peptide sequences identified')))
-
+        colnames(df2)[colnames(datadf2_ex1) == "Peptide sequences identified"] <- "Peptide Sequences Identified" # Rename column
     }
 
 

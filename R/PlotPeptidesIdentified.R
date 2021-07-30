@@ -35,7 +35,7 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     #Detect MaxQuant Version to read column names accordingly.
 
-    if (MaxQuant_version = '1.6.17.0') {
+    if (MaxQuant_version == '1.6.17.0') {
     p <- ggplot(summary, aes(
         x = Experiment, y = `Peptide Sequences Identified`,
         fill = Experiment))

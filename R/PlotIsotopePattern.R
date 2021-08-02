@@ -26,8 +26,9 @@ PlotIsotopePattern <- function(MQCombined,
 
     summary <- MQCombined$summary.txt
 
-    Experiment <- `Isotope Patterns` <- `Isotope Patterns Sequenced` <-  NULL
-    value <- variable <- NULL
+    `Isotope patterns sequenced` <- `Isotope Patterns Sequenced` <-  NULL
+    value <- variable <- `Isotope patterns`  <- `Isotope Patterns` <- NULL
+    Experiment <- NULL
 
     MaxQuant_version <- MQCombined$parameters$Value[
         MQCombined$parameters$Parameter == 'Version']

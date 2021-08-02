@@ -24,6 +24,7 @@ PlotPeptidesIdentified <- function(MQCombined,
     summary <- MQCombined$summary.txt
 
     `Peptide Sequences Identified` <- Experiment <- NULL
+    `Peptide sequences identified` <- NULL
 
 
     colourCount <- nrow(summary)

@@ -26,7 +26,7 @@ PlotPeaks <- function(MQCombined,
     summary <- MQCombined$summary.txt
 
     Experiment <- `Peaks Sequenced` <- Peaks <- value <- variable <- NULL
-
+    `Peaks Sequenced` <- NULL
 
     MaxQuant_version <- MQCombined$parameters$Value[
         MQCombined$parameters$Parameter == 'Version']

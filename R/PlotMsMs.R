@@ -25,7 +25,7 @@ PlotMsMs <- function(MQCombined,
     summary <- MQCombined$summary.txt
 
     Experiment <- `MS/MS Submitted` <- `MS/MS Identified` <- NULL
-    value <- variable <- NULL
+    value <- variable <- `MS/MS submitted` <- `MS/MS identified` <- NULL
 
 
     MaxQuant_version <- MQCombined$parameters$Value[

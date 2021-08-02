@@ -11,7 +11,7 @@
 * Usage of ultiples of 4 spaces for line indents.
 * Removed *LazyData: TRUE*.
 
-# MQmetrics 0.99.4 (Bioconductor stable version 3.13)
+# MQmetrics 1.0.0 (Bioconductor stable version 3.13)
 
 * The function `generateReport()` now takes the parameter *name_output_file* 
 to name the output pdf file.
@@ -20,7 +20,7 @@ tables.
 * Added the function `PlotProteinPeptideRatio()` to visualize a comparison 
 between the proteins identified and the ratio Peptide/Proteins among
 Experiments.
-* Version released within Bioconductor as 1.00.0
+
 
 
 # MQmetrics 1.1.1 
@@ -37,7 +37,7 @@ longer than a day.
 * Improved aesthethics in the plots from `PlotCombinedDynamicRange()` and 
 `PlotAllDynamicRange()`.
 
-# MQmetrics 1.1.3 (Bioconductor Development Version)
+# MQmetrics 1.1.3 (Bioconductor Development Version 3.14)
 
 * Added new function `PlotPTMAcrossSamples()`, it takes as input one PTM of 
 interest and shows its intensities across the samples. 

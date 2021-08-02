@@ -27,14 +27,10 @@ PlotProteinPeptideRatio <- function(MQCombined,
                                     long_names = FALSE,
                                     sep_names = NULL){
 
-
-
     Experiment <- value <- variable <- r <- NULL
 
     proteinGroups <- MQCombined$proteinGroups.txt
     summary <- MQCombined$summary.txt
-
-
 
     if (intensity_type == 'Intensity') {
 
@@ -46,9 +42,7 @@ PlotProteinPeptideRatio <- function(MQCombined,
         #Remove Intensity from name
         colnames(df) <- gsub("Intensity.","",colnames(df)
         )
-
         title <- 'Proteins vs Peptide/Protein ratio based on Intensity'
-
     }
 
     if (intensity_type == 'LFQ'){
@@ -56,7 +50,6 @@ PlotProteinPeptideRatio <- function(MQCombined,
         #Remove LFQ Intensity from name
 
         df <- proteinGroups %>%select(contains('LFQ '))
-
 
         colnames(df) <- gsub("LFQ intensity.", "", colnames(df))
 
@@ -75,12 +68,9 @@ PlotProteinPeptideRatio <- function(MQCombined,
             #Remove Intensity from name
             colnames(df) <- gsub("Intensity.", "",
                                             colnames(df))
-
             title <- 'Proteins vs Peptide/Protein ratio based on Intensity'
-
         }
     }
-
 
     df <- data.frame("Proteins Identified" = nrow(df)-colSums(df==0))
 
@@ -88,11 +78,7 @@ PlotProteinPeptideRatio <- function(MQCombined,
 
     rownames(df) <- NULL
 
-
-
-
     # Add column peptides identified, and peptide/protein ratio.
-
 
     MaxQuant_version <- MQCombined$parameters$Value[
         MQCombined$parameters$Parameter == 'Version']
@@ -106,14 +92,10 @@ PlotProteinPeptideRatio <- function(MQCombined,
     } else{
         df2 <- summary %>% select(contains(c('Experiment',
                                              'Peptide sequences identified')))
-        colnames(df2)[colnames(df2) == "Peptide sequences identified"] <- "Peptide Sequences Identified" # Rename column
+        colnames(df2)[
+            colnames(df2) == "Peptide sequences identified"
+            ] <- "Peptide Sequences Identified" # Rename column
     }
-
-
-
-    df2 <- summary %>% select(contains(c('Experiment',
-                                        'Peptide Sequences Identified')))
-
 
     df_merged <- merge(df, df2, by = 'Experiment')
 
@@ -122,9 +104,6 @@ PlotProteinPeptideRatio <- function(MQCombined,
             df_merged$Proteins.Identified, 1), nsmall = 1)
 
     df_merged$`Peptide Sequences Identified` <- NULL
-
-
-
 
     df_melt <- melt(df_merged, id.vars = 'Experiment')
 
@@ -144,8 +123,6 @@ PlotProteinPeptideRatio <- function(MQCombined,
                     panel.grid.minor = element_blank(),
                     axis.line = element_line(colour = "black"))
 
-
-
     p2 <- ggplot(d2,  aes(x = Experiment, y = as.numeric(value),
                                 group = variable))+
             geom_point(color = '#5B84B1FF',size = 2)+
@@ -159,8 +136,6 @@ PlotProteinPeptideRatio <- function(MQCombined,
                 panel.grid.minor = element_blank(),
                 axis.line = element_line(colour = "black"))
 
-
-
     if (long_names == TRUE) {
         p1 <-  p1 + scale_x_discrete(labels = function(x) {
                         stringr::str_wrap(gsub(sep_names," ", x),3)})
@@ -169,7 +144,6 @@ PlotProteinPeptideRatio <- function(MQCombined,
         p2 <-  p2 + scale_x_discrete(labels = function(x) {
             stringr::str_wrap(gsub(sep_names," ", x),3)})
     }
-
 
     # Get the ggplot grobs
     g1 <- ggplotGrob(p1)

@@ -45,9 +45,10 @@ PlotProteinCoverage <- function(MQCombined,
                                         table_peptides$Proteins ),]
 
     if(nrow(table_peptides) == 0){
-        print(paste0('The protein: ',
+        message(paste0('The protein: ',
                     UniprotID ,
                     ' provided was not identified in any of the samples.'))
+        return(NULL)
     } else{
 
         #Total protein coverage
@@ -167,9 +168,7 @@ PlotProteinCoverage <- function(MQCombined,
             myplots[[ii]] <- plot_grid( title, c, ncol = 1,
                                         rel_heights=c(0.1, 1))
             #p <- plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
-
         }
-
         return(myplots)
     }
 }

@@ -228,20 +228,26 @@ PlotAllDynamicRange(MQCombined,
 \newpage
 
 ```{r ProteinCoverage}
-if(is.null(params$UniprotID)){
-  
-    print('No UniprotID provided.')
-  
-} else{
-  
-  for(page in seq_len(n_pages)){
-    print(
-      PlotProteinCoverage(MQCombined, 
+p <- PlotProteinCoverage(MQCombined, 
                           UniprotID = params$UniprotID, 
                           log_base = params$log_base,
                           segment_width = params$segment_width,
                           palette = params$palette,
-                          plots_per_page = params$plots_per_page)[[page]]
+                          plots_per_page = params$plots_per_page)
+
+
+if(is.null(params$UniprotID)){
+  
+    print('No UniprotID provided.')
+  
+} else if (is.null(p)) {
+  print(paste0('The UniprotID: ',params$UniprotID,
+               ' was not found in the analysis.'))
+}else{
+  
+  for(page in seq_len(n_pages)){
+    print(
+      p[[page]]
       )
     }
 }
@@ -252,25 +258,38 @@ if(is.null(params$UniprotID)){
 \newpage
 ```{r irt_peps1}
 
-for(page in seq_len(n_pages)){
-  print(
-    PlotiRT(MQCombined, 
+p <- PlotiRT(MQCombined, 
             show_calibrated_rt = params$show_calibrated_rt,
             tolerance =  params$tolerance,
-            plots_per_page = params$plots_per_page)[[page]]
-        )
+            plots_per_page = params$plots_per_page)
+        
+
+if (is.null(p)) {
+  print('iRT peptides not found')
+  
+} else{
+  
+  for(page in seq_len(n_pages)){
+    print(p[[page]])
+    }
 }
 ```
 \newpage
 
 ```{r irt_peps2}
-for(page in seq_len(n_pages)){
-  print(
-    PlotiRTScore(MQCombined,
+p <-  PlotiRTScore(MQCombined,
                  tolerance =  params$tolerance,
-                 plots_per_page = params$plots_per_page)[[page]]
-      )
+                 plots_per_page = params$plots_per_page)
+
+if (is.null(p)) {
+  print('iRT peptides not found')
+} else{
+  
+  for(page in seq_len(n_pages)){
+    print(p[[page]])
+  }
 }
+
 ```
 
 

@@ -62,7 +62,8 @@ PlotiRT <- function(MQCombined,
 
     # if no iRT peptide found return error.
     if (length(indexes_prot) == 0) {
-        print("No iRT peptides found in the MaxQuant output.")
+        message("No iRT peptides found in the MaxQuant output.")
+        return(NULL)
     } else {
 
         # obtain rows only with irt by sequence
@@ -151,6 +152,7 @@ PlotiRT <- function(MQCombined,
                 }
         myplots[[ii]] <- p
         }
+        return(myplots)
     }
-    return(myplots)
+
 }

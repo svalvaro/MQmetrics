@@ -70,7 +70,8 @@ PlotiRTScore <- function(MQCombined,
 
     # if no iRT peptide found return error.
     if (length(indexes_prot) == 0) {
-        print("No iRT peptides found in the MaxQuant output.")
+        message("No iRT peptides found in the MaxQuant output.")
+        return(NULL)
     } else {
 
         # obtain rows only with irt by sequence
@@ -143,10 +144,13 @@ PlotiRTScore <- function(MQCombined,
 
         n_samples <-length(unique(iRT_table_prot_maxvalues$Experiment))
 
-        n_pages_needed <- ceiling(n_samples / plots_per_page)
+        # Plots_per_page / 2 because there are two columns always.
+
+        n_pages_needed <- ceiling(n_samples / (plots_per_page))
 
 
         myplots <- list()
+
         for (ii  in seq_len(n_pages_needed)) {
 
             if (n_samples < plots_per_page) {
@@ -166,7 +170,8 @@ PlotiRTScore <- function(MQCombined,
                 geom_vline(xintercept = 0, size = 0.5, linetype = 2) +
                 stat_cor(label.x = 3, label.y = 120) +
                 stat_regline_equation(label.x = 3, label.y = 110) +
-                facet_wrap_paginate(~Experiment, page = ii, nrow = nrow) +
+                facet_wrap_paginate(. ~ Experiment, ncol = 1, page = ii,
+                                    nrow = nrow) +
                 geom_point(aes(fill = names_Sequence),
                             shape = 21,
                             colour = "black", size = 3) +
@@ -177,8 +182,6 @@ PlotiRTScore <- function(MQCombined,
 
             myplots[[ii]] <- p
         }
-
-
+        return(myplots)
     }
-    return(myplots)
 }

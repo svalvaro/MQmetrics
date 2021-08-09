@@ -46,7 +46,7 @@ added. It combines multiple PTMs happening in the same residue such as:
 Dimethyl (KR), Trimethyl (KR).
 
 
-# MQmetrics 1.1.4 (Bioconductor Development Version 3.14)
+# MQmetrics 1.1.4 (Bioconductor Development Version 3.14) (Github version)
 
 
 * The function `PlotProteinCoverage()` now reports the coverage individually in
@@ -55,8 +55,6 @@ each plot rather than the total protein coverage.
 * MQmetrics now is adapted to MaxQuant v.2.0.1.0, since the column names 
 are different than in MaxQuant v.1.6.17.0. MQmetrics will detect the MaxQuant 
 version used and read the columns accordingly.
-
-# MQmetrics 1.1.5 (Github version)
 
 * Enhanced error message in `PlotiRT()` and `PlotiRTScore()` when irt 
 peptides are note found. Enhanced error message for `PlotProteinCoverage()`

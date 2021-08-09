@@ -47,7 +47,7 @@ added. It combines multiple PTMs happening in the same residue such as:
 Dimethyl (KR), Trimethyl (KR).
 
 
-# MQmetrics 1.1.4 (Github version)
+# MQmetrics 1.1.4 
 
 * The function `PlotProteinCoverage()` now reports the coverage individually in
 each plot rather than the total protein coverage.
@@ -56,7 +56,8 @@ each plot rather than the total protein coverage.
 are different than in MaxQuant v.1.6.17.0. MQmetrics will detect the MaxQuant 
 version used and read the columns accordingly.
 
-# MQmetrics 1.1.5
+# MQmetrics 1.1.5 (Github version)
 
-* Removed ugly error message in `PlotiRT()` and `PlotiRTScore()` when irt 
-peptides are note found.
+* Enhanced error message in `PlotiRT()` and `PlotiRTScore()` when irt 
+peptides are note found. Enhanced error message for `PlotProteinCoverage()`
+when the  `UniprotID` is not found.

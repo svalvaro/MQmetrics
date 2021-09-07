@@ -10,7 +10,8 @@ PlotHydrophobicity(
   size_median = 1.5,
   binwidth = 0.2,
   palette = "Set2",
-  plots_per_page = 5
+  plots_per_page = 5,
+  tabular_output = FALSE
 )
 }
 \arguments{

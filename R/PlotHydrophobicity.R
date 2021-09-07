@@ -24,7 +24,8 @@ PlotHydrophobicity <- function(MQCombined,
                             size_median = 1.5,
                             binwidth = 0.2,
                             palette = "Set2",
-                            plots_per_page = 5) {
+                            plots_per_page = 5,
+                            tabular_output = FALSE) {
     peptides <- MQCombined$peptides.txt
 
     variable <- GRAVY <- `median(GRAVY)` <- NULL
@@ -71,6 +72,21 @@ PlotHydrophobicity <- function(MQCombined,
 
     # Repeat rows n numbers of times, being n the frequency (value)
     df_expanded <- df_out[rep(rownames(df_out), df_out$value), ]
+
+
+
+    if (tabular_output == TRUE) {
+
+        GRAVY <- df_expanded %>%
+            group_by(variable) %>%
+            summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
+                      Max = format(round(max(GRAVY),2),nsmall = 1),
+                      Min = format(round(min(GRAVY),2),nsmall = 1),
+                      Median = format(round(median(GRAVY),2),nsmall = 1))
+        names(GRAVY)[1] <- 'Experiment'
+
+        return(GRAVY)
+    }
 
     colourCount <- length(df) - 1
 

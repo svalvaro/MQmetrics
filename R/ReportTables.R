@@ -286,60 +286,9 @@ ReportTables <- function(MQCombined,
 
     names(charge_percentage)[1] <- 'Experiment'
 
-    #### Table 4, GRAVY with median and retention times ####
-    peptides <- MQCombined$peptides.txt
+    #### Table 4, GRAVY ####
 
-    df <- peptides %>%  select(contains(c('Length',
-                                        "Count",
-                                        "Sequence",
-                                        "Experiment")
-    )
-    )
-
-    df$GRAVY <-  (df$`A Count` * 1.8 +
-                df$`R Count` * -4.5 +
-                df$`N Count` * -3.5 +
-                df$`D Count` * -3.5 +
-                df$`C Count` * 2.5 +
-                df$`Q Count` * -3.5 +
-                df$`E Count` * -3.5 +
-                df$`G Count` * -0.4 +
-                df$`H Count` * -3.2 +
-                df$`I Count` * 4.5 +
-                df$`L Count` * 3.8 +
-                df$`K Count` * -3.9 +
-                df$`M Count` * 1.9 +
-                df$`F Count` * 2.8 +
-                df$`P Count` * -1.6 +
-                df$`S Count` * -0.8 +
-                df$`T Count` * -0.7 +
-                df$`W Count` * -0.9 +
-                df$`Y Count` * -1.3 +
-                df$`V Count` * 4.2)/df$Length
-
-    df <- df %>% select(contains(c('GRAVY', 'Experiment')))
-
-    df_out <- melt(df, id.vars = 'GRAVY')
-
-    df_out$variable <- gsub('Experiment ', '', df_out$variable)
-
-    #Remove value 0,
-
-
-    df_out[is.na(df_out$value),] <- 0
-
-    #Repeat rows n numbers of times, being n the frequency (value)
-    df_expanded<- df_out[rep(rownames(df_out),df_out$value),]
-
-    GRAVY <- df_expanded %>%
-        group_by(variable) %>%
-        summarise(Mean = format(round(mean(GRAVY),2),nsmall = 1),
-                Max = format(round(max(GRAVY),2),nsmall = 1),
-                Min = format(round(min(GRAVY),2),nsmall = 1),
-                Median = format(round(median(GRAVY),2),nsmall = 1))
-    names(GRAVY)[1] <- 'Experiment'
-
-
+    GRAVY <- PlotHydrophobicity(MQCombined, tabular_output = TRUE)
 
     #### Table  5, Cleavages ####
 

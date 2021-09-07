@@ -78,8 +78,6 @@ PlotPTM <- function(MQCombined,
         df <- df[!df$Modifications == "Unmodified", ]
     }
 
-
-
     legend_title = 'All PTMs'
 
     if(aggregate_PTMs == TRUE){
@@ -116,7 +114,6 @@ PlotPTM <- function(MQCombined,
         # Change the legend title
 
         legend_title = 'Aggregated PTMs'
-
     }
 
     if (combine_same_residue_ptms == TRUE) {
@@ -125,7 +122,6 @@ PlotPTM <- function(MQCombined,
 
         #Find the Di- modifications
         di_indexes <- which(grepl('^Di', df$Modifications))
-
 
         #Find the Tri- modifications
         tri_indexes <- which(grepl('^Tri', df$Modifications))
@@ -149,7 +145,6 @@ PlotPTM <- function(MQCombined,
 
         # If there are not Tri- this won't be run
         if (length(tri_indexes) > 0) {
-
 
             # Do the same for tri modifications
 
@@ -277,8 +272,6 @@ PlotPTM <- function(MQCombined,
         prow <- plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1))
 
         legend <- get_legend(a)
-
-
 
         myplots[[ii]] <-  plot_grid(prow, legend, ncol = 1,
                                     rel_heights = c(9, 1))

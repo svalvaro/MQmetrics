@@ -40,7 +40,7 @@ ReportTables <- function(MQCombined,
         MQCombined$parameters$Parameter == 'Version']
 
 
-
+    #### Table 1, Summary ####
 
     #Read the Protein Groups without removing the contamintants To plot it.
     proteinGroups <- read_delim(file.path(MQPathCombined,
@@ -188,12 +188,7 @@ ReportTables <- function(MQCombined,
 
     table_summary <- rbind( combined_row, table_summary)
 
-
-
-
-
-
-    #Table 2 Log10 intensities
+    #### Table 2 Log10 intensities ####
 
 
     int_info <- protein_table %>% select(-contains(c('Reverse',
@@ -272,7 +267,7 @@ ReportTables <- function(MQCombined,
 
     dynamic_table <- dynamic_table[,c(7,1,2,3,4,5,6)]
 
-    #Table 3 Charge
+    #### Table 3 Charge ####
 
     evidence <- MQCombined$evidence.txt
 
@@ -291,9 +286,7 @@ ReportTables <- function(MQCombined,
 
     names(charge_percentage)[1] <- 'Experiment'
 
-
-
-    #Table 4, GRAVY with median and retention times
+    #### Table 4, GRAVY with median and retention times ####
     peptides <- MQCombined$peptides.txt
 
     df <- peptides %>%  select(contains(c('Length',
@@ -348,7 +341,7 @@ ReportTables <- function(MQCombined,
 
 
 
-    # Table 5
+    #### Table  5 , Protease Activity####
 
     peptides <- MQCombined$peptides.txt %>%
         select(contains(c('Missed cleavages','Experiment','Length')))
@@ -379,33 +372,11 @@ ReportTables <- function(MQCombined,
 
 
 
-    #Table 6 Completeness or PlotCoverageAll
+    #### Table 6 Completeness or PlotCoverageAll ####
 
+    df_bin_stat <- PlotProteinOverlap(MQCombined, tabular_output = TRUE)
 
-    df <- MQCombined$proteinGroups.txt %>% #This proteinGroups will have the
-        # Contaminants, Reverse, etc removed.
-        select(contains(c('Protein IDs', 'peptides '))) %>%
-        select(-contains(c('unique', 'Majority')))
-
-
-    # Make a binary long data.frame (1 = valid value, 0 = missing value)
-    # It shows the present of the protein or not.
-
-    df_bin <- df
-
-    df_bin[,-1][df_bin[,-1]>1] <- 1
-
-
-    # Calculate the number of times that
-    # each protein has appear in each experiment
-
-    df_bin$samples <- rowSums(df_bin[,-1])
-
-    df_bin_stat <- df_bin %>%
-        group_by(samples) %>%
-        summarise(Freq = n())
-
-
+    #### Combination all tables ####
     out <- list()
 
     out$proteins <- table_summary

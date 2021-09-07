@@ -4,7 +4,7 @@
 \alias{PlotProteinOverlap}
 \title{Protein Overlap Between Samples}
 \usage{
-PlotProteinOverlap(MQCombined)
+PlotProteinOverlap(MQCombined, tabular_output = FALSE)
 }
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant

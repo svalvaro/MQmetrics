@@ -10,7 +10,10 @@
 #' MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotProteinOverlap(MQCombined)
-PlotProteinOverlap <- function(MQCombined) {
+PlotProteinOverlap <- function(MQCombined,
+                               tabular_output = FALSE) {
+
+
     proteinGroups <- MQCombined$proteinGroups.txt
 
     samples <- value <- NULL
@@ -34,12 +37,14 @@ PlotProteinOverlap <- function(MQCombined) {
 
     df_bin_stat <- df_bin %>%
         group_by(samples) %>%
-        summarise(value = n())
+        summarise(Freq = n())
 
 
     getPalette <- colorRampPalette(brewer.pal(9, 'Blues'))
 
-    ggplot(df_bin_stat, aes(x = "all", y = value,fill = factor(samples))) +
+    p <- ggplot(df_bin_stat, aes(x = "all",
+                                y = Freq,
+                                fill = factor(samples))) +
         geom_col(col = "white", width = 0.3) +
         scale_fill_manual(values = getPalette(nrow(df_bin_stat))) +
         ylab("Number of Proteins") +
@@ -47,4 +52,10 @@ PlotProteinOverlap <- function(MQCombined) {
         ggtitle("Protein Overlap") +
         #ggtitle("Protein Overlap Between samples") +
         labs(fill = "samples",x = NULL)
+
+    if (tabular_output == TRUE) {
+        return(df_bin_stat)
+    } else{
+        return(p)
+    }
 }

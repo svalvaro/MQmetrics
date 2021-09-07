@@ -264,27 +264,12 @@ ReportTables <- function(MQCombined,
     dynamic_table$Experiment  <- rownames(dynamic_table)
 
     rownames(dynamic_table) <- NULL
-
+2
     dynamic_table <- dynamic_table[,c(7,1,2,3,4,5,6)]
 
     #### Table 3 Charge ####
 
-    evidence <- MQCombined$evidence.txt
-
-    charge_table <- evidence %>%
-        select(c(Experiment,Charge ))
-
-    charge_table <- dcast(charge_table,
-                        Experiment~ Charge,
-                        fill = 0)
-
-    charge_percentage <- charge_table[,-1]/rowSums(charge_table[,-1])*100
-
-    charge_percentage <- cbind(charge_table$Experiment,
-                                format(round(charge_percentage,1),
-                                    nsmall =1))
-
-    names(charge_percentage)[1] <- 'Experiment'
+    charge_percentage <- PlotCharge(MQCombined, tabular_output =  TRUE)
 
     #### Table 4, GRAVY ####
 

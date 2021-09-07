@@ -16,7 +16,8 @@
 #' PlotCharge(MQCombined)
 PlotCharge <- function(MQCombined,
                         palette = "Set2",
-                        plots_per_page = 5) {
+                        plots_per_page = 5,
+                        tabular_output = FALSE) {
     evidence <- MQCombined$evidence.txt
 
     Experiment <- Charge <- value <- variable <- NULL
@@ -27,6 +28,19 @@ PlotCharge <- function(MQCombined,
     ev_agrup <- dcast(ev, Experiment ~ Charge, fill = 0)
 
     ev_agrup_m <- melt(ev_agrup, id.vars = "Experiment")
+
+
+    if (tabular_output == TRUE) {
+        charge_percentage <- ev_agrup[,-1]/rowSums(ev_agrup[,-1])*100
+
+        charge_percentage <- cbind(ev_agrup$Experiment,
+                                   format(round(charge_percentage,1),
+                                          nsmall =1))
+
+        names(charge_percentage)[1] <- 'Experiment'
+
+        return(charge_percentage)
+    }
 
     n_pages_needed <- ceiling(
         length(unique(ev_agrup$Experiment)) / plots_per_page

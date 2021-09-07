@@ -4,7 +4,12 @@
 \alias{PlotCharge}
 \title{The charge-state of the precursor ion.}
 \usage{
-PlotCharge(MQCombined, palette = "Set2", plots_per_page = 5)
+PlotCharge(
+  MQCombined,
+  palette = "Set2",
+  plots_per_page = 5,
+  tabular_output = FALSE
+)
 }
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant

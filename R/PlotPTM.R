@@ -1,4 +1,4 @@
-#' Post*Translational Modifications
+#' Post-Translational Modifications
 #'
 #' @param MQCombined Object list containing all the files from the MaxQuant
 #' output. It is the result from using \code{make_MQCombined}.
@@ -43,9 +43,6 @@ PlotPTM <- function(MQCombined,
         ))) %>%
         select(-contains(c("calibrated", "Unique (Proteins)")))
 
-
-
-
     mod_melted <- modification_table %>% select(-contains('Intensity'))
 
 
@@ -83,7 +80,7 @@ PlotPTM <- function(MQCombined,
 
 
 
-
+    legend_title = 'All PTMs'
 
     if(aggregate_PTMs == TRUE){
 
@@ -108,8 +105,6 @@ PlotPTM <- function(MQCombined,
             group_by(variable,Mod2) %>%
             summarise(Freq = sum(frequency2))
 
-
-
         colnames(combined)[colnames(combined) == "Mod2"] <- 'Modifications'
 
         combined_final <- rbind(mod_final, combined)
@@ -118,9 +113,9 @@ PlotPTM <- function(MQCombined,
             group_by(Modifications, variable) %>%
             summarise(Freq = sum(Freq))
 
+        # Change the legend title
 
-
-
+        legend_title = 'Aggregated PTMs'
 
     }
 
@@ -178,9 +173,6 @@ PlotPTM <- function(MQCombined,
                 summarise(Freq = sum(Freq))
     }
 
-
-
-
     # For Intensity plot
 
     modifications_unique <- unique(df$Modifications) # names
@@ -197,7 +189,6 @@ PlotPTM <- function(MQCombined,
     # Select only the same modifications as in the Frequency
     mod_intensities2 <- mod_intensities[mod_intensities$Modifications %in%
                                             modifications_unique, ]
-
 
     mod_intensities2$variable <- gsub("Intensity","",mod_intensities2$variable)
 
@@ -224,6 +215,7 @@ PlotPTM <- function(MQCombined,
 
     myplots <- list() # initate a list to store the plots
 
+
     for (ii in seq_len(n_pages_needed)) {
         if (n_samples < plots_per_page) {
             nrow <- n_samples
@@ -240,7 +232,6 @@ PlotPTM <- function(MQCombined,
             facet_wrap_paginate(. ~ variable, ncol = 1,
                                 nrow = nrow,
                                 page = ii) +
-
             theme_bw() +
             ggtitle("Frequency of modified peptides") +
             ylab("Peptide Frequency") +
@@ -248,10 +239,10 @@ PlotPTM <- function(MQCombined,
                 legend.position = "bottom",
                 axis.title.x = element_blank(),
                 axis.text.x = element_blank(),
-                axis.ticks.x = element_blank()
-            ) +
+                axis.ticks.x = element_blank()) +
             guides(fill = guide_legend(ncol = 3)) +
-            scale_fill_brewer(palette = palette)
+            scale_fill_brewer(palette = palette)+
+            labs(fill = legend_title)
 
 
         b <- ggplot(mod_intensities2, aes(

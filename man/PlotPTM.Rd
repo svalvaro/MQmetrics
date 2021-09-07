@@ -2,7 +2,7 @@
 % Please edit documentation in R/PlotPTM.R
 \name{PlotPTM}
 \alias{PlotPTM}
-\title{Post*Translational Modifications}
+\title{Post-Translational Modifications}
 \usage{
 PlotPTM(
   MQCombined,
@@ -42,7 +42,7 @@ Methyl (KR).}
 Two plots per sample
 }
 \description{
-Post*Translational Modifications
+Post-Translational Modifications
 }
 \examples{
 MQPathCombined <- system.file("extdata/combined/", package = "MQmetrics")

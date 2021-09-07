@@ -9,6 +9,9 @@ PlotProteinOverlap(MQCombined, tabular_output = FALSE)
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant
 output. It is the result from using \code{make_MQCombined}.}
+
+\item{tabular_output}{If true a table with the information will be the
+output.}
 }
 \value{
 A plot showing the protein coverage in all samples.

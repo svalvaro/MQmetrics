@@ -5,6 +5,8 @@
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
+#' @param tabular_output If true a table with the information will be the
+#' output.
 #'
 #' @return Two plots per sample: Peptide length distribution and the number of
 #'  missed enzymatic cleavages.

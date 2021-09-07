@@ -9,6 +9,8 @@
 #' 'Set2'.
 #' @param size_median The width of the median line in the plots.
 #' @param plots_per_page Establish the maximum number of plots per page.
+#' @param tabular_output If true a table with the information will be the
+#' output.
 #'
 #' @return Returns a histogram per sample, showing the frequency of the
 #'  peptide's hydrophobicity GRAVY value.

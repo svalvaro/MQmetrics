@@ -29,6 +29,9 @@ dashed line.By default is TRUE.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{tabular_output}{If true a table with the information will be the
+output.}
 }
 \value{
 Returns a histogram per sample, showing the frequency of the

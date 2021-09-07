@@ -2,6 +2,8 @@
 #'
 #' @param MQCombined Object list containing all the files from the MaxQuant
 #' output. It is the result from using \code{make_MQCombined}.
+#' @param tabular_output If true a table with the information will be the
+#' output.
 #'
 #' @return A plot showing the protein coverage in all samples.
 #' @export

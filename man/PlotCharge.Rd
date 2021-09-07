@@ -19,6 +19,9 @@ output. It is the result from using \code{make_MQCombined}.}
 'Set2'.}
 
 \item{plots_per_page}{Establish the maximum number of plots per page.}
+
+\item{tabular_output}{If true a table with the information will be the
+output.}
 }
 \value{
 Plots the charge-state of the precursor ion.

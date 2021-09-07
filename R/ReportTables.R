@@ -341,36 +341,9 @@ ReportTables <- function(MQCombined,
 
 
 
-    #### Table  5 , Protease Activity####
+    #### Table  5, Cleavages ####
 
-    peptides <- MQCombined$peptides.txt %>%
-        select(contains(c('Missed cleavages','Experiment','Length')))
-
-    pep_melt <-  melt(peptides, id.vars =c("Missed cleavages", 'Length'),
-                    measure.vars = colnames(peptides %>%
-                                                select(contains(c('Experiment'))
-                                                )
-                                            )
-                        )
-    pep_melt <- aggregate(value ~ variable + `Missed cleavages`,
-                        data=pep_melt,
-                        sum)
-
-
-    missed_summary <- pep_melt %>%
-        group_by(variable, `Missed cleavages`) %>%
-        summarise(freq = sum(value))
-
-    missed_summary <- pivot_wider(missed_summary,
-                                names_from =  `Missed cleavages`,
-                                values_from = freq)
-
-    missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
-
-    colnames(missed_summary)[colnames(
-        missed_summary)=='variable'] <- 'Experiment'
-
-
+    missed_summary <- PlotProteaseSpecificity(MQCombined, tabular_output = TRUE)
 
     #### Table 6 Completeness or PlotCoverageAll ####
 
@@ -385,6 +358,7 @@ ReportTables <- function(MQCombined,
     out$GRAVY <- GRAVY
     out$cleavages <- missed_summary
     out$overlap <- df_bin_stat
+
 
 
 

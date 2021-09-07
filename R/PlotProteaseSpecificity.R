@@ -16,7 +16,8 @@
 #' PlotProteaseSpecificity(MQCombined)
 PlotProteaseSpecificity <- function(MQCombined,
                                     palette = "Set2",
-                                    plots_per_page = 5) {
+                                    plots_per_page = 5,
+                                    tabular_output = FALSE) {
     peptides <- MQCombined$peptides.txt
 
     `Missed cleavages` <- value <- variable <- Length <- NULL
@@ -36,7 +37,26 @@ PlotProteaseSpecificity <- function(MQCombined,
                     )
 
     pep_melt1 <- aggregate(value ~ variable + `Missed cleavages`,
-                        data = pep_melt, sum)
+                        data = pep_melt,
+                        sum)
+
+    if (tabular_output == TRUE) {
+
+        missed_summary <- pep_melt1 %>%
+        group_by(variable, `Missed cleavages`) %>%
+        summarise(freq = sum(value))
+
+        missed_summary <- pivot_wider(missed_summary,
+                                      names_from =  `Missed cleavages`,
+                                      values_from = freq)
+
+        missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
+
+        colnames(missed_summary)[colnames(
+            missed_summary)=='variable'] <- 'Experiment'
+
+        return(missed_summary)
+    }
 
     pep_melt1$variable <- gsub("Experiment", "", pep_melt1$variable)
 

@@ -4,7 +4,12 @@
 \alias{PlotProteaseSpecificity}
 \title{Protease Specificity}
 \usage{
-PlotProteaseSpecificity(MQCombined, palette = "Set2", plots_per_page = 5)
+PlotProteaseSpecificity(
+  MQCombined,
+  palette = "Set2",
+  plots_per_page = 5,
+  tabular_output = FALSE
+)
 }
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant

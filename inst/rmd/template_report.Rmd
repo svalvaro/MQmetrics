@@ -119,10 +119,7 @@ PlotIsotopePattern(MQCombined,
 # I create a variable called n_pages, that I will use to print the pages of 
 # some of the functions directly.
 
-n_pages <- length(PlotCharge(MQCombined, 
-                                        palette = params$palette,
-                                        plots_per_page = params$plots_per_page))
-
+n_pages <- ceiling(nrow(MQCombined$summary.txt)/params$plots_per_page)
 ```
 
 

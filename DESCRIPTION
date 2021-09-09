@@ -22,7 +22,7 @@ biocViews: Infrastructure, Proteomics, MassSpectrometry,
     QualityControl, DataImport       
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     ggplot2,
     readr,

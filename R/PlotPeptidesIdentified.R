@@ -25,18 +25,12 @@ PlotPeptidesIdentified <- function(MQCombined,
     `Peptide Sequences Identified` <- Experiment <- NULL
     `Peptide sequences identified` <- NULL
 
-
-
     peptides <- MQCombined$peptides.txt %>%
         select(contains("Identification type"))
 
     colnames(peptides) <- gsub("Identification type", "",
                                     colnames(peptides))
 
-
-
-
-    # NAs <- vapply(peptides, function(x) sum(is.na(x)))
     By_MS_MS <- str_count(peptides, "By MS/MS")
     By_matching <- str_count(peptides, "By matching")
     NAs <- str_count(peptides, 'NA')
@@ -49,7 +43,7 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     df <- melt(df, id.vars = 'Experiment')
 
-    a <-  ggplot(df, aes(x =Experiment,
+    a <-  ggplot(df, aes(x = Experiment,
                         y = value,
                         fill = reorder(variable, desc(variable)))) +
         ggtitle("Peptide Identification") +

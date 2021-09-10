@@ -33,7 +33,7 @@ PlotMsMs <- function(MQCombined,
 
     #Detect MaxQuant Version to read column names accordingly.
 
-    if (MaxQuant_version == '1.6.17.0') {
+    if (base::startsWith(MaxQuant_version) == '1') {
 
         a <- summary %>% select(c(Experiment, `MS/MS Submitted`,
                                   `MS/MS Identified`))

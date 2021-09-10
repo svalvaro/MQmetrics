@@ -176,20 +176,6 @@ for(page in seq_len(n_pages)){
 ```
 
 
-\newpage
-```{r IdentificationType}
-if(MQCombined$parameters.txt$Value[
-    MQCombined$parameters.txt$Parameter == 'Match between runs'] == 'True'){
-    PlotIdentificationType(MQCombined,
-                           palette = params$palette,
-                           long_names = params$long_names, 
-                           sep_names = params$sep_names)  
-} else{
-    cat('Match Between Runs was not used during the MaxQuant analysis.
-        No Identification Type to show.')
-}
-```
-
 
 
 \newpage

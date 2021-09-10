@@ -62,7 +62,7 @@ PlotPeptidesIdentified <- function(MQCombined,
     if (long_names == TRUE) {
         a <- a + scale_x_discrete(labels = function(x) {
             stringr::str_wrap(gsub(sep_names," ", x),3)})
-    } else {
-        a
     }
+
+    return(a)
 }

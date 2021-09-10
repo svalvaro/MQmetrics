@@ -33,7 +33,7 @@ PlotPeaks <- function(MQCombined,
 
     #Detect MaxQuant Version to read column names accordingly.
 
-    if (base::startsWith(MaxQuant_version) == '1') {
+    if (base::startsWith(MaxQuant_version, '1')) {
 
         a <- summary %>% select(c(Experiment, Peaks, `Peaks Sequenced`))
     } else{

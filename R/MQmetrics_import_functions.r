@@ -8,7 +8,7 @@
 #' @importFrom readr read_delim
 #' @importFrom magrittr %>%
 #' @importFrom dplyr contains summarise select group_by filter n arrange
-#' coalesce full_join mutate lag
+#' coalesce full_join mutate lag desc
 #' @importFrom reshape2 melt dcast
 #' @importFrom gridExtra marrangeGrob
 #' @importFrom utils head

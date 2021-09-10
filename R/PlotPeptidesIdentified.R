@@ -45,7 +45,7 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     a <-  ggplot(df, aes(x = Experiment,
                         y = value,
-                        fill = reorder(variable, desc(variable)))) +
+                        fill = reorder(variable, dplyr::desc(variable)))) +
         ggtitle("Peptide Identification") +
         ylab("Peptide Frequency") +
         xlab("Experiment") +

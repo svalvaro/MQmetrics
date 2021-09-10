@@ -21,52 +21,54 @@ PlotPeptidesIdentified <- function(MQCombined,
                                 long_names = FALSE,
                                 sep_names = NULL,
                                 palette = "Set2") {
-    summary <- MQCombined$summary.txt
 
     `Peptide Sequences Identified` <- Experiment <- NULL
     `Peptide sequences identified` <- NULL
 
 
-    colourCount <- nrow(summary)
 
-    getPalette <- colorRampPalette(brewer.pal(8, palette))
+    peptides <- MQCombined$peptides.txt %>%
+        select(contains("Identification type"))
 
-    MaxQuant_version <- MQCombined$parameters$Value[
-        MQCombined$parameters$Parameter == 'Version']
-
-    #Detect MaxQuant Version to read column names accordingly.
-
-    if (MaxQuant_version == '1.6.17.0') {
-    p <- ggplot(summary, aes(
-        x = Experiment, y = `Peptide Sequences Identified`,
-        fill = Experiment))
-
-    } else{
-        p <- ggplot(summary, aes(
-            x = Experiment, y = `Peptide sequences identified`,
-            fill = Experiment))
-    }
+    colnames(peptides) <- gsub("Identification type", "",
+                                    colnames(peptides))
 
 
-    p <- p +
-        geom_bar(stat = "identity", color = "black") +
-        scale_fill_manual(values = getPalette(colourCount)) +
-        theme_bw(base_size = 12) +
-        ggtitle("Peptides Sequences Identified") +
-        theme(legend.position = "none")
+
+
+    # NAs <- vapply(peptides, function(x) sum(is.na(x)))
+    By_MS_MS <- str_count(peptides, "By MS/MS")
+    By_matching <- str_count(peptides, "By matching")
+    NAs <- str_count(peptides, 'NA')
+
+
+    df <- data.frame(Experiment = colnames(peptides),
+                    `By MS/MS` = By_MS_MS,
+                    `By matching` = By_matching,
+                    NAs = NAs)
+
+    df <- melt(df, id.vars = 'Experiment')
+
+    a <-  ggplot(df, aes(x =Experiment,
+                        y = value,
+                        fill = reorder(variable, desc(variable)))) +
+        ggtitle("Peptide Identification") +
+        ylab("Peptide Frequency") +
+        xlab("Experiment") +
+        geom_bar(stat = "identity",
+                position = "stack",
+                size = 0.5,
+                col = "black") +
+        theme(axis.title.y = element_text(margin = margin(r = 20))) +
+        theme_bw() +
+        scale_fill_brewer(palette = palette) +
+        theme(legend.position = "bottom",
+              legend.title = element_blank())
 
     if (long_names == TRUE) {
-       p + scale_x_discrete(labels = function(x) {
-            stringr::str_wrap(
-                gsub(
-                    sep_names,
-                    " ",
-                    x
-                ),
-                3
-            )
-        })
+        a <- a + scale_x_discrete(labels = function(x) {
+            stringr::str_wrap(gsub(sep_names," ", x),3)})
     } else {
-        p
+        a
     }
 }

@@ -29,28 +29,34 @@ PlotProteinsIdentified <- function(MQCombined,
     Experiment <- value <- variable <- NULL
 
     if (intensity_type == "Intensity") {
-        protein_table <- proteinGroups[, grep(
-            "Intensity ",
-            colnames(proteinGroups)
-        )]
+
+        protein_table <- proteinGroups %>%
+        select(contains(
+            c('Intensity ', 'Identification type'))) %>%
+        select(-contains('LFQ'))
+
+        #protein_table <- proteinGroups[, grep("Intensity ",
+                                              #colnames(proteinGroups))]
         # Remove Intensity from name
-        colnames(protein_table) <- gsub(
-            "Intensity.", "",
-            colnames(protein_table)
-        )
+        colnames(protein_table) <- gsub("Intensity.", "",
+                                        colnames(protein_table))
 
         #title <- "Protein Identification based on Intensity"
         title <- "Protein Identification"
     }
 
     if (intensity_type == "LFQ") {
-        protein_table <- proteinGroups[, grep("LFQ", colnames(proteinGroups))]
+
+        protein_table <- proteinGroups %>%
+            select(contains(
+                c('LFQ intensity', 'Identification type')))
+
+        #protein_table <- proteinGroups[, grep("LFQ", colnames(proteinGroups))]
+
         # Remove LFQ Intensity from name
-        colnames(protein_table) <- gsub(
-            "LFQ intensity.",
-            "",
-            colnames(protein_table)
-        )
+        colnames(protein_table) <- gsub("LFQ intensity.","",
+            colnames(protein_table))
+
         title <- "Protein Identification based on LFQ intensity"
 
         # Error if LFQ Intensity not found.
@@ -59,62 +65,60 @@ PlotProteinsIdentified <- function(MQCombined,
             print("LFQ intensities not found,
                 changing automatically to Intensity.")
 
-            protein_table <- proteinGroups[, grep(
-                "Intensity ",
-                colnames(proteinGroups)
-            )]
-            # Remove Intensity from name
-            colnames(protein_table) <- gsub(
-                "Intensity.",
-                "",
-                colnames(protein_table)
-            )
+            protein_table <- proteinGroups %>%
+                select(contains(
+                    c('Intensity ', 'Identification type'))) %>%
+                select(-contains('LFQ'))
 
-            title <- "Protein Identification based on Intensity"
+            #protein_table <- proteinGroups[, grep("Intensity ",
+            #colnames(proteinGroups))]
+            # Remove Intensity from name
+            colnames(protein_table) <- gsub("Intensity.", "",
+                                            colnames(protein_table))
+
+            #title <- "Protein Identification based on Intensity"
+            title <- "Protein Identification"
         }
     }
 
-    # Protein Identification
-    table_prot <- data.frame(nrow(protein_table) - colSums(protein_table == 0))
+    # Count the missing values
+    missing_values <- protein_table %>%
+        select(-contains('Identification type'))
 
-    rownames_prot <- rownames(table_prot)
+    missing_values <- data.frame(
+        `Missing values` = nrow(missing_values) - colSums( missing_values> 0,)
+        )
 
-    table_proteins <- cbind(rownames_prot, table_prot)
-    # Order it
-    table_proteins <- table_proteins[order(rownames(table_proteins)), ]
+    # Count the identification type
+    identification_type <- protein_table %>%
+        select(contains('Identification type'))
 
-    # Changing names
-    colnames(table_proteins)[1] <- "Experiment"
-    colnames(table_proteins)[2] <- "Proteins identified"
+    df <- data.frame(
+        `By Matching` = str_count(identification_type, 'By matching'),
+        `By MS/MS` = str_count(identification_type, 'By MS/MS'))
 
-    # NAs
-    table_proteins$"Missing values" <- nrow(protein_table) -
-                                        table_proteins$`Proteins identified`
+    # Bind them together
+    df <- cbind(missing_values,df)
 
+    df$Experiment <- rownames(df)
 
-    rownames(table_proteins) <- NULL
+    rownames(df) <- NULL
 
+    df <- melt(df, id.vars = 'Experiment')
 
-    table_proteins <- table_proteins[, c("Experiment",
-                                        "Missing values",
-                                        "Proteins identified")]
-
-    # melted
-    table_melt <- melt(table_proteins, id.vars = "Experiment")
-
-    a <- ggplot(table_melt, aes(x = Experiment, y = value, fill = variable)) +
-        ggtitle(title) +
-        geom_bar(stat = "identity",
-                position = "stack",
-                size = 0.5,
-                col = "black") +
-        theme(axis.title.y = element_text(margin = margin(r = 20))) +
-        ylab("Number of Proteins") +
-        theme_bw() +
-        scale_fill_brewer(palette = palette) +
-        #scale_fill_manual(values = c('olivedrab3','pink4')) +
-        theme(legend.position = "bottom",
-              legend.title = element_blank())
+    a <-    ggplot(df, aes(x = Experiment, y = value, fill = variable))+
+                ggtitle(title) +
+                geom_bar(stat = "identity",
+                         position = "stack",
+                         size = 0.5,
+                         col = "black") +
+                theme(axis.title.y = element_text(margin = margin(r = 20))) +
+                ylab("Number of Proteins") +
+                theme_bw() +
+                scale_fill_brewer(palette = palette) +
+                #scale_fill_manual(values = c('olivedrab3','pink4')) +
+                theme(legend.position = "bottom",
+                      legend.title = element_blank())
 
     if (long_names == TRUE) {
         a + scale_x_discrete(labels = function(x) {

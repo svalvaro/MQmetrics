@@ -437,16 +437,16 @@ PlotPTM(MQCombined,
 ## Post-translational modifications across samples
 
 The function `PlotPTMAcrossSamples()`, takes as input 
-the modificationSpecificPeptides.txt table and a modification of interest. It 
-returns a plot showing the intensities of that given PTM across the samples.
-It is important to specify correctly the name of the PTM, the same way as 
-MaxQuant:
+the modificationSpecificPeptides.txt table and one or multiple modification of 
+interest. It returns a plot showing the intensities of that given PTM across 
+the samples. It is important to specify correctly the name of the PTM, the same
+way as MaxQuant:
 
 
 ```{r ptm_single, fig.height=8, fig.width=7.2}
 
 PlotPTMAcrossSamples(MQCombined, 
-                     PTM_of_interest = 'Acetyl (Protein N-term)',
+                     PTM_of_interest = c('Acetyl (Protein N-term)','Oxidation (M)'),
                      long_names = TRUE,
                      sep_names = '_')
 

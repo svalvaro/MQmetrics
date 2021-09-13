@@ -68,9 +68,8 @@ PlotAllDynamicRange <- function(MQCombined,
             ggtitle(colnames(rank_groups)[i]) +
             theme_bw() +
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            ylab(expression("log"[10] * "(Intensity)")) +
+            ylab(expression("Log"[10] * "(Intensity)")) +
             xlab("Protein Abundance Rank")
-
 
         if (show_shade == TRUE) {
             limits <- (1 - percent_proteins) / 2
@@ -117,7 +116,6 @@ PlotAllDynamicRange <- function(MQCombined,
                 ylab(expression("log"[10] * "(Intensity)")) +
                 xlab("Protein Abundance Rank")+
                 geom_point(colour = "#FC766AFF", alpha = 0.75, shape = 21)
-
             }
 
         pl[[i]] <- temp_plot

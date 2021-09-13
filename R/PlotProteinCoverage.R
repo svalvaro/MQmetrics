@@ -27,6 +27,12 @@ PlotProteinCoverage <- function(MQCombined,
                                 palette = 'Set2',
                                 plots_per_page = 5){
 
+
+    if (is.null(UniprotID)) {
+        print('No UniprotID provided')
+        return(NULL)
+    }
+
     peptides <- MQCombined$peptides.txt
     proteinGroups <- MQCombined$proteinGroups.txt
 
@@ -34,6 +40,8 @@ PlotProteinCoverage <- function(MQCombined,
 
     # all_plots are a list of all UniprotIDs plots.
     all_plots <- list()
+
+
 
     for (index in seq_len(length(UniprotID))) {
 
@@ -50,7 +58,7 @@ PlotProteinCoverage <- function(MQCombined,
                                                table_peptides$Proteins ),]
 
     if(nrow(table_peptides) == 0){
-        message(paste0('The protein: ',
+        print(paste0('The protein: ',
                        UniprotID[index] ,
                     ' provided was not identified in any of the samples.'))
         #return(NULL)

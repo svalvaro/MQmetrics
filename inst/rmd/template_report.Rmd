@@ -201,6 +201,7 @@ PlotCombinedDynamicRange(MQCombined,
                          show_shade = params$show_shade, 
                          percent_proteins = params$percent_proteins) 
 ```
+
 \newpage
 ```{r DynamicRangeAll}
 PlotAllDynamicRange(MQCombined,
@@ -211,8 +212,8 @@ PlotAllDynamicRange(MQCombined,
 \newpage
 
 ```{r ProteinCoverage}
-p <- PlotProteinCoverage(MQCombined, 
-                          UniprotID = params$UniprotID, 
+p <- PlotProteinCoverage(MQCombined,
+                          UniprotID = params$UniprotID,
                           log_base = params$log_base,
                           segment_width = params$segment_width,
                           palette = params$palette,
@@ -220,20 +221,57 @@ p <- PlotProteinCoverage(MQCombined,
 
 
 if(is.null(params$UniprotID)){
-  
+
     print('No UniprotID provided.')
-  
+
 } else if (is.null(p)) {
   print(paste0('The UniprotID: ',params$UniprotID,
                ' was not found in the analysis.'))
 }else{
   
+  # For each different page
   for(page in seq_len(n_pages)){
-    print(
-      p[[page]]
-      )
+    
+    # For each different Uniprot 
+    for (plot in seq_len(length(p[[1]]))) {
+      
+            print(p[[page]][[plot]])
     }
+
+    }
+
+  # for(page in seq_len(n_pages)){
+  #   print(
+  #     p[[page]]
+  #     )
+  #   }
 }
+
+# p <- PlotProteinCoverage(MQCombined,
+#                   UniprotID =  c('P55072', 'P13639'),
+#                   log_base = 2,
+#                   segment_width = 1,
+#                   palette = 'Set2',
+#                   plots_per_page = 5)
+# 
+# 
+# if(is.null(c('P55072', 'P13639'))){
+# 
+#     print('No UniprotID provided.')
+# 
+# } else if (is.null(p)) {
+#   print(paste0('The UniprotID: ',params$UniprotID,
+#                ' was not found in the analysis.'))
+# }else{
+# 
+#   for(page in seq_len(n_pages)){
+#     
+#     for (plot in seq_len(length(p[[1]]))) {
+#             print(p[[page]][[plot]])      
+#     }
+# 
+#     }
+# }
 ```
 
 

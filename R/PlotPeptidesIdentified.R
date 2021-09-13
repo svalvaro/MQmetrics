@@ -25,23 +25,47 @@ PlotPeptidesIdentified <- function(MQCombined,
     `Peptide Sequences Identified` <- Experiment <- NULL
     `Peptide sequences identified` <- NULL
 
-    peptides <- MQCombined$peptides.txt %>%
-        select(contains("Identification type"))
+    # Add exception if MBR is false
 
-    colnames(peptides) <- gsub("Identification type", "",
-                                    colnames(peptides))
+    MBR <- MQCombined$parameters$Value[
+        parameters$Parameter == 'Match between runs']
 
-    By_MS_MS <- str_count(peptides, "By MS/MS")
-    By_matching <- str_count(peptides, "By matching")
-    NAs <- str_count(peptides, 'NA')
+    if (MBR == 'False') {
+
+        peptides <- MQCombined$peptides.txt %>%
+            select(contains('Intensity '))
+
+        colnames(peptides) <- gsub("Intensity ", "",
+                                        colnames(peptides))
 
 
-    df <- data.frame(Experiment = colnames(peptides),
-                    `By MS/MS` = By_MS_MS,
-                    `By matching` = By_matching,
-                    NAs = NAs)
+        df <- data.frame(Experiment = colnames(peptides),
+                         Identified = colSums(peptides != 0),
+                         `Missing values` = nrow(peptides) -
+                             colSums(peptides != 0)
+                         )
+        rownames(df) <- NULL
+
+    } else{
+
+        peptides <- MQCombined$peptides.txt %>%
+            select(contains("Identification type"))
+
+        colnames(peptides) <- gsub("Identification type", "",
+                                   colnames(peptides))
+
+        By_MS_MS <- str_count(peptides, "By MS/MS")
+        By_matching <- str_count(peptides, "By matching")
+        NAs <- str_count(peptides, 'NA')
+
+        df <- data.frame(Experiment = colnames(peptides),
+                         `By MS/MS` = By_MS_MS,
+                         `By matching` = By_matching,
+                         NAs = NAs)
+    }
 
     df <- melt(df, id.vars = 'Experiment')
+
 
     a <-  ggplot(df, aes(x = Experiment,
                         y = value,

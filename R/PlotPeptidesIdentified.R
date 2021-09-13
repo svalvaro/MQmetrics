@@ -27,7 +27,7 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     # Add exception if MBR is false
 
-    MBR <- MQCombined$parameters$Value[
+    MBR <- MQCombined$parameters.txt$Value[
         parameters$Parameter == 'Match between runs']
 
     if (MBR == 'False') {

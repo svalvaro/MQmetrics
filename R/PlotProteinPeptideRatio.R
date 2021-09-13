@@ -112,25 +112,25 @@ PlotProteinPeptideRatio <- function(MQCombined,
 
     p1 <- ggplot(d1,  aes(x = Experiment, y = as.numeric(value),
                                 group = variable))+
-                geom_point(colour = '#FC766AFF', size = 2)+
-                geom_line(colour = '#FC766AFF', size = 1.5)+
                 ggtitle(title)+
                 theme_bw()+
                 ylab('# Proteins Identified')+
                 theme(axis.text.y=element_text(colour="#FC766AFF"))+
-                theme(panel.border = element_blank(),
-                    panel.grid.major = element_blank(),
-                    panel.grid.minor = element_blank(),
-                    axis.line = element_line(colour = "black"))
+                geom_point(colour = '#FC766AFF', size = 2)+
+                geom_line(colour = '#FC766AFF', size = 1.5)#+
+                # theme(panel.border = element_blank(),
+                #     panel.grid.major = element_blank(),
+                #     panel.grid.minor = element_blank(),
+                #     axis.line = element_line(colour = "black"))
 
     p2 <- ggplot(d2,  aes(x = Experiment, y = as.numeric(value),
                                 group = variable))+
-            geom_point(color = '#5B84B1FF',size = 2)+
-            geom_line(colour = '#5B84B1FF',size = 1.5)+
-            theme_bw()%+replace%
+            theme_bw()+#%+replace%
             theme(panel.background = element_rect(fill = NA))+
             ylab('Ratio Peptides/Proteins Identified')+
             theme(axis.text.y=element_text(colour="#5B84B1FF"))+
+            geom_point(color = '#5B84B1FF',size = 2)+
+            geom_line(colour = '#5B84B1FF',size = 1.5)+
             theme(panel.border = element_blank(),
                 panel.grid.major = element_blank(),
                 panel.grid.minor = element_blank(),

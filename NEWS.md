@@ -66,3 +66,8 @@ when the  `UniprotID` is not found.
 whether the Post-Translational modifications have been aggregated or not as a 
 result of the parameter `aggregate_PTMs`. 
 
+* The function `PlotPeptidesIdentified()` and  `PlotProteinsIdentified()` now
+return a plot containing Missing Values, Frequency of Identified by Match 
+Between Runs and Frequency of identified by MS/MS. With this, the funciton 
+`PlotIdentificationType()` becomes obsolete. 
+

@@ -90,11 +90,11 @@ PlotProteinsIdentified <- function(MQCombined,
         `Missing values` = nrow(missing_values) - colSums( missing_values> 0,)
         )
 
-
     # Add exception if MBR is false
 
+    parameters <- MQCombined$parameters.txt
 
-    MBR <- MQCombined$parameters.txt$Value[
+    MBR <- parameters$Value[
         parameters$Parameter == 'Match between runs']
 
     if (MBR == 'True') {
@@ -110,38 +110,32 @@ PlotProteinsIdentified <- function(MQCombined,
         # Bind them together
         df <- cbind(missing_values,df)
 
-
-
         # If MBR is false
     } else{
 
         df <- missing_values
 
         df$Identified <- nrow(protein_table) - df$Missing.values
-
-
     }
-    #
+
     df$Experiment <- rownames(df)
 
     rownames(df) <- NULL
 
     df <- melt(df, id.vars = 'Experiment')
 
-
-    a <-    ggplot(df, aes(x = Experiment, y = value, fill = variable))+
-                ggtitle(title) +
-                geom_bar(stat = "identity",
-                         position = "stack",
-                         size = 0.5,
-                         col = "black") +
-                theme(axis.title.y = element_text(margin = margin(r = 20))) +
-                ylab("Number of Proteins") +
-                theme_bw() +
-                scale_fill_brewer(palette = palette) +
-                #scale_fill_manual(values = c('olivedrab3','pink4')) +
-                theme(legend.position = "bottom",
-                      legend.title = element_blank())
+    a <- ggplot(df, aes(x = Experiment, y = value, fill = variable))+
+            ggtitle(title) +
+            geom_bar(stat = "identity",
+                    position = "stack",
+                    size = 0.5,
+                    col = "black") +
+            theme(axis.title.y = element_text(margin = margin(r = 20))) +
+            ylab("Number of Proteins") +
+            theme_bw() +
+            scale_fill_brewer(palette = palette) +
+            theme(legend.position = "bottom",
+                  legend.title = element_blank())
 
     if (long_names == TRUE) {
         a + scale_x_discrete(labels = function(x) {

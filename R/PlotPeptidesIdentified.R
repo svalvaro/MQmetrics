@@ -27,7 +27,9 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     # Add exception if MBR is false
 
-    MBR <- MQCombined$parameters.txt$Value[
+    parameters <- MQCombined$parameters.txt
+
+    MBR <- parameters$Value[
         parameters$Parameter == 'Match between runs']
 
     if (MBR == 'False') {
@@ -37,7 +39,6 @@ PlotPeptidesIdentified <- function(MQCombined,
 
         colnames(peptides) <- gsub("Intensity ", "",
                                         colnames(peptides))
-
 
         df <- data.frame(Experiment = colnames(peptides),
                          Identified = colSums(peptides != 0),

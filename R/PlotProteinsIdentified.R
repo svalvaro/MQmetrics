@@ -24,6 +24,7 @@ PlotProteinsIdentified <- function(MQCombined,
                                 long_names = FALSE,
                                 sep_names = NULL,
                                 palette = "Set2") {
+
     proteinGroups <- MQCombined$proteinGroups.txt
 
     Experiment <- value <- variable <- NULL
@@ -89,22 +90,43 @@ PlotProteinsIdentified <- function(MQCombined,
         `Missing values` = nrow(missing_values) - colSums( missing_values> 0,)
         )
 
-    # Count the identification type
-    identification_type <- protein_table %>%
-        select(contains('Identification type'))
 
-    df <- data.frame(
-        `By Matching` = str_count(identification_type, 'By matching'),
-        `By MS/MS` = str_count(identification_type, 'By MS/MS'))
+    # Add exception if MBR is false
 
-    # Bind them together
-    df <- cbind(missing_values,df)
+    MBR <- MQCombined$parameters$Value[
+        parameters$Parameter == 'Match between runs']
 
+    if (MBR == 'True') {
+
+        # Count the identification type
+        identification_type <- protein_table %>%
+            select(contains('Identification type'))
+
+        df <- data.frame(
+            `By Matching` = str_count(identification_type, 'By matching'),
+            `By MS/MS` = str_count(identification_type, 'By MS/MS'))
+
+        # Bind them together
+        df <- cbind(missing_values,df)
+
+
+
+        # If MBR is false
+    } else{
+
+        df <- missing_values
+
+        df$Identified <- nrow(protein_table) - df$Missing.values
+
+
+    }
+    #
     df$Experiment <- rownames(df)
 
     rownames(df) <- NULL
 
     df <- melt(df, id.vars = 'Experiment')
+
 
     a <-    ggplot(df, aes(x = Experiment, y = value, fill = variable))+
                 ggtitle(title) +

@@ -32,28 +32,33 @@ PlotProteinCoverage <- function(MQCombined,
 
     `Start position` <-  `End position` <- variable <- value <- coverage <- NULL
 
-    table_peptides <- peptides %>%
-        select(contains(c('Intensity ', 'Start position',
-                        'End position', 'Proteins', 'Gene names', 'Length'))
-               )%>%
-        select(-contains('Unique')) %>%
-        select(-starts_with('LFQ'))# %>%
-    #select(-'Intensity')
+    # all_plots are a list of all UniprotIDs plots.
+    all_plots <- list()
 
-    #Select rows for the protein selected
-    table_peptides <- table_peptides[grepl(UniprotID,
-                                        table_peptides$Proteins ),]
+    for (index in seq_len(length(UniprotID))) {
+
+        table_peptides <- peptides %>%
+            select(contains(c('Intensity ', 'Start position',
+                              'End position', 'Proteins', 'Gene names',
+                              'Length')))%>%
+            select(-contains('Unique')) %>%
+            select(-starts_with('LFQ'))
+
+
+        #Select rows for the protein selected
+        table_peptides <- table_peptides[grepl(UniprotID[index],
+                                               table_peptides$Proteins ),]
 
     if(nrow(table_peptides) == 0){
         message(paste0('The protein: ',
-                    UniprotID ,
+                       UniprotID[index] ,
                     ' provided was not identified in any of the samples.'))
-        return(NULL)
+        #return(NULL)
     } else{
 
-        #Total protein coverage
+                #Total protein coverage
 
-        prot_info <- proteinGroups[grepl(UniprotID,
+        prot_info <- proteinGroups[grepl(UniprotID[index],
                                         proteinGroups$`Protein IDs` ),]
 
         prot_len <- prot_info$`Sequence length`[1] # Protein length
@@ -130,7 +135,6 @@ PlotProteinCoverage <- function(MQCombined,
                 scale_color_manual(values = getPalette(colourCount))+
                 coord_cartesian(xlim = c(0, prot_len), ylim = c(0, prot_len))
 
-
             ## Create a plot for the protein length vs the intensity
 
             b <- ggplot(pep_melt )+
@@ -146,29 +150,26 @@ PlotProteinCoverage <- function(MQCombined,
                 scale_color_manual(values = getPalette(colourCount))+
                 coord_cartesian(xlim = c(0, prot_len))
 
-
             if(log_base == 10){
-                b <- b +
-                    ylab(expression('Log'[10]*'(Intensity)'))
+                b <- b + ylab(expression('Log'[10]*'(Intensity)'))
             } else{
-                b <- b+
-                    ylab(expression('Log'[2]*'(Intensity)'))
-
+                b <- b + ylab(expression('Log'[2]*'(Intensity)'))
             }
 
             #Plot them together
             c <- plot_grid(a,b)
             #Make a title
             title <- ggdraw()+ draw_label(paste0('Protein Coverage of: ',
-                                                UniprotID,
+                                                 UniprotID[index],
                                                 ' (',prot_len,' amino acids)',
                                                 ', Gene: ',
                                                 pep_melt$`Gene names`[1]))
 
-            myplots[[ii]] <- plot_grid( title, c, ncol = 1,
-                                        rel_heights=c(0.1, 1))
-            #p <- plot_grid( title, c, ncol = 1, rel_heights=c(0.1, 1))
+            myplots[[ii]] <- plot_grid(title, c, ncol = 1,rel_heights=c(0.1, 1))
+
+            }
+        all_plots[[index]] <- myplots
         }
-        return(myplots)
     }
+    return(all_plots)
 }

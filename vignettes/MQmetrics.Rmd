@@ -276,21 +276,6 @@ PlotAndromedaScore(MQCombined,
 ```
 
 
-## Protein and peptide identification type
-
-The function `PlotIdentificationType()`, takes as input the peptides.txt and
-proteinGroups.txt tables and returns the number of peptides and proteins 
-identified by Matching Between Runs or by MS/MS.
-
-```{r IdentificationType,message = F, warning = F, fig.height=5, fig.width=7.2}
-PlotIdentificationType(MQCombined,
-                     long_names = TRUE, 
-                     sep_names = '_', 
-                     palette = 'Set2')  
-
-```
-
-
 ## Protein intensities comparison
 
 The function `PlotIntensity()`, takes as input the  proteinGroups.txt table 
@@ -369,9 +354,9 @@ The function `PlotProteinCoverage()` takes as input the peptides.txt and
 proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the
 coverage of that protein in each of the samples.
 
-```{r protein_degradation,fig.height=10, fig.width=7.2, message=FALSE, warning=FALSE}
+```{r protein_degradation,fig.height=12, fig.width=12, message=FALSE, warning=FALSE}
 PlotProteinCoverage(MQCombined,
-                  UniprotID = "P55072",
+                  UniprotID =  c('P55072', 'P13639'),
                   log_base = 2,
                   segment_width = 1,
                   palette = 'Set2',

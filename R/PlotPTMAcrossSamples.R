@@ -28,72 +28,72 @@ PlotPTMAcrossSamples <- function(MQCombined,
 
     variable <- value <- Modifications <- NULL
 
-    df <- MQCombined$modificationSpecificPeptides.txt
+    all_plots <- list()
 
-    df <- df[grepl(PTM_of_interest, df$Modifications, fixed = TRUE),]
+    for(index in seq_len(length(PTM_of_interest))){
 
-    if(nrow(df)==0){
-        message('PTM provided not found,\nDid you write it correctly?')
-        return(NULL)
-    }else{
-        df <- df %>%  select(contains(c(
-            "Modifications", "Proteins", "Intensity "))
-        ) %>%
-            select(-contains(c("calibrated", "Unique (Proteins)", 'Proteins')))
+        df <- MQCombined$modificationSpecificPeptides.txt
 
+        df <- df[grepl(PTM_of_interest[index], df$Modifications, fixed = TRUE),]
 
-        df_melted <- melt(df, id.vars = 'Modifications')
+        if(nrow(df)==0){
+            print('PTM provided not found')
+            print('Did you write it correctly?')
 
-        #remove the name Intensity
-        df_melted$variable <- gsub('Intensity','', df_melted$variable)
-
-        #Rremove values = 0
-        df_melted <- df_melted[df_melted$value != 0, ]
-
-        #apply log
-        df_melted$value <- log(df_melted$value, base = log_base)
-
-        # Rename the modifications, to aggrupate them into the modification of
-        # interest
-
-        df_melted$Modifications <- PTM_of_interest
+        }else{
+            df <- df %>%  select(contains(c(
+                "Modifications", "Proteins", "Intensity "))
+            ) %>%
+                select(-contains(c("calibrated", "Unique (Proteins)",
+                                   'Proteins')))
 
 
+            df_melted <- melt(df, id.vars = 'Modifications')
+
+            #remove the name Intensity
+            df_melted$variable <- gsub('Intensity','', df_melted$variable)
+
+            #Rremove values = 0
+            df_melted <- df_melted[df_melted$value != 0, ]
+
+            #apply log
+            df_melted$value <- log(df_melted$value, base = log_base)
+
+            # Rename the modifications, to aggrupate them into the modification
+            # of interest
+
+            df_melted$Modifications <- PTM_of_interest[index]
+
+            p <-    ggplot(df_melted, aes(x = variable, y = value,
+                                          fill = Modifications))+
+                gghalves::geom_half_violin(side = 'r',
+                                           position = position_nudge(
+                                               x = 0.25,y = 0),
+                                           adjust = 2, trim = FALSE,
+                                           alpha = 0.4,
+                                           fill = '#FEE715FF')+
+                geom_jitter(width = 0.2, alpha = 0.1, color = '#101820FF')+
+                geom_boxplot(width = 0.07, alpha= 0.1,
+                             position = position_nudge(x = 0.29, y = 0),
+                             outlier.shape = NA,
+                             fill = '#FEE715FF')+
+                theme_bw()+
+                ggtitle(paste0('Intensities of peptides with: ',
+                               PTM_of_interest[index]))+
+                xlab('Experiment')+
+                ylab(paste0('Log',log_base,' of Intensity'))+
+                theme(legend.position = 'none')
 
 
+            if (long_names == TRUE) {
+                p <- p + scale_x_discrete(labels = function(x) {
+                    stringr::str_wrap(gsub(sep_names," ", x),3)})
+            }
+            #return(p)
 
-        p <-    ggplot(df_melted, aes(x = variable, y = value,
-                                   fill = Modifications))+
-                    gghalves::geom_half_violin(side = 'r',
-                                                position = position_nudge(
-                                                    x = 0.25,y = 0),
-                                                adjust = 2, trim = FALSE,
-                                                alpha = 0.4,
-                                                fill = '#FEE715FF')+
-                    geom_jitter(width = 0.2, alpha = 0.1, color = '#101820FF')+
-                    geom_boxplot(width = 0.07, alpha= 0.1,
-                                position = position_nudge(x = 0.29, y = 0),
-                                outlier.shape = NA,
-                                fill = '#FEE715FF')+
-                    theme_bw()+
-                    ggtitle(paste0('Intensities of peptides with: ',
-                                   PTM_of_interest))+
-                    xlab('Experiment')+
-                    ylab(paste0('Log',log_base,' of Intensity'))+
-                    theme(legend.position = 'none')
-
-
-        if (long_names == TRUE) {
-            p <- p + scale_x_discrete(labels = function(x) {
-                stringr::str_wrap(gsub(sep_names," ", x),3)})
+            all_plots[[index]] <- p
         }
-
-        return(p)
     }
-
-
-
-
-
+return(all_plots)
 
 }

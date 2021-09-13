@@ -351,8 +351,8 @@ PlotProteinOverlap(MQCombined)
 ## Protein Coverage
 
 The function `PlotProteinCoverage()` takes as input the peptides.txt and
-proteinGroups.txt tables and a protein Uniprot ID. It shows, if present, the
-coverage of that protein in each of the samples.
+proteinGroups.txt tables and one or multiple protein UniprotID(s). It shows,
+if present, the coverage of that protein in each of the samples.
 
 ```{r protein_degradation,fig.height=12, fig.width=12, message=FALSE, warning=FALSE}
 PlotProteinCoverage(MQCombined,

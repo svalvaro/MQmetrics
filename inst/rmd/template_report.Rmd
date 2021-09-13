@@ -236,42 +236,9 @@ if(is.null(params$UniprotID)){
     for (plot in seq_len(length(p[[1]]))) {
       
             print(p[[page]][[plot]])
+      }
     }
-
-    }
-
-  # for(page in seq_len(n_pages)){
-  #   print(
-  #     p[[page]]
-  #     )
-  #   }
 }
-
-# p <- PlotProteinCoverage(MQCombined,
-#                   UniprotID =  c('P55072', 'P13639'),
-#                   log_base = 2,
-#                   segment_width = 1,
-#                   palette = 'Set2',
-#                   plots_per_page = 5)
-# 
-# 
-# if(is.null(c('P55072', 'P13639'))){
-# 
-#     print('No UniprotID provided.')
-# 
-# } else if (is.null(p)) {
-#   print(paste0('The UniprotID: ',params$UniprotID,
-#                ' was not found in the analysis.'))
-# }else{
-# 
-#   for(page in seq_len(n_pages)){
-#     
-#     for (plot in seq_len(length(p[[1]]))) {
-#             print(p[[page]][[plot]])      
-#     }
-# 
-#     }
-# }
 ```
 
 
@@ -357,13 +324,15 @@ for(page in seq_len(n_pages)){
 
 \newpage
 ```{r PTMAcrossSamples}
-
-PlotPTMAcrossSamples(MQCombined, 
+p <- PlotPTMAcrossSamples(MQCombined, 
                     PTM_of_interest = params$PTM_of_interest,
                     log_base = params$log_base, 
                     long_names = params$long_names, 
                     sep_names = params$sep_names)
 
+for (index in seq_len(length(params$PTM_of_interest))) {
+  print(p[[index]])
+}
 ```
 
 \newpage

@@ -71,3 +71,9 @@ return a plot containing Missing Values, Frequency of Identified by Match
 Between Runs and Frequency of identified by MS/MS. With this, the funciton 
 `PlotIdentificationType()` becomes obsolete. 
 
+* The function `PlotProteinCoverage()` now can take as input multiple 
+`UniprotID` in a vector format.
+
+* The function `PlotPTMAcrossSamples()` now can take as input multiple 
+`PTM_of_Interest` in a vector format.
+

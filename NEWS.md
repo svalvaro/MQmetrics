@@ -77,3 +77,6 @@ Between Runs and Frequency of identified by MS/MS. With this, the funciton
 * The function `PlotPTMAcrossSamples()` now can take as input multiple 
 `PTM_of_Interest` in a vector format.
 
+* Change in the function `make_MQCombined()` to read faster the tables and 
+reducing the overall time required to generate a report.
+

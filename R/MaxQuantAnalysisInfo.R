@@ -64,7 +64,8 @@ MaxQuantAnalysisInfo <- function(MQCombined){
                 start_time, '.'))
     cat(paste0('\nThe whole  MaxQuant analysis lasted: ',days ,' days, ',
                  hours,' hours and ', mins, ' mins.'))
-    cat(paste0('\nThe MaxQuant analysis finished on: ', end_date, ' at: ', end_time))
+    cat(paste0('\nThe MaxQuant analysis finished on: ', end_date, ' at: ',
+               end_time))
     cat(paste0('\nThe MaxQuant version used was: ', MaxQuant_version))
     cat(paste0('\nThe user was: ', user_name))
     cat(paste0('\nThe machine name was: ', machine_name))

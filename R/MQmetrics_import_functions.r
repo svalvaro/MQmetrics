@@ -4,7 +4,7 @@
 #' @import rmarkdown
 #' @import ggridges
 #' @import purrr
-#' @importFrom stats aggregate complete.cases lm coef median
+#' @importFrom stats aggregate complete.cases lm coef median reorder
 #' @importFrom readr read_delim
 #' @importFrom magrittr %>%
 #' @importFrom dplyr contains summarise select group_by filter n arrange

@@ -18,7 +18,7 @@ PlotProteinOverlap <- function(MQCombined,
 
     proteinGroups <- MQCombined$proteinGroups.txt
 
-    samples <- value <- NULL
+    samples <- value <- Freq <- NULL
 
     df <- proteinGroups %>%
         select(contains(c("Protein IDs", "peptides "))) %>%

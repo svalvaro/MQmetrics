@@ -23,7 +23,7 @@ PlotPeptidesIdentified <- function(MQCombined,
                                 palette = "Set2") {
 
     `Peptide Sequences Identified` <- Experiment <- NULL
-    `Peptide sequences identified` <- NULL
+    `Peptide sequences identified` <- value <- variable <- NULL
 
     # Add exception if MBR is false
 
@@ -70,7 +70,8 @@ PlotPeptidesIdentified <- function(MQCombined,
 
     a <-  ggplot(df, aes(x = Experiment,
                         y = value,
-                        fill = reorder(variable, dplyr::desc(variable)))) +
+                        fill = stats::reorder(variable, dplyr::desc(variable)))
+                 ) +
         ggtitle("Peptide Identification") +
         ylab("Peptide Frequency") +
         xlab("Experiment") +

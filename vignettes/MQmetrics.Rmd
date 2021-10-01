@@ -354,7 +354,7 @@ The function `PlotProteinCoverage()` takes as input the peptides.txt and
 proteinGroups.txt tables and one or multiple protein UniprotID(s). It shows,
 if present, the coverage of that protein in each of the samples.
 
-```{r protein_degradation,fig.height=12, fig.width=12, message=FALSE, warning=FALSE}
+```{r protein_degradation,fig.height=12, fig.width=12, message=FALSE, warning=F}
 PlotProteinCoverage(MQCombined,
                   UniprotID =  c('P55072', 'P13639'),
                   log_base = 2,
@@ -369,7 +369,7 @@ PlotProteinCoverage(MQCombined,
 The function `PlotiRT()` takes as input the evidence.txt table and returns,
 if found the iRT peptides from Biognosys. Their retention time and intensity.
 
-```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2, }
+```{r irt_peps1, warning = FALSE, message= FALSE, fig.height=10, fig.width=7.2}
 PlotiRT(MQCombined, 
       show_calibrated_rt = FALSE,
       tolerance = 0.001,
@@ -446,7 +446,8 @@ way as MaxQuant:
 ```{r ptm_single, fig.height=8, fig.width=7.2}
 
 PlotPTMAcrossSamples(MQCombined, 
-                     PTM_of_interest = c('Acetyl (Protein N-term)','Oxidation (M)'),
+                     PTM_of_interest = c('Acetyl (Protein N-term)',
+                                         'Oxidation (M)'),
                      long_names = TRUE,
                      sep_names = '_')
 

@@ -22,7 +22,7 @@ PlotProteaseSpecificity <- function(MQCombined,
                                     tabular_output = FALSE) {
     peptides <- MQCombined$peptides.txt
 
-    `Missed cleavages` <- value <- variable <- Length <- NULL
+    `Missed cleavages` <- value <- variable <- Length <- freq <-  NULL
 
     peptides <- peptides %>% select(contains(c(
         "Missed cleavages",
@@ -49,10 +49,11 @@ PlotProteaseSpecificity <- function(MQCombined,
         summarise(freq = sum(value))
 
         missed_summary <- pivot_wider(missed_summary,
-                                      names_from =  `Missed cleavages`,
-                                      values_from = freq)
+                                    names_from =  `Missed cleavages`,
+                                    values_from = freq)
 
-        missed_summary$variable <- gsub('Experiment', '', missed_summary$variable)
+        missed_summary$variable <- gsub('Experiment', '',
+                                        missed_summary$variable)
 
         colnames(missed_summary)[colnames(
             missed_summary)=='variable'] <- 'Experiment'
@@ -136,7 +137,8 @@ PlotProteaseSpecificity <- function(MQCombined,
 
         #print(plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1.5)))
 
-        myplots[[ii]] <- plot_grid(title, c, ncol = 1, rel_heights = c(0.1, 1.5))
+        myplots[[ii]] <- plot_grid(title, c, ncol = 1,
+                                rel_heights = c(0.1, 1.5))
     }
     return(myplots)
 }

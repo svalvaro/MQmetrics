@@ -29,7 +29,7 @@ PlotProteinCoverage <- function(MQCombined,
 
 
     if (is.null(UniprotID)) {
-        print('No UniprotID provided')
+
         return(NULL)
     }
 

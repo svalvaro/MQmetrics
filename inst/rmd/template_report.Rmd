@@ -55,60 +55,109 @@ MaxQuantAnalysisInfo(MQCombined)
 \newpage
 
 ```{r PlotProteins}
-PlotProteinsIdentified(MQCombined,
+
+if (! is.null(MQCombined$proteinGroups.txt)) {
+  
+  PlotProteinsIdentified(MQCombined,
                        intensity_type =params$intensity_type,
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
                        palette = params$palette)
+}else{
+  print('proteinGroups.txt is missing, can not create plot')
+}
+
+
 ```
 
 \newpage
 ```{r protein_coverage_all}
-PlotProteinOverlap(MQCombined)
+if (! is.null(MQCombined$proteinGroups.txt)) {
+
+  PlotProteinOverlap(MQCombined)
+
+}else{
+  print('proteinGroups.txt is missing, can not create plot')
+}
 
 ```
 
 \newpage
 ```{r PeptidesIdentified}
-PlotPeptidesIdentified(MQCombined, 
+if ((!is.null(MQCombined$summary.txt )) &&
+     (!is.null(MQCombined$parameters.txt)))  {
+  
+  PlotPeptidesIdentified(MQCombined, 
                        long_names = params$long_names, 
                        sep_names = params$sep_names, 
                        palette = params$palette)
+}else{
+  print('parameter.txt and/or peptides.txt is missing, can not create plot')
+}
+
+
 ```
 
 \newpage
 ```{r ratio}
-PlotProteinPeptideRatio(MQCombined,
-                        intensity_type = params$intensity_type, 
-                        long_names = params$long_names, 
-                        sep_names = params$sep_names)
+
+if ((!is.null(MQCombined$summary.txt == TRUE )) &&
+     (!is.null(MQCombined$parameters.txt)== TRUE))  {
+  
+  PlotProteinPeptideRatio(MQCombined,
+                          intensity_type = params$intensity_type, 
+                          long_names = params$long_names, 
+                          sep_names = params$sep_names)
+  
+}else{
+  print('summary.txt and/or proteinGroups.txt is missing, can not create plot')
+}  
 ```
 
 
 \newpage
 ```{r PlotMSMS}
-PlotMsMs(MQCombined,
-         long_names = params$long_names, 
-         sep_names = params$sep_names, 
-         palette = params$palette)
+
+if ((!is.null(MQCombined$summary.txt == TRUE )) &&
+     (!is.null(MQCombined$parameters.txt)== TRUE)) {
+  
+  PlotMsMs(MQCombined,
+           long_names = params$long_names, 
+           sep_names = params$sep_names, 
+           palette = params$palette)
+}else{
+  print('summary.txt and/or parameters.txt is missing, can not create plot')
+}    
 ```
 
 
 \newpage
 ```{r PlotPeaks}
-PlotPeaks(MQCombined, 
-          long_names = params$long_names, 
-          sep_names = params$sep_names, 
-          palette = params$palette)
+
+if ((!is.null(MQCombined$summary.txt == TRUE )) &&
+     (!is.null(MQCombined$parameters.txt)== TRUE))  {
+  
+  PlotPeaks(MQCombined, 
+            long_names = params$long_names, 
+            sep_names = params$sep_names, 
+            palette = params$palette)
+}else{
+  print('summary.txt and/or parameters.txt is missing, can not create plot')
+}   
 ```
 
 
 \newpage
 ```{r isotope}
-PlotIsotopePattern(MQCombined,
-                   long_names = params$long_names, 
-                   sep_names = params$sep_names, 
-                   palette = params$palette)
+if ((!is.null(MQCombined$summary.txt == TRUE )) &&
+     (!is.null(MQCombined$parameters.txt)== TRUE)) {
+  PlotIsotopePattern(MQCombined,
+                     long_names = params$long_names, 
+                     sep_names = params$sep_names, 
+                     palette = params$palette)
+}else{
+  print('summary.txt and/or parameters.txt is missing, can not create plot')
+} 
 ```
 
 
@@ -126,53 +175,73 @@ n_pages <- ceiling(nrow(MQCombined$summary.txt)/params$plots_per_page)
 
 
 ```{r Charge}
-for (page in seq_len(n_pages)) {
-  print(
-    PlotCharge(MQCombined, 
-           palette = params$palette,
-           plots_per_page = params$plots_per_page)[[page]]
-    )
-}
+if (! is.null(MQCombined$evidence.txt )) {
+
+  for (page in seq_len(n_pages)) {
+    print(
+      PlotCharge(MQCombined, 
+             palette = params$palette,
+             plots_per_page = params$plots_per_page)[[page]]
+      )
+  }
+}else{
+  print('evidence.txt is missing, can not create plot')
+}   
 
 
 ```
 
 \newpage
 ```{r missed_cleavages}
-for(page in seq_len(n_pages)){
-  print(
-    PlotProteaseSpecificity(MQCombined, 
-                        palette = params$palette,
-                        plots_per_page = params$plots_per_page)[[page]]
-    )
-}
+
+if (! is.null(MQCombined$peptides.txt )) {
+  
+  for(page in seq_len(n_pages)){
+    print(
+      PlotProteaseSpecificity(MQCombined, 
+                          palette = params$palette,
+                          plots_per_page = params$plots_per_page)[[page]]
+      )
+  }
+}else{
+  print('peptides.txt is missing, can not create plot')
+}   
 ```
 
 
 \newpage
 ```{r PlotHydrophobicity}
-
-for(page in seq_len(n_pages)){
-  print(
-    PlotHydrophobicity(MQCombined,
-                     palette = params$palette,
-                     show_median =  params$show_median,
-                     size_median = params$size_median,
-                     binwidth = params$binwidth,
-                     plots_per_page = params$plots_per_page)[[page]]
-    )
-}
+if (! is.null(MQCombined$peptides.txt )) {
+  
+  for(page in seq_len(n_pages)){
+    print(
+      PlotHydrophobicity(MQCombined,
+                       palette = params$palette,
+                       show_median =  params$show_median,
+                       size_median = params$size_median,
+                       binwidth = params$binwidth,
+                       plots_per_page = params$plots_per_page)[[page]]
+      )
+  }
+}else{
+  print('peptides.txt is missing, can not create plot')
+} 
 ```
 
 \newpage
 ```{r PlotAndromedaScore}
-for(page in seq_len(n_pages)){
-  print(
-    PlotAndromedaScore(MQCombined, 
-                       palette = params$palette,
-                       plots_per_page = params$plots_per_page)[[page]]
-    )
-}
+if (! is.null(MQCombined$peptides.txt )) {  
+
+  for(page in seq_len(n_pages)){
+    print(
+      PlotAndromedaScore(MQCombined, 
+                         palette = params$palette,
+                         plots_per_page = params$plots_per_page)[[page]]
+      )
+  }
+}else{
+  print('peptides.txt is missing, can not create plot')
+} 
 ```
 
 
@@ -180,103 +249,151 @@ for(page in seq_len(n_pages)){
 
 \newpage
 ```{r PlotIntensity}
-PlotIntensity(MQCombined, 
-              intensity_type = params$intensity_type, 
-              log_base = params$log_base, 
-              long_names = params$long_names, 
-              sep_names = params$sep_names,
-              palette = params$palette)
+if (! is.null(MQCombined$proteinGroups.txt )) {
+
+  PlotIntensity(MQCombined, 
+                intensity_type = params$intensity_type, 
+                log_base = params$log_base, 
+                long_names = params$long_names, 
+                sep_names = params$sep_names,
+                palette = params$palette)
+}else{
+  print('proteinGroups.txt is missing, can not create plot')
+}   
+  
 ```
 \newpage
 
 ```{r PlotPCA}
-PlotPCA(MQCombined,
-        intensity_type = params$intensity_type,
-        palette = params$palette)
+if (! is.null(MQCombined$proteinGroups.txt )) {
+  
+  PlotPCA(MQCombined,
+          intensity_type = params$intensity_type,
+          palette = params$palette)
+
+}else{
+  print('proteinGroups.txt is missing, can not create plot')
+} 
 ```
 
 \newpage
 ```{r DynamicRange}
-PlotCombinedDynamicRange(MQCombined,
-                         show_shade = params$show_shade, 
-                         percent_proteins = params$percent_proteins) 
+if (! is.null(MQCombined$proteinGroups.txt )) {
+  
+  PlotCombinedDynamicRange(MQCombined,
+                           show_shade = params$show_shade, 
+                           percent_proteins = params$percent_proteins) 
+
+}else{
+  print('proteinGroups.txt is missing, can not create plot')
+} 
 ```
 
 \newpage
 ```{r DynamicRangeAll}
-PlotAllDynamicRange(MQCombined,
-                    show_shade = params$show_shade, 
-                    percent_proteins = params$percent_proteins)
+
+if (! is.null(MQCombined$proteinGroups.txt )) {
+  
+  PlotAllDynamicRange(MQCombined,
+                      show_shade = params$show_shade, 
+                      percent_proteins = params$percent_proteins)
+  
+  
+}else{
+  print('proteinGroups.txt is missing, can not create plot')
+} 
 ```
 
 \newpage
 
 ```{r ProteinCoverage}
-p <- PlotProteinCoverage(MQCombined,
-                          UniprotID = params$UniprotID,
-                          log_base = params$log_base,
-                          segment_width = params$segment_width,
-                          palette = params$palette,
-                          plots_per_page = params$plots_per_page)
 
-
-if(is.null(params$UniprotID)){
-
-    print('No UniprotID provided.')
-
-} else if (is.null(p)) {
-  print(paste0('The UniprotID: ',params$UniprotID,
-               ' was not found in the analysis.'))
-}else{
+if ((! is.null(MQCombined$peptides.txt  ) == TRUE) && 
+    (!is.null(MQCombined$proteinGroups.txt  ) == TRUE)) {
   
-  # For each different page
-  for(page in seq_len(n_pages)){
+  p <- PlotProteinCoverage(MQCombined,
+                            UniprotID = params$UniprotID,
+                            log_base = params$log_base,
+                            segment_width = params$segment_width,
+                            palette = params$palette,
+                            plots_per_page = params$plots_per_page)
+
+
+
+
+  if(is.null(params$UniprotID)){
+  
+      print('No UniprotID provided.')
+  
+  } else if (is.null(p)) {
+    print(paste0('The UniprotID: ',params$UniprotID,
+                 ' was not found in the analysis.'))
+  }else{
     
-    # For each different Uniprot 
-    for (plot in seq_len(length(p[[1]]))) {
+    # For each different page
+    for(page in seq_len(n_pages)){
       
-            print(p[[page]][[plot]])
+      # For each different Uniprot 
+      for (plot in seq_len(length(p[[1]]))) {
+        
+              print(p[[page]][[plot]])
+        }
       }
-    }
-}
+  }
+  
+}else{
+  print('proteinGroups.txt and/or peptides.txt is missing, can not create plot')
+} 
 ```
 
 
 
 \newpage
 ```{r irt_peps1}
+if (! is.null(MQCombined$evidence.txt )) {
 
-p <- PlotiRT(MQCombined, 
-            show_calibrated_rt = params$show_calibrated_rt,
-            tolerance =  params$tolerance,
-            plots_per_page = params$plots_per_page)
-        
 
-if (is.null(p)) {
-  print('iRT peptides not found')
+  p <- PlotiRT(MQCombined, 
+              show_calibrated_rt = params$show_calibrated_rt,
+              tolerance =  params$tolerance,
+              plots_per_page = params$plots_per_page)
+          
   
+  if (is.null(p)) {
+    print('iRT peptides not found')
+    
+  } else{
+    
+    for(page in seq_len(n_pages)){
+      print(p[[page]])
+      }
+  }
+
 } else{
-  
-  for(page in seq_len(n_pages)){
-    print(p[[page]])
-    }
-}
+  print('evidence.txt is missing, can not create plot')
+} 
 ```
 \newpage
 
 ```{r irt_peps2}
-p <-  PlotiRTScore(MQCombined,
-                 tolerance =  params$tolerance,
-                 plots_per_page = params$plots_per_page)
+if (! is.null(MQCombined$evidence.txt )) {
 
-if (is.null(p)) {
-  print('iRT peptides not found')
-} else{
+  p <-  PlotiRTScore(MQCombined,
+                   tolerance =  params$tolerance,
+                   plots_per_page = params$plots_per_page)
   
-  for(page in seq_len(n_pages)){
-    print(p[[page]])
+  if (is.null(p)) {
+    print('iRT peptides not found')
+  } else{
+    
+    for(page in seq_len(n_pages)){
+      print(p[[page]])
+    }
   }
-}
+
+} else{
+  print('evidence.txt is missing, can not create plot')
+} 
 
 ```
 
@@ -284,55 +401,81 @@ if (is.null(p)) {
 
 \newpage
 ```{r TotalIonCurrent}
-for(page in seq_len(n_pages)){
-  print(
-    PlotTotalIonCurrent(MQCombined,
-                        show_max_value = params$show_max_value,
-                        palette = params$palette,
-                        plots_per_page = params$plots_per_page)[[page]]
-      )
-}
+
+if (! is.null(MQCombined$msmsScans.txt )) {
+  
+  for(page in seq_len(n_pages)){
+    print(
+      PlotTotalIonCurrent(MQCombined,
+                          show_max_value = params$show_max_value,
+                          palette = params$palette,
+                          plots_per_page = params$plots_per_page)[[page]]
+        )
+  }
+  
+}else{
+  print('msmsScans.txt is missing, can not create plot')
+} 
 ```
 
 
 \newpage
 ```{r PlotAcquisition}
-for(page in seq_len(n_pages)){
-  print(
-    PlotAcquisitionCycle(MQCombined, 
-                         palette = params$palette,
-                         plots_per_page = params$plots_per_page)[[page]]
-      )
-}
+
+if (! is.null(MQCombined$msScans.txt )) {
+  
+  for(page in seq_len(n_pages)){
+    print(
+      PlotAcquisitionCycle(MQCombined, 
+                           palette = params$palette,
+                           plots_per_page = params$plots_per_page)[[page]]
+        )
+  }
+
+}else{
+  print('msScans.txt is missing, can not create plot')
+} 
 ```
 
 \newpage
 ```{r PTM}
-for(page in seq_len(n_pages)){
-  print(
-    PlotPTM(MQCombined, 
-            peptides_modified = params$peptides_modified,
-            log_base = params$log_base,
-            plot_unmodified_peptides = params$plot_unmodified_peptides,
-            palette = params$palette,
-            aggregate_PTMs = params$aggregate_PTMs,
-            combine_same_residue_ptms = params$combine_same_residue_ptms,
-            plots_per_page = params$plots_per_page)[[page]]
-      )
-}
+if (! is.null(MQCombined$modificationSpecificPeptides )) {
+
+  for(page in seq_len(n_pages)){
+    print(
+      PlotPTM(MQCombined, 
+              peptides_modified = params$peptides_modified,
+              log_base = params$log_base,
+              plot_unmodified_peptides = params$plot_unmodified_peptides,
+              palette = params$palette,
+              aggregate_PTMs = params$aggregate_PTMs,
+              combine_same_residue_ptms = params$combine_same_residue_ptms,
+              plots_per_page = params$plots_per_page)[[page]]
+        )
+  }
+  
+}else{
+  print('modificationSpecificPeptides is missing, can not create plot')
+}   
 ```
 
 \newpage
 ```{r PTMAcrossSamples}
-p <- PlotPTMAcrossSamples(MQCombined, 
-                    PTM_of_interest = params$PTM_of_interest,
-                    log_base = params$log_base, 
-                    long_names = params$long_names, 
-                    sep_names = params$sep_names)
+if (! is.null(MQCombined$modificationSpecificPeptides )) {
+  
+  p <- PlotPTMAcrossSamples(MQCombined, 
+                      PTM_of_interest = params$PTM_of_interest,
+                      log_base = params$log_base, 
+                      long_names = params$long_names, 
+                      sep_names = params$sep_names)
+  
+  for (index in seq_len(length(params$PTM_of_interest))) {
+    print(p[[index]])
+  }
 
-for (index in seq_len(length(params$PTM_of_interest))) {
-  print(p[[index]])
-}
+}else{
+  print('modificationSpecificPeptides is missing, can not create plot')
+} 
 ```
 
 \newpage

@@ -49,7 +49,9 @@ you need to use MQmetrics.
 ``` r
 library(MQmetrics)
 
-MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
+MQPathCombined <- "D:/Documents/MaxQuant_results/example5/combined/"
+# Use forward slashes in both windows/or linux.
+MQPathCombined <- "/home/alvaro/Documents/MaxQuant/example5/combined/"
 ```
 
 The main function of the package is `generateReport()`. It will generate

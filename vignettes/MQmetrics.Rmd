@@ -106,8 +106,8 @@ Is as simple as this to use MQmetrics:
 # If you're using a Unix-like OS use forward slashes.
 MQPathCombined <- '/home/alvaro/Documents/MaxQuant/example5/combined/'
 
-# If you're using Windows use backslashes:
-MQPathCombined <- "D:\Documents\MaxQuant_results\example5\combined\ "
+# If you're using Windows you can also use forward slashes:
+MQPathCombined <- "D:/Documents/MaxQuant_results/example5/combined/"
 
 #Use the generateReport function.
 generateReport(MQPathCombined)

@@ -27,7 +27,6 @@ PlotProteinCoverage <- function(MQCombined,
                                 palette = 'Set2',
                                 plots_per_page = 5){
 
-
     if (is.null(UniprotID)) {
 
         return(NULL)
@@ -40,8 +39,6 @@ PlotProteinCoverage <- function(MQCombined,
 
     # all_plots are a list of all UniprotIDs plots.
     all_plots <- list()
-
-
 
     for (index in seq_len(length(UniprotID))) {
 
@@ -132,9 +129,9 @@ PlotProteinCoverage <- function(MQCombined,
 
                 geom_text(individual_coverage,
                           mapping =  aes(
-                              x = prot_len*0.2,
-                              y = prot_len* 0.9,
-                              label = paste0(coverage, ' % Prot. Coverage')))+
+                            x = prot_len*0.2,
+                            y = prot_len* 0.9,
+                            label = paste0(coverage, ' % Prot. Coverage')))+
                 theme_bw()+
                 facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
                                     page = ii)+

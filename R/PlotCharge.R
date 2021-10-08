@@ -20,12 +20,12 @@ PlotCharge <- function(MQCombined,
                         palette = "Set2",
                         plots_per_page = 5,
                         tabular_output = FALSE) {
+
     evidence <- MQCombined$evidence.txt
 
     Experiment <- Charge <- value <- variable <- NULL
 
-    ev <- evidence %>%
-        select(c(Experiment, Charge))
+    ev <- evidence %>% select(c(Experiment, Charge))
 
     ev_agrup <- dcast(ev, Experiment ~ Charge, fill = 0)
 
@@ -35,9 +35,10 @@ PlotCharge <- function(MQCombined,
     if (tabular_output == TRUE) {
         charge_percentage <- ev_agrup[,-1]/rowSums(ev_agrup[,-1])*100
 
-        charge_percentage <- cbind(ev_agrup$Experiment,
-                                   format(round(charge_percentage,1),
-                                          nsmall =1))
+        charge_percentage <- cbind(
+            ev_agrup$Experiment,
+            format(round(charge_percentage,1),
+                    nsmall =1))
 
         names(charge_percentage)[1] <- 'Experiment'
 

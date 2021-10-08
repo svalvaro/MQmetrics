@@ -54,7 +54,6 @@ PlotAllDynamicRange <- function(MQCombined,
 
         assign(colnames(rank_groups)[i], temp)
 
-
         temp <- temp[order(temp[, 1], decreasing = TRUE), ]
 
         temp <- temp[!grepl("^-Inf$", temp)]

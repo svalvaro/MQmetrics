@@ -42,16 +42,14 @@ PlotPeaks <- function(MQCombined,
 
     }
 
-
     a_melt <- melt(a, id.vars = "Experiment")
-
 
     b <- ggplot(a_melt, aes(
         x = Experiment,
         y = value,
         group = variable,
-        fill = variable
-    )) +
+        fill = variable)
+        ) +
         geom_bar(
             stat = "identity",
             colour = "black",

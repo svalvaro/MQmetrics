@@ -42,9 +42,6 @@ make_MQCombined <- function(MQPathCombined,
         print('summary.txt not found, some plots will be missing')
     }
 
-
-
-
     # Open the peptides.txt table
 
 
@@ -74,7 +71,6 @@ make_MQCombined <- function(MQPathCombined,
         warning('peptides.txt not found, some plots will be missing')
         print('peptides.txt not found, some plots will be missing')
     }
-
 
     # Open the evidence table
 
@@ -106,7 +102,6 @@ make_MQCombined <- function(MQPathCombined,
         print('evidence.txt not found, some plots will be missing')
     }
 
-
     # Check if the msScans.txt is present, if so, add it to alltables
 
     if ("msScans.txt" %in% list.files(file.path(MQPathCombined,"txt/"))){
@@ -120,7 +115,6 @@ make_MQCombined <- function(MQPathCombined,
             trim_ws = TRUE
         )
 
-
         allTables[[length(allTables)+1]] <- msScans_table
         names(allTables)[[length(allTables)]] <- 'msScans.txt'
 
@@ -129,7 +123,6 @@ make_MQCombined <- function(MQPathCombined,
         warning('msScans.txt not found, some plots will be missing')
         print('msScans.txt not found, some plots will be missing')
     }
-
 
     # msmsScans.txt
 
@@ -191,11 +184,10 @@ make_MQCombined <- function(MQPathCombined,
         print('proteinGroups.txt not found, some plots will be missing')
     }
 
-
-
     # modificationSpecificPeptides
 
-    if ("modificationSpecificPeptides.txt" %in% list.files(file.path(MQPathCombined,"txt/"))){
+    if ("modificationSpecificPeptides.txt" %in%
+        list.files(file.path(MQPathCombined,"txt/"))){
 
         modification_table <-
             read_delim(
@@ -217,11 +209,14 @@ make_MQCombined <- function(MQPathCombined,
         }
 
         allTables[[length(allTables)+1]] <- modification_table
-        names(allTables)[[length(allTables)]] <- 'modificationSpecificPeptides.txt'
+        names(allTables)[[length(allTables)]] <-
+            'modificationSpecificPeptides.txt'
 
     }else{
-        warning('modificationSpecificPeptides.txt not found, some plots will be missing')
-        print('modificationSpecificPeptides.txt not found, some plots will be missing')
+        warning('modificationSpecificPeptides.txt not found, some
+                plots will be missing')
+        print('modificationSpecificPeptides.txt not found,
+              some plots will be missing')
     }
 
 
@@ -272,12 +267,10 @@ make_MQCombined <- function(MQPathCombined,
         print('#runningTimes.txt not found, some plots will be missing')
     }
 
-
     # Add MQPath Combined
 
     allTables[[length(allTables)+1]] <- MQPathCombined
     names(allTables)[[length(allTables)]] <- 'MQPathCombined'
-
 
     return(allTables)
 }

@@ -11,7 +11,7 @@
 * Usage of ultiples of 4 spaces for line indents.
 * Removed *LazyData: TRUE*.
 
-# MQmetrics 1.0.0  Bioconductor 3.13
+# MQmetrics 1.0.0  
 
 * The function `generateReport()` now takes the parameter *name_output_file* 
 to name the output pdf file.
@@ -84,6 +84,11 @@ reducing the overall time required to generate a report.
 
 * Bug fixed: If a table was missing, the report was not generated.
 
-# MQmetrics 1.1.7, 07/10/2021, Bioconductor 3.14 and Github Version
+# MQmetrics 1.1.7, 07/10/2021
 
 * Removed parentheses from the news that was causing issues in Bioconductor.
+
+# MQmetrics 1.1.8, 08/10/2021
+
+* Fixed test that was resulting in error duet to version 1.1.6 updated way
+to read the files. 

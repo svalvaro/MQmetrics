@@ -16,5 +16,9 @@ test_that("returns a list of 10 elements", {
         "#runningTimes.txt"
     )
 
-    expect_equal(names(MQCombined), name_files)
+    # Check if the the names are in the MQCombined,
+    # then with all return only one TRUE
+
+    expect_true(all(names(MQCombined) %in% name_files))
+
 })

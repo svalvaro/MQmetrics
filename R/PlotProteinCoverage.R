@@ -129,9 +129,9 @@ PlotProteinCoverage <- function(MQCombined,
 
                 geom_text(individual_coverage,
                           mapping =  aes(
-                            x = prot_len*0.2,
+                            x = prot_len*0.3,
                             y = prot_len* 0.9,
-                            label = paste0(coverage, ' % Prot. Coverage')))+
+                            label = paste0(coverage, ' % Prot. Cov.')))+
                 theme_bw()+
                 facet_wrap_paginate(.~ variable, ncol = 1, nrow = nrow,
                                     page = ii)+

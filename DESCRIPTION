@@ -1,7 +1,7 @@
 Package: MQmetrics
 Type: Package
 Title: Quality Control of Protemics Data
-Version: 1.2.1
+Version: 1.3.1
 Authors@R: c(person(given = "Alvaro", family = "Sanchez-Villalba",
                     email = "sanchezvillalba.alvaro@gmail.com",
                     role = c("aut", "cre")),

@@ -13,7 +13,8 @@ test_that("returns a list of 10 elements", {
         "proteinGroups.txt",
         "modificationSpecificPeptides.txt",
         "parameters.txt",
-        "#runningTimes.txt"
+        "#runningTimes.txt",
+        "mqpar.xml"
     )
 
     # Check if the the names are in the MQCombined,

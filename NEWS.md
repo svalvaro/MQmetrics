@@ -97,3 +97,8 @@ to read the files.
 
 * Added median to the `PlotAndromedaScore()`. 
 * Remove warnings from the vignettes.
+* Now MQmetrics can read the `mqpar.xml` file. This one must be located on the 
+same directory as the `combined` folder.
+* Reporting the number of threads used by MaxQuant if found the `mqpar.xml` 
+file.
+

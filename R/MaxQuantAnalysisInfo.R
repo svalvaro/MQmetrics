@@ -10,6 +10,7 @@
 #' MaxQuantAnalysisInfo(MQCombined)
 #'
 MaxQuantAnalysisInfo <- function(MQCombined){
+
     MQPathCombined <- MQCombined$MQPathCombined
     runningTimes <- MQCombined$`#runningTimes.txt`
     parameters <- MQCombined$parameters.txt
@@ -57,6 +58,24 @@ MaxQuantAnalysisInfo <- function(MQCombined){
             'Modifications included in protein quantification'
         ]
 
+    # mqpar.xml parameters if found the file
+
+    if ("mqpar.xml" %in% names(MQCombined)) {
+
+        mqpar.xml <- MQCombined$mqpar.xml
+
+        numberOfThreads <- as.integer(sub(".*?<numThreads>.*?(\\d+).*",
+                                          "\\1", mqpar.xml))
+
+        message_threads <- paste0('Number of threads: ', numberOfThreads)
+
+    } else{
+        message_threads <- 'mqpar.xml file not found. Can not report number of
+        threads.'
+    }
+
+    # Messages
+
     cat(paste0('The MaxQuant output directory is: \n',
                  MQPathCombined))
     cat(paste0('\nThe MaxQuant analysis  started the day: ',
@@ -69,10 +88,13 @@ MaxQuantAnalysisInfo <- function(MQCombined){
     cat(paste0('\nThe MaxQuant version used was: ', MaxQuant_version))
     cat(paste0('\nThe user was: ', user_name))
     cat(paste0('\nThe machine name was: ', machine_name))
+    cat(paste0('\n', message_threads))
     cat(paste0('\nThe PSM FDR was: ', PSM_FDR))
     cat(paste0('\nThe protein FDR was: ', Protein_FDR))
     cat(paste0('\nThe match between runs was: ', match_between_runs))
     cat(paste0('\nThe fasta file(s) used was: \n', fasta_file))
     cat(paste0('\nThe iBAQ presence is: ', iBAQ))
     cat(paste0('\nThe PTM selected is/are: ', PTM))
+
+
 }

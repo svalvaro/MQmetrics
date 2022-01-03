@@ -44,7 +44,6 @@ make_MQCombined <- function(MQPathCombined,
 
     # Open the peptides.txt table
 
-
     if ("peptides.txt" %in% list.files(file.path(MQPathCombined,"txt/"))){
 
         peptides_table <- read_delim(
@@ -271,6 +270,28 @@ make_MQCombined <- function(MQPathCombined,
 
     allTables[[length(allTables)+1]] <- MQPathCombined
     names(allTables)[[length(allTables)]] <- 'MQPathCombined'
+
+
+    # Read the mqpar.xml file to read some parameters from it. This file is
+    # located one folder upper than the combined.
+
+    backMQPathCombined <- unlist(strsplit(MQPathCombined, '/'))
+    backMQPathCombined <- paste0(
+        backMQPathCombined[-length(backMQPathCombined)], collapse = '/'
+        )
+
+    if ("mqpar.xml" %in% list.files(backMQPathCombined)) {
+        mqpar.xml <- readr::read_file(
+            file.path(
+                backMQPathCombined,
+                '/mqpar.xml'
+            )
+        )
+
+        allTables[[length(allTables)+1]] <- mqpar.xml
+        names(allTables)[[length(allTables)]] <- 'mqpar.xml'
+    }
+
 
     return(allTables)
 }

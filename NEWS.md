@@ -92,3 +92,8 @@ reducing the overall time required to generate a report.
 
 * Fixed test that was resulting in error duet to version 1.1.6 updated way
 to read the files. 
+
+# MQmetrics 1.2.1 03/01/2022
+
+* Added median to the `PlotAndromedaScore()`. 
+* Remove warnings from the vignettes.

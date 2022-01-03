@@ -234,7 +234,9 @@ if (! is.null(MQCombined$peptides.txt )) {
 
   for(page in seq_len(n_pages)){
     print(
-      PlotAndromedaScore(MQCombined, 
+      PlotAndromedaScore(MQCombined,
+                         show_median =  params$show_median,
+                         size_median = params$size_median,
                          palette = params$palette,
                          plots_per_page = params$plots_per_page)[[page]]
       )

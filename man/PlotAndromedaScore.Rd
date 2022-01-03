@@ -4,11 +4,22 @@
 \alias{PlotAndromedaScore}
 \title{Andromeda score for the best associated MS/MS spectrum.}
 \usage{
-PlotAndromedaScore(MQCombined, palette = "Set2", plots_per_page = 5)
+PlotAndromedaScore(
+  MQCombined,
+  show_median = TRUE,
+  size_median = 1.5,
+  palette = "Set2",
+  plots_per_page = 5
+)
 }
 \arguments{
 \item{MQCombined}{Object list containing all the files from the MaxQuant
 output. It is the result from using \code{make_MQCombined}.}
+
+\item{show_median}{If true it will show the median of each group, as a red
+dashed line.By default is TRUE.}
+
+\item{size_median}{The width of the median line in the plots.}
 
 \item{palette}{The palette from the Package RColorBrewer. By default is
 'Set2'.}

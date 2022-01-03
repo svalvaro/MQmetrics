@@ -5,6 +5,9 @@
 #' @param palette The palette from the Package RColorBrewer. By default is
 #' 'Set2'.
 #' @param plots_per_page Establish the maximum number of plots per page.
+#' @param show_median If true it will show the median of each group, as a red
+#'  dashed line.By default is TRUE.
+#' @param size_median The width of the median line in the plots.
 #'
 #' @return Plots the MaxQuant Andromeda Score.
 #' @export
@@ -14,6 +17,8 @@
 #' MQCombined <- make_MQCombined(MQPathCombined)
 #' PlotAndromedaScore(MQCombined)
 PlotAndromedaScore <- function(MQCombined,
+                            show_median = TRUE,
+                            size_median = 1.5,
                             palette = "Set2",
                             plots_per_page = 5) {
     peptides <- MQCombined$peptides.txt
@@ -70,6 +75,20 @@ PlotAndromedaScore <- function(MQCombined,
             ggtitle(label = "Andromeda score") +
             scale_fill_manual(values = getPalette(colourCount)) +
             theme(legend.position = "none")
+
+        if (show_median == TRUE) {
+            median_groups <- df_expanded %>%
+                group_by(variable) %>%
+                summarise(median(Score))
+
+            p <- p + geom_vline(
+                data = median_groups,
+                aes(xintercept = `median(Score)`, group = variable),
+                color = "red",
+                linetype = "dashed",
+                size = size_median
+            )
+        }
 
         myplots[[ii]] <- p
     }

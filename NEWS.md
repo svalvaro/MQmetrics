@@ -93,7 +93,7 @@ reducing the overall time required to generate a report.
 * Fixed test that was resulting in error duet to version 1.1.6 updated way
 to read the files. 
 
-# MQmetrics 1.2.1 03/01/2022
+# MQmetrics 1.3.1 03/01/2022
 
 * Added median to the `PlotAndromedaScore()`. 
 * Remove warnings from the vignettes.
@@ -102,3 +102,6 @@ same directory as the `combined` folder.
 * Reporting the number of threads used by MaxQuant if found the `mqpar.xml` 
 file.
 
+# MQmetrics 1.3.2 03/01/2022
+
+* Reporthing the `fixed Modifications` if the `mqpar.xml` is present.

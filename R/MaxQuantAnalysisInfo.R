@@ -64,14 +64,31 @@ MaxQuantAnalysisInfo <- function(MQCombined){
 
         mqpar.xml <- MQCombined$mqpar.xml
 
+        # Number of threads
         numberOfThreads <- as.integer(sub(".*?<numThreads>.*?(\\d+).*",
                                           "\\1", mqpar.xml))
 
         message_threads <- paste0('Number of threads: ', numberOfThreads)
 
+        # Fixed modifications
+
+        fixedModifications <- gsub(
+        ".*<fixedModifications>(.+)</fixedModifications>.*",
+        "\\1", mqpar.xml)
+
+        fixedModifications <- gsub("<*string>", "", fixedModifications)
+        fixedModifications <- gsub("</\r", "", fixedModifications)
+        fixedModifications <- gsub("\r", "", fixedModifications)
+        fixedModifications <- gsub("\n", "", fixedModifications)
+
+        message_fixedModifications <- paste0('Fixed modifications: ',
+                                             fixedModifications)
+
     } else{
         message_threads <- 'mqpar.xml file not found. Can not report number of
         threads.'
+        message_fixedModifications <- 'mqpar.xml file not found. Can not report
+        fixed modifications.'
     }
 
     # Messages
@@ -95,6 +112,6 @@ MaxQuantAnalysisInfo <- function(MQCombined){
     cat(paste0('\nThe fasta file(s) used was: \n', fasta_file))
     cat(paste0('\nThe iBAQ presence is: ', iBAQ))
     cat(paste0('\nThe PTM selected is/are: ', PTM))
-
+    cat(paste0('\n', message_fixedModifications))
 
 }

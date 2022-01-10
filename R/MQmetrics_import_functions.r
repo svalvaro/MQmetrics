@@ -2,7 +2,6 @@
 #' @import ggplot2
 #' @import ggpubr
 #' @import rmarkdown
-#' @import ggridges
 #' @import purrr
 #' @importFrom stats aggregate complete.cases lm coef median reorder
 #' @importFrom readr read_delim

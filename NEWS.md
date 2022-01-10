@@ -105,3 +105,7 @@ file.
 # MQmetrics 1.3.2 03/01/2022
 
 * Reporthing the `fixed Modifications` if the `mqpar.xml` is present.
+
+# MQmetrics 1.3.3 10/01/2022
+
+* Removed unused dependency.
